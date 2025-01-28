@@ -58,7 +58,7 @@ namespace tp2
             //Get Direction
             float strafe = Input.GetAxis("Horizontal");
             float forward = Input.GetAxis("Vertical");
-            Vector3 movement = new Vector3(forward, 0, strafe);
+            Vector3 movement = new Vector3(forward, 0, -strafe);
             float angle = 0;
             if(cameraSettings.strictFollow)
             {

@@ -530,6 +530,7 @@ MonoBehaviour:
   smoothSpeed: 0.125
   locationOffset: {x: 0, y: 5, z: 0}
   rotationOffset: {x: 22.5, y: -90, z: 0}
+  rotationSpeed: 2
   shakeAmount: 0.25
   decreaseSpeed: 1
   shakeDuration: 0
@@ -596,7 +597,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f1b1047beb3cab04f8ed5bd239ccef8e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

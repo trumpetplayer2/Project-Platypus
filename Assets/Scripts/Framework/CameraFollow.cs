@@ -28,6 +28,8 @@ namespace tp2
         public float smoothSpeed = 0.125f;
         public Vector3 locationOffset;
         public Vector3 rotationOffset;
+        //Camera rotate speed
+        public float rotationSpeed = 1f;
         //Camera Shake Variables
         public float shakeAmount = 0.25f;
         public float decreaseSpeed = 1.0f;
@@ -124,7 +126,10 @@ namespace tp2
                 tempTracker = new Vector3(tempTracker.x, tempTracker.y, maxLocations.z);
             }
 
-            if(angle > 360)
+            //Update Angle
+            angle += Input.GetAxis("RotateCamera") * rotationSpeed;
+
+            if (angle > 360)
             {
                 angle -= 360;
             }
