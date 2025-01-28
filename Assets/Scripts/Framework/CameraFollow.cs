@@ -40,7 +40,6 @@ namespace tp2
         int positionNumber = 0;
         float time = 0;
         Vector3 startPos;
-        public GameObject Waiting;
 
         public void Awake()
         {
@@ -55,7 +54,7 @@ namespace tp2
             }
             else
             {
-                //paused = false;
+                GameManager.instance.isPaused = false;
             }
         }
 
@@ -64,18 +63,14 @@ namespace tp2
             sceneNumber = number;
             positionNumber = 0;
             time = 0;
-            //paused = true;
+            GameManager.instance.isPaused = true;
             startPos = this.transform.position;
         }
 
         public void endCutscene()
         {
             cinematicMode = false;
-            //paused = false;
-            if (Waiting != null)
-            {
-                Waiting.SetActive(false);
-            }
+            GameManager.instance.isPaused = false;
         }
 
         public void FixedUpdate()
@@ -92,7 +87,7 @@ namespace tp2
 
         private void cinematicCamUpdate()
         {
-            //paused = true;
+            GameManager.instance.isPaused = true;
         }
 
         private void followCamUpdate()
