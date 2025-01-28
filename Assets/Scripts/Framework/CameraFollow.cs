@@ -22,7 +22,8 @@ namespace tp2
         //Camera Follow Variables
         public Vector3 maxLocations = new Vector3(10, 10, 10);
         public Vector3 minLocations = new Vector3(-10, -10, -10);
-        public float distance = -10;
+        public float distance;
+        public float angle;
         public Transform playerTracker;
         public float smoothSpeed = 0.125f;
         public Vector3 locationOffset;
@@ -128,12 +129,23 @@ namespace tp2
                 tempTracker = new Vector3(tempTracker.x, tempTracker.y, maxLocations.z);
             }
 
+            if(angle > 360)
+            {
+                angle -= 360;
+            }
+            if(angle < 0)
+            {
+                angle += 360;
+            }
+
+            locationOffset = new Vector3((Mathf.Sin(angle) * distance), locationOffset.y, (Mathf.Cos(angle) * distance));
+
             //Check player relation to camera
             Vector3 desiredPosition = tempTracker + playerTracker.rotation * locationOffset;
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-
             transform.position = smoothedPosition;
 
+            //Rotation
             Quaternion desiredrotation = playerTracker.rotation * Quaternion.Euler(rotationOffset);
             Quaternion smoothedrotation = Quaternion.Lerp(transform.rotation, desiredrotation, smoothSpeed);
             transform.rotation = smoothedrotation;
