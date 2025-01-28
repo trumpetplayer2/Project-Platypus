@@ -430,9 +430,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLocations: {x: 10, y: 10, z: 10}
   minLocations: {x: -10, y: -10, z: -10}
+  distance: 10
+  angle: 0
   playerTracker: {fileID: 102672644}
   smoothSpeed: 0.125
-  locationOffset: {x: 10, y: 5, z: 0}
+  locationOffset: {x: 0, y: 5, z: 0}
   rotationOffset: {x: 22.5, y: -90, z: 0}
   shakeAmount: 0.25
   decreaseSpeed: 1

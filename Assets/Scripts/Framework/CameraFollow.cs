@@ -138,12 +138,14 @@ namespace tp2
                 angle += 360;
             }
 
-            locationOffset = new Vector3((Mathf.Sin(angle) * distance), locationOffset.y, (Mathf.Cos(angle) * distance));
+            locationOffset = new Vector3((Mathf.Sin(Mathf.Deg2Rad * angle) * distance), locationOffset.y, (Mathf.Cos(Mathf.Deg2Rad * angle) * distance));
 
             //Check player relation to camera
             Vector3 desiredPosition = tempTracker + playerTracker.rotation * locationOffset;
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
             transform.position = smoothedPosition;
+
+            rotationOffset.y = angle-180;
 
             //Rotation
             Quaternion desiredrotation = playerTracker.rotation * Quaternion.Euler(rotationOffset);
