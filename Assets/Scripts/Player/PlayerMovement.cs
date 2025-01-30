@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace tp2
 {
@@ -20,12 +18,19 @@ namespace tp2
         public float baseSpeed = 5;
         public float runSpeedMult = 1.5f;
         public float waterSpeedMult = 0.5f;
+        public float gravity = 9.81f;
+        public float terminalVelocity = 10;
+        [Tooltip("Slope Min is when slope is at 0")]
+        public float slopeMultiplierMin = 0;
+        [Tooltip("Slope Max is determined by Character Controller")]
+        public float slopeMultiplierMax = 0;
     }
     public class PlayerMovement : MonoBehaviour
     {
         public PlayerCameraSettings cameraSettings;
         public PlayerChildrenSetting childSettings;
         public WalkSpeed speed;
+        float lastGravity = 0;
         public static PlayerMovement instance;
         // Start is called before the first frame update
         void Start()
@@ -80,8 +85,42 @@ namespace tp2
             {
                 mult += speed.waterSpeedMult;
             }
-            childSettings.body.Move(movement * speed.baseSpeed * Time.deltaTime * mult);
+            //Current Slope
+            float slope = calculateSlope();
+            mult += Mathf.Lerp(speed.slopeMultiplierMin, speed.slopeMultiplierMax, (slope/childSettings.body.slopeLimit));
+            movement = movement * speed.baseSpeed * Time.deltaTime * mult;
+            //Calculate Gravity if needed
+            float gravity = 0;
+            if (!childSettings.body.isGrounded)
+            {
+                //Velocity = Initial Velocity + (Gravity) * Delta time
+                gravity = lastGravity + -speed.gravity * Time.deltaTime; 
+                if(gravity > speed.terminalVelocity)
+                {
+                    gravity = speed.terminalVelocity;
+                }
+            }
+            else
+            {
+                gravity = 0;
+            }
+            movement.y = gravity;
+            childSettings.body.Move(movement);
+            lastGravity = gravity;
+        }
 
+        public float calculateSlope()
+        {
+            if(Physics.Raycast(transform.position, -transform.up, out RaycastHit HitInfo))
+            {
+                //Normal: HitInfo.normal
+                //Up: Vector3.up
+                return Vector3.Angle(HitInfo.normal, Vector3.up);
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

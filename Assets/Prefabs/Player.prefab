@@ -244,11 +244,15 @@ MonoBehaviour:
   cameraSettings:
     strictFollow: 1
   childSettings:
-    body: {fileID: 5962478121073343951}
+    body: {fileID: 0}
   speed:
     baseSpeed: 7
     runSpeedMult: 1.5
-    waterSpeedMult: 1.5
+    waterSpeedMult: -0.5
+    gravity: 1
+    terminalVelocity: 0.5
+    slopeMultiplierMin: 0
+    slopeMultiplierMax: 0
 --- !u!143 &5962478121073343951
 CharacterController:
   m_ObjectHideFlags: 0
