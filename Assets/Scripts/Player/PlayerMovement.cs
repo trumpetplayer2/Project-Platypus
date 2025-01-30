@@ -9,9 +9,10 @@ namespace tp2
         public bool strictFollow = true;
     }
     [System.Serializable]
-    public class ChildrenSetting
+    [RequireComponent(typeof(CharacterController))]
+    public class PlayerChildrenSetting
     {
-        public Rigidbody body;
+        public CharacterController body;
     }
     [System.Serializable]
     public class WalkSpeed
@@ -20,11 +21,10 @@ namespace tp2
         public float runSpeedMult = 1.5f;
         public float waterSpeedMult = 0.5f;
     }
-    [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovement : MonoBehaviour
     {
         public PlayerCameraSettings cameraSettings;
-        public ChildrenSetting childSettings;
+        public PlayerChildrenSetting childSettings;
         public WalkSpeed speed;
         public static PlayerMovement instance;
         // Start is called before the first frame update
@@ -36,13 +36,13 @@ namespace tp2
             }
             if(childSettings.body == null)
             {
-                if (this.TryGetComponent<Rigidbody>(out Rigidbody obj))
+                if (this.TryGetComponent<CharacterController>(out CharacterController obj))
                 {
                     childSettings.body = obj;
                 }
                 else
                 {
-                    childSettings.body = gameObject.AddComponent<Rigidbody>();
+                    childSettings.body = gameObject.AddComponent<CharacterController>();
                 }
             }
         }
@@ -80,7 +80,7 @@ namespace tp2
             {
                 mult += speed.waterSpeedMult;
             }
-            childSettings.body.velocity = movement * speed.baseSpeed * Time.deltaTime * mult * 50;
+            childSettings.body.Move(movement * speed.baseSpeed * Time.deltaTime * mult);
 
         }
     }
