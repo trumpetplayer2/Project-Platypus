@@ -44,11 +44,19 @@ public class AIBase : MonoBehaviour
 
     #region AI Variables
 
-    public float AISpeed;
+    public float AIWalkSpeed;
 
-    public float AIDetectionRadius;
+    public float AIRunMultiplier;
+
+    public float AIVisionRange;
+
+    public LayerMask BlocksVision;
+
+    public Transform Eyes;
 
     public float TimeUntilIdle;
+
+    private GameObject CurrTarget;
 
     //List of in game objects that the AI will interact with 
     public List<GameObject> AITargets = new List<GameObject>();
@@ -60,6 +68,8 @@ public class AIBase : MonoBehaviour
     #region NavMesh Variables
 
     NavMeshAgent _agent;
+
+
 
     #endregion
 
@@ -107,24 +117,35 @@ public class AIBase : MonoBehaviour
         }
     }
 
+
+
   
 
-    private bool SearchingForTarget()
+    private bool SearchingForPlayer()
     {
         Debug.Log("Detecting Target Function");
 
-
+        //if(Physics.Raycast(Eyes.position, (CurrTarget)))
         return true;
     }
 
     ///
     private void TargetInteracting()
     {
+        if (SearchingForPlayer())
+        {
+
+        }
+
+
+
         Debug.Log("Interaction Function");
     }
 
     private void Chasing()
     {
+
+        //_agent.destination = 
         Debug.Log("Chasing Function");
     }
 
@@ -132,39 +153,44 @@ public class AIBase : MonoBehaviour
     {
         Debug.Log("Patrol Function");
 
-        if (SearchingForTarget())
+        if (SearchingForPlayer())
         {
             
         }
 
         int RandomTask = UnityEngine.Random.Range(0, AITargets.Count);
+
+        CurrTarget = AITargets[RandomTask];
        
-        _agent.destination = AITargets[RandomTask].transform.position;
+        _agent.destination = CurrTarget.transform.position;
 
 
-        //if (Vector3.Distance(AITargets[i].transform.position, _agent.gameObject.transform.position) <= 2)
-        //    {
+        if (Vector3.Distance(CurrTarget.transform.position, _agent.gameObject.transform.position) <= 2)
+        {
 
-        //        CurrState = States.TargetInteract;
+            CurrState = States.TargetInteract;
 
-        //    }
-        
+        }
+
         
 
     }
+
+
 
     private void Idle()
     {
         Debug.Log("Idle Function");
 
-        if(Timer == TimeUntilIdle)
-        {
-            CurrState = States.Patrol;
-            Timer = 0f;
-        }
+        StartCoroutine(ChangeState());
     }
 
-  
+    IEnumerator ChangeState()
+    {
+        yield return new WaitForSeconds(3);
+
+        CurrState = States.Patrol;
+    }
 
 
     // Start is called before the first frame update
