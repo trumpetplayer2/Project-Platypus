@@ -12,6 +12,7 @@ namespace tp2
     {
         public CharacterController body;
     }
+    public enum SlopeMode{None, Linear}
     [System.Serializable]
     public class WalkSpeed
     {
@@ -20,6 +21,7 @@ namespace tp2
         public float waterSpeedMult = 0.5f;
         public float gravity = 9.81f;
         public float terminalVelocity = 10;
+        public SlopeMode slopeMode = SlopeMode.Linear;
         [Tooltip("Slope Min is when slope is at 0")]
         public float slopeMultiplierMin = 0;
         [Tooltip("Slope Max is determined by Character Controller")]
@@ -65,7 +67,7 @@ namespace tp2
             float forward = Input.GetAxis("Vertical");
             Vector3 movement = new Vector3(forward, 0, -strafe);
             float angle = 0;
-            if(cameraSettings.strictFollow)
+            if (cameraSettings.strictFollow)
             {
                 angle = CameraFollow.instance.angle + 90;
             }
@@ -74,8 +76,13 @@ namespace tp2
                 angle = transform.rotation.y;
             }
             movement = Quaternion.AngleAxis(angle, Vector3.up) * movement;
+            //Update Angle
+            if (cameraSettings.strictFollow)
+            {
+                //transform.rotation = Quaternion.Euler(transform.rotation.x, CameraFollow.instance.angle, transform.rotation.z);
+            }
             float mult = 1;
-            if(Input.GetButton("Sprint"))
+            if (Input.GetButton("Sprint"))
             {
                 //Animation Sprint
                 mult += speed.runSpeedMult;
@@ -87,7 +94,15 @@ namespace tp2
             }
             //Current Slope
             float slope = calculateSlope();
-            mult += Mathf.Lerp(speed.slopeMultiplierMin, speed.slopeMultiplierMax, (slope/childSettings.body.slopeLimit));
+            switch (speed.slopeMode)
+            {
+                case SlopeMode.Linear:
+                    mult += Mathf.Lerp(speed.slopeMultiplierMin, speed.slopeMultiplierMax, (slope / childSettings.body.slopeLimit));
+                    break;
+                case SlopeMode.None:
+                    
+                    break;
+            }
             movement = movement * speed.baseSpeed * Time.deltaTime * mult;
             //Calculate Gravity if needed
             float gravity = 0;
@@ -103,6 +118,10 @@ namespace tp2
             else
             {
                 gravity = 0;
+            }
+            if(slope > childSettings.body.slopeLimit)
+            {
+                //SLIDE? IDK if we're doing this
             }
             movement.y = gravity;
             childSettings.body.Move(movement);
