@@ -42,6 +42,7 @@ namespace tp2
         int positionNumber = 0;
         float time = 0;
         Vector3 startPos;
+        public bool freecam = false;
 
         public void Awake()
         {
@@ -121,7 +122,7 @@ namespace tp2
             {
                 tempTracker = new Vector3(tempTracker.x, tempTracker.y, minLocations.z);
             }
-            else if (playerTracker.position.y > maxLocations.y)
+            else if (playerTracker.position.z > maxLocations.y)
             {
                 tempTracker = new Vector3(tempTracker.x, tempTracker.y, maxLocations.z);
             }
@@ -139,16 +140,17 @@ namespace tp2
             }
 
             locationOffset = new Vector3((Mathf.Sin(Mathf.Deg2Rad * angle) * distance), locationOffset.y, (Mathf.Cos(Mathf.Deg2Rad * angle) * distance));
-
-            //Check player relation to camera
-            Vector3 desiredPosition = tempTracker + playerTracker.rotation * locationOffset;
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-            transform.position = smoothedPosition;
-
+            if (!freecam)
+            {
+                //Check player relation to camera
+                Vector3 desiredPosition = tempTracker + Quaternion.Euler(0, 0, 0) * locationOffset;
+                Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+                transform.position = smoothedPosition;
+            }
             rotationOffset.y = angle-180;
 
             //Rotation
-            Quaternion desiredrotation = playerTracker.rotation * Quaternion.Euler(rotationOffset);
+            Quaternion desiredrotation = Quaternion.Euler(0,0,0) * Quaternion.Euler(rotationOffset);
             Quaternion smoothedrotation = Quaternion.Lerp(transform.rotation, desiredrotation, smoothSpeed);
             transform.rotation = smoothedrotation;
         }
@@ -179,6 +181,12 @@ namespace tp2
         public void shake(CameraShakeVar var)
         {
             shake(var.shakeAmount, var.shakeTime);
+        }
+
+        public void freecamUpdate(Vector3 movement)
+        {
+            freecam = true;
+            transform.position += movement;
         }
     }
 }
