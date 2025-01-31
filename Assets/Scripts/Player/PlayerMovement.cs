@@ -1,10 +1,17 @@
 using UnityEngine;
 namespace tp2
 {
+    /// <summary>
+    /// Camera Modes:
+    /// Follow - Player and Camera rotate together
+    /// Free Cam - Camera moves, but player doesn't. Screenshots!
+    /// Independent - Camera and player have seperate rotations
+    /// </summary>
+    public enum cameraMode { Assist, Locked, Unlocked, FreeCam }
     [System.Serializable]
     public class PlayerCameraSettings
     {
-        public bool strictFollow = true;
+        public cameraMode followMode = cameraMode.Assist;
     }
     [System.Serializable]
     [RequireComponent(typeof(CharacterController))]
@@ -20,6 +27,7 @@ namespace tp2
         public float runSpeedMult = 1.5f;
         public float waterSpeedMult = 0.5f;
         public float gravity = 9.81f;
+        public float slideSpeed = 10f;
         public float terminalVelocity = 10;
         public SlopeMode slopeMode = SlopeMode.Linear;
         [Tooltip("Slope Min is when slope is at 0")]
@@ -62,25 +70,49 @@ namespace tp2
 
         void unpausedUpdate()
         {
+            if (Input.GetButtonDown("SwitchCameraMode"))
+            {
+                updateCameraMode();
+            }
             //Get Direction
             float strafe = Input.GetAxis("Horizontal");
             float forward = Input.GetAxis("Vertical");
+            //Calculate base movement
             Vector3 movement = new Vector3(forward, 0, -strafe);
+            //Create a variable angle for later use
             float angle = 0;
-            if (cameraSettings.strictFollow)
+            //Different Camera Modes!
+            switch (cameraSettings.followMode)
             {
-                angle = CameraFollow.instance.angle + 90;
+                case cameraMode.Assist:
+                    //Forward facing matters, Get Cam Forward, disregard y rotation
+                    Vector3 cameraForward = new Vector3(CameraFollow.instance.transform.right.x, 0, CameraFollow.instance.transform.right.z);
+                    cameraForward.Normalize();
+                    //Update Angle
+                    angle = CameraFollow.instance.angle + 90;
+                    //Update movement
+                    movement = Quaternion.AngleAxis(angle, Vector3.up) * movement;
+                    //Face direction of movement
+                    transform.rotation = Quaternion.FromToRotation(Vector3.right, Quaternion.Euler(0,-90,0) * movement);
+                    break;
+                case cameraMode.Locked:
+                    angle = CameraFollow.instance.angle + 90;
+                    transform.rotation = Quaternion.Euler(transform.eulerAngles.x, CameraFollow.instance.transform.eulerAngles.y + 180, transform.eulerAngles.z);
+                    movement = Quaternion.AngleAxis(angle, Vector3.up) * movement;
+                    break;
+                case cameraMode.Unlocked:
+                    if (movement.magnitude > 0)
+                    {
+                        transform.rotation = Quaternion.FromToRotation(Vector3.right, movement);
+                    }
+                    movement = Quaternion.AngleAxis(90, Vector3.up) * movement;
+                    break;
+                case cameraMode.FreeCam:
+                    angle = CameraFollow.instance.angle + 90;
+                    movement = Quaternion.AngleAxis(angle, Vector3.up) * movement;
+                    break;
             }
-            else
-            {
-                angle = transform.rotation.y;
-            }
-            movement = Quaternion.AngleAxis(angle, Vector3.up) * movement;
-            //Update Angle
-            if (cameraSettings.strictFollow)
-            {
-                //transform.rotation = Quaternion.Euler(transform.rotation.x, CameraFollow.instance.angle, transform.rotation.z);
-            }
+            
             float mult = 1;
             if (Input.GetButton("Sprint"))
             {
@@ -93,7 +125,7 @@ namespace tp2
                 mult += speed.waterSpeedMult;
             }
             //Current Slope
-            float slope = calculateSlope();
+            float slope = calculateSlope(out Vector3 normal);
             switch (speed.slopeMode)
             {
                 case SlopeMode.Linear:
@@ -103,7 +135,18 @@ namespace tp2
                     
                     break;
             }
+            //Finalize horizontal plane movement
             movement = movement * speed.baseSpeed * Time.deltaTime * mult;
+            //Freecam check! This movement goes to freecam if in freecam mode
+            if(cameraSettings.followMode == cameraMode.FreeCam)
+            {
+                //Send movement to camera;
+                CameraFollow.instance.freecamUpdate(movement);
+                //Set movement here to zero
+                movement = Vector3.zero;
+            }else if (CameraFollow.instance.freecam){
+                CameraFollow.instance.freecam = false;
+            }
             //Calculate Gravity if needed
             float gravity = 0;
             if (!childSettings.body.isGrounded)
@@ -121,24 +164,46 @@ namespace tp2
             }
             if(slope > childSettings.body.slopeLimit)
             {
-                //SLIDE? IDK if we're doing this
+                Vector3 temp = normal.normalized;
+                movement = new Vector3(temp.x,-.5f,temp.z) * speed.slideSpeed * Time.deltaTime;
             }
             movement.y = gravity;
             childSettings.body.Move(movement);
             lastGravity = gravity;
         }
 
-        public float calculateSlope()
+        public float calculateSlope(out Vector3 normal)
         {
             if(Physics.Raycast(transform.position, -transform.up, out RaycastHit HitInfo))
             {
                 //Normal: HitInfo.normal
                 //Up: Vector3.up
+                normal = HitInfo.normal;
                 return Vector3.Angle(HitInfo.normal, Vector3.up);
             }
             else
             {
+                normal = Vector3.zero;
                 return 0;
+            }
+        }
+
+        public void updateCameraMode()
+        {
+            switch (cameraSettings.followMode)
+            {
+                case cameraMode.Assist:
+                    cameraSettings.followMode = cameraMode.Locked;
+                    break;
+                case cameraMode.Locked:
+                    cameraSettings.followMode = cameraMode.Unlocked;
+                    break;
+                case cameraMode.Unlocked:
+                    cameraSettings.followMode = cameraMode.FreeCam;
+                    break;                
+                case cameraMode.FreeCam:
+                    cameraSettings.followMode = cameraMode.Assist;
+                    break;
             }
         }
     }
