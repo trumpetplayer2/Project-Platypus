@@ -89,14 +89,17 @@ namespace tp2
                     Vector3 cameraForward = new Vector3(CameraFollow.instance.transform.right.x, 0, CameraFollow.instance.transform.right.z);
                     cameraForward.Normalize();
                     //Update Angle
-                    angle = CameraFollow.instance.angle + 90;
+                    angle = CameraFollow.instance.getAngle() + 90;
                     //Update movement
                     movement = Quaternion.AngleAxis(angle, Vector3.up) * movement;
-                    //Face direction of movement
-                    transform.rotation = Quaternion.FromToRotation(Vector3.right, Quaternion.Euler(0,-90,0) * movement);
+                    if (movement.magnitude > 0)
+                    {
+                        //Face direction of movement
+                        transform.rotation = Quaternion.FromToRotation(Vector3.right, Quaternion.Euler(0, -90, 0) * movement);
+                    }
                     break;
                 case cameraMode.Locked:
-                    angle = CameraFollow.instance.angle + 90;
+                    angle = CameraFollow.instance.getAngle() + 90;
                     transform.rotation = Quaternion.Euler(transform.eulerAngles.x, CameraFollow.instance.transform.eulerAngles.y + 180, transform.eulerAngles.z);
                     movement = Quaternion.AngleAxis(angle, Vector3.up) * movement;
                     break;
@@ -108,7 +111,7 @@ namespace tp2
                     movement = Quaternion.AngleAxis(90, Vector3.up) * movement;
                     break;
                 case cameraMode.FreeCam:
-                    angle = CameraFollow.instance.angle + 90;
+                    angle = CameraFollow.instance.getAngle() + 90;
                     movement = Quaternion.AngleAxis(angle, Vector3.up) * movement;
                     break;
             }
