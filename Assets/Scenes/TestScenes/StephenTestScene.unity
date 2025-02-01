@@ -1206,20 +1206,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62959f83b5676a540a604592914458c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLocations: {x: 100, y: 10, z: 100}
-  minLocations: {x: -100, y: -10, z: -100}
-  distance: 10
-  angle: 0
-  playerTracker: {fileID: 8240315480030543725}
-  smoothSpeed: 0.125
-  locationOffset: {x: 0, y: 5, z: 0}
-  rotationOffset: {x: 22.5, y: -90, z: 0}
-  rotationSpeed: 2
-  shakeAmount: 0.25
-  decreaseSpeed: 1
-  shakeDuration: 0
-  cinematicMode: 0
-  cinematicNumber: 0
+  CinematicSettings:
+    cinematicMode: 0
+    cinematicNumber: 0
+  MovementSettings:
+    rotationSpeed: 1
+    minZoom: 5
+    maxZoom: 20
+    zoomScale: 7
+  Settings:
+    maxLocations: {x: 100, y: 30, z: 100}
+    minLocations: {x: -100, y: 0, z: -100}
+    distance: 10
+    startAngle: 0
+    playerTracker: {fileID: 8240315480030543725}
+    smoothSpeed: 0.125
+    locationOffset: {x: 0, y: 5, z: 0}
+    rotationOffset: {x: 22.5, y: 0, z: 0}
   freecam: 0
 --- !u!1 &1131063265
 GameObject:

@@ -17,41 +17,75 @@ namespace tp2
         }
     }
 
-    public class CameraFollow : MonoBehaviour
+    [System.Serializable]
+    public class CameraFollowVariables
     {
         //Camera Follow Variables
         public Vector3 maxLocations = new Vector3(10, 10, 10);
         public Vector3 minLocations = new Vector3(-10, -10, -10);
         public float distance;
-        public float angle;
+        public float startAngle;
         public Transform playerTracker;
         public float smoothSpeed = 0.125f;
         public Vector3 locationOffset;
         public Vector3 rotationOffset;
-        //Camera rotate speed
-        public float rotationSpeed = 1f;
-        //Camera Shake Variables
-        public float shakeAmount = 0.25f;
-        public float decreaseSpeed = 1.0f;
-        public float shakeDuration = 0f;
-        public static CameraFollow instance;
+    }
+    [System.Serializable]
+    public class CameraCinematicVariables
+    {
         //Cinematic Camera
         public bool cinematicMode = false;
         public int cinematicNumber = 0;
+        
+    }
+
+    [System.Serializable]
+    public class CameraMovementSettings
+    {
+        //Camera rotate speed
+        public float rotationSpeed = 1f;
+        public float minZoom = 3f;
+        public float maxZoom = 20f;
+        public float zoomScale = 0.2f;
+    }
+
+    public class CameraFollow : MonoBehaviour
+    {
+        //Instance
+        public static CameraFollow instance;
+        //Public Settings
+        public CameraCinematicVariables CinematicSettings;
+        public CameraMovementSettings MovementSettings;
+        public CameraFollowVariables Settings;
+        //Private trackers
         int sceneNumber = 0;
         int positionNumber = 0;
         float time = 0;
         Vector3 startPos;
+        float angle;
         public bool freecam = false;
+        float lastMouseX = 0;
+        Vector3 locationOffset;
+        float distance;
+        //Camera Shake Variables
+        float shakeAmount = 0.25f;
+        float decreaseSpeed = 1.0f;
+        float shakeDuration = 0f;
+        
+        
+
 
         public void Awake()
         {
             instance = this;
+            angle = Settings.startAngle;
+            locationOffset = Settings.locationOffset;
+            distance = Settings.distance;
         }
 
         public void Start()
         {
-            if (cinematicMode)
+            if (CinematicSettings.cinematicMode)
             {
                 startCutscene(0);
             }
@@ -72,13 +106,13 @@ namespace tp2
 
         public void endCutscene()
         {
-            cinematicMode = false;
+            CinematicSettings.cinematicMode = false;
             GameManager.instance.isPaused = false;
         }
 
         public void FixedUpdate()
         {
-            if (cinematicMode)
+            if (CinematicSettings.cinematicMode)
             {
                 cinematicCamUpdate();
             }
@@ -95,73 +129,81 @@ namespace tp2
 
         private void followCamUpdate()
         {
+            if (Settings.playerTracker == null) return;
             
-            if (playerTracker == null) return;
-            
-            Vector3 tempTracker = new Vector3(playerTracker.position.x, playerTracker.position.y, playerTracker.position.z);
+            Vector3 tempTracker = new Vector3(Settings.playerTracker.position.x, Settings.playerTracker.position.y, Settings.playerTracker.position.z);
 
-            if (playerTracker.position.x < minLocations.x)
+            if (Settings.playerTracker.position.x < Settings.minLocations.x)
             {
-                tempTracker = new Vector3(minLocations.x, playerTracker.position.y, playerTracker.position.z);
+                tempTracker = new Vector3(Settings.minLocations.x, Settings.playerTracker.position.y, Settings.playerTracker.position.z);
             }
-            else if (playerTracker.position.x > maxLocations.x)
+            else if (Settings.playerTracker.position.x > Settings.maxLocations.x)
             {
-                tempTracker = new Vector3(maxLocations.x, playerTracker.position.y, playerTracker.position.z);
+                tempTracker = new Vector3(Settings.maxLocations.x, Settings.playerTracker.position.y, Settings.playerTracker.position.z);
             }
 
-            if (playerTracker.position.y < minLocations.y)
+            if (Settings.playerTracker.position.y < Settings.minLocations.y)
             {
-                tempTracker = new Vector3(tempTracker.x, minLocations.y, playerTracker.position.z);
+                tempTracker = new Vector3(tempTracker.x, Settings.minLocations.y, Settings.playerTracker.position.z);
             }
-            else if (playerTracker.position.y > maxLocations.y)
+            else if (Settings.playerTracker.position.y > Settings.maxLocations.y)
             {
-                tempTracker = new Vector3(tempTracker.x, maxLocations.y, playerTracker.position.z);
+                tempTracker = new Vector3(tempTracker.x, Settings.maxLocations.y, Settings.playerTracker.position.z);
             }
 
-            if (playerTracker.position.z < minLocations.z)
+            if (Settings.playerTracker.position.z < Settings.minLocations.z)
             {
-                tempTracker = new Vector3(tempTracker.x, tempTracker.y, minLocations.z);
+                tempTracker = new Vector3(tempTracker.x, tempTracker.y, Settings.minLocations.z);
             }
-            else if (playerTracker.position.z > maxLocations.y)
+            else if (Settings.playerTracker.position.z > Settings.maxLocations.y)
             {
-                tempTracker = new Vector3(tempTracker.x, tempTracker.y, maxLocations.z);
+                tempTracker = new Vector3(tempTracker.x, tempTracker.y, Settings.maxLocations.z);
             }
 
             //Update Angle
-            angle += Input.GetAxis("RotateCamera") * rotationSpeed;
-
-            if (angle > 360)
-            {
-                angle -= 360;
-            }
-            if(angle < 0)
-            {
-                angle += 360;
-            }
-
+            angle += Input.GetAxis("RotateCamera") * MovementSettings.rotationSpeed;
+            angle = angle % 360;
+            
             locationOffset = new Vector3((Mathf.Sin(Mathf.Deg2Rad * angle) * distance), locationOffset.y, (Mathf.Cos(Mathf.Deg2Rad * angle) * distance));
             if (!freecam)
             {
                 //Check player relation to camera
                 Vector3 desiredPosition = tempTracker + Quaternion.Euler(0, 0, 0) * locationOffset;
-                Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+                Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, Settings.smoothSpeed);
                 transform.position = smoothedPosition;
             }
-            rotationOffset.y = angle-180;
+            Settings.rotationOffset.y = angle-180;
 
             //Rotation
-            Quaternion desiredrotation = Quaternion.Euler(0,0,0) * Quaternion.Euler(rotationOffset);
-            Quaternion smoothedrotation = Quaternion.Lerp(transform.rotation, desiredrotation, smoothSpeed);
+            Quaternion desiredrotation = Quaternion.Euler(0,0,0) * Quaternion.Euler(Settings.rotationOffset);
+            Quaternion smoothedrotation = Quaternion.Lerp(transform.rotation, desiredrotation, Settings.smoothSpeed);
             transform.rotation = smoothedrotation;
         }
 
         private void Update()
         {
+            if (GameManager.instance.isPaused) return;
             if (shakeDuration > 0)
             {
                 transform.localPosition = transform.position + Random.insideUnitSphere * shakeAmount;
 
                 shakeDuration -= Time.deltaTime * decreaseSpeed;
+            }
+
+            float cameraZoomChange = Input.GetAxis("Mouse ScrollWheel");
+            distance -= cameraZoomChange * MovementSettings.zoomScale;
+            distance = Mathf.Clamp(distance, MovementSettings.minZoom, MovementSettings.maxZoom);
+            //Scale current y by the initial settings
+            locationOffset.y = distance / Settings.distance * Settings.locationOffset.y;
+
+            if (Input.GetButton("MoveCamera"))
+            {
+                angle += Input.GetAxis("Mouse X");
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            if (Input.GetButtonUp("MoveCamera"))
+            {
+                Cursor.lockState = CursorLockMode.None;
             }
         }
 
@@ -187,6 +229,11 @@ namespace tp2
         {
             freecam = true;
             transform.position += movement;
+        }
+
+        public float getAngle()
+        {
+            return angle;
         }
     }
 }
