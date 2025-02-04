@@ -5,8 +5,8 @@ using UnityEngine;
 public class Detectable : MonoBehaviour
 {
     public GameObject Indicator;
-    public bool hideBase;
-    public MeshRenderer mesh;
+    public bool hideBase = false;
+    MeshRenderer mesh;
     private void Start()
     {
         if(mesh == null)
