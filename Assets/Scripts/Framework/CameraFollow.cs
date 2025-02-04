@@ -57,14 +57,13 @@ namespace tp2
         public CameraCinematicVariables CinematicSettings;
         public CameraMovementSettings MovementSettings;
         public CameraFollowVariables Settings;
-        //Private trackers
-        int sceneNumber = 0;
-        int positionNumber = 0;
-        float time = 0;
-        Vector3 startPos;
+        ////Private trackers
+        //int sceneNumber = 0;
+        //int positionNumber = 0;
+        //float time = 0;
+        //Vector3 startPos;
         float angle;
         public bool freecam = false;
-        float lastMouseX = 0;
         Vector3 locationOffset;
         float distance;
         //Camera Shake Variables
@@ -97,11 +96,11 @@ namespace tp2
 
         public void startCutscene(int number)
         {
-            sceneNumber = number;
-            positionNumber = 0;
-            time = 0;
-            GameManager.instance.isPaused = true;
-            startPos = this.transform.position;
+            //sceneNumber = number;
+            //positionNumber = 0;
+            //time = 0;
+            //GameManager.instance.isPaused = true;
+            //startPos = this.transform.position;
         }
 
         public void endCutscene()
@@ -130,35 +129,12 @@ namespace tp2
         private void followCamUpdate()
         {
             if (Settings.playerTracker == null) return;
+
+            float x = Mathf.Clamp(Settings.playerTracker.position.x, Settings.minLocations.x, Settings.maxLocations.x);
+            float y = Mathf.Clamp(Settings.playerTracker.position.y, Settings.minLocations.y, Settings.maxLocations.y);
+            float z = Mathf.Clamp(Settings.playerTracker.position.z, Settings.minLocations.z, Settings.maxLocations.z);
+            Vector3 tempTracker = new Vector3(x, y, z);
             
-            Vector3 tempTracker = new Vector3(Settings.playerTracker.position.x, Settings.playerTracker.position.y, Settings.playerTracker.position.z);
-
-            if (Settings.playerTracker.position.x < Settings.minLocations.x)
-            {
-                tempTracker = new Vector3(Settings.minLocations.x, Settings.playerTracker.position.y, Settings.playerTracker.position.z);
-            }
-            else if (Settings.playerTracker.position.x > Settings.maxLocations.x)
-            {
-                tempTracker = new Vector3(Settings.maxLocations.x, Settings.playerTracker.position.y, Settings.playerTracker.position.z);
-            }
-
-            if (Settings.playerTracker.position.y < Settings.minLocations.y)
-            {
-                tempTracker = new Vector3(tempTracker.x, Settings.minLocations.y, Settings.playerTracker.position.z);
-            }
-            else if (Settings.playerTracker.position.y > Settings.maxLocations.y)
-            {
-                tempTracker = new Vector3(tempTracker.x, Settings.maxLocations.y, Settings.playerTracker.position.z);
-            }
-
-            if (Settings.playerTracker.position.z < Settings.minLocations.z)
-            {
-                tempTracker = new Vector3(tempTracker.x, tempTracker.y, Settings.minLocations.z);
-            }
-            else if (Settings.playerTracker.position.z > Settings.maxLocations.y)
-            {
-                tempTracker = new Vector3(tempTracker.x, tempTracker.y, Settings.maxLocations.z);
-            }
 
             //Update Angle
             angle += Input.GetAxis("RotateCamera") * MovementSettings.rotationSpeed;
