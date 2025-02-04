@@ -1,203 +1,254 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
+using UnityEngine.XR;
 
 public class AIBase : MonoBehaviour
 {
 
+    [Header("Idle Info")]
+
+    public int idleTimeUntil;
+
+    public IdleState idle = null;
 
 
-    #region StateMachine Information
+    [Header("Patrol Info")]
 
-    //States for all 
-    /// <summary>
-    /// Idle: The Transition state between states
-    /// 
-    /// Patrol: Moving to different points of interest
-    /// 
-    /// Chasing: Is given a Target to chase, such as the player
-    /// 
-    /// TargetInteract: The specific event that occurs when the AI reaches the target, such as taking an object from the player.
-    /// </summary>
-    /// 
-    enum States
-    {
-        Idle,
-        Patrol,
-        DetectedPlayer,
-        Chasing,
-        TargetInteract,
+    public PatrolState patrol = null;
 
-    }
+    public Transform[] PatrolDestinations;
 
-    //AI agent's current State
-    States CurrState;
+    public Transform CurrPatrolDestination;
 
-    private float Timer = 0;
 
-    public float IdleUntilTime;
+    [Header("Interact Info")]
 
-    #endregion
+    public float TargetInteractDistance;
 
-    #region AI Variables
 
-    public float AIWalkSpeed;
+    [Header("Searching For Player Info")]
 
-    public float AIRunMultiplier;
-
-    public float AIVisionRange;
-
-    public LayerMask BlocksVision;
+    public GameObject CurrTarget;
 
     public Transform Eyes;
 
-    public float TimeUntilIdle;
+    public float VisionRange;
 
-    private GameObject CurrTarget;
+    public GameObject PlayerObjRef;
 
-    //List of in game objects that the AI will interact with 
-    public List<GameObject> AITargets = new List<GameObject>();
+    public GameObject TargetObjRef;
 
-    //public
-
-    #endregion
-
-    #region NavMesh Variables
-
-    NavMeshAgent _agent;
+    public GameObject ObjectObjRef;
 
 
+    public float radius;
 
-    #endregion
+    [Range(0, 360)]
+    public float angle;
+
+
+    public LayerMask TargetMask;
+
+    public LayerMask EnvironmentMask;
+
+
+    [Header("Navigation Info")]
+
+    public NavMeshAgent agent;
+
+
+    [Header("State Machine Info")]
+
+    private AIBase thisAIObj;
+
+    public BaseStateClass currActiveState;
+
+    BaseStateClass previousState;
+
+
+
+
+
+
+
+    // 
+    //TargetTypes
+    //{
+    //   ActiveObject,
+    //   InactiveObject,
+    //   Player,
+    //   Target
+
+
+    //}
+
+
+
+
+    
+
+    public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
+    {
+        Debug.Log("New State Decision");
+
+        currActiveState.ChangeState(aNextState, ref aCurrActiveState);
+
+        previousState = aCurrActiveState;
+
+        currActiveState = aNextState;
+    }
+
+    public void ReturnToPreviousState()
+    {
+        SwitchStates(currActiveState, previousState);
+    }
+
+
+    //will search for specific game objects, such as the player, misplaced objects, and specific task related objects.
+    public bool UpdateNewTargets()
+    {
+        return true;
+    }
 
     void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        thisAIObj = GetComponent<AIBase>();
+
+        agent = GetComponent<NavMeshAgent>();
+
+
+        idle = gameObject.AddComponent<IdleState>();
+
+
+
+        patrol = gameObject.AddComponent<PatrolState>();
+
+
+        idle.StateSetup(thisAIObj);
+
+        patrol.StateSetup(thisAIObj);
+
+        idleTimeUntil = 5;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    void OnEnable()
+    {
+        currActiveState = idle;
+
+        StartCoroutine(ChangeToPatrol(idleTimeUntil));
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Determines functionality to perform based on state.
-        switch(CurrState)
-        {
-            case States.Idle:
-                {
-                    Timer += Time.deltaTime;
-                    Idle();
-                    break;
-                }
-            case States.Patrol: 
-                {
-                    Debug.Log("AI is Patrolling");
-                    Patrol();
-                    
-                    break;
-                }
-            case States.DetectedPlayer:
-                {
-                    Debug.Log("Player is Detected");
-                    break;
-                }
-            case States.Chasing:
-                {
-                    Debug.Log("AI is Chasing Target");
-                    Chasing();
-                    break;
-                }
-             case States.TargetInteract:
-                {
-                    Debug.Log("AI is busy, interacting with object");
-                    TargetInteracting();
-                    break;
-                }
-        }
+
+        currActiveState.CurrStateFunctionality();
+
+        //SearchForTargets();
     }
 
-
-
-  
-
-    private bool SearchingForPlayer()
+    /// <summary>
+    /// 
+    /// Given a list of GameObject tags to look out for, cast a ray from Eyes.position to a specific range ahead of them, and return the gameObject that possesses the correct tag.
+    /// 
+    /// The player will then move towards that gameObject, and, then, when close enough to the gameObject
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public void SearchForTargets()
     {
-        Debug.Log("Detecting Target Function");
-
-        //if(Physics.Raycast(Eyes.position, (CurrTarget)))
-        return true;
-    }
-
-    ///
-    private void TargetInteracting()
-    {
-        if (SearchingForPlayer())
-        {
-
-        }
-
-
-
-        Debug.Log("Interaction Function");
-    }
-
-    private void Chasing()
-    {
-
-        //_agent.destination = 
-        Debug.Log("Chasing Function");
-    }
-
-    private void Patrol()
-    {
-        Debug.Log("Patrol Function");
-
-        if (SearchingForPlayer())
-        {
-            
-        }
-
-        int RandomTask = UnityEngine.Random.Range(0, AITargets.Count);
-
-        CurrTarget = AITargets[RandomTask];
-       
-        _agent.destination = CurrTarget.transform.position;
-
-
-        if (Vector3.Distance(CurrTarget.transform.position, _agent.gameObject.transform.position) <= 2)
-        {
-
-            CurrState = States.TargetInteract;
-
-        }
 
         
+        Debug.Log("Searching for targets");
 
+
+        //establishes detection radius
+        Collider[] AIRange = Physics.OverlapSphere(transform.position, radius, TargetMask);
+
+        if (AIRange.Length != 0)
+        {
+
+            Debug.Log("Target found");
+
+            Transform target = AIRange[0].transform;
+
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            {
+                //set agent destination to new found target.
+
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+                if (!Physics.Raycast(Eyes.transform.position, directionToTarget, distanceToTarget, EnvironmentMask))
+                {
+                    Debug.Log("AI to Target");
+                }
+                else
+                {
+                    Debug.Log("Target not found in front of AI.");
+                }
+            }
+            else
+            {
+                Debug.Log("Maintain current Patrol");
+            }
+
+        }
+        else
+            Debug.Log("Maintain current Patrol");
+
+        //Debug.DrawRay(Eyes.position, (TargetObjRef.transform.position - Eyes.position).normalized * VisionRange, Color.red, 0.01f);
+
+        ////don't check for the player if they are behind the player, aka -1 for dot product
+        //if (Vector3.Dot((target.position - eyes.position).normalized, eyes.forward) < 0)
+        //{
+        //    return false;
+        //}
+        ////not normalized, as we need a set distance that isn't one
+
+
+        ////a raycast from the eyes toward the player, able to go through glass and other enemies, up to MaxPlayerDistance
+        ////and stores the hit in a variable
+
+        ////origin, direction, stores hit properties, max distance of raycast, objects that can obstruct raycast
+        //if (Physics.Raycast(Eyes.position, (target.position - eyes.position).normalized,
+        //    out RaycastHit hit, visionRange, visionBlockers))
+        //{
+        //    if (hit.transform.CompareTag(playerTag))
+        //    {
+        //        return true;
+        //    }
+        //}
+
+        ////if(Physics.Raycast(eyes.position,(target.position - eyes.position).normalized, out RaycastHit hit, 
+        ////visionRange, 
+        //return false;
+
+
+
+       
     }
 
-
-
-    private void Idle()
+    IEnumerator ChangeToPatrol(int aIdleTime)
     {
-        Debug.Log("Idle Function");
 
-        StartCoroutine(ChangeState());
+        Debug.Log("Waiting to change to patrol");
+
+        yield return new WaitForSeconds(aIdleTime);
+
+        SwitchStates(idle, patrol);
+
     }
 
-    IEnumerator ChangeState()
-    {
-        yield return new WaitForSeconds(3);
-
-        CurrState = States.Patrol;
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        CurrState = States.Idle;
-    }
-
-   
 }
