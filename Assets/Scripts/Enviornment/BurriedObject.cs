@@ -12,7 +12,9 @@ public class BurriedObject : Diggable
     public float digTime = 1f;
     public override void dig()
     {
+        timer = 0;
         digging = true;
+        treasure.layer = 0;
     }
     private void Start()
     {
@@ -21,11 +23,13 @@ public class BurriedObject : Diggable
     private void Update()
     {
         if(!digging) { return; }
+        Debug.Log(timer);
         timer += Time.deltaTime;
-        treasure.transform.position = Vector3.Lerp(startLocation, endLocation.position, timer/digTime);
-        if(digTime >= timer)
+        treasure.transform.position = Vector3.Lerp(startLocation, endLocation.position, (timer)/digTime);
+        if(digTime <= timer)
         {
             treasure.transform.parent = null;
+            treasure.gameObject.SetActive(true);
             Destroy(this.gameObject);
         }
     }

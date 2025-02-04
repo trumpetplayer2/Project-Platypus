@@ -57,14 +57,13 @@ namespace tp2
         public CameraCinematicVariables CinematicSettings;
         public CameraMovementSettings MovementSettings;
         public CameraFollowVariables Settings;
-        //Private trackers
-        int sceneNumber = 0;
-        int positionNumber = 0;
-        float time = 0;
-        Vector3 startPos;
+        ////Private trackers
+        //int sceneNumber = 0;
+        //int positionNumber = 0;
+        //float time = 0;
+        //Vector3 startPos;
         float angle;
         public bool freecam = false;
-        float lastMouseX = 0;
         Vector3 locationOffset;
         float distance;
         //Camera Shake Variables
@@ -97,11 +96,11 @@ namespace tp2
 
         public void startCutscene(int number)
         {
-            sceneNumber = number;
-            positionNumber = 0;
-            time = 0;
-            GameManager.instance.isPaused = true;
-            startPos = this.transform.position;
+            //sceneNumber = number;
+            //positionNumber = 0;
+            //time = 0;
+            //GameManager.instance.isPaused = true;
+            //startPos = this.transform.position;
         }
 
         public void endCutscene()

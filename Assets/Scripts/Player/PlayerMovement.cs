@@ -123,10 +123,10 @@ namespace tp2
                 mult += speed.runSpeedMult;
             }
             //In Water Check
-            if (false)
-            {
-                mult += speed.waterSpeedMult;
-            }
+            //if (false)
+            //{
+            //    mult += speed.waterSpeedMult;
+            //}
             //Current Slope
             float slope = calculateSlope(out Vector3 normal);
             switch (speed.slopeMode)
