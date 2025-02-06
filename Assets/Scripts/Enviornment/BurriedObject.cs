@@ -33,6 +33,11 @@ public class BurriedObject : Diggable
             {
                 item.holdable = true;
             }
+            if(treasure.layer == 6)
+            {
+                treasure.layer = 0;
+            }
+            treasure.gameObject.SetActive(true);
             Destroy(this.gameObject);
         }
     }

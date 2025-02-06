@@ -29,6 +29,7 @@ namespace tp2
         public float smoothSpeed = 0.125f;
         public Vector3 locationOffset;
         public Vector3 rotationOffset;
+        public float rotationSmoothSpeed = 0.1f;
     }
     [System.Serializable]
     public class CameraCinematicVariables
@@ -47,6 +48,7 @@ namespace tp2
         public float minZoom = 3f;
         public float maxZoom = 20f;
         public float zoomScale = 0.2f;
+        public Vector3 FreecamCap = new Vector3(20, 20, 20);
     }
 
     public class CameraFollow : MonoBehaviour
@@ -152,7 +154,7 @@ namespace tp2
 
             //Rotation
             Quaternion desiredrotation = Quaternion.Euler(0,0,0) * Quaternion.Euler(Settings.rotationOffset);
-            Quaternion smoothedrotation = Quaternion.Lerp(transform.rotation, desiredrotation, Settings.smoothSpeed);
+            Quaternion smoothedrotation = Quaternion.Lerp(transform.rotation, desiredrotation, Settings.rotationSmoothSpeed);
             transform.rotation = smoothedrotation;
         }
 
@@ -204,7 +206,14 @@ namespace tp2
         public void freecamUpdate(Vector3 movement)
         {
             freecam = true;
-            transform.position += movement;
+            //Get bounds
+            Vector3 max = new Vector3(transform.position.x + MovementSettings.FreecamCap.x, transform.position.y + MovementSettings.FreecamCap.y, transform.position.z + MovementSettings.FreecamCap.z);
+            Vector3 min = new Vector3(transform.position.x - MovementSettings.FreecamCap.x, transform.position.y - MovementSettings.FreecamCap.y, transform.position.z - MovementSettings.FreecamCap.z);
+            float x = Mathf.Clamp(transform.position.x + movement.x, min.x, max.x);
+            float y = Mathf.Clamp(transform.position.y + movement.y, min.y, max.y);
+            float z = Mathf.Clamp(transform.position.z + movement.z, min.z, max.z);
+
+            transform.position = new Vector3(x, y, z);
         }
 
         public float getAngle()

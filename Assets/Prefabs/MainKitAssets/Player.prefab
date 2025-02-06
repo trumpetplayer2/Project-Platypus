@@ -343,14 +343,14 @@ MonoBehaviour:
     body: {fileID: 0}
   speed:
     baseSpeed: 7
-    runSpeedMult: 1.5
-    waterSpeedMult: -0.5
+    runSpeedMult: 1.05
+    waterSpeedMult: -0.05
     gravity: 1
     slideSpeed: 10
     terminalVelocity: 0.5
     slopeMode: 1
     slopeMultiplierMin: 0
-    slopeMultiplierMax: 0
+    slopeMultiplierMax: -0.3
 --- !u!143 &4578871774910618203
 CharacterController:
   m_ObjectHideFlags: 0

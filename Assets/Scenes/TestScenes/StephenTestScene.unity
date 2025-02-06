@@ -1362,7 +1362,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.25, y: 1.25, z: 1.25}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &634290779
 MonoBehaviour:
@@ -3638,6 +3638,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2734037736696402264, guid: c94f67e4675e707419f35437e6005524, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2993446212992674133, guid: c94f67e4675e707419f35437e6005524, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3667,6 +3671,10 @@ PrefabInstance:
       propertyPath: Settings.playerTracker
       value: 
       objectReference: {fileID: 8240315480030543725}
+    - target: {fileID: 1549921472727175950, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
+      propertyPath: Settings.rotationSmoothSpeed
+      value: 0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 2202592486761563797, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
       propertyPath: m_Name
       value: Main Camera
