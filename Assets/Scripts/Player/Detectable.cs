@@ -16,7 +16,6 @@ public class Detectable : MonoBehaviour
     }
     public void showIndicator()
     {
-        Indicator.SetActive(true);
         if (hideBase)
         {
             if (mesh == null) return;
@@ -26,7 +25,6 @@ public class Detectable : MonoBehaviour
 
     public void hideIndicator()
     {
-        Indicator.SetActive(false);
         if (hideBase)
         {
             if (mesh == null) return;

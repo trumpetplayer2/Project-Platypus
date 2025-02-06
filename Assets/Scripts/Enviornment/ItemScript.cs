@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using tp2;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEngine.GraphicsBuffer;
 
 public class ItemScript : MonoBehaviour
@@ -12,7 +13,7 @@ public class ItemScript : MonoBehaviour
     bool isHeld = false;
     public bool holdable = true;
     Rigidbody rb = null;
-
+    UnityAction call;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -62,7 +63,12 @@ public class ItemScript : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerAbilityManager>(out PlayerAbilityManager ability))
         {
-            ability.grab.grabEvent.AddListener(() => grab(ability));
+            if(call != null)
+            {
+                return;
+            }
+            call = () => grab(ability);
+            ability.grab.grabEvent.AddListener(call);
         }
         //Insert NPC grab check here
 
@@ -74,7 +80,8 @@ public class ItemScript : MonoBehaviour
         {
             try
             {
-                ability.grab.grabEvent.RemoveListener(() => grab(ability));
+                ability.grab.grabEvent.RemoveListener(call);
+                call = null;
             }
             catch { }
         }

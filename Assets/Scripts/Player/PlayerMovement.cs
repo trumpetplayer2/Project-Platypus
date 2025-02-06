@@ -74,11 +74,26 @@ namespace tp2
             {
                 updateCameraMode();
             }
+            if (Input.GetButtonDown("CameraModeAssist"))
+            {
+                cameraSettings.followMode = cameraMode.Assist;
+            } else if (Input.GetButtonDown("CameraModeStrict"))
+            {
+                cameraSettings.followMode = cameraMode.Locked;
+            }
+            else if (Input.GetButtonDown("CameraModeUnlocked"))
+            {
+                cameraSettings.followMode = cameraMode.Unlocked;
+            }
+            else if (Input.GetButtonDown("Freecam"))
+            {
+                cameraSettings.followMode = cameraMode.FreeCam;
+            }
             //Get Direction
             float strafe = Input.GetAxis("Horizontal");
             float forward = Input.GetAxis("Vertical");
             //Calculate base movement
-            Vector3 movement = new Vector3(forward, 0, -strafe);
+            Vector3 movement = new Vector3(forward, 0, -strafe).normalized;
             //Create a variable angle for later use
             float angle = 0;
             //Different Camera Modes!

@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using tp2;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Diggable : MonoBehaviour
 {
+    UnityAction call;
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<PlayerAbilityManager>(out PlayerAbilityManager ability))
         {
-            ability.dig.dig.AddListener(() => dig());
+            if(call != null) { return; }
+            call = () => dig();
+            ability.dig.dig.AddListener(call);
         }
     }
 
@@ -19,7 +23,8 @@ public abstract class Diggable : MonoBehaviour
         {
             try
             {
-                ability.dig.dig.RemoveListener(() => dig());
+                ability.dig.dig.RemoveListener(call);
+                call = null;
             }
             catch { }
         }

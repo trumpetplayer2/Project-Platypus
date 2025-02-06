@@ -117,6 +117,7 @@ namespace tp2
             }
             else
             {
+                if (grab.heldObject != null) return;
                 SpitGravel();
             }
         }
