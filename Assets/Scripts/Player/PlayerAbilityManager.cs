@@ -34,6 +34,15 @@ namespace tp2
         public SenseSphere sphere;
         public string SenseInputName = "SixthSense";
     }
+    [Serializable]
+    public class  HoldSettings
+    {
+        public Transform holdLocation;
+        public ItemScript heldObject;
+        public string grabInput = "Grab";
+        public float Cooldown = 1f;
+        public UnityEvent grabEvent = new UnityEvent();
+    }
     public class PlayerAbilityManager : MonoBehaviour
     {
         //Gravel Stuff
@@ -48,12 +57,9 @@ namespace tp2
         public SixthSenseSettings sense;
         private float senseCooldown = 0;
         bool canSense = true;
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
+        //Grab settings
+        public HoldSettings grab;
+        float grabCooldown = 0f;
 
         // Update is called once per frame
         void Update()
@@ -75,13 +81,18 @@ namespace tp2
             {
                 if(gravelCooldown <= 0) Gravel();
             }
+            if (Input.GetButtonDown(grab.grabInput))
+            {
+                if (grabCooldown <= 0) Grab();
+            }
         }
 
         void DecrementCooldown()
         {
             senseCooldown = Mathf.Max(0, senseCooldown - Time.deltaTime);
-            digCooldown = Mathf.Max(0, senseCooldown - Time.deltaTime);
-            gravelCooldown = Mathf.Max(0, senseCooldown - Time.deltaTime);
+            digCooldown = Mathf.Max(0, digCooldown - Time.deltaTime);
+            gravelCooldown = Mathf.Max(0, gravelCooldown - Time.deltaTime);
+            grabCooldown = Mathf.Max(0, grabCooldown - Time.deltaTime);
             canSense = senseCooldown <= 0;
 
         }
@@ -149,6 +160,18 @@ namespace tp2
         void Dig()
         {
             dig.dig?.Invoke();
+            digCooldown = dig.Cooldown;
+        }
+
+        void Grab()
+        {
+            if(grab.heldObject != null) {
+                grab.heldObject.release();
+                grabCooldown = grab.Cooldown;
+                return;
+            }
+            grab.grabEvent?.Invoke();
+            grabCooldown = grab.Cooldown;
         }
     }
 }

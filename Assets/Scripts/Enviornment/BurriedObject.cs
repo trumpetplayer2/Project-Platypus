@@ -23,13 +23,16 @@ public class BurriedObject : Diggable
     private void Update()
     {
         if(!digging) { return; }
-        Debug.Log(timer);
         timer += Time.deltaTime;
         treasure.transform.position = Vector3.Lerp(startLocation, endLocation.position, (timer)/digTime);
         if(digTime <= timer)
         {
             treasure.transform.parent = null;
             treasure.gameObject.SetActive(true);
+            if (treasure.TryGetComponent<ItemScript>(out ItemScript item))
+            {
+                item.holdable = true;
+            }
             Destroy(this.gameObject);
         }
     }

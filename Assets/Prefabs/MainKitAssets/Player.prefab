@@ -31,7 +31,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.4, z: -0.4}
   m_LocalScale: {x: 0.6, y: 0.2, z: 0.6}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5336857866152154989}
   m_Father: {fileID: 2487688002107975274}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &14561800561844032
@@ -404,11 +405,22 @@ MonoBehaviour:
     Cooldown: 1
     digTip: {fileID: 0}
     DigInputName: Dig
+    dig:
+      m_PersistentCalls:
+        m_Calls: []
   sense:
     Cooldown: 1
     length: 5
     sphere: {fileID: 1672031150833428941}
     SenseInputName: SixthSense
+  grab:
+    holdLocation: {fileID: 5336857866152154989}
+    heldObject: {fileID: 0}
+    grabInput: Grab
+    Cooldown: 1
+    grabEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!54 &7450155215747013509
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -436,6 +448,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &7932964424357477162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5336857866152154989}
+  m_Layer: 3
+  m_Name: HoldLocation
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5336857866152154989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7932964424357477162}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.69, z: 0.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3190463933237773391}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9036077043187915527
 GameObject:
   m_ObjectHideFlags: 0
