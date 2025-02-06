@@ -26,14 +26,28 @@ public class AIBase : MonoBehaviour
     public Transform CurrPatrolDestination;
 
 
+   
+
+
     [Header("Interact Info")]
 
     public float TargetInteractDistance;
 
 
+    public InteractState interact = null;
+
+    public GameObject CurrTarget;
+    //enum TargetTypes
+    //{
+    //    ActiveObject,
+    //    InactiveObject,
+    //    Player,
+    //    Target
+    //}
+
     [Header("Searching For Player Info")]
 
-    public Transform CurrTarget;
+   
 
     public Transform Eyes;
 
@@ -76,23 +90,15 @@ public class AIBase : MonoBehaviour
 
 
 
-    // 
-    //TargetTypes
-    //{
-    //   ActiveObject,
-    //   InactiveObject,
-    //   Player,
-    //   Target
 
-
-    //}
+   
 
 
 
 
-    
 
-    public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
+
+public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
     {
         Debug.Log("New State Decision");
 
@@ -129,9 +135,14 @@ public class AIBase : MonoBehaviour
         patrol = gameObject.AddComponent<PatrolState>();
 
 
+        interact = gameObject.AddComponent<InteractState>();
+
+
         idle.StateSetup(thisAIObj);
 
         patrol.StateSetup(thisAIObj);
+
+        interact.StateSetup(thisAIObj);
 
         idleTimeUntil = 5;
     }
@@ -157,6 +168,14 @@ public class AIBase : MonoBehaviour
 
         CurrTarget = SearchForTargets();
 
+        if(CurrTarget != null)
+        {
+            SwitchStates(currActiveState, interact);
+
+            interact.SetTargetLocation(CurrTarget);
+
+        }
+
         //SearchForTargets();
     }
 
@@ -168,13 +187,15 @@ public class AIBase : MonoBehaviour
     /// 
     /// </summary>
     /// <returns></returns>
-    public Transform SearchForTargets()
+    public GameObject SearchForTargets()
     {
 
         
         Debug.Log("Searching for targets");
 
-        Transform target;
+        GameObject target;
+
+        string targetTag;
         //establishes detection radius
         Collider[] AIRange = Physics.OverlapSphere(transform.position, radius, TargetMask);
 
@@ -185,23 +206,30 @@ public class AIBase : MonoBehaviour
 
             for (int i = 0; i < AIRange.Length; i++)
             {
-                target = AIRange[i].transform;
+                target = AIRange[i].gameObject;
 
-                Vector3 directionToTarget = (target.position - Eyes.transform.position).normalized;
+                targetTag = target.tag;
+
+                Vector3 directionToTarget = (target.gameObject.transform.position - Eyes.transform.position).normalized;
 
                 if (Vector3.Angle(Eyes.transform.forward, directionToTarget) < angle / 2)
                 {
                     //set agent destination to new found target.
 
-                    float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                    float distanceToTarget = Vector3.Distance(transform.position, target.gameObject.transform.position);
 
                     if (!Physics.Raycast(Eyes.transform.position, directionToTarget, distanceToTarget, EnvironmentMask))
                     {
                         Debug.Log("Target seen, moving to target");
 
+                        if (CurrTarget == null)
+                        {
+                            return target;
+                        }
+                        else if (CurrTarget != null)
+                            CurrentTargetAnalysis(target);
 
-
-                        return target;
+                        
                     }
                     else
                     {
@@ -255,6 +283,11 @@ public class AIBase : MonoBehaviour
 
 
 
+       
+    }
+
+    private void CurrentTargetAnalysis(GameObject aTarget)
+    {
        
     }
 

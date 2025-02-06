@@ -1,25 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class IdleState : BaseStateClass
+public class DetectedState : BaseStateClass
 {
-    //public override bool IsActiveState
-    //{
-
-    //    get { return isActiveState; }
-
-
-    //    set
-    //    {
-    //        isActiveState = value;
-
-
-    //    }
-    //}
-
-
+    Transform currentTarget;
 
     public override void StateSetup(AIBase aAIscript)
     {
@@ -28,6 +13,11 @@ public class IdleState : BaseStateClass
         //idleTimeUntil = 5;
 
         Debug.Log("Setting Up idle state State");
+    }
+
+    public void StateSetup(Transform NewTarget)
+    {
+        currentTarget = NewTarget;
     }
 
     public override void OnEnterState()
@@ -54,7 +44,7 @@ public class IdleState : BaseStateClass
 
     public override void ChangeState(BaseStateClass aNewState, ref BaseStateClass aCurrState)
     {
-        Debug.Log("Changing from Idle");
+        Debug.Log("Changing from Detected");
         aCurrState.OnExitState();
 
 
@@ -71,28 +61,16 @@ public class IdleState : BaseStateClass
     }
 
 
-    
-
-
-    //public override void OnEveryFrame()
-    //{
-    //    //For Checking for player
-
-    //    Debug.Log("CheckingForPlayer");
-    //}
-
-
-
-
+   
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //OnEveryFrame();
+        
     }
 }
