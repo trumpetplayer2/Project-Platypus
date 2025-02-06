@@ -42,7 +42,7 @@ public abstract class BaseStateClass : MonoBehaviour
 
     //public abstract void OnEveryFrame();
 
-    public abstract void UpdateNewTarget(Transform aNewTarget);
+   
     
 
 

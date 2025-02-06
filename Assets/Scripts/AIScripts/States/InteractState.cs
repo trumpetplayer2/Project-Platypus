@@ -1,25 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class IdleState : BaseStateClass
+public class InteractState : BaseStateClass
 {
-    //public override bool IsActiveState
-    //{
-
-    //    get { return isActiveState; }
-
-
-    //    set
-    //    {
-    //        isActiveState = value;
-
-
-    //    }
-    //}
-
-
+    GameObject currentTarget;
 
     public override void StateSetup(AIBase aAIscript)
     {
@@ -30,20 +16,26 @@ public class IdleState : BaseStateClass
         Debug.Log("Setting Up idle state State");
     }
 
+    public void SetTargetLocation(GameObject NewTarget)
+    {
+        currentTarget = NewTarget;
+    }
+
     public override void OnEnterState()
     {
 
         Debug.Log("In idle State");
+
+        aiScript.agent.destination = currentTarget.transform.position;
         //IsActiveState = true;
 
-        //StartCoroutine(ChangeToPatrol(idleTimeUntil));
 
         return;
     }
 
     public override void OnExitState()
     {
-        //StopCoroutine(ChangeToPatrol(idleTimeUntil));
+        
 
         //IsActiveState = false;
 
@@ -54,7 +46,7 @@ public class IdleState : BaseStateClass
 
     public override void ChangeState(BaseStateClass aNewState, ref BaseStateClass aCurrState)
     {
-        Debug.Log("Changing from Idle");
+        Debug.Log("Changing from Patrol or Idle");
         aCurrState.OnExitState();
 
 
@@ -65,34 +57,37 @@ public class IdleState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        Debug.Log("idle functionality");
+        Debug.Log("interact functionality");
 
-        //StartCoroutine(ChangeToPatrol(idleTimeUntil));
+        if(Vector3.Distance(aiScript.gameObject.transform.position, currentTarget.transform.position) < 2)
+        {
+            aiScript.agent.isStopped = true;
+
+            BeginInteract(currentTarget);
+        }
+
+        
+        
     }
 
+    private void BeginInteract(GameObject aCurrentTarget)
+    {
+        Debug.Log("Beginning interacting");
+
+        
+    }
 
     
-
-
-    //public override void OnEveryFrame()
-    //{
-    //    //For Checking for player
-
-    //    Debug.Log("CheckingForPlayer");
-    //}
-
-
-
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //OnEveryFrame();
+        
     }
 }
