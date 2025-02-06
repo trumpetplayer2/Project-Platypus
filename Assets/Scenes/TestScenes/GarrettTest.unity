@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 29721495}
   - component: {fileID: 29721494}
   - component: {fileID: 29721493}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 38889631}
   - component: {fileID: 38889630}
   - component: {fileID: 38889629}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 85756439}
   - component: {fileID: 85756438}
   - component: {fileID: 85756437}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 157803505}
   - component: {fileID: 157803504}
   - component: {fileID: 157803503}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 179605299}
   - component: {fileID: 179605298}
   - component: {fileID: 179605297}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -818,7 +818,7 @@ GameObject:
   - component: {fileID: 325823816}
   - component: {fileID: 325823815}
   - component: {fileID: 325823814}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NTThree
   m_TagString: Target
   m_Icon: {fileID: 0}
@@ -920,7 +920,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400828001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PDOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -954,7 +954,7 @@ GameObject:
   - component: {fileID: 437918093}
   - component: {fileID: 437918092}
   - component: {fileID: 437918091}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NTOne
   m_TagString: Target
   m_Icon: {fileID: 0}
@@ -1056,7 +1056,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 759916030}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PDThree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1150,14 +1150,14 @@ MonoBehaviour:
   PlayerObjRef: {fileID: 0}
   TargetObjRef: {fileID: 0}
   ObjectObjRef: {fileID: 0}
-  radius: 0
-  angle: 0
+  radius: 5
+  angle: 70
   TargetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   EnvironmentMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   agent: {fileID: 0}
   currActiveState: {fileID: 0}
 --- !u!136 &778202152
@@ -1261,7 +1261,7 @@ GameObject:
   - component: {fileID: 790999035}
   - component: {fileID: 790999034}
   - component: {fileID: 790999033}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1363,7 +1363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 799883659}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PDFive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1394,7 +1394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 897685471}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PDFour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1428,7 +1428,7 @@ GameObject:
   - component: {fileID: 926848419}
   - component: {fileID: 926848418}
   - component: {fileID: 926848417}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1578,7 +1578,7 @@ GameObject:
   - component: {fileID: 1014660387}
   - component: {fileID: 1014660386}
   - component: {fileID: 1014660385}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1683,7 +1683,7 @@ GameObject:
   - component: {fileID: 1042425716}
   - component: {fileID: 1042425715}
   - component: {fileID: 1042425714}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1823,7 +1823,7 @@ GameObject:
   - component: {fileID: 1155480386}
   - component: {fileID: 1155480385}
   - component: {fileID: 1155480384}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NTTwo
   m_TagString: Target
   m_Icon: {fileID: 0}
@@ -1928,7 +1928,7 @@ GameObject:
   - component: {fileID: 1320637257}
   - component: {fileID: 1320637256}
   - component: {fileID: 1320637255}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2031,7 +2031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1384160428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PDTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2170,7 +2170,7 @@ GameObject:
   - component: {fileID: 1505011301}
   - component: {fileID: 1505011300}
   - component: {fileID: 1505011299}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2276,7 +2276,7 @@ GameObject:
   - component: {fileID: 1625866643}
   - component: {fileID: 1625866642}
   - component: {fileID: 1625866641}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2382,7 +2382,7 @@ GameObject:
   - component: {fileID: 1744955747}
   - component: {fileID: 1744955746}
   - component: {fileID: 1744955745}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NTFour
   m_TagString: Target
   m_Icon: {fileID: 0}
@@ -2615,7 +2615,7 @@ GameObject:
   - component: {fileID: 2109651560}
   - component: {fileID: 2109651559}
   - component: {fileID: 2109651558}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
