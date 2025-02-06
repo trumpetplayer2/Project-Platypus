@@ -70,6 +70,13 @@ public class IdleState : BaseStateClass
         //StartCoroutine(ChangeToPatrol(idleTimeUntil));
     }
 
+
+    public override void UpdateNewTarget(Transform aNewTarget)
+    {
+
+    }
+
+
     //public override void OnEveryFrame()
     //{
     //    //For Checking for player

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.XR;
+using System.Net;
 
 public class AIBase : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class AIBase : MonoBehaviour
 
     [Header("Searching For Player Info")]
 
-    public GameObject CurrTarget;
+    public Transform CurrTarget;
 
     public Transform Eyes;
 
@@ -154,6 +155,8 @@ public class AIBase : MonoBehaviour
 
         currActiveState.CurrStateFunctionality();
 
+        CurrTarget = SearchForTargets();
+
         //SearchForTargets();
     }
 
@@ -165,13 +168,13 @@ public class AIBase : MonoBehaviour
     /// 
     /// </summary>
     /// <returns></returns>
-    public void SearchForTargets()
+    public Transform SearchForTargets()
     {
 
         
         Debug.Log("Searching for targets");
 
-
+        Transform target;
         //establishes detection radius
         Collider[] AIRange = Physics.OverlapSphere(transform.position, radius, TargetMask);
 
@@ -180,33 +183,48 @@ public class AIBase : MonoBehaviour
 
             Debug.Log("Target found");
 
-            Transform target = AIRange[0].transform;
-
-            Vector3 directionToTarget = (target.position - Eyes.transform.position).normalized;
-
-            if (Vector3.Angle(Eyes.transform.forward, directionToTarget) < angle / 2)
+            for (int i = 0; i < AIRange.Length; i++)
             {
-                //set agent destination to new found target.
+                target = AIRange[i].transform;
 
-                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                Vector3 directionToTarget = (target.position - Eyes.transform.position).normalized;
 
-                if (!Physics.Raycast(Eyes.transform.position, directionToTarget, distanceToTarget, EnvironmentMask))
+                if (Vector3.Angle(Eyes.transform.forward, directionToTarget) < angle / 2)
                 {
-                    Debug.Log("AI to Target");
+                    //set agent destination to new found target.
+
+                    float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+                    if (!Physics.Raycast(Eyes.transform.position, directionToTarget, distanceToTarget, EnvironmentMask))
+                    {
+                        Debug.Log("Target seen, moving to target");
+
+
+
+                        return target;
+                    }
+                    else
+                    {
+                        Debug.Log("Target not found in front of AI.");
+                        continue;
+                    }
                 }
                 else
                 {
-                    Debug.Log("Target not found in front of AI.");
+                    Debug.Log("Maintain current Patrol");
+                    continue;
                 }
             }
-            else
-            {
-                Debug.Log("Maintain current Patrol");
-            }
+
+
+
 
         }
         else
-            Debug.Log("Maintain current Patrol");
+            Debug.Log("Continue current State");
+            return null;
+        
+            
 
         //Debug.DrawRay(Eyes.position, (TargetObjRef.transform.position - Eyes.position).normalized * VisionRange, Color.red, 0.01f);
 

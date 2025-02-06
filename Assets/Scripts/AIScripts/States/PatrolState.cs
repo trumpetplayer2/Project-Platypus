@@ -80,8 +80,13 @@ public class PatrolState : BaseStateClass
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public override void UpdateNewTarget(Transform aNewTarget)
+    {
 
-
+    }
 
 
 
