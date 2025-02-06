@@ -182,9 +182,9 @@ public class AIBase : MonoBehaviour
 
             Transform target = AIRange[0].transform;
 
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
+            Vector3 directionToTarget = (target.position - Eyes.transform.position).normalized;
 
-            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            if (Vector3.Angle(Eyes.transform.forward, directionToTarget) < angle / 2)
             {
                 //set agent destination to new found target.
 
