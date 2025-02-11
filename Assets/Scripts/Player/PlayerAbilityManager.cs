@@ -17,6 +17,8 @@ namespace tp2
         public Sprite[] sprites;
         public GameObject gravelEntity;
         public Transform gravelSpawnLocation;
+        public AudioClip collectClip;
+        public AudioClip spitClip;
     }
     [Serializable]
     public class DigSettings
@@ -25,6 +27,7 @@ namespace tp2
         public GameObject digTip;
         public string DigInputName = "Dig";
         public UnityEvent dig = new UnityEvent();
+        public AudioClip clip;
     }
     [Serializable]
     public class SixthSenseSettings
@@ -33,6 +36,7 @@ namespace tp2
         public float length = 10f;
         public SenseSphere sphere;
         public string SenseInputName = "SixthSense";
+        public AudioClip clip;
     }
     [Serializable]
     public class  HoldSettings
@@ -42,6 +46,8 @@ namespace tp2
         public string grabInput = "Grab";
         public float Cooldown = 1f;
         public UnityEvent grabEvent = new UnityEvent();
+        public AudioClip grabClip;
+        public AudioClip dropClip;
     }
     public class PlayerAbilityManager : MonoBehaviour
     {
@@ -60,6 +66,12 @@ namespace tp2
         //Grab settings
         public HoldSettings grab;
         float grabCooldown = 0f;
+        AudioSettings audioSettings;
+
+        private void Start()
+        {
+            audioSettings = new AudioSettings(gravel.collectClip, gravel.spitClip, dig.clip, sense.clip, grab.grabClip, grab.dropClip);
+        }
 
         // Update is called once per frame
         void Update()
@@ -99,6 +111,7 @@ namespace tp2
         void Sense()
         {
             sense.sphere.showDetect();
+            queueClip(3);
             Invoke("SenseFade", sense.length);
         }
 
@@ -121,10 +134,15 @@ namespace tp2
                 SpitGravel();
             }
         }
+
+        void queueClip(int slot)
+        {
+            AudioHandler.instance.queueClip(audioSettings.toClip(slot));
+        }
         void CollectGravel()
         {
-            Debug.Log("Collect");
             gravelCount = gravel.Max;
+            queueClip(0);
             updateGravelUI();
         }
 
@@ -135,6 +153,7 @@ namespace tp2
                 return;
             }
             Instantiate(gravel.gravelEntity, gravel.gravelSpawnLocation.position, gravel.gravelSpawnLocation.rotation);
+            queueClip(1);
             gravelCount -= 1;
             updateGravelUI();
         }
@@ -162,6 +181,7 @@ namespace tp2
         {
             dig.dig?.Invoke();
             digCooldown = dig.Cooldown;
+            queueClip(2);
         }
 
         void Grab()
@@ -169,10 +189,12 @@ namespace tp2
             if(grab.heldObject != null) {
                 grab.heldObject.release();
                 grabCooldown = grab.Cooldown;
+                queueClip(5);
                 return;
             }
             grab.grabEvent?.Invoke();
             grabCooldown = grab.Cooldown;
+            queueClip(4);
         }
     }
 }

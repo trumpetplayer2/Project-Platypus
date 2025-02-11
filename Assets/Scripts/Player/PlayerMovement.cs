@@ -42,6 +42,7 @@ namespace tp2
         public WalkSpeed speed;
         float lastGravity = 0;
         public static PlayerMovement instance;
+        public bool swimming = false;
         // Start is called before the first frame update
         void Start()
         {
@@ -138,10 +139,10 @@ namespace tp2
                 mult += speed.runSpeedMult;
             }
             //In Water Check
-            //if (false)
-            //{
-            //    mult += speed.waterSpeedMult;
-            //}
+            if (swimming)
+            {
+                mult += speed.waterSpeedMult;
+            }
             //Current Slope
             float slope = calculateSlope(out Vector3 normal);
             switch (speed.slopeMode)

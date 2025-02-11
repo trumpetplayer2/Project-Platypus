@@ -13,6 +13,27 @@ namespace tp2
         public float timeout = -1f;
         public float cooldown = 0.1f;
         public AudioClip[] sfx = new AudioClip[2];
+
+        public AudioSettings(float sfxVolume = 1f, float sfxPitch = 1f, float startTime = 0f, float timeout = -1f, float cooldown = 0.1f, params AudioClip[] sfx)
+        {
+            this.sfxVolume = sfxVolume;
+            this.sfxPitch = sfxPitch;
+            this.startTime = startTime;
+            this.timeout = timeout;
+            this.cooldown = cooldown;
+            this.sfx = sfx;
+        }
+        public AudioSettings(params AudioClip[] sfx)
+        {
+            this.sfx = sfx;
+        }
+        public AudioSettings() { }
+
+        public Clip toClip(int sfxSlot)
+        {
+            return new Clip(sfx[sfxSlot], sfxVolume, sfxPitch, timeout, startTime);
+        }
+
     }
 
     public class SfxHandler : MonoBehaviour

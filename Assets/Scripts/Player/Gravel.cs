@@ -7,6 +7,7 @@ public class Gravel : MonoBehaviour
     public float speed;
     private void Update()
     {
+        if (GameManager.instance.isPaused) return;
         transform.position += transform.forward * Time.deltaTime * speed;
     }
 
