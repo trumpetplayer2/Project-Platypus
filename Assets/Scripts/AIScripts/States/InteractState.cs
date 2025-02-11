@@ -16,7 +16,7 @@ public class InteractState : BaseStateClass
         Debug.Log("Setting Up idle state State");
     }
 
-    public void SetTargetLocation(GameObject NewTarget)
+    public void SetTarget(GameObject NewTarget)
     {
         currentTarget = NewTarget;
     }
@@ -74,10 +74,12 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("Beginning interacting");
 
+        aiScript.BaseTargetInteractFunction();
+
         
     }
 
-    
+   
 
     // Start is called before the first frame update
     void Start()

@@ -36,14 +36,16 @@ public class AIBase : MonoBehaviour
 
     public InteractState interact = null;
 
+    public GameObject PrevTarget;
+
     public GameObject CurrTarget;
-    //enum TargetTypes
-    //{
-    //    ActiveObject,
-    //    InactiveObject,
-    //    Player,
-    //    Target
-    //}
+    enum TargetTypes
+    {
+        ActiveObject,
+        InactiveObject,
+        Player,
+        Target
+    }
 
     [Header("Searching For Player Info")]
 
@@ -166,15 +168,10 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
         currActiveState.CurrStateFunctionality();
 
-        CurrTarget = SearchForTargets();
+        
+        
 
-        if(CurrTarget != null)
-        {
-            SwitchStates(currActiveState, interact);
-
-            interact.SetTargetLocation(CurrTarget);
-
-        }
+        
 
         //SearchForTargets();
     }
@@ -187,7 +184,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     /// 
     /// </summary>
     /// <returns></returns>
-    public GameObject SearchForTargets()
+    public void SearchForTargets()
     {
 
         
@@ -222,14 +219,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
                     {
                         Debug.Log("Target seen, moving to target");
 
-                        if (CurrTarget == null)
-                        {
-                            return target;
-                        }
-                        else if (CurrTarget != null)
-                            CurrentTargetAnalysis(target);
-
-                        
+                        CurrentTargetAnalysis(target);
                     }
                     else
                     {
@@ -250,7 +240,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
         }
         else
             Debug.Log("Continue current State");
-            return null;
+        return;
         
             
 
@@ -286,9 +276,39 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
        
     }
 
+
+    public void BaseTargetInteractFunction()
+    {
+        StartCoroutine(BaseTargetTime());
+    }
+
+    IEnumerator BaseTargetTime()
+    {
+        yield return new WaitForSeconds(5);
+
+        PrevTarget = CurrTarget;
+
+        CurrTarget = null;
+    }
+
     private void CurrentTargetAnalysis(GameObject aTarget)
     {
+        if(aTarget != null)
+        {
+            if (CurrTarget == null)
+            {
+                CurrTarget = aTarget;
+                SwitchStates(interact, patrol);
+
+                interact.SetTarget(aTarget);
+            }
+        }
+        else
+        {
+            return;
+        }
        
+        
     }
 
     IEnumerator ChangeToPatrol(int aIdleTime)
