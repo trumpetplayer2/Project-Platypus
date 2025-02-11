@@ -68,7 +68,12 @@ namespace tp2
         {
             if(!GameManager.instance.isPaused) { unpausedUpdate(); }
         }
-
+        public void warp(Vector3 position)
+        {
+            childSettings.body.enabled = false;
+            transform.position = position;
+            childSettings.body.enabled = true;
+        }
         void unpausedUpdate()
         {
             if (Input.GetButtonDown("SwitchCameraMode"))

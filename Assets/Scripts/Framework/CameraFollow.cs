@@ -181,7 +181,7 @@ namespace tp2
             }
             if (Input.GetButtonUp("MoveCamera"))
             {
-                Cursor.lockState = CursorLockMode.None;
+                //Cursor.lockState = CursorLockMode.None;
             }
         }
 
