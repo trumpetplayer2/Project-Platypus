@@ -18,6 +18,7 @@ namespace tp2
     public class PlayerChildrenSetting
     {
         public CharacterController body;
+        public Animator animator;
     }
     public enum SlopeMode{None, Linear}
     [System.Serializable]
@@ -136,17 +137,27 @@ namespace tp2
                     movement = Quaternion.AngleAxis(angle, Vector3.up) * movement;
                     break;
             }
-            
+            childSettings.animator.SetBool("Walking", movement.magnitude > 0);
             float mult = 1;
             if (Input.GetButton("Sprint"))
             {
                 //Animation Sprint
                 mult += speed.runSpeedMult;
+                childSettings.animator.SetBool("Sprinting", true);
+            }
+            else
+            {
+                childSettings.animator.SetBool("Sprinting", false);
             }
             //In Water Check
             if (swimming)
             {
                 mult += speed.waterSpeedMult;
+                childSettings.animator.SetBool("Swimming", true);
+            }
+            else
+            {
+                childSettings.animator.SetBool("Swimming", false);
             }
             //Current Slope
             float slope = calculateSlope(out Vector3 normal);

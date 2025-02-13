@@ -17,11 +17,15 @@ public class PauseScript : MonoBehaviour
     float fadeCounter = 0;
     public Vector3 checkpoint;
     bool canTeleport = false;
+    public Submenu currentMenu;
     // Update is called once per frame
     void Update()
     {
         if(Input.GetButtonDown("Cancel")){
-            togglePause();
+            if (currentMenu.layer < 1)
+            {
+                togglePause();
+            }
         }
         Fade();
         if (canTeleport)
@@ -52,6 +56,7 @@ public class PauseScript : MonoBehaviour
         }
         Time.timeScale = GameManager.instance.isPaused ? 1 : 0;
         Cursor.lockState = GameManager.instance.isPaused ? CursorLockMode.Locked : CursorLockMode.None;
+        Debug.Log(Cursor.lockState);
         GameManager.instance.isPaused = !GameManager.instance.isPaused;
     }
 

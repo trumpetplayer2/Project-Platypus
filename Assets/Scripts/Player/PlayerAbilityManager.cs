@@ -67,6 +67,7 @@ namespace tp2
         public HoldSettings grab;
         float grabCooldown = 0f;
         AudioSettings audioSettings;
+        public Animator animator;
 
         private void Start()
         {

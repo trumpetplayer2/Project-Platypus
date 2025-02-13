@@ -6,9 +6,13 @@ using UnityEngine.UI;
 [System.Serializable]
 public static class Settings
 {
+    [Range(0,1)]
     public static float masterVolume = 1f;
+    [Range(0,1)]
     public static float musicVolume = 1f;
+    [Range(0,1)]
     public static float sfxVolume = 1f;
+    [Range(0,100)]
     public static float cameraSensitivity = 1f;
     public static bool cameraLock = false;
 }

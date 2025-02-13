@@ -51,6 +51,14 @@ namespace tp2
                 return false;
             }
         }
+        /// <summary>
+        /// Scales the volume by master volume * sfx volume
+        /// </summary>
+        /// <returns></returns>
+        public float getScaledVolume()
+        {
+            return volume * Settings.masterVolume * Settings.sfxVolume;
+        }
     }
 
     public class AudioHandler : MonoBehaviour
@@ -83,10 +91,21 @@ namespace tp2
                 {
                     //Grab most recent clip and Deque it
                     Clip c = audioQueue.Dequeue();
+                    if (c.clip == null)
+                    {
+                        if (audioQueue.Count > 0)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
                     //If clip is not expired, play it
                     if (!c.getExpired())
                     {
-                        sfxSource.volume = c.volume;
+                        sfxSource.volume = c.getScaledVolume();
                         sfxSource.pitch = c.pitch;
                         sfxSource.time = Mathf.Min(c.clip.length, c.startTime);
                         sfxSource.PlayOneShot(c.clip);

@@ -58,7 +58,7 @@ namespace tp2
         //Public Settings
         public CameraCinematicVariables CinematicSettings;
         public CameraMovementSettings MovementSettings;
-        public CameraFollowVariables Settings;
+        public CameraFollowVariables cSettings;
         ////Private trackers
         //int sceneNumber = 0;
         //int positionNumber = 0;
@@ -79,9 +79,9 @@ namespace tp2
         public void Awake()
         {
             instance = this;
-            angle = Settings.startAngle;
-            locationOffset = Settings.locationOffset;
-            distance = Settings.distance;
+            angle = cSettings.startAngle;
+            locationOffset = cSettings.locationOffset;
+            distance = cSettings.distance;
         }
 
         public void Start()
@@ -130,16 +130,16 @@ namespace tp2
 
         private void followCamUpdate()
         {
-            if (Settings.playerTracker == null) return;
+            if (cSettings.playerTracker == null) return;
 
-            float x = Mathf.Clamp(Settings.playerTracker.position.x, Settings.minLocations.x, Settings.maxLocations.x);
-            float y = Mathf.Clamp(Settings.playerTracker.position.y, Settings.minLocations.y, Settings.maxLocations.y);
-            float z = Mathf.Clamp(Settings.playerTracker.position.z, Settings.minLocations.z, Settings.maxLocations.z);
+            float x = Mathf.Clamp(cSettings.playerTracker.position.x, cSettings.minLocations.x, cSettings.maxLocations.x);
+            float y = Mathf.Clamp(cSettings.playerTracker.position.y, cSettings.minLocations.y, cSettings.maxLocations.y);
+            float z = Mathf.Clamp(cSettings.playerTracker.position.z, cSettings.minLocations.z, cSettings.maxLocations.z);
             Vector3 tempTracker = new Vector3(x, y, z);
             
 
             //Update Angle
-            angle += Input.GetAxis("RotateCamera") * MovementSettings.rotationSpeed;
+            angle += Input.GetAxis("RotateCamera") * MovementSettings.rotationSpeed * Settings.cameraSensitivity;
             angle = angle % 360;
             
             locationOffset = new Vector3((Mathf.Sin(Mathf.Deg2Rad * angle) * distance), locationOffset.y, (Mathf.Cos(Mathf.Deg2Rad * angle) * distance));
@@ -147,14 +147,14 @@ namespace tp2
             {
                 //Check player relation to camera
                 Vector3 desiredPosition = tempTracker + Quaternion.Euler(0, 0, 0) * locationOffset;
-                Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, Settings.smoothSpeed);
+                Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, cSettings.smoothSpeed);
                 transform.position = smoothedPosition;
             }
-            Settings.rotationOffset.y = angle-180;
+            cSettings.rotationOffset.y = angle-180;
 
             //Rotation
-            Quaternion desiredrotation = Quaternion.Euler(0,0,0) * Quaternion.Euler(Settings.rotationOffset);
-            Quaternion smoothedrotation = Quaternion.Lerp(transform.rotation, desiredrotation, Settings.rotationSmoothSpeed);
+            Quaternion desiredrotation = Quaternion.Euler(0,0,0) * Quaternion.Euler(cSettings.rotationOffset);
+            Quaternion smoothedrotation = Quaternion.Lerp(transform.rotation, desiredrotation, cSettings.rotationSmoothSpeed);
             transform.rotation = smoothedrotation;
         }
 
@@ -172,11 +172,12 @@ namespace tp2
             distance -= cameraZoomChange * MovementSettings.zoomScale;
             distance = Mathf.Clamp(distance, MovementSettings.minZoom, MovementSettings.maxZoom);
             //Scale current y by the initial settings
-            locationOffset.y = distance / Settings.distance * Settings.locationOffset.y;
+            locationOffset.y = distance / cSettings.distance * cSettings.locationOffset.y;
 
-            if (Input.GetButton("MoveCamera"))
+            //If camera lock is disabled, input is not needed
+            if (Input.GetButton("MoveCamera") || !Settings.cameraLock)
             {
-                angle += Input.GetAxis("Mouse X");
+                angle += Input.GetAxis("Mouse X") * Settings.cameraSensitivity;
                 Cursor.lockState = CursorLockMode.Locked;
             }
             if (Input.GetButtonUp("MoveCamera"))

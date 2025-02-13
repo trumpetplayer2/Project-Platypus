@@ -197,7 +197,8 @@ MonoBehaviour:
     minZoom: 5
     maxZoom: 20
     zoomScale: 7
-  Settings:
+    FreecamCap: {x: 20, y: 20, z: 20}
+  cSettings:
     maxLocations: {x: 100, y: 30, z: 100}
     minLocations: {x: -100, y: 0, z: -100}
     distance: 10
@@ -206,4 +207,5 @@ MonoBehaviour:
     smoothSpeed: 0.125
     locationOffset: {x: 0, y: 5, z: 0}
     rotationOffset: {x: 22.5, y: 0, z: 0}
+    rotationSmoothSpeed: 0.1
   freecam: 0

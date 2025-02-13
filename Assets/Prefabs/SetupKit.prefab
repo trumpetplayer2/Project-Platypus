@@ -138,6 +138,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1745545076147126932, guid: ea685bb404d98554a812a682de95466a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745545076147126932, guid: ea685bb404d98554a812a682de95466a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745545076147126932, guid: ea685bb404d98554a812a682de95466a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745545076147126932, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -301,6 +313,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1549921472727175950, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
       propertyPath: Settings.playerTracker
+      value: 
+      objectReference: {fileID: 7215663444279273688}
+    - target: {fileID: 1549921472727175950, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
+      propertyPath: cSettings.playerTracker
       value: 
       objectReference: {fileID: 7215663444279273688}
     - target: {fileID: 2202592486761563797, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
