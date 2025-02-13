@@ -13,18 +13,21 @@ public class InteractState : BaseStateClass
 
         //idleTimeUntil = 5;
 
-        Debug.Log("Setting Up idle state State");
+        Debug.Log("Setting Up Interact State");
     }
 
     public void SetTarget(GameObject NewTarget)
     {
+        Debug.Log("New Target for Interact State is set");
         currentTarget = NewTarget;
+
+        return;
     }
 
     public override void OnEnterState()
     {
 
-        Debug.Log("In idle State");
+        Debug.Log("In interact State");
 
         aiScript.agent.destination = currentTarget.transform.position;
         //IsActiveState = true;
@@ -39,7 +42,7 @@ public class InteractState : BaseStateClass
 
         //IsActiveState = false;
 
-        Debug.Log("Exiting idle State");
+        Debug.Log("Exiting interact State");
 
         return;
     }
@@ -59,9 +62,14 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("interact functionality");
 
-        if(Vector3.Distance(aiScript.gameObject.transform.position, currentTarget.transform.position) < 2)
+        aiScript.agent.isStopped = true;
+
+        BeginInteract(currentTarget);
+
+        if (Vector3.Distance(aiScript.gameObject.transform.position, currentTarget.transform.position) < 1)
         {
-            aiScript.agent.isStopped = true;
+            Debug.Log("AI is stopped in front of target");
+            
 
             BeginInteract(currentTarget);
         }

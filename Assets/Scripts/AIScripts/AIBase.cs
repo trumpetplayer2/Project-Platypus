@@ -173,7 +173,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
         
 
-        //SearchForTargets();
+        SearchForTargets();
     }
 
     /// <summary>
@@ -218,8 +218,24 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
                     if (!Physics.Raycast(Eyes.transform.position, directionToTarget, distanceToTarget, EnvironmentMask))
                     {
                         Debug.Log("Target seen, moving to target");
+                        if (target == CurrTarget)
+                        {
+                           
+                            continue;
+                        }
+                        else
+                        {
+                            CurrentTargetAnalysis(target);
+                            continue;
+                        }
+                       
+                        
+                            
+                        
+                       
 
-                        CurrentTargetAnalysis(target);
+                       
+                      
                     }
                     else
                     {
@@ -279,11 +295,13 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
     public void BaseTargetInteractFunction()
     {
+        Debug.Log("Test Interact with target");
         StartCoroutine(BaseTargetTime());
     }
 
     IEnumerator BaseTargetTime()
     {
+        
         yield return new WaitForSeconds(5);
 
         PrevTarget = CurrTarget;
@@ -293,18 +311,28 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
     private void CurrentTargetAnalysis(GameObject aTarget)
     {
+        Debug.Log("Analyzing potential target");
+
+
         if(aTarget != null)
         {
+            Debug.Log("Given argument is not null");
             if (CurrTarget == null)
             {
                 CurrTarget = aTarget;
-                SwitchStates(interact, patrol);
+                interact.SetTarget(CurrTarget);
+                SwitchStates(patrol, interact);
 
-                interact.SetTarget(aTarget);
+                return;
+            }
+            else
+            {
+                return;
             }
         }
         else
         {
+            Debug.Log("Given argument is null");
             return;
         }
        
