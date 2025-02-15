@@ -72,6 +72,38 @@ public class AIBase : MonoBehaviour
 
     public LayerMask EnvironmentMask;
 
+    private bool isBusywithTarget;
+
+    private bool targetFound;
+
+    [HideInInspector]
+    public bool TargetFound
+    {
+        get { return targetFound; }
+
+        set { targetFound = value;
+
+
+
+
+            if (!targetFound  /*!isBusywithTarget*/ && currActiveState == interact)
+            {
+                Debug.Log("Returning to patrol state");
+                CurrTarget = null;
+                SwitchStates(currActiveState, idle);
+            }
+
+            if (targetFound || CurrTarget != null)
+            {
+                Debug.Log("switching to interact state");
+                SwitchStates(patrol, interact);
+
+            }
+
+           
+        
+        }
+    }
 
     [Header("Navigation Info")]
 
@@ -157,6 +189,12 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
     void OnEnable()
     {
+        CurrTarget = null;
+
+        TargetFound = false;
+
+        isBusywithTarget = false;
+
         currActiveState = idle;
 
         StartCoroutine(ChangeToPatrol(idleTimeUntil));
@@ -186,8 +224,8 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     /// <returns></returns>
     public void SearchForTargets()
     {
-
         
+
         Debug.Log("Searching for targets");
 
         GameObject target;
@@ -217,34 +255,44 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
                     if (!Physics.Raycast(Eyes.transform.position, directionToTarget, distanceToTarget, EnvironmentMask))
                     {
+                        
                         Debug.Log("Target seen, moving to target");
-                        if (target == CurrTarget)
+                        if (target == CurrTarget || target == PrevTarget)
+                        {
+                            
+                            continue;
+                        }
+                        else if (target != CurrTarget)
+                        {
+                            
+                            CurrentTargetAnalysis(target);
+                            continue;
+                        }
+                        else if (target == null)
                         {
                            
                             continue;
                         }
-                        else
-                        {
-                            CurrentTargetAnalysis(target);
-                            continue;
-                        }
-                       
-                        
-                            
-                        
                        
 
-                       
-                      
+
+
+
+
+
+
+
                     }
                     else
                     {
+                        TargetFound = false;
                         Debug.Log("Target not found in front of AI.");
                         continue;
                     }
                 }
                 else
                 {
+                    targetFound = false;
                     Debug.Log("Maintain current Patrol");
                     continue;
                 }
@@ -255,6 +303,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
         }
         else
+            TargetFound = false;
             Debug.Log("Continue current State");
         return;
         
@@ -306,7 +355,12 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
         PrevTarget = CurrTarget;
 
-        CurrTarget = null;
+        
+        targetFound = false;
+
+        isBusywithTarget = false;
+
+        Debug.Log("Target task is complete");
     }
 
     private void CurrentTargetAnalysis(GameObject aTarget)
@@ -316,22 +370,43 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
         if(aTarget != null)
         {
-            Debug.Log("Given argument is not null");
-            if (CurrTarget == null)
-            {
-                CurrTarget = aTarget;
-                interact.SetTarget(CurrTarget);
-                SwitchStates(patrol, interact);
+            //Debug.Log("Given argument is not null");
+            //if (!isBusywithTarget && CurrTarget != null)
+            //{
+            //    Debug.Log("Currently not busy with target");
 
-                return;
-            }
-            else
-            {
-                return;
-            }
+              
+                if (CurrTarget == null)
+                {
+                    Debug.Log("New object is set, proceed with interact state");
+
+
+                    CurrTarget = aTarget;
+                    interact.SetTarget(CurrTarget);
+                    targetFound = true;
+                    isBusywithTarget = true;
+                    
+
+                    return;
+                }
+                else if (aTarget == PrevTarget && !isBusywithTarget)
+                {
+                    targetFound = false;
+                    CurrTarget = null;
+                    return;
+                }
+            //}
+            //else
+            //{
+            //    Debug.Log("busy with target");
+            //    return;
+            //}
+
+            
         }
         else
         {
+            targetFound = false;
             Debug.Log("Given argument is null");
             return;
         }

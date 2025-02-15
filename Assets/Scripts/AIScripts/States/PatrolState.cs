@@ -32,7 +32,7 @@ public class PatrolState : BaseStateClass
 
     public override void OnExitState()
     {
-        aiScript.agent.isStopped = true;
+        //aiScript.agent.isStopped = true;
         //IsActiveState = false;
         Debug.Log("Exiting Patrol State");
 

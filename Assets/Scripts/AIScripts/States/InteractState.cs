@@ -62,11 +62,13 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("interact functionality");
 
-        aiScript.agent.isStopped = true;
+        //aiScript.agent.isStopped = true;
 
-        BeginInteract(currentTarget);
+        //BeginInteract(currentTarget);
 
-        if (Vector3.Distance(aiScript.gameObject.transform.position, currentTarget.transform.position) < 1)
+        //Debug.Log(Vector3.Distance(aiScript.gameObject.transform.position, currentTarget.transform.position));
+
+        if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < 2)
         {
             Debug.Log("AI is stopped in front of target");
             
