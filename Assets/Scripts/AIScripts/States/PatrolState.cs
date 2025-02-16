@@ -5,6 +5,29 @@ using UnityEngine.AI;
 
 public class PatrolState : BaseStateClass
 {
+
+    //public override bool IsActiveState
+    //{
+
+    //    get { return isActiveState; }
+
+
+    //    set
+    //    {
+    //        isActiveState = value;
+
+    //        if (!IsActiveState)
+    //        {
+    //            this.gameObject.SetActive(false);
+    //        }
+
+    //        if(IsActiveState)
+    //        {
+
+    //        }
+    //    }
+    //}
+
     int randomPatrolDestination;
     //public PatrolState(AIBase aAIBase) : base(aAIBase)
     //{
@@ -14,7 +37,7 @@ public class PatrolState : BaseStateClass
     public override void StateSetup(AIBase aAIscript)
     {
 
-        Debug.Log("Setting Up Patrol State");
+        //Debug.Log("Setting Up Patrol State");
         this.aiScript = aAIscript;
     }
 
@@ -32,10 +55,10 @@ public class PatrolState : BaseStateClass
 
     public override void OnExitState()
     {
-        //aiScript.agent.isStopped = true;
+        aiScript.agent.isStopped = true;
         //IsActiveState = false;
         Debug.Log("Exiting Patrol State");
-
+        //IsActiveState = false;
         return;
     }
 
@@ -78,6 +101,9 @@ public class PatrolState : BaseStateClass
 
 
         }
+
+
+        return;
     }
 
     /// <summary>

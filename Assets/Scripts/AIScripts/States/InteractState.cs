@@ -5,6 +5,24 @@ using UnityEngine;
 
 public class InteractState : BaseStateClass
 {
+    //public override bool IsActiveState
+    //{
+
+    //    get { return isActiveState; }
+
+
+    //    set
+    //    {
+    //        isActiveState = value;
+
+    //        if (!IsActiveState)
+    //        {
+    //            this.gameObject.SetActive(false);
+    //        }
+    //    }
+    //}
+
+
     GameObject currentTarget;
 
     public override void StateSetup(AIBase aAIscript)
@@ -13,13 +31,21 @@ public class InteractState : BaseStateClass
 
         //idleTimeUntil = 5;
 
-        Debug.Log("Setting Up Interact State");
+        //Debug.Log("Setting Up Interact State");
     }
 
     public void SetTarget(GameObject NewTarget)
     {
-        Debug.Log("New Target for Interact State is set");
-        currentTarget = NewTarget;
+        if(NewTarget == currentTarget)
+        {
+            return;
+        }
+        else
+        {
+            Debug.Log("New Target for Interact State is set");
+            currentTarget = NewTarget;
+        }
+       
 
         return;
     }
@@ -28,7 +54,7 @@ public class InteractState : BaseStateClass
     {
 
         Debug.Log("In interact State");
-
+        aiScript.agent.isStopped = false;
         aiScript.agent.destination = currentTarget.transform.position;
         //IsActiveState = true;
 
@@ -44,6 +70,8 @@ public class InteractState : BaseStateClass
 
         Debug.Log("Exiting interact State");
 
+    
+        //IsActiveState = false;
         return;
     }
 
@@ -76,7 +104,7 @@ public class InteractState : BaseStateClass
             BeginInteract(currentTarget);
         }
 
-        
+        return;
         
     }
 
@@ -84,7 +112,27 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("Beginning interacting");
 
-        aiScript.BaseTargetInteractFunction();
+        string TargetInstructions = aCurrentTarget.tag.ToString();
+
+        switch (TargetInstructions)
+        {
+            case "Player": 
+                    {
+                    aiScript.PlayerInteractFunction();
+                    break;
+                    }
+            case "Target":
+                {
+                    aiScript.BaseTargetInteractFunction();
+                    break;
+                }
+            case "LowestPriority":
+                {
+                    aiScript.LowPriInteractFunction();
+                    break;
+                }
+        }
+        
 
         
     }

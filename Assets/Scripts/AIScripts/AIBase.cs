@@ -76,6 +76,8 @@ public class AIBase : MonoBehaviour
 
     private bool targetFound;
 
+    
+
     [HideInInspector]
     public bool TargetFound
     {
@@ -84,19 +86,20 @@ public class AIBase : MonoBehaviour
         set { targetFound = value;
 
 
+            //Debug.Log(targetFound = true ? "target is found" : "target is not found");
 
-
-            if (!targetFound  /*!isBusywithTarget*/ && currActiveState == interact)
+            if (!targetFound  && !isBusywithTarget && currActiveState == interact)
             {
-                Debug.Log("Returning to patrol state");
-                CurrTarget = null;
+                Debug.Log("Returning to idle state");
+                targetFound = false;
+                isBusywithTarget = false;
                 SwitchStates(currActiveState, idle);
             }
 
             if (targetFound || CurrTarget != null)
             {
                 Debug.Log("switching to interact state");
-                SwitchStates(patrol, interact);
+                SwitchStates(currActiveState, interact);
 
             }
 
@@ -134,6 +137,10 @@ public class AIBase : MonoBehaviour
 
 public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
     {
+        if(aNextState == aCurrActiveState)
+        {
+            return;
+        }
         Debug.Log("New State Decision");
 
         currActiveState.ChangeState(aNextState, ref aCurrActiveState);
@@ -178,7 +185,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
         interact.StateSetup(thisAIObj);
 
-        idleTimeUntil = 5;
+        
     }
 
     // Start is called before the first frame update
@@ -243,6 +250,12 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
             {
                 target = AIRange[i].gameObject;
 
+                if (target == CurrTarget || target == PrevTarget)
+                {
+                    Debug.Log("target is already current target or is a previous target");
+                    continue;
+                }
+
                 targetTag = target.tag;
 
                 Vector3 directionToTarget = (target.gameObject.transform.position - Eyes.transform.position).normalized;
@@ -256,29 +269,21 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
                     if (!Physics.Raycast(Eyes.transform.position, directionToTarget, distanceToTarget, EnvironmentMask))
                     {
                         
-                        Debug.Log("Target seen, moving to target");
-                        if (target == CurrTarget || target == PrevTarget)
+                        Debug.Log("Target seen");
+                     
+                        if (target != CurrTarget)
                         {
-                            
-                            continue;
-                        }
-                        else if (target != CurrTarget)
-                        {
+                            Debug.Log("Sending Target for analysis");
                             
                             CurrentTargetAnalysis(target);
                             continue;
                         }
                         else if (target == null)
                         {
-                           
+                            Debug.Log("target is null");
                             continue;
                         }
                        
-
-
-
-
-
 
 
 
@@ -292,7 +297,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
                 }
                 else
                 {
-                    targetFound = false;
+                    TargetFound = false;
                     Debug.Log("Maintain current Patrol");
                     continue;
                 }
@@ -309,35 +314,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
         
             
 
-        //Debug.DrawRay(Eyes.position, (TargetObjRef.transform.position - Eyes.position).normalized * VisionRange, Color.red, 0.01f);
-
-        ////don't check for the player if they are behind the player, aka -1 for dot product
-        //if (Vector3.Dot((target.position - eyes.position).normalized, eyes.forward) < 0)
-        //{
-        //    return false;
-        //}
-        ////not normalized, as we need a set distance that isn't one
-
-
-        ////a raycast from the eyes toward the player, able to go through glass and other enemies, up to MaxPlayerDistance
-        ////and stores the hit in a variable
-
-        ////origin, direction, stores hit properties, max distance of raycast, objects that can obstruct raycast
-        //if (Physics.Raycast(Eyes.position, (target.position - eyes.position).normalized,
-        //    out RaycastHit hit, visionRange, visionBlockers))
-        //{
-        //    if (hit.transform.CompareTag(playerTag))
-        //    {
-        //        return true;
-        //    }
-        //}
-
-        ////if(Physics.Raycast(eyes.position,(target.position - eyes.position).normalized, out RaycastHit hit, 
-        ////visionRange, 
-        //return false;
-
-
-
+      
        
     }
 
@@ -346,6 +323,9 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     {
         Debug.Log("Test Interact with target");
         StartCoroutine(BaseTargetTime());
+        StopCoroutine(BaseTargetTime());
+
+        return;
     }
 
     IEnumerator BaseTargetTime()
@@ -353,48 +333,127 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
         
         yield return new WaitForSeconds(5);
 
+        StateComplete();
+
+        Debug.Log("Target task is complete");
+
+        yield break;
+    }
+
+    IEnumerator PlayerTargetTime()
+    {
+
+        yield return new WaitForSeconds(5);
+
+        StateComplete();
+
+        Debug.Log("Player task is complete");
+
+        yield break;
+    }
+
+    public void PlayerInteractFunction()
+    {
+        StartCoroutine(PlayerTargetTime());
+        StopCoroutine(PlayerTargetTime());
+
+        return;
+    }
+
+    IEnumerator LPTargetTime()
+    {
+
+        yield return new WaitForSeconds(5);
+
+        StateComplete();
+
+        Debug.Log("Low Priority task is complete");
+
+        yield break;
+    }
+
+    public void LowPriInteractFunction()
+    {
+        StartCoroutine(LPTargetTime());
+        StopCoroutine(LPTargetTime());
+
+        return;
+    }
+
+    public void StateComplete()
+    {
+        Debug.Log("Task Complete");
         PrevTarget = CurrTarget;
 
-        
-        targetFound = false;
+        CurrTarget = null;
+
+        TargetFound = false;
 
         isBusywithTarget = false;
 
-        Debug.Log("Target task is complete");
+        return;
     }
 
     private void CurrentTargetAnalysis(GameObject aTarget)
     {
+
+        Debug.Log(targetFound);
+
         Debug.Log("Analyzing potential target");
 
-
+        Debug.Log("Is the target null?");
         if(aTarget != null)
         {
-            //Debug.Log("Given argument is not null");
-            //if (!isBusywithTarget && CurrTarget != null)
-            //{
-            //    Debug.Log("Currently not busy with target");
+            Debug.Log("Given argument is not null");
+            
+            //Starting case, the first target spotted, will be the target regardless of status
+            if (CurrTarget == null)
+            {
+                Debug.Log("New object is set, proceed with interact state");
 
-              
-                if (CurrTarget == null)
+                CurrTarget = aTarget;
+                interact.SetTarget(CurrTarget);
+                TargetFound = true;
+                isBusywithTarget = true;
+
+                return;
+            }
+            else if(CurrTarget != null && isBusywithTarget)
+            {
+                if (aTarget.gameObject.CompareTag("Player"))
                 {
-                    Debug.Log("New object is set, proceed with interact state");
-
+                    PrevTarget = CurrTarget;
 
                     CurrTarget = aTarget;
-                    interact.SetTarget(CurrTarget);
-                    targetFound = true;
-                    isBusywithTarget = true;
-                    
 
-                    return;
+                    interact.SetTarget(CurrTarget);
+
+                    TargetFound = true;
+
+                    isBusywithTarget = true;
                 }
-                else if (aTarget == PrevTarget && !isBusywithTarget)
+                else if (aTarget.gameObject.CompareTag("Target")){
+
+                    PrevTarget = CurrTarget;
+                    CurrTarget = aTarget;
+                    interact.SetTarget(CurrTarget);
+                   
+
+                    TargetFound = true;
+
+                    isBusywithTarget = true;
+                }
+                else if (aTarget.gameObject.CompareTag("LowestPriority"))
                 {
-                    targetFound = false;
-                    CurrTarget = null;
-                    return;
+                    PrevTarget = CurrTarget;
+                    CurrTarget = aTarget;
+                    interact.SetTarget(CurrTarget);
+
+                   
                 }
+
+            }
+            
             //}
             //else
             //{
@@ -406,7 +465,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
         }
         else
         {
-            targetFound = false;
+            TargetFound = false;
             Debug.Log("Given argument is null");
             return;
         }
@@ -414,7 +473,9 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
         
     }
 
-    IEnumerator ChangeToPatrol(int aIdleTime)
+    
+
+    public IEnumerator ChangeToPatrol(int aIdleTime)
     {
 
         Debug.Log("Waiting to change to patrol");
@@ -425,4 +486,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
     }
 
+    
+
+   
 }

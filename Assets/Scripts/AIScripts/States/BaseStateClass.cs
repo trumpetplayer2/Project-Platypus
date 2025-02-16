@@ -4,17 +4,17 @@ using UnityEngine;
 
 public abstract class BaseStateClass : MonoBehaviour
 {
-    //protected bool isActiveState;
+    protected bool isActiveState;
 
-    //public virtual bool IsActiveState
-    //{
-    //    get;
+    public virtual bool IsActiveState
+    {
+        get;
 
-    //    set;
+        set;
 
 
 
-    //}
+    }
 
 
     public AIBase aiScript;

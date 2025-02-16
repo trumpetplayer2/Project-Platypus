@@ -15,7 +15,10 @@ public class IdleState : BaseStateClass
     //    {
     //        isActiveState = value;
 
-
+    //        if (!IsActiveState)
+    //        {
+    //            this.gameObject.SetActive(false);
+    //        }
     //    }
     //}
 
@@ -27,7 +30,7 @@ public class IdleState : BaseStateClass
 
         //idleTimeUntil = 5;
 
-        Debug.Log("Setting Up idle state State");
+        //Debug.Log("Setting Up idle state State");
     }
 
     public override void OnEnterState()
@@ -35,7 +38,7 @@ public class IdleState : BaseStateClass
 
         Debug.Log("In idle State");
         //IsActiveState = true;
-
+        StartCoroutine(aiScript.ChangeToPatrol(aiScript.idleTimeUntil));
         //StartCoroutine(ChangeToPatrol(idleTimeUntil));
 
         return;
@@ -43,7 +46,7 @@ public class IdleState : BaseStateClass
 
     public override void OnExitState()
     {
-        //StopCoroutine(ChangeToPatrol(idleTimeUntil));
+        StopCoroutine(aiScript.ChangeToPatrol(aiScript.idleTimeUntil));
 
         //IsActiveState = false;
 
@@ -68,6 +71,8 @@ public class IdleState : BaseStateClass
         Debug.Log("idle functionality");
 
         //StartCoroutine(ChangeToPatrol(idleTimeUntil));
+
+        return;
     }
 
 
