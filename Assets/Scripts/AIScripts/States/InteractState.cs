@@ -5,23 +5,21 @@ using UnityEngine;
 
 public class InteractState : BaseStateClass
 {
-    //public override bool IsActiveState
-    //{
 
-    //    get { return isActiveState; }
+    public override bool IsActiveState
+    {
+        get { return isActiveState; }
 
+        set
+        {
+            isActiveState = value;
 
-    //    set
-    //    {
-    //        isActiveState = value;
+            if (!IsActiveState)
+                DeactivateState();
 
-    //        if (!IsActiveState)
-    //        {
-    //            this.gameObject.SetActive(false);
-    //        }
-    //    }
-    //}
+        }
 
+    }
 
     GameObject currentTarget;
 
@@ -29,9 +27,6 @@ public class InteractState : BaseStateClass
     {
         this.aiScript = aAIscript;
 
-        //idleTimeUntil = 5;
-
-        //Debug.Log("Setting Up Interact State");
     }
 
     public void SetTarget(GameObject NewTarget)
@@ -45,7 +40,6 @@ public class InteractState : BaseStateClass
             Debug.Log("New Target for Interact State is set");
             currentTarget = NewTarget;
         }
-       
 
         return;
     }
@@ -56,22 +50,19 @@ public class InteractState : BaseStateClass
         Debug.Log("In interact State");
         aiScript.agent.isStopped = false;
         aiScript.agent.destination = currentTarget.transform.position;
-        //IsActiveState = true;
-
-
+        
         return;
     }
 
     public override void OnExitState()
     {
-        
 
-        //IsActiveState = false;
+        aiScript.TargetsBacklog.Add(currentTarget);
+
+        aiScript.CurrTarget = null;
 
         Debug.Log("Exiting interact State");
 
-    
-        //IsActiveState = false;
         return;
     }
 
@@ -79,7 +70,6 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("Changing from Patrol or Idle");
         aCurrState.OnExitState();
-
 
         aNewState.OnEnterState();
 
@@ -90,16 +80,9 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("interact functionality");
 
-        //aiScript.agent.isStopped = true;
-
-        //BeginInteract(currentTarget);
-
-        //Debug.Log(Vector3.Distance(aiScript.gameObject.transform.position, currentTarget.transform.position));
-
         if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < 2)
         {
             Debug.Log("AI is stopped in front of target");
-            
 
             BeginInteract(currentTarget);
         }
@@ -132,22 +115,12 @@ public class InteractState : BaseStateClass
                     break;
                 }
         }
-        
 
-        
     }
 
-   
-
-    // Start is called before the first frame update
-    void Start()
+    public override void DeactivateState()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
