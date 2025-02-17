@@ -23,23 +23,13 @@ public class InteractState : BaseStateClass
 
     GameObject currentTarget;
 
-    public override void StateSetup(AIBase aAIscript)
-    {
-        this.aiScript = aAIscript;
-
-    }
-
     public void SetTarget(GameObject NewTarget)
     {
-        if(NewTarget == currentTarget)
-        {
-            return;
-        }
-        else
-        {
+        
+        
             Debug.Log("New Target for Interact State is set");
             currentTarget = NewTarget;
-        }
+        
 
         return;
     }
@@ -61,6 +51,8 @@ public class InteractState : BaseStateClass
 
         aiScript.CurrTarget = null;
 
+        IsActiveState = false;
+
         Debug.Log("Exiting interact State");
 
         return;
@@ -68,12 +60,16 @@ public class InteractState : BaseStateClass
 
     public override void ChangeState(BaseStateClass aNewState, ref BaseStateClass aCurrState)
     {
-        Debug.Log("Changing from Patrol or Idle");
-        aCurrState.OnExitState();
+        
+        if (!aiScript.CheckForStateCooldown())
+        {
+            Debug.Log("Changing from Patrol or Idle");
+            aCurrState.OnExitState();
 
-        aNewState.OnEnterState();
+            aNewState.OnEnterState();
 
-        return;
+            return;
+        }
     }
 
     public override void CurrStateFunctionality()

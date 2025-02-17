@@ -7,9 +7,42 @@ using static UnityEngine.GraphicsBuffer;
 using UnityEngine.XR;
 using System.Net;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 public class AIBase : MonoBehaviour
 {
+
+    
+    private bool stateCoolingDown;
+
+    
+    public bool StateCoolingDown
+    {
+        get { return stateCoolingDown; }
+        set
+        {
+            stateCoolingDown = value;
+
+
+            if (stateCoolingDown)
+            {
+                float timer = 0;
+
+                timer += Time.deltaTime;
+
+                if (timer >= stateCooldown)
+                {
+                    stateCoolingDown = false;
+                }
+            }
+        }
+    }
+
+
+    public float stateCooldown;
+
+    
+   
 
     [Header("Idle Info")]
 
@@ -55,6 +88,13 @@ public class AIBase : MonoBehaviour
 
     private bool targetFound;
 
+    public float searchCooldown;
+
+
+    public bool isSearchCooldowm = true;
+
+    
+
     [HideInInspector]
     public bool TargetFound
     {
@@ -88,17 +128,28 @@ public class AIBase : MonoBehaviour
 
 public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
     {
-        Debug.Log("New State Decision");
-        if (aNextState == aCurrActiveState)
+
+        if (!StateCoolingDown)
         {
-            return;
+            Debug.Log("New State Decision");
+            if (aNextState == aCurrActiveState)
+            {
+                return;
+            }
+
+            currActiveState.ChangeState(aNextState, ref aCurrActiveState);
+
+            previousState = aCurrActiveState;
+
+            currActiveState = aNextState;
+
+
         }
-      
-        currActiveState.ChangeState(aNextState, ref aCurrActiveState);
 
-        previousState = aCurrActiveState;
 
-        currActiveState = aNextState;
+        StateCoolingDown = true;
+
+
     }
 
     public void ReturnToPreviousState()
@@ -151,7 +202,24 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     {
         currActiveState.CurrStateFunctionality();
 
-        
+        if (isSearchCooldowm)
+        {
+
+            float timer = 0;
+
+            Debug.Log("I am Here in cooldown");
+            timer += Time.deltaTime;
+
+            if (timer > searchCooldown)
+            {
+                Debug.Log("Should no longer be in cooldown");
+                isSearchCooldowm = false;
+
+            }
+
+        }
+        isSearchCooldowm = true;
+
     }
 
     /// <summary>
@@ -164,6 +232,10 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     /// <returns></returns>
     public void SearchForTargets()
     {
+        Debug.Log("In Searching Function");
+
+       
+
         Debug.Log("Searching for targets");
 
         GameObject target;
@@ -197,11 +269,12 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
                         
                         Debug.Log("Target seen");
 
-                        bool isTargetValid =  CurrentTargetAnalysis(target);
+                        bool isTargetValid = CurrentTargetAnalysis(target);
 
                         if (isTargetValid)
                         {
                             TargetFound = true;
+                            isSearchCooldowm = true;
                         }
                             return;
                         
@@ -215,6 +288,8 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
         }
 
     }
+
+    
 
 
     public void BaseTargetInteractFunction()
@@ -319,4 +394,8 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
     }
 
+    public bool CheckForStateCooldown()
+    {
+        return StateCoolingDown;
+    }
 }

@@ -1238,6 +1238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e9b2756fc4b8440a99a3d66343a558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateCooldown: 1
   idleTimeUntil: 5
   idle: {fileID: 0}
   patrol: {fileID: 0}
@@ -1261,6 +1262,8 @@ MonoBehaviour:
   EnvironmentMask:
     serializedVersion: 2
     m_Bits: 128
+  searchCooldown: 2
+  isSearchCooldowm: 1
   agent: {fileID: 0}
   currActiveState: {fileID: 0}
 --- !u!136 &778202152

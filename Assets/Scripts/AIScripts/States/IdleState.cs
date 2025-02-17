@@ -18,12 +18,6 @@ public class IdleState : BaseStateClass
 
     }
 
-    public override void StateSetup(AIBase aAIscript)
-    {
-        this.aiScript = aAIscript;
-
-    }
-
     public override void OnEnterState()
     {
 
@@ -38,6 +32,7 @@ public class IdleState : BaseStateClass
     {
         StopCoroutine(aiScript.ChangeToPatrol(aiScript.idleTimeUntil));
 
+        IsActiveState = false;
         Debug.Log("Exiting idle State");
 
         return;
@@ -45,17 +40,25 @@ public class IdleState : BaseStateClass
 
     public override void ChangeState(BaseStateClass aNewState, ref BaseStateClass aCurrState)
     {
-        Debug.Log("Changing from Idle");
-        aCurrState.OnExitState();
+        if (!aiScript.CheckForStateCooldown())
+        {
+            Debug.Log("Changing from Idle");
+            aCurrState.OnExitState();
 
-        aNewState.OnEnterState();
+            aNewState.OnEnterState();
 
-        return;
+            return;
+        }
+       
+       
     }
 
     public override void CurrStateFunctionality()
     {
         Debug.Log("idle functionality");
+
+        if(!aiScript.isSearchCooldowm)
+        aiScript.SearchForTargets();
 
         return;
     }
