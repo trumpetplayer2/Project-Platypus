@@ -13,7 +13,9 @@ public class IdleState : BaseStateClass
 
             if (!IsActiveState)
                 DeactivateState();
-        
+            
+            else
+                    this.enabled = false;
         }
 
     }
@@ -38,34 +40,29 @@ public class IdleState : BaseStateClass
         return;
     }
 
-    public override void ChangeState(BaseStateClass aNewState, ref BaseStateClass aCurrState)
+    public override void ChangeState(BaseStateClass aNewState)
     {
-        if (!aiScript.CheckForStateCooldown())
-        {
             Debug.Log("Changing from Idle");
-            aCurrState.OnExitState();
 
-            aNewState.OnEnterState();
+        aNewState.IsActiveState = true;
+
+
+        OnExitState();
 
             return;
-        }
-       
-       
+
     }
 
     public override void CurrStateFunctionality()
     {
         Debug.Log("idle functionality");
 
-        if(!aiScript.isSearchCooldowm)
+      
         aiScript.SearchForTargets();
 
         return;
     }
 
-    public override void DeactivateState()
-    {
-        
-    }
+   
 
 }

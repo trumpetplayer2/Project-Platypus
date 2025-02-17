@@ -12,36 +12,14 @@ using System.Diagnostics.CodeAnalysis;
 public class AIBase : MonoBehaviour
 {
 
-    
-    private bool stateCoolingDown;
+
+
 
     
-    public bool StateCoolingDown
-    {
-        get { return stateCoolingDown; }
-        set
-        {
-            stateCoolingDown = value;
 
+    public float stateSwitchTimer;
 
-            if (stateCoolingDown)
-            {
-                float timer = 0;
-
-                timer += Time.deltaTime;
-
-                if (timer >= stateCooldown)
-                {
-                    stateCoolingDown = false;
-                }
-            }
-        }
-    }
-
-
-    public float stateCooldown;
-
-    
+    public float searchTimer;
    
 
     [Header("Idle Info")]
@@ -60,7 +38,16 @@ public class AIBase : MonoBehaviour
 
     [Header("Interact Info")]
 
-    public float TargetInteractDistance;
+    private float targetInteractDistance;
+
+    public float TargetInteractDistance{
+
+        get { return targetInteractDistance; }
+        set { TargetInteractDistance = value;
+
+            agent.stoppingDistance = value;
+        }
+    }
 
     public InteractState interact = null;
 
@@ -88,10 +75,32 @@ public class AIBase : MonoBehaviour
 
     private bool targetFound;
 
-    public float searchCooldown;
+    
 
 
-    public bool isSearchCooldowm = true;
+    [Header("Chase Info")]
+
+   public ChaseState chase = null;
+
+    public float ChaseRange;
+    
+
+    private float speed;
+
+    public float Speed
+    {
+        get { return speed; } 
+        set { speed = value; 
+
+            agent.speed = value;
+        }
+    }
+
+    [Header("Searching Info")]
+
+    SearchState search = null;
+
+    public float rotateSpeed;
 
     
 
@@ -129,26 +138,22 @@ public class AIBase : MonoBehaviour
 public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
     {
 
-        if (!StateCoolingDown)
+        if (stateSwitchTimer > 0)
         {
+            return;
+        }
+
             Debug.Log("New State Decision");
             if (aNextState == aCurrActiveState)
             {
                 return;
             }
 
-            currActiveState.ChangeState(aNextState, ref aCurrActiveState);
+            currActiveState.ChangeState(aNextState);
 
-            previousState = aCurrActiveState;
+            //previousState = aCurrActiveState;
 
             currActiveState = aNextState;
-
-
-        }
-
-
-        StateCoolingDown = true;
-
 
     }
 
@@ -174,11 +179,19 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
         interact = gameObject.AddComponent<InteractState>();
 
+        chase = gameObject.AddComponent<ChaseState>();
+
+        search = gameObject.AddComponent<SearchState>();
+
         idle.StateSetup(thisAIObj);
 
         patrol.StateSetup(thisAIObj);
 
         interact.StateSetup(thisAIObj);
+
+        chase.StateSetup(thisAIObj);
+
+        search.StateSetup(thisAIObj);
 
         TargetsBacklog = new List<GameObject>();
 
@@ -202,23 +215,9 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     {
         currActiveState.CurrStateFunctionality();
 
-        if (isSearchCooldowm)
-        {
+        stateSwitchTimer -= Time.deltaTime;
 
-            float timer = 0;
-
-            Debug.Log("I am Here in cooldown");
-            timer += Time.deltaTime;
-
-            if (timer > searchCooldown)
-            {
-                Debug.Log("Should no longer be in cooldown");
-                isSearchCooldowm = false;
-
-            }
-
-        }
-        isSearchCooldowm = true;
+        searchTimer -= Time.deltaTime;
 
     }
 
@@ -232,10 +231,10 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     /// <returns></returns>
     public void SearchForTargets()
     {
-        Debug.Log("In Searching Function");
-
-       
-
+        if(searchTimer > 0)
+        {
+            return;
+        }
         Debug.Log("Searching for targets");
 
         GameObject target;
@@ -274,7 +273,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
                         if (isTargetValid)
                         {
                             TargetFound = true;
-                            isSearchCooldowm = true;
+                            
                         }
                             return;
                         
@@ -364,8 +363,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     private bool CurrentTargetAnalysis(GameObject aTarget)
     {
 
-        if (aTarget == null)
-            return false;
+       
 
             //Starting case, the first target spotted, will be the target regardless of status
             if (CurrTarget == null || !isBusywithTarget)
@@ -394,8 +392,15 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
     }
 
-    public bool CheckForStateCooldown()
+  
+
+    public GameObject RetrieveCurrTarget()
     {
-        return StateCoolingDown;
+        return CurrTarget;
+    }
+
+    internal void LostTarget()
+    {
+        SwitchStates(currActiveState, search);
     }
 }

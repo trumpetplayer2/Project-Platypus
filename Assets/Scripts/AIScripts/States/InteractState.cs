@@ -58,25 +58,23 @@ public class InteractState : BaseStateClass
         return;
     }
 
-    public override void ChangeState(BaseStateClass aNewState, ref BaseStateClass aCurrState)
+    public override void ChangeState(BaseStateClass aNewState)
     {
-        
-        if (!aiScript.CheckForStateCooldown())
-        {
             Debug.Log("Changing from Patrol or Idle");
-            aCurrState.OnExitState();
 
-            aNewState.OnEnterState();
+        aNewState.IsActiveState = true;
+
+        OnExitState();
 
             return;
-        }
+        
     }
 
     public override void CurrStateFunctionality()
     {
         Debug.Log("interact functionality");
 
-        if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < 2)
+        if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < aiScript.TargetInteractDistance)
         {
             Debug.Log("AI is stopped in front of target");
 
@@ -114,9 +112,6 @@ public class InteractState : BaseStateClass
 
     }
 
-    public override void DeactivateState()
-    {
-        
-    }
+ 
 
 }

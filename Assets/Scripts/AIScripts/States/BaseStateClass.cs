@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class BaseStateClass : MonoBehaviour
@@ -26,8 +27,16 @@ public abstract class BaseStateClass : MonoBehaviour
 
     public abstract void OnExitState();
 
-    public abstract void ChangeState(BaseStateClass aNewState, ref BaseStateClass aCurrState);
+    public abstract void ChangeState(BaseStateClass aNewState);
 
-    public abstract void DeactivateState();
+    public virtual void DeactivateState()
+    {
+        this.enabled = false;
+    }
+
+    protected void OnEnable()
+    {
+        OnEnterState();
+    }
 
 }

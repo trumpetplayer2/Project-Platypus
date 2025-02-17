@@ -40,23 +40,21 @@ public class PatrolState : BaseStateClass
         return;
     }
 
-    public override void ChangeState(BaseStateClass aNewState, ref BaseStateClass aCurrState)
+    public override void ChangeState(BaseStateClass aNewState)
     { 
-        
-        if (!aiScript.CheckForStateCooldown())
-        {
             Debug.Log("Changing from Patrol State");
-            aCurrState.OnExitState();
 
-            aNewState.OnEnterState();
+             aNewState.IsActiveState = true;
+
+            OnExitState();
 
             return;
-        }
+        
     }
 
     public override void CurrStateFunctionality()
     {
-        if (!aiScript.isSearchCooldowm)
+       
             aiScript.SearchForTargets();
 
         Debug.Log("Patrolling to target");
@@ -75,8 +73,5 @@ public class PatrolState : BaseStateClass
         return;
     }
 
-    public override void DeactivateState()
-    {
-        
-    }
+  
 }
