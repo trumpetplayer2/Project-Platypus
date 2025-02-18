@@ -15,7 +15,7 @@ public class IdleState : BaseStateClass
                 DeactivateState();
             
             else
-                    this.enabled = false;
+                 ActivateState();
         }
 
     }

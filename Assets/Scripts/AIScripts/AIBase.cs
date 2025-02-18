@@ -113,6 +113,13 @@ public class AIBase : MonoBehaviour
 
             if (targetFound)
             {
+                if (CurrTarget.CompareTag("Player"))
+                {
+                    isBusywithTarget = true;
+                    SwitchStates(currActiveState, chase);
+                    TargetFound = false;
+                }
+
                 isBusywithTarget = true;
                 SwitchStates(currActiveState, interact);
                 TargetFound = false;
@@ -162,11 +169,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
         SwitchStates(currActiveState, previousState);
     }
 
-    public bool UpdateNewTargets()
-    {
-        return true;
-    }
-
+    
     void Awake()
     {
         thisAIObj = GetComponent<AIBase>();
@@ -362,21 +365,32 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
     private bool CurrentTargetAnalysis(GameObject aTarget)
     {
-
-       
+        
 
             //Starting case, the first target spotted, will be the target regardless of status
             if (CurrTarget == null || !isBusywithTarget)
             {
+                CurrTarget = aTarget;
+
+                if (aTarget.CompareTag("Player"))
+                {
+
+               
+                    chase.ActivateState();
+
+                    return true;
+                }
+              
                 Debug.Log("New object is set, proceed with interact state");
 
-                CurrTarget = aTarget;
                 
-                interact.SetTarget(CurrTarget);
+                
+                interact.ActivateState();
                 
 
                 return true;
             }
+
 
        return false;
     }
@@ -402,5 +416,6 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     internal void LostTarget()
     {
         SwitchStates(currActiveState, search);
+        isBusywithTarget = false;
     }
 }

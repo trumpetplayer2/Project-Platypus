@@ -34,6 +34,11 @@ public abstract class BaseStateClass : MonoBehaviour
         this.enabled = false;
     }
 
+    public virtual void ActivateState()
+    {
+        this.enabled = true;
+    }
+
     protected void OnEnable()
     {
         OnEnterState();

@@ -16,6 +16,8 @@ public class PatrolState : BaseStateClass
 
             if(!isActiveState)
                 DeactivateState();
+            else
+                ActivateState();
         }
     }
 

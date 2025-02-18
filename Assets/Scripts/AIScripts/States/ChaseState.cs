@@ -18,6 +18,8 @@ public class ChaseState : BaseStateClass
 
             if (!IsActiveState)
                 DeactivateState();
+            else
+                ActivateState();
 
         }
 
@@ -46,17 +48,19 @@ public class ChaseState : BaseStateClass
 
     private void LosingTarget()
     {
+        Debug.Log("Lost Target");
         aiScript.LostTarget();
     }
 
     private void CatchTarget()
     {
-        
+        Debug.Log("Caught Target");
     }
 
     public override void OnExitState()
     {
         Debug.Log("Exiting Chase State");
+        IsActiveState = false;
     }
 
     public override void ChangeState(BaseStateClass aNewState)

@@ -14,6 +14,8 @@ public class SearchState : BaseStateClass
 
             if (!IsActiveState)
                 DeactivateState();
+            else
+                ActivateState();
 
         }
 
@@ -32,7 +34,7 @@ public class SearchState : BaseStateClass
 
     public override void OnExitState()
     {
-
+        IsActiveState = false;
     }
 
     public override void ChangeState(BaseStateClass aNewState)

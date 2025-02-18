@@ -16,28 +16,21 @@ public class InteractState : BaseStateClass
 
             if (!IsActiveState)
                 DeactivateState();
-
+            else
+                ActivateState();
         }
 
     }
 
     GameObject currentTarget;
 
-    public void SetTarget(GameObject NewTarget)
-    {
-        
-        
-            Debug.Log("New Target for Interact State is set");
-            currentTarget = NewTarget;
-        
-
-        return;
-    }
+   
 
     public override void OnEnterState()
     {
 
         Debug.Log("In interact State");
+        currentTarget = aiScript.RetrieveCurrTarget();
         aiScript.agent.isStopped = false;
         aiScript.agent.destination = currentTarget.transform.position;
         
