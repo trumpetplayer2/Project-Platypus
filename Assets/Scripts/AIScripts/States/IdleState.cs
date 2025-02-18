@@ -13,14 +13,10 @@ public class IdleState : BaseStateClass
 
             if (!IsActiveState)
                 DeactivateState();
-        
+            
+            else
+                 ActivateState();
         }
-
-    }
-
-    public override void StateSetup(AIBase aAIscript)
-    {
-        this.aiScript = aAIscript;
 
     }
 
@@ -38,31 +34,35 @@ public class IdleState : BaseStateClass
     {
         StopCoroutine(aiScript.ChangeToPatrol(aiScript.idleTimeUntil));
 
+        IsActiveState = false;
         Debug.Log("Exiting idle State");
 
         return;
     }
 
-    public override void ChangeState(BaseStateClass aNewState, ref BaseStateClass aCurrState)
+    public override void ChangeState(BaseStateClass aNewState)
     {
-        Debug.Log("Changing from Idle");
-        aCurrState.OnExitState();
+            Debug.Log("Changing from Idle");
 
-        aNewState.OnEnterState();
+        aNewState.IsActiveState = true;
 
-        return;
+
+        OnExitState();
+
+            return;
+
     }
 
     public override void CurrStateFunctionality()
     {
         Debug.Log("idle functionality");
 
+      
+        aiScript.SearchForTargets();
+
         return;
     }
 
-    public override void DeactivateState()
-    {
-        
-    }
+   
 
 }

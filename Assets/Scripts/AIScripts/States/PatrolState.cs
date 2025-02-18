@@ -16,15 +16,12 @@ public class PatrolState : BaseStateClass
 
             if(!isActiveState)
                 DeactivateState();
+            else
+                ActivateState();
         }
     }
 
     int randomPatrolDestination;
-
-    public override void StateSetup(AIBase aAIscript)
-    { 
-        this.aiScript = aAIscript;
-    }
 
     public override void OnEnterState()
     {
@@ -39,23 +36,29 @@ public class PatrolState : BaseStateClass
     {
         aiScript.agent.isStopped = true;
         
+        IsActiveState = false;
         Debug.Log("Exiting Patrol State");
 
         return;
     }
 
-    public override void ChangeState(BaseStateClass aNewState, ref BaseStateClass aCurrState)
+    public override void ChangeState(BaseStateClass aNewState)
     { 
-        Debug.Log("Changing from Patrol State");
-        aCurrState.OnExitState();
+            Debug.Log("Changing from Patrol State");
 
-        aNewState.OnEnterState();
+             aNewState.IsActiveState = true;
 
-        return;
+            OnExitState();
+
+            return;
+        
     }
 
     public override void CurrStateFunctionality()
-    { 
+    {
+       
+            aiScript.SearchForTargets();
+
         Debug.Log("Patrolling to target");
 
         aiScript.CurrPatrolDestination = aiScript.PatrolDestinations[randomPatrolDestination];
@@ -67,11 +70,10 @@ public class PatrolState : BaseStateClass
             randomPatrolDestination = Random.Range(0, aiScript.PatrolDestinations.Length - 1);
         }
 
+
+
         return;
     }
 
-    public override void DeactivateState()
-    {
-        
-    }
+  
 }

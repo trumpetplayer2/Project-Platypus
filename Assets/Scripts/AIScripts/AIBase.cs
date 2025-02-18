@@ -7,9 +7,20 @@ using static UnityEngine.GraphicsBuffer;
 using UnityEngine.XR;
 using System.Net;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 public class AIBase : MonoBehaviour
 {
+
+
+
+
+    
+
+    public float stateSwitchTimer;
+
+    public float searchTimer;
+   
 
     [Header("Idle Info")]
 
@@ -27,7 +38,16 @@ public class AIBase : MonoBehaviour
 
     [Header("Interact Info")]
 
-    public float TargetInteractDistance;
+    private float targetInteractDistance;
+
+    public float TargetInteractDistance{
+
+        get { return targetInteractDistance; }
+        set { TargetInteractDistance = value;
+
+            agent.stoppingDistance = value;
+        }
+    }
 
     public InteractState interact = null;
 
@@ -55,6 +75,35 @@ public class AIBase : MonoBehaviour
 
     private bool targetFound;
 
+    
+
+
+    [Header("Chase Info")]
+
+   public ChaseState chase = null;
+
+    public float ChaseRange;
+    
+
+    private float speed;
+
+    public float Speed
+    {
+        get { return speed; } 
+        set { speed = value; 
+
+            agent.speed = value;
+        }
+    }
+
+    [Header("Searching Info")]
+
+    SearchState search = null;
+
+    public float rotateSpeed;
+
+    
+
     [HideInInspector]
     public bool TargetFound
     {
@@ -64,6 +113,13 @@ public class AIBase : MonoBehaviour
 
             if (targetFound)
             {
+                if (CurrTarget.CompareTag("Player"))
+                {
+                    isBusywithTarget = true;
+                    SwitchStates(currActiveState, chase);
+                    TargetFound = false;
+                }
+
                 isBusywithTarget = true;
                 SwitchStates(currActiveState, interact);
                 TargetFound = false;
@@ -88,17 +144,24 @@ public class AIBase : MonoBehaviour
 
 public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
     {
-        Debug.Log("New State Decision");
-        if (aNextState == aCurrActiveState)
+
+        if (stateSwitchTimer > 0)
         {
             return;
         }
-      
-        currActiveState.ChangeState(aNextState, ref aCurrActiveState);
 
-        previousState = aCurrActiveState;
+            Debug.Log("New State Decision");
+            if (aNextState == aCurrActiveState)
+            {
+                return;
+            }
 
-        currActiveState = aNextState;
+            currActiveState.ChangeState(aNextState);
+
+            //previousState = aCurrActiveState;
+
+            currActiveState = aNextState;
+
     }
 
     public void ReturnToPreviousState()
@@ -106,11 +169,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
         SwitchStates(currActiveState, previousState);
     }
 
-    public bool UpdateNewTargets()
-    {
-        return true;
-    }
-
+    
     void Awake()
     {
         thisAIObj = GetComponent<AIBase>();
@@ -123,11 +182,19 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
         interact = gameObject.AddComponent<InteractState>();
 
+        chase = gameObject.AddComponent<ChaseState>();
+
+        search = gameObject.AddComponent<SearchState>();
+
         idle.StateSetup(thisAIObj);
 
         patrol.StateSetup(thisAIObj);
 
         interact.StateSetup(thisAIObj);
+
+        chase.StateSetup(thisAIObj);
+
+        search.StateSetup(thisAIObj);
 
         TargetsBacklog = new List<GameObject>();
 
@@ -151,7 +218,10 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     {
         currActiveState.CurrStateFunctionality();
 
-        
+        stateSwitchTimer -= Time.deltaTime;
+
+        searchTimer -= Time.deltaTime;
+
     }
 
     /// <summary>
@@ -164,6 +234,10 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     /// <returns></returns>
     public void SearchForTargets()
     {
+        if(searchTimer > 0)
+        {
+            return;
+        }
         Debug.Log("Searching for targets");
 
         GameObject target;
@@ -197,11 +271,12 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
                         
                         Debug.Log("Target seen");
 
-                        bool isTargetValid =  CurrentTargetAnalysis(target);
+                        bool isTargetValid = CurrentTargetAnalysis(target);
 
                         if (isTargetValid)
                         {
                             TargetFound = true;
+                            
                         }
                             return;
                         
@@ -215,6 +290,8 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
         }
 
     }
+
+    
 
 
     public void BaseTargetInteractFunction()
@@ -288,22 +365,32 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
     private bool CurrentTargetAnalysis(GameObject aTarget)
     {
-
-        if (aTarget == null)
-            return false;
+        
 
             //Starting case, the first target spotted, will be the target regardless of status
             if (CurrTarget == null || !isBusywithTarget)
             {
+                CurrTarget = aTarget;
+
+                if (aTarget.CompareTag("Player"))
+                {
+
+               
+                    chase.ActivateState();
+
+                    return true;
+                }
+              
                 Debug.Log("New object is set, proceed with interact state");
 
-                CurrTarget = aTarget;
                 
-                interact.SetTarget(CurrTarget);
+                
+                interact.ActivateState();
                 
 
                 return true;
             }
+
 
        return false;
     }
@@ -319,4 +406,16 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
     }
 
+  
+
+    public GameObject RetrieveCurrTarget()
+    {
+        return CurrTarget;
+    }
+
+    internal void LostTarget()
+    {
+        SwitchStates(currActiveState, search);
+        isBusywithTarget = false;
+    }
 }

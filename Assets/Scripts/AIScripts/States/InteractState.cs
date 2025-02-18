@@ -16,38 +16,21 @@ public class InteractState : BaseStateClass
 
             if (!IsActiveState)
                 DeactivateState();
-
+            else
+                ActivateState();
         }
 
     }
 
     GameObject currentTarget;
 
-    public override void StateSetup(AIBase aAIscript)
-    {
-        this.aiScript = aAIscript;
-
-    }
-
-    public void SetTarget(GameObject NewTarget)
-    {
-        if(NewTarget == currentTarget)
-        {
-            return;
-        }
-        else
-        {
-            Debug.Log("New Target for Interact State is set");
-            currentTarget = NewTarget;
-        }
-
-        return;
-    }
+   
 
     public override void OnEnterState()
     {
 
         Debug.Log("In interact State");
+        currentTarget = aiScript.RetrieveCurrTarget();
         aiScript.agent.isStopped = false;
         aiScript.agent.destination = currentTarget.transform.position;
         
@@ -61,26 +44,30 @@ public class InteractState : BaseStateClass
 
         aiScript.CurrTarget = null;
 
+        IsActiveState = false;
+
         Debug.Log("Exiting interact State");
 
         return;
     }
 
-    public override void ChangeState(BaseStateClass aNewState, ref BaseStateClass aCurrState)
+    public override void ChangeState(BaseStateClass aNewState)
     {
-        Debug.Log("Changing from Patrol or Idle");
-        aCurrState.OnExitState();
+            Debug.Log("Changing from Patrol or Idle");
 
-        aNewState.OnEnterState();
+        aNewState.IsActiveState = true;
 
-        return;
+        OnExitState();
+
+            return;
+        
     }
 
     public override void CurrStateFunctionality()
     {
         Debug.Log("interact functionality");
 
-        if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < 2)
+        if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < aiScript.TargetInteractDistance)
         {
             Debug.Log("AI is stopped in front of target");
 
@@ -118,9 +105,6 @@ public class InteractState : BaseStateClass
 
     }
 
-    public override void DeactivateState()
-    {
-        
-    }
+ 
 
 }
