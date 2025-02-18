@@ -73,48 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8f45efdd9f1644a92b79b0ca2d44b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuestList:
-  - questName: 
-    questDescription: 
-    trigger:
-      rid: 4483830835374718983
-    zone: 0
-    hidden: 0
-    OnStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnFinish:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2673349774910085278}
-          m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
-          m_MethodName: unlockQuest
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - questName: 
-    questDescription: 
-    trigger:
-      rid: 4483830835374718983
-    zone: 0
-    hidden: 0
-    OnStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnFinish:
-      m_PersistentCalls:
-        m_Calls: []
+  QuestList: []
   references:
     version: 2
-    RefIds:
-    - rid: 4483830835374718983
-      type: {class: AIStateQuest, ns: , asm: Assembly-CSharp}
-      data:
-        AI: {fileID: 0}
-        goalStateType: 
+    RefIds: []

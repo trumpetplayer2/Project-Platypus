@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gravel : MonoBehaviour
 {
     public float speed;
+    public LayerMask ignoreLayer;
     private void Update()
     {
         if (GameManager.instance.isPaused) return;
@@ -14,6 +15,10 @@ public class Gravel : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player") return;
+        if (((ignoreLayer & (1 << other.gameObject.layer)) != 0))
+        {
+            return;
+        }
         Destroy(this.gameObject);
     }
 }
