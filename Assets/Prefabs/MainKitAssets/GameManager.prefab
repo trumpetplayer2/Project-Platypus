@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 36507702814949574}
   - component: {fileID: 6299745339043865969}
   - component: {fileID: 1470145355889620928}
+  - component: {fileID: 2673349774910085278}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
+  saveIcon: {fileID: 0}
+  saveState: {fileID: 0}
 --- !u!114 &1470145355889620928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,3 +61,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d70ec4c25b9ff414eaea5ea6d7fedc2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2673349774910085278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177108668886356094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8f45efdd9f1644a92b79b0ca2d44b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QuestList:
+  - questName: 
+    questDescription: 
+    trigger:
+      rid: 4483830835374718983
+    zone: 0
+    hidden: 0
+    OnStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnFinish:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2673349774910085278}
+          m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
+          m_MethodName: unlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - questName: 
+    questDescription: 
+    trigger:
+      rid: 4483830835374718983
+    zone: 0
+    hidden: 0
+    OnStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnFinish:
+      m_PersistentCalls:
+        m_Calls: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4483830835374718983
+      type: {class: AIStateQuest, ns: , asm: Assembly-CSharp}
+      data:
+        AI: {fileID: 0}
+        goalStateType: 

@@ -2381,6 +2381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alignLocation: {fileID: 890954398}
   alignTarget: {fileID: 0}
+  type: 0
   holdable: 0
 --- !u!135 &890954402
 SphereCollider:
