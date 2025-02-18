@@ -51,6 +51,7 @@ namespace tp2
     }
     public class PlayerAbilityManager : MonoBehaviour
     {
+        public static PlayerAbilityManager instance;
         //Gravel Stuff
         public GravelSettings gravel;
         public bool canCollectGravel = false;
@@ -72,6 +73,7 @@ namespace tp2
         private void Start()
         {
             audioSettings = new AudioSettings(gravel.collectClip, gravel.spitClip, dig.clip, sense.clip, grab.grabClip, grab.dropClip);
+            instance = this;
         }
 
         // Update is called once per frame

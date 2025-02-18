@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using tp2;
@@ -5,10 +6,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using static UnityEngine.GraphicsBuffer;
 
+public enum ItemType
+{
+    Other, Ball, Bell, Rope
+}
+[Serializable]
 public class ItemScript : MonoBehaviour
 {
     public Transform alignLocation;
     public Transform alignTarget;
+    public ItemType type = ItemType.Other;
     PlayerAbilityManager abilityManager;
     bool isHeld = false;
     public bool holdable = true;
