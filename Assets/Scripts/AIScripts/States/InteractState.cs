@@ -5,26 +5,12 @@ using UnityEngine;
 
 public class InteractState : BaseStateClass
 {
-
-    public override bool IsActiveState
+    public InteractState(AIBase aAIscript) : base(aAIscript)
     {
-        get { return isActiveState; }
-
-        set
-        {
-            isActiveState = value;
-
-            if (!IsActiveState)
-                DeactivateState();
-            else
-                ActivateState();
-        }
-
+        this.aiScript = aAIscript;
     }
 
     GameObject currentTarget;
-
-   
 
     public override void OnEnterState()
     {
@@ -44,7 +30,7 @@ public class InteractState : BaseStateClass
 
         aiScript.CurrTarget = null;
 
-        IsActiveState = false;
+        
 
         Debug.Log("Exiting interact State");
 
@@ -55,7 +41,7 @@ public class InteractState : BaseStateClass
     {
             Debug.Log("Changing from Patrol or Idle");
 
-        aNewState.IsActiveState = true;
+       
 
         OnExitState();
 

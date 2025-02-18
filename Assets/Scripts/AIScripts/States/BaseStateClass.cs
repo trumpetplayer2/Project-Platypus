@@ -4,23 +4,16 @@ using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class BaseStateClass : MonoBehaviour
+public abstract class BaseStateClass
 {
-    protected bool isActiveState;
-
-    public abstract bool IsActiveState
-    {
-        get;
-
-        set;
-    }
-
     public AIBase aiScript;
 
-    public virtual void StateSetup(AIBase aAIscript)
-    {
+    public BaseStateClass(AIBase aAIscript) { 
+    
         this.aiScript = aAIscript;
+
     }
+
     public abstract void OnEnterState();
 
     public abstract void CurrStateFunctionality();
@@ -29,16 +22,12 @@ public abstract class BaseStateClass : MonoBehaviour
 
     public abstract void ChangeState(BaseStateClass aNewState);
 
-    public virtual void DeactivateState()
+    public void ChangeToInteract()
     {
-        this.enabled = false;
+        aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
     }
 
-    public virtual void ActivateState()
-    {
-        this.enabled = true;
-    }
-
+  
     protected void OnEnable()
     {
         OnEnterState();

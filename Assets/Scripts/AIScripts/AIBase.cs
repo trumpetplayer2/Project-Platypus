@@ -11,17 +11,6 @@ using System.Diagnostics.CodeAnalysis;
 
 public class AIBase : MonoBehaviour
 {
-
-
-
-
-    
-
-    public float stateSwitchTimer;
-
-    public float searchTimer;
-   
-
     [Header("Idle Info")]
 
     public int idleTimeUntil;
@@ -55,7 +44,7 @@ public class AIBase : MonoBehaviour
 
     public GameObject CurrTarget;
 
-    [HideInInspector]
+   
     public List<GameObject> TargetsBacklog; 
 
     [Header("Searching For Player Info")]
@@ -75,57 +64,38 @@ public class AIBase : MonoBehaviour
 
     private bool targetFound;
 
-    
-
-
     [Header("Chase Info")]
 
-   public ChaseState chase = null;
+    public ChaseState chase = null;
 
     public float ChaseRange;
-    
 
-    private float speed;
+   
 
     public float Speed
     {
         get { return speed; } 
         set { speed = value; 
 
-            agent.speed = value;
+            agent.speed = speed;
         }
     }
-
+    [SerializeField]
+    private float speed;
     [Header("Searching Info")]
 
-    SearchState search = null;
 
     public float rotateSpeed;
 
-    
+    SearchState search = null;
 
-    [HideInInspector]
     public bool TargetFound
     {
         get { return targetFound; }
 
         set { targetFound = value;
 
-            if (targetFound)
-            {
-                if (CurrTarget.CompareTag("Player"))
-                {
-                    isBusywithTarget = true;
-                    SwitchStates(currActiveState, chase);
-                    TargetFound = false;
-                }
-
-                isBusywithTarget = true;
-                SwitchStates(currActiveState, interact);
-                TargetFound = false;
-            }
-                
-            
+           
 
         }
     }
@@ -134,19 +104,30 @@ public class AIBase : MonoBehaviour
 
     public NavMeshAgent agent;
 
+    
+   
+
     [Header("State Machine Info")]
 
-    private AIBase thisAIObj;
+   [SerializeField] public BaseStateClass currActiveState;
 
-    public BaseStateClass currActiveState;
+    public float stateSwitchTimerVal;
+
+    public float searchTimerVal;
 
     BaseStateClass previousState;
 
-public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
+    private float stateSwitchTimer;
+
+    private float searchTimer;
+
+
+    public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
     {
 
         if (stateSwitchTimer > 0)
         {
+            Debug.Log("Exiting SwitchStates Function");
             return;
         }
 
@@ -158,9 +139,9 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
             currActiveState.ChangeState(aNextState);
 
-            //previousState = aCurrActiveState;
-
             currActiveState = aNextState;
+
+       
 
     }
 
@@ -172,31 +153,32 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     
     void Awake()
     {
-        thisAIObj = GetComponent<AIBase>();
+        
 
         agent = GetComponent<NavMeshAgent>();
 
-        idle = gameObject.AddComponent<IdleState>();
+        idle = new IdleState(this);
 
-        patrol = gameObject.AddComponent<PatrolState>();
+       
 
-        interact = gameObject.AddComponent<InteractState>();
+        patrol = new PatrolState(this);
 
-        chase = gameObject.AddComponent<ChaseState>();
 
-        search = gameObject.AddComponent<SearchState>();
+        interact = new InteractState(this);
 
-        idle.StateSetup(thisAIObj);
+        
 
-        patrol.StateSetup(thisAIObj);
+        chase = new ChaseState(this);
 
-        interact.StateSetup(thisAIObj);
+       
 
-        chase.StateSetup(thisAIObj);
+        search = new SearchState(this);
 
-        search.StateSetup(thisAIObj);
+        
 
         TargetsBacklog = new List<GameObject>();
+
+        
 
 }
 
@@ -210,7 +192,6 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
         currActiveState = idle;
 
-        StartCoroutine(ChangeToPatrol(idleTimeUntil));
     }
 
     // Update is called once per frame
@@ -220,7 +201,13 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
         stateSwitchTimer -= Time.deltaTime;
 
+        if (stateSwitchTimer <= 0)
+            stateSwitchTimer = stateSwitchTimerVal;
+
         searchTimer -= Time.deltaTime;
+
+        if(searchTimer <= 0)
+            searchTimer = searchTimerVal;
 
     }
 
@@ -232,12 +219,14 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
     /// 
     /// </summary>
     /// <returns></returns>
-    public void SearchForTargets()
+    public bool SearchForTargets()
     {
         if(searchTimer > 0)
         {
-            return;
+            return false;
         }
+
+      
         Debug.Log("Searching for targets");
 
         GameObject target;
@@ -256,7 +245,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
                 if (target == CurrTarget || target == PrevTarget)
                 {
                     Debug.Log("target is already current target or is a previous target");
-                    return;
+                    return false;
                 }
 
                 Vector3 directionToTarget = (target.gameObject.transform.position - Eyes.transform.position).normalized;
@@ -275,19 +264,27 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
                         if (isTargetValid)
                         {
-                            TargetFound = true;
-                            
+                            CurrTarget = target;
+                            return true;
+                           
                         }
-                            return;
+                        else
+                        {
+                            return false;
+                        }
                         
 
                     }
                   
                 }
+                return false;
+
+                
                 
             }
 
         }
+        return false;
 
     }
 
@@ -365,8 +362,6 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
     private bool CurrentTargetAnalysis(GameObject aTarget)
     {
-        
-
             //Starting case, the first target spotted, will be the target regardless of status
             if (CurrTarget == null || !isBusywithTarget)
             {
@@ -376,7 +371,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
                 {
 
                
-                    chase.ActivateState();
+                   
 
                     return true;
                 }
@@ -385,7 +380,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
 
                 
                 
-                interact.ActivateState();
+               
                 
 
                 return true;
@@ -395,18 +390,7 @@ public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextSt
        return false;
     }
 
-    public IEnumerator ChangeToPatrol(int aIdleTime)
-    {
-
-        Debug.Log("Waiting to change to patrol");
-
-        yield return new WaitForSeconds(aIdleTime);
-
-        SwitchStates(idle, patrol);
-
-    }
-
-  
+   
 
     public GameObject RetrieveCurrTarget()
     {
