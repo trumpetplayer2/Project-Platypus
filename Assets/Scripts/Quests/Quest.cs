@@ -17,6 +17,7 @@ public class Quest
     public QuestTrigger trigger;
     public int zone = 0;
     public bool hidden = false;
+    bool finished = false;
     public UnityEvent OnStart = new UnityEvent();
     public UnityEvent OnFinish = new UnityEvent();
     
@@ -33,7 +34,15 @@ public class Quest
 
     public void QuestUpdate()
     {
-        trigger.updateCheck();
+        if (!hidden)
+        {
+            trigger.updateCheck();
+            if (trigger.getCompleted() && !finished)
+            {
+                finished = true;
+                Finish();
+            }
+        }
     }
 
     public string GetQuestName()
@@ -65,6 +74,7 @@ public class Quest
     public void unlock()
     {
         hidden = false;
+        Start();
     }
     public int getUID()
     {
