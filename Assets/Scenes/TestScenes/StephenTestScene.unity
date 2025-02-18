@@ -4087,73 +4087,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8177108668886356094, guid: 549d1f143a2118345b260c40e323504c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4967606630227372923}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 549d1f143a2118345b260c40e323504c, type: 3}
---- !u!1 &4967606630227372922 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8177108668886356094, guid: 549d1f143a2118345b260c40e323504c, type: 3}
-  m_PrefabInstance: {fileID: 4967606630227372921}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4967606630227372923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4967606630227372922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f8f45efdd9f1644a92b79b0ca2d44b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  QuestList:
-  - questName: 
-    questDescription: 
-    trigger:
-      rid: 4483830835374718983
-    zone: 0
-    hidden: 0
-    OnStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnFinish:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4967606630227372923}
-          m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
-          m_MethodName: unlockQuest
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - questName: 
-    questDescription: 
-    trigger:
-      rid: 4483830835374718983
-    zone: 0
-    hidden: 0
-    OnStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnFinish:
-      m_PersistentCalls:
-        m_Calls: []
-  references:
-    version: 2
-    RefIds:
-    - rid: 4483830835374718983
-      type: {class: AIStateQuest, ns: , asm: Assembly-CSharp}
-      data:
-        AI: {fileID: 0}
-        goalStateType: 
 --- !u!114 &5471643441486489695 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4684889950032541299, guid: ea685bb404d98554a812a682de95466a, type: 3}
