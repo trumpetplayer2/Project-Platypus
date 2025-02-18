@@ -5,36 +5,25 @@ using UnityEngine;
 
 public class IdleState : BaseStateClass
 {
-    public override bool IsActiveState
+    public IdleState(AIBase aAIscript) : base(aAIscript)
     {
-        get { return isActiveState; }
-
-        set { isActiveState = value;
-
-            if (!IsActiveState)
-                DeactivateState();
-            
-            else
-                 ActivateState();
-        }
-
+        this.aiScript = aAIscript;
     }
-
+    
+    float timer;
     public override void OnEnterState()
     {
-
-        Debug.Log("In idle State");
         
-        StartCoroutine(aiScript.ChangeToPatrol(aiScript.idleTimeUntil));
+        Debug.Log("In idle State");
+
+        timer = aiScript.idleTimeUntil;
         
         return;
     }
 
     public override void OnExitState()
     {
-        StopCoroutine(aiScript.ChangeToPatrol(aiScript.idleTimeUntil));
 
-        IsActiveState = false;
         Debug.Log("Exiting idle State");
 
         return;
@@ -44,8 +33,7 @@ public class IdleState : BaseStateClass
     {
             Debug.Log("Changing from Idle");
 
-        aNewState.IsActiveState = true;
-
+        aNewState.OnEnterState();
 
         OnExitState();
 
@@ -57,12 +45,20 @@ public class IdleState : BaseStateClass
     {
         Debug.Log("idle functionality");
 
-      
-        aiScript.SearchForTargets();
+        timer -= Time.deltaTime;
+
+        if(timer <= 0)
+        {
+            Debug.Log("Switching to Patrol");
+            aiScript.SwitchStates(aiScript.currActiveState, aiScript.patrol);
+        }
+
+        if (aiScript.SearchForTargets())
+        {
+            aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
+        }
 
         return;
     }
-
-   
 
 }
