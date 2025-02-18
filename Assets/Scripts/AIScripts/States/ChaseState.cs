@@ -6,24 +6,14 @@ using UnityEngine;
 
 public class ChaseState : BaseStateClass
 {
+    public ChaseState(AIBase aAIscript) : base(aAIscript)
+    {
+        this.aiScript = aAIscript;
+    }
+
 
     public GameObject chasingTarget;
-    public override bool IsActiveState
-    {
-        get { return isActiveState; }
-
-        set
-        {
-            isActiveState = value;
-
-            if (!IsActiveState)
-                DeactivateState();
-            else
-                ActivateState();
-
-        }
-
-    }
+ 
     public override void OnEnterState()
     {
         Debug.Log("Entering Chase State");
@@ -34,12 +24,12 @@ public class ChaseState : BaseStateClass
     {
         aiScript.agent.destination = chasingTarget.transform.position;
 
-        if(Vector3.Distance(this.gameObject.transform.position, chasingTarget.transform.position) < aiScript.TargetInteractDistance)
+        if(Vector3.Distance(this.aiScript.gameObject.transform.position, chasingTarget.transform.position) < aiScript.TargetInteractDistance)
         {
             CatchTarget();
         }
 
-        if(Vector3.Distance(this.gameObject.transform.position, chasingTarget.transform.position) > aiScript.ChaseRange)
+        if(Vector3.Distance(this.aiScript.gameObject.transform.position, chasingTarget.transform.position) > aiScript.ChaseRange)
         {
             
             LosingTarget();
@@ -60,12 +50,12 @@ public class ChaseState : BaseStateClass
     public override void OnExitState()
     {
         Debug.Log("Exiting Chase State");
-        IsActiveState = false;
+        
     }
 
     public override void ChangeState(BaseStateClass aNewState)
     {
-        aNewState.IsActiveState = true;
+        
 
         OnExitState();
     }

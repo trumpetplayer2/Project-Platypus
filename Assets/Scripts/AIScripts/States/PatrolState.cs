@@ -5,20 +5,9 @@ using UnityEngine.AI;
 
 public class PatrolState : BaseStateClass
 {
-
-    public override bool IsActiveState
-    { 
-        get { return isActiveState; }
-
-        set
-        {
-            isActiveState = value;
-
-            if(!isActiveState)
-                DeactivateState();
-            else
-                ActivateState();
-        }
+    public PatrolState(AIBase aAIscript) : base(aAIscript)
+    {
+        this.aiScript = aAIscript;
     }
 
     int randomPatrolDestination;
@@ -29,6 +18,8 @@ public class PatrolState : BaseStateClass
 
         randomPatrolDestination = Random.Range(0, aiScript.PatrolDestinations.Length - 1);
 
+
+
         return;
     }
 
@@ -36,7 +27,7 @@ public class PatrolState : BaseStateClass
     {
         aiScript.agent.isStopped = true;
         
-        IsActiveState = false;
+       
         Debug.Log("Exiting Patrol State");
 
         return;
@@ -46,7 +37,7 @@ public class PatrolState : BaseStateClass
     { 
             Debug.Log("Changing from Patrol State");
 
-             aNewState.IsActiveState = true;
+           aNewState.OnEnterState();
 
             OnExitState();
 
@@ -57,9 +48,10 @@ public class PatrolState : BaseStateClass
     public override void CurrStateFunctionality()
     {
        
-            aiScript.SearchForTargets();
+      
 
         Debug.Log("Patrolling to target");
+
 
         aiScript.CurrPatrolDestination = aiScript.PatrolDestinations[randomPatrolDestination];
 
@@ -70,8 +62,10 @@ public class PatrolState : BaseStateClass
             randomPatrolDestination = Random.Range(0, aiScript.PatrolDestinations.Length - 1);
         }
 
-
-
+        if (aiScript.SearchForTargets())
+        {
+            aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
+        }
         return;
     }
 

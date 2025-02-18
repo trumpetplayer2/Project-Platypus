@@ -4,21 +4,9 @@ using UnityEngine;
 
 public class SearchState : BaseStateClass
 {
-    public override bool IsActiveState
+    public SearchState(AIBase aAIscript) : base(aAIscript)
     {
-        get { return isActiveState; }
-
-        set
-        {
-            isActiveState = value;
-
-            if (!IsActiveState)
-                DeactivateState();
-            else
-                ActivateState();
-
-        }
-
+        this.aiScript = aAIscript;
     }
     public override void OnEnterState()
     {
@@ -34,7 +22,7 @@ public class SearchState : BaseStateClass
 
     public override void OnExitState()
     {
-        IsActiveState = false;
+       
     }
 
     public override void ChangeState(BaseStateClass aNewState)
