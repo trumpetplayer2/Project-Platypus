@@ -17,9 +17,10 @@ public class InteractState : BaseStateClass
 
         Debug.Log("In interact State");
         currentTarget = aiScript.RetrieveCurrTarget();
-        aiScript.agent.isStopped = false;
+       // aiScript.agent.isStopped = false;
         aiScript.agent.destination = currentTarget.transform.position;
-        
+
+        Debug.Log("Should have AI moving to target");
         return;
     }
 
@@ -53,10 +54,10 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("interact functionality");
 
-        if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < aiScript.TargetInteractDistance)
+        if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < aiScript.agent.stoppingDistance)
         {
             Debug.Log("AI is stopped in front of target");
-
+            aiScript.agent.isStopped = true;
             BeginInteract(currentTarget);
         }
 
@@ -73,18 +74,18 @@ public class InteractState : BaseStateClass
         switch (TargetInstructions)
         {
             case "Player": 
-                    {
-                    aiScript.PlayerInteractFunction();
+                {
+                    
                     break;
-                    }
+                }
             case "Target":
                 {
-                    aiScript.BaseTargetInteractFunction();
+                    
                     break;
                 }
             case "LowestPriority":
                 {
-                    aiScript.LowPriInteractFunction();
+                    
                     break;
                 }
         }

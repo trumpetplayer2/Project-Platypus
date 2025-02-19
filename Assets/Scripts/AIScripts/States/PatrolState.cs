@@ -25,7 +25,7 @@ public class PatrolState : BaseStateClass
 
     public override void OnExitState()
     {
-        aiScript.agent.isStopped = true;
+       // aiScript.agent.isStopped = true;
         
        
         Debug.Log("Exiting Patrol State");
@@ -50,7 +50,7 @@ public class PatrolState : BaseStateClass
        
       
 
-        Debug.Log("Patrolling to target");
+        Debug.Log("Patrolling to destination");
 
 
         aiScript.CurrPatrolDestination = aiScript.PatrolDestinations[randomPatrolDestination];
