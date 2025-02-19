@@ -27,6 +27,8 @@ public class AIBase : MonoBehaviour
 
     [Header("Interact Info")]
 
+    public float targetInteractDistanceVal;
+
     private float targetInteractDistance;
 
     public float TargetInteractDistance{
@@ -70,7 +72,7 @@ public class AIBase : MonoBehaviour
 
     public float ChaseRange;
 
-   
+    public float speedVal;
 
     public float Speed
     {
@@ -80,7 +82,7 @@ public class AIBase : MonoBehaviour
             agent.speed = speed;
         }
     }
-    [SerializeField]
+   
     private float speed;
     [Header("Searching Info")]
 
@@ -125,7 +127,7 @@ public class AIBase : MonoBehaviour
     public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
     {
 
-        if (stateSwitchTimer > 0)
+        if (stateSwitchTimer > 1)
         {
             Debug.Log("Exiting SwitchStates Function");
             return;
@@ -141,7 +143,7 @@ public class AIBase : MonoBehaviour
 
             currActiveState = aNextState;
 
-       
+        stateSwitchTimer = stateSwitchTimerVal;
 
     }
 
@@ -178,7 +180,9 @@ public class AIBase : MonoBehaviour
 
         TargetsBacklog = new List<GameObject>();
 
-        
+        Speed = speedVal;
+
+        //TargetInteractDistance = targetInteractDistanceVal;
 
 }
 
@@ -221,8 +225,9 @@ public class AIBase : MonoBehaviour
     /// <returns></returns>
     public bool SearchForTargets()
     {
-        if(searchTimer > 0)
+        if(searchTimer > 1)
         {
+            Debug.Log("Search Cooldown");
             return false;
         }
 
@@ -242,11 +247,11 @@ public class AIBase : MonoBehaviour
             {
                 target = AIRange[i].gameObject;
 
-                if (target == CurrTarget || target == PrevTarget)
-                {
-                    Debug.Log("target is already current target or is a previous target");
-                    return false;
-                }
+                //if (target == CurrTarget || target == PrevTarget)
+                //{
+                //    Debug.Log("target is already current target or is a previous target");
+                //    return false;
+                //}
 
                 Vector3 directionToTarget = (target.gameObject.transform.position - Eyes.transform.position).normalized;
 
@@ -264,6 +269,7 @@ public class AIBase : MonoBehaviour
 
                         if (isTargetValid)
                         {
+                            Debug.Log("Target is Valid, returning true");
                             CurrTarget = target;
                             return true;
                            
