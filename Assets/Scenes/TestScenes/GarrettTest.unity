@@ -818,6 +818,7 @@ GameObject:
   - component: {fileID: 325823816}
   - component: {fileID: 325823815}
   - component: {fileID: 325823814}
+  - component: {fileID: 325823817}
   m_Layer: 8
   m_Name: NTThree
   m_TagString: Target
@@ -911,6 +912,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325823812}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &325823817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325823812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b6bd510b0b0da41b5ff2fb29fcd2a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetInfo: {fileID: 11400000, guid: 0c96956a6d4ed534098e22036e298f0d, type: 2}
 --- !u!1 &400828000
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,6 +968,7 @@ GameObject:
   - component: {fileID: 437918093}
   - component: {fileID: 437918092}
   - component: {fileID: 437918091}
+  - component: {fileID: 437918094}
   m_Layer: 8
   m_Name: NTOne
   m_TagString: Target
@@ -1047,6 +1062,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437918089}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &437918094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437918089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b6bd510b0b0da41b5ff2fb29fcd2a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetInfo: {fileID: 11400000, guid: 5a9f13c7d6703de4fa66a9dae342195a, type: 2}
 --- !u!1 &757579248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,8 +1270,6 @@ MonoBehaviour:
   PatrolDestinations:
   - {fileID: 897685471}
   - {fileID: 799883659}
-  - {fileID: 400828001}
-  - {fileID: 759916030}
   CurrPatrolDestination: {fileID: 0}
   targetInteractDistanceVal: 1
   PrevTarget: {fileID: 0}
@@ -1260,7 +1286,7 @@ MonoBehaviour:
     m_Bits: 128
   ChaseRange: 5
   speedVal: 5
-  rotateSpeed: 5
+  LookingSpeed: 0
   agent: {fileID: 0}
   stateSwitchTimerVal: 2
   searchTimerVal: 2

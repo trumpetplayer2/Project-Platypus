@@ -42,12 +42,12 @@ public class AIBase : MonoBehaviour
 
     public InteractState interact = null;
 
-    public GameObject PrevTarget;
+    public TargetScript PrevTarget;
 
-    public GameObject CurrTarget;
+    public  TargetScript CurrTarget;
 
    
-    public List<GameObject> TargetsBacklog; 
+    public List<TargetScript> TargetsBacklog; 
 
     [Header("Searching For Player Info")]
 
@@ -87,9 +87,11 @@ public class AIBase : MonoBehaviour
     [Header("Searching Info")]
 
 
-    public float rotateSpeed;
+    public float LookingSpeed;
 
-    SearchState search = null;
+    public SearchState search = null;
+
+
 
     public bool TargetFound
     {
@@ -178,7 +180,7 @@ public class AIBase : MonoBehaviour
 
         
 
-        TargetsBacklog = new List<GameObject>();
+        TargetsBacklog = new List<TargetScript>();
 
         Speed = speedVal;
 
@@ -234,7 +236,7 @@ public class AIBase : MonoBehaviour
       
         Debug.Log("Searching for targets");
 
-        GameObject target;
+        TargetScript target;
         
         Collider[] AIRange = Physics.OverlapSphere(transform.position, radius, TargetMask);
 
@@ -245,7 +247,7 @@ public class AIBase : MonoBehaviour
 
             for (int i = 0; i < AIRange.Length; i++)
             {
-                target = AIRange[i].gameObject;
+                target = AIRange[i].GetComponent<TargetScript>();
 
                 //if (target == CurrTarget || target == PrevTarget)
                 //{
@@ -284,9 +286,6 @@ public class AIBase : MonoBehaviour
                   
                 }
                 return false;
-
-                
-                
             }
 
         }
@@ -294,111 +293,28 @@ public class AIBase : MonoBehaviour
 
     }
 
-    
-
-
-    public void BaseTargetInteractFunction()
+    private bool CurrentTargetAnalysis(TargetScript aTarget)
     {
-        Debug.Log("Test Interact with target");
-        StartCoroutine(BaseTargetTime());
-        StopCoroutine(BaseTargetTime());
+        //Starting case, the first target spotted, will be the target regardless of status
+        if (CurrTarget == null || !aTarget.TargetInfo.wasCompleted)
+        {
+            CurrTarget = aTarget;
 
-        return;
-    }
-
-    IEnumerator BaseTargetTime()
-    {
-        yield return new WaitForSeconds(5);
-
-        StateComplete();
-
-        Debug.Log("Target task is complete");
-
-        yield break;
-    }
-
-    IEnumerator PlayerTargetTime()
-    {
-        yield return new WaitForSeconds(5);
-
-        StateComplete();
-
-        Debug.Log("Player task is complete");
-
-        yield break;
-    }
-
-    public void PlayerInteractFunction()
-    {
-        StartCoroutine(PlayerTargetTime());
-        StopCoroutine(PlayerTargetTime());
-
-        return;
-    }
-
-    IEnumerator LPTargetTime()
-    {
-        yield return new WaitForSeconds(5);
-
-        StateComplete();
-
-        Debug.Log("Low Priority task is complete");
-
-        yield break;
-    }
-
-    public void LowPriInteractFunction()
-    {
-        StartCoroutine(LPTargetTime());
-        StopCoroutine(LPTargetTime());
-
-        return;
-    }
-
-    public void StateComplete()
-    {
-        Debug.Log("Task Complete");
-
-        TargetFound = false;
-
-        isBusywithTarget = false;
-
-        return;
-    }
-
-    private bool CurrentTargetAnalysis(GameObject aTarget)
-    {
-            //Starting case, the first target spotted, will be the target regardless of status
-            if (CurrTarget == null || !isBusywithTarget)
+            if (aTarget.CompareTag("Player"))
             {
-                CurrTarget = aTarget;
-
-                if (aTarget.CompareTag("Player"))
-                {
-
-               
-                   
-
-                    return true;
-                }
-              
-                Debug.Log("New object is set, proceed with interact state");
-
-                
-                
-               
-                
-
                 return true;
             }
 
+            Debug.Log("New object is set, proceed with interact state");
 
+            return true;
+        }
+
+        TargetsBacklog.Add(aTarget);
        return false;
     }
 
-   
-
-    public GameObject RetrieveCurrTarget()
+    public TargetScript RetrieveCurrTarget()
     {
         return CurrTarget;
     }

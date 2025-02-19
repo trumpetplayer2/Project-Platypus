@@ -10,7 +10,7 @@ public class InteractState : BaseStateClass
         this.aiScript = aAIscript;
     }
 
-    GameObject currentTarget;
+    TargetScript currentTarget;
 
     public override void OnEnterState()
     {
@@ -26,12 +26,10 @@ public class InteractState : BaseStateClass
 
     public override void OnExitState()
     {
-
-        aiScript.TargetsBacklog.Add(currentTarget);
+        
+        currentTarget = null;
 
         aiScript.CurrTarget = null;
-
-        
 
         Debug.Log("Exiting interact State");
 
@@ -40,9 +38,7 @@ public class InteractState : BaseStateClass
 
     public override void ChangeState(BaseStateClass aNewState)
     {
-            Debug.Log("Changing from Patrol or Idle");
-
-       
+        Debug.Log("Changing from Patrol or Idle");
 
         OnExitState();
 
@@ -65,33 +61,38 @@ public class InteractState : BaseStateClass
         
     }
 
-    private void BeginInteract(GameObject aCurrentTarget)
+    private void BeginInteract(TargetScript aCurrentTarget)
     {
         Debug.Log("Beginning interacting");
 
-        string TargetInstructions = aCurrentTarget.tag.ToString();
+        InteractableTarget tInfo = aCurrentTarget.ReturnTargetInfo();
 
-        switch (TargetInstructions)
+        Debug.LogFormat("Target Name: {0} , Target Desciption: {1}", tInfo.objName, tInfo.objDescription);
+
+        float interactTimer = tInfo.objDuration;
+    
+        interactTimer -= Time.deltaTime + 5;
+
+        tInfo.isActive = true;
+
+        Debug.Log(interactTimer);
+
+        if(interactTimer <= 0)
         {
-            case "Player": 
-                {
-                    
-                    break;
-                }
-            case "Target":
-                {
-                    
-                    break;
-                }
-            case "LowestPriority":
-                {
-                    
-                    break;
-                }
+            Debug.Log("task is complete");
+
+            tInfo.wasCompleted = true;
+
+            tInfo.isActive = false;
+
+            aiScript.SwitchStates(aiScript.currActiveState, aiScript.idle);
         }
+
+    
 
     }
 
+   
  
 
 }

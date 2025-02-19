@@ -7,10 +7,12 @@ public class InteractableTarget : ScriptableObject
 {
     public string objName;
 
-    public float objDescription;
-
-
+    public string objDescription;
+    
     public float objDuration;
 
+    public bool isActive;
+
+    public bool wasCompleted;
 
 }

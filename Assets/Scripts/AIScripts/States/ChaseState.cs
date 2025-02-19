@@ -12,7 +12,7 @@ public class ChaseState : BaseStateClass
     }
 
 
-    public GameObject chasingTarget;
+    public TargetScript chasingTarget;
  
     public override void OnEnterState()
     {
