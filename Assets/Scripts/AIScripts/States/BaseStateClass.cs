@@ -6,6 +6,9 @@ using UnityEngine;
 
 public abstract class BaseStateClass
 {
+
+    public bool playerDetected;
+
     public AIBase aiScript;
 
     public BaseStateClass(AIBase aAIscript) { 
