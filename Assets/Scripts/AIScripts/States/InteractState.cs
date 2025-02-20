@@ -14,16 +14,21 @@ public class InteractState : BaseStateClass
 
     TargetScript currentTarget;
 
-    
+    TargetScript playerTarget;
 
     public override void OnEnterState()
     {
 
         Debug.Log("In interact State");
 
+        
 
         currentTarget = aiScript.RetrieveCurrTarget();
-       
+
+        if (currentTarget.CompareTag("Player"))
+        {
+            PlayerFunctionality();
+        }
 
         timer = currentTarget.TargetInfo.objDuration;
 
@@ -61,8 +66,10 @@ public class InteractState : BaseStateClass
 
         timer -= Time.deltaTime;
 
-
+       
         Debug.Log("interact functionality");
+
+      
 
         if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < aiScript.agent.stoppingDistance)
         {
@@ -74,6 +81,11 @@ public class InteractState : BaseStateClass
 
         return;
         
+    }
+
+    private void PlayerFunctionality()
+    {
+        aiScript.SwitchStates(aiScript.currActiveState, aiScript.chase);
     }
 
     private void BeginInteract(TargetScript aCurrentTarget)
