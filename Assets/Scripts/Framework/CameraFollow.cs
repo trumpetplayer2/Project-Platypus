@@ -72,7 +72,7 @@ namespace tp2
         float shakeAmount = 0.25f;
         float decreaseSpeed = 1.0f;
         float shakeDuration = 0f;
-        
+        Rigidbody body;
         
 
 
@@ -82,6 +82,7 @@ namespace tp2
             angle = cSettings.startAngle;
             locationOffset = cSettings.locationOffset;
             distance = cSettings.distance;
+            body = this.GetComponent<Rigidbody>();
         }
 
         public void Start()
@@ -148,7 +149,8 @@ namespace tp2
                 //Check player relation to camera
                 Vector3 desiredPosition = tempTracker + Quaternion.Euler(0, 0, 0) * locationOffset;
                 Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, cSettings.smoothSpeed);
-                transform.position = smoothedPosition;
+                //transform.position = smoothedPosition;
+                body.velocity = (smoothedPosition - transform.position)/Time.deltaTime;
             }
             cSettings.rotationOffset.y = angle-180;
 

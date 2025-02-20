@@ -482,7 +482,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: StephenTestScene
+          m_StringArgument: Zone1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &725635017
@@ -614,6 +614,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5dc02bf88d10924bb6659da9856ae21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layer: 0
+  pause: {fileID: 0}
 --- !u!1 &968658333
 GameObject:
   m_ObjectHideFlags: 0
