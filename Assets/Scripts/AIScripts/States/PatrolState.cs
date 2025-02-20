@@ -18,7 +18,7 @@ public class PatrolState : BaseStateClass
 
         randomPatrolDestination = Random.Range(0, aiScript.PatrolDestinations.Length - 1);
 
-
+        aiScript.agent.isStopped = false;
 
         return;
     }

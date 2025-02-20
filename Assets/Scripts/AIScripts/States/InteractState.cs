@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class InteractState : BaseStateClass
 {
+
+    float timer;
     public InteractState(AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -16,8 +18,13 @@ public class InteractState : BaseStateClass
     {
 
         Debug.Log("In interact State");
+
+
         currentTarget = aiScript.RetrieveCurrTarget();
-       // aiScript.agent.isStopped = false;
+       
+
+        timer = currentTarget.TargetInfo.objDuration;
+
         aiScript.agent.destination = currentTarget.transform.position;
 
         Debug.Log("Should have AI moving to target");
@@ -48,10 +55,16 @@ public class InteractState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
+       
+
+        timer -= Time.deltaTime;
+
+
         Debug.Log("interact functionality");
 
         if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < aiScript.agent.stoppingDistance)
         {
+
             Debug.Log("AI is stopped in front of target");
             aiScript.agent.isStopped = true;
             BeginInteract(currentTarget);
@@ -69,15 +82,11 @@ public class InteractState : BaseStateClass
 
         Debug.LogFormat("Target Name: {0} , Target Desciption: {1}", tInfo.objName, tInfo.objDescription);
 
-        float interactTimer = tInfo.objDuration;
-    
-        interactTimer -= Time.deltaTime + 5;
-
         tInfo.isActive = true;
 
-        Debug.Log(interactTimer);
+        Debug.Log(timer);
 
-        if(interactTimer <= 0)
+        if(timer <= 0)
         {
             Debug.Log("task is complete");
 

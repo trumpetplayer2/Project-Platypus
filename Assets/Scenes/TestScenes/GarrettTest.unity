@@ -1270,6 +1270,9 @@ MonoBehaviour:
   PatrolDestinations:
   - {fileID: 897685471}
   - {fileID: 799883659}
+  - {fileID: 400828001}
+  - {fileID: 759916030}
+  - {fileID: 1384160428}
   CurrPatrolDestination: {fileID: 0}
   targetInteractDistanceVal: 1
   PrevTarget: {fileID: 0}
@@ -1954,7 +1957,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6729085949646818361, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 39.84
       objectReference: {fileID: 0}
     - target: {fileID: 6729085949646818361, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1962,7 +1965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6729085949646818361, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 17.51
       objectReference: {fileID: 0}
     - target: {fileID: 6729085949646818361, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2013,6 +2016,7 @@ GameObject:
   - component: {fileID: 1155480386}
   - component: {fileID: 1155480385}
   - component: {fileID: 1155480384}
+  - component: {fileID: 1155480387}
   m_Layer: 8
   m_Name: NTTwo
   m_TagString: Target
@@ -2106,6 +2110,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1155480382}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1155480387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155480382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b6bd510b0b0da41b5ff2fb29fcd2a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetInfo: {fileID: 11400000, guid: 0c96956a6d4ed534098e22036e298f0d, type: 2}
 --- !u!1 &1320637253
 GameObject:
   m_ObjectHideFlags: 0
@@ -2572,6 +2589,7 @@ GameObject:
   - component: {fileID: 1744955747}
   - component: {fileID: 1744955746}
   - component: {fileID: 1744955745}
+  - component: {fileID: 1744955748}
   m_Layer: 8
   m_Name: NTFour
   m_TagString: Target
@@ -2665,6 +2683,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744955743}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1744955748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744955743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b6bd510b0b0da41b5ff2fb29fcd2a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetInfo: {fileID: 11400000, guid: 5a9f13c7d6703de4fa66a9dae342195a, type: 2}
 --- !u!1 &1839360048
 GameObject:
   m_ObjectHideFlags: 0
