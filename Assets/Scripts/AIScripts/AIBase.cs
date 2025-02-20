@@ -238,7 +238,7 @@ public class AIBase : MonoBehaviour
 
         TargetScript target;
         
-        Collider[] AIRange = Physics.OverlapSphere(transform.position, radius, 3);
+        Collider[] AIRange = Physics.OverlapSphere(transform.position, radius, TargetMask);
         
 
         if (AIRange.Length != 0)
