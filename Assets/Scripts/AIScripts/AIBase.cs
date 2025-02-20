@@ -27,29 +27,11 @@ public class AIBase : MonoBehaviour
 
     [Header("Interact Info")]
 
-    public float targetInteractDistanceVal;
-
-    private float targetInteractDistance;
-
-    public float TargetInteractDistance{
-
-        get { return targetInteractDistance; }
-        set { TargetInteractDistance = value;
-
-            agent.stoppingDistance = value;
-        }
-    }
-
     public InteractState interact = null;
-
-    public TargetScript PrevTarget;
 
     public  TargetScript CurrTarget;
 
     public TargetScript playerObj;
-
-   
-    public List<TargetScript> TargetsBacklog; 
 
     [Header("Searching For Player Info")]
 
@@ -64,13 +46,9 @@ public class AIBase : MonoBehaviour
 
     public LayerMask EnvironmentMask;
 
-    private bool targetFound;
-
     [Header("Chase Info")]
 
     public ChaseState chase = null;
-
-    public float ChaseRange;
 
     public float speedVal;
 
@@ -86,30 +64,11 @@ public class AIBase : MonoBehaviour
     private float speed;
     [Header("Searching Info")]
 
-
-    public float LookingSpeed;
-
     public SearchState search = null;
-
-
-
-    public bool TargetFound
-    {
-        get { return targetFound; }
-
-        set { targetFound = value;
-
-           
-
-        }
-    }
 
     [Header("Navigation Info")]
 
     public NavMeshAgent agent;
-
-    
-   
 
     [Header("State Machine Info")]
 
@@ -119,12 +78,52 @@ public class AIBase : MonoBehaviour
 
     public float searchTimerVal;
 
-    BaseStateClass previousState;
-
     private float stateSwitchTimer;
 
     private float searchTimer;
 
+
+    void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+
+        idle = new IdleState(this);
+
+        patrol = new PatrolState(this);
+
+        interact = new InteractState(this);
+
+        chase = new ChaseState(this);
+
+        search = new SearchState(this);
+
+        Speed = speedVal;
+
+        CurrTarget = null;
+    }
+
+    void OnEnable()
+    { 
+        currActiveState = idle;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        currActiveState.CurrStateFunctionality();
+
+        stateSwitchTimer -= Time.deltaTime;
+
+        if (stateSwitchTimer <= 0)
+            stateSwitchTimer = stateSwitchTimerVal;
+
+        searchTimer -= Time.deltaTime;
+
+        if (searchTimer <= 0)
+            searchTimer = searchTimerVal;
+
+    }
 
     public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
     {
@@ -149,78 +148,6 @@ public class AIBase : MonoBehaviour
 
     }
 
-   
-    
-    void Awake()
-    {
-        
-
-        agent = GetComponent<NavMeshAgent>();
-
-        idle = new IdleState(this);
-
-       
-
-        patrol = new PatrolState(this);
-
-
-        interact = new InteractState(this);
-
-        
-
-        chase = new ChaseState(this);
-
-       
-
-        search = new SearchState(this);
-
-        
-
-        TargetsBacklog = new List<TargetScript>();
-
-        Speed = speedVal;
-
-        
-
-}
-
-    void OnEnable()
-    {
-        CurrTarget = null;
-
-        TargetFound = false;
-
-        
-
-        currActiveState = idle;
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        currActiveState.CurrStateFunctionality();
-
-        stateSwitchTimer -= Time.deltaTime;
-
-        if (stateSwitchTimer <= 0)
-            stateSwitchTimer = stateSwitchTimerVal;
-
-        searchTimer -= Time.deltaTime;
-
-        if(searchTimer <= 0)
-            searchTimer = searchTimerVal;
-
-    }
-
-    /// <summary>
-    /// 
-    /// Given a list of GameObject tags to look out for, cast a ray from Eyes.position to a specific range ahead of them, and return the gameObject that possesses the correct tag.
-    /// 
-    /// The player will then move towards that gameObject, and, then, when close enough to the gameObject
-    /// 
-    /// </summary>
-    /// <returns></returns>
     public bool SearchForTargets()
     {
         if(searchTimer > 1)
@@ -229,17 +156,12 @@ public class AIBase : MonoBehaviour
             return false;
         }
 
-      
         Debug.Log("Searching for targets");
 
-  
-        
         Collider[] AIRange = Physics.OverlapSphere(transform.position, radius, TargetMask);
-        
 
         if (AIRange.Length != 0)
         {
-            
             Debug.Log("Target found");
 
             for (int i = 0; i < AIRange.Length; i++)
@@ -307,7 +229,7 @@ public class AIBase : MonoBehaviour
             return true;
         }
 
-        TargetsBacklog.Add(aTarget);
+       
        return false;
     }
 

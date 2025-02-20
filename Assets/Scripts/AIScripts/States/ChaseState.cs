@@ -25,16 +25,7 @@ public class ChaseState : BaseStateClass
         Debug.Log("Chase Functionality");
         aiScript.agent.destination = chasingTarget.transform.position;
          
-        if(Vector3.Distance(this.aiScript.gameObject.transform.position, chasingTarget.transform.position) < aiScript.TargetInteractDistance)
-        {
-            CatchTarget();
-        }
-
-        if(Vector3.Distance(this.aiScript.gameObject.transform.position, chasingTarget.transform.position) > aiScript.ChaseRange)
-        {
-            
-            LosingTarget();
-        }
+        
     }
 
     private void LosingTarget()
