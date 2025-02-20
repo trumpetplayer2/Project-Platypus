@@ -302,8 +302,6 @@ public class AIBase : MonoBehaviour
         {
             CurrTarget = aTarget;
 
-           
-
             Debug.Log("New object is set, proceed with interact state");
 
             return true;

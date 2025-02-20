@@ -17,3 +17,5 @@ MonoBehaviour:
   objDuration: 2
   isActive: 0
   wasCompleted: 0
+  isPlayer: 1
+  SetResponse: 0

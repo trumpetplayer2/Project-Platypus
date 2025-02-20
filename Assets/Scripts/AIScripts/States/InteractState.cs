@@ -25,10 +25,6 @@ public class InteractState : BaseStateClass
 
         currentTarget = aiScript.RetrieveCurrTarget();
 
-        if (currentTarget.CompareTag("Player"))
-        {
-            PlayerFunctionality();
-        }
 
         timer = currentTarget.TargetInfo.objDuration;
 
@@ -83,11 +79,7 @@ public class InteractState : BaseStateClass
         
     }
 
-    private void PlayerFunctionality()
-    {
-        aiScript.SwitchStates(aiScript.currActiveState, aiScript.chase);
-    }
-
+ 
     private void BeginInteract(TargetScript aCurrentTarget)
     {
         Debug.Log("Beginning interacting");

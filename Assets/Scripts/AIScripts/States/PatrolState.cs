@@ -63,9 +63,12 @@ public class PatrolState : BaseStateClass
         }
 
         if (aiScript.SearchForTargets())
-        {
+        { 
+            
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
         }
+
+        
         return;
     }
 
