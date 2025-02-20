@@ -14,6 +14,8 @@ public class InteractState : BaseStateClass
 
     TargetScript currentTarget;
 
+    
+
     public override void OnEnterState()
     {
 
