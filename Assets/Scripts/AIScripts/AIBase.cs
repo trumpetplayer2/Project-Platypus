@@ -62,8 +62,6 @@ public class AIBase : MonoBehaviour
 
     public LayerMask EnvironmentMask;
 
-    private bool isBusywithTarget;
-
     private bool targetFound;
 
     [Header("Chase Info")]
@@ -149,11 +147,7 @@ public class AIBase : MonoBehaviour
 
     }
 
-    public void ReturnToPreviousState()
-    {
-        SwitchStates(currActiveState, previousState);
-    }
-
+   
     
     void Awake()
     {
@@ -184,7 +178,7 @@ public class AIBase : MonoBehaviour
 
         Speed = speedVal;
 
-        //TargetInteractDistance = targetInteractDistanceVal;
+        
 
 }
 
@@ -194,7 +188,7 @@ public class AIBase : MonoBehaviour
 
         TargetFound = false;
 
-        isBusywithTarget = false;
+        
 
         currActiveState = idle;
 
@@ -248,13 +242,8 @@ public class AIBase : MonoBehaviour
 
             for (int i = 0; i < AIRange.Length; i++)
             {
+                
                 target = AIRange[i].GetComponent<TargetScript>();
-
-                //if (target == CurrTarget || target == PrevTarget)
-                //{
-                //    Debug.Log("target is already current target or is a previous target");
-                //    return false;
-                //}
 
                 Vector3 directionToTarget = (target.gameObject.transform.position - Eyes.transform.position).normalized;
 
@@ -273,7 +262,7 @@ public class AIBase : MonoBehaviour
                         if (isTargetValid)
                         {
                             Debug.Log("Target is Valid, returning true");
-                            CurrTarget = target;
+                           
                             return true;
                            
                         }
@@ -296,15 +285,13 @@ public class AIBase : MonoBehaviour
 
     private bool CurrentTargetAnalysis(TargetScript aTarget)
     {
+
         //Starting case, the first target spotted, will be the target regardless of status
         if (CurrTarget == null || !aTarget.TargetInfo.wasCompleted)
         {
             CurrTarget = aTarget;
 
-            if (aTarget.CompareTag("Player"))
-            {
-                return true;
-            }
+           
 
             Debug.Log("New object is set, proceed with interact state");
 
@@ -315,14 +302,22 @@ public class AIBase : MonoBehaviour
        return false;
     }
 
+    public bool IsPlayer(TargetScript aTarget)
+    {
+        if (aTarget.CompareTag("Player"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public TargetScript RetrieveCurrTarget()
     {
         return CurrTarget;
     }
 
-    internal void LostTarget()
-    {
-        SwitchStates(currActiveState, search);
-        isBusywithTarget = false;
-    }
+   
 }

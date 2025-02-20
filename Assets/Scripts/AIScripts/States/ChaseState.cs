@@ -39,7 +39,7 @@ public class ChaseState : BaseStateClass
     private void LosingTarget()
     {
         Debug.Log("Lost Target");
-        aiScript.LostTarget();
+       
     }
 
     private void CatchTarget()
