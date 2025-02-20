@@ -46,6 +46,8 @@ public class AIBase : MonoBehaviour
 
     public  TargetScript CurrTarget;
 
+    public TargetScript playerObj;
+
    
     public List<TargetScript> TargetsBacklog; 
 
@@ -230,7 +232,7 @@ public class AIBase : MonoBehaviour
       
         Debug.Log("Searching for targets");
 
-        TargetScript target;
+  
         
         Collider[] AIRange = Physics.OverlapSphere(transform.position, radius, TargetMask);
         
@@ -242,8 +244,11 @@ public class AIBase : MonoBehaviour
 
             for (int i = 0; i < AIRange.Length; i++)
             {
-                
-                target = AIRange[i].GetComponent<TargetScript>();
+
+                if (!AIRange[i].TryGetComponent<TargetScript>(out TargetScript target))
+                {
+                    continue;
+                }
 
                 Vector3 directionToTarget = (target.gameObject.transform.position - Eyes.transform.position).normalized;
 
@@ -285,6 +290,12 @@ public class AIBase : MonoBehaviour
 
     private bool CurrentTargetAnalysis(TargetScript aTarget)
     {
+        if (IsPlayer(aTarget))
+        {
+            Debug.Log("Player Detected");
+            playerObj = aTarget;
+            return true;
+        }
 
         //Starting case, the first target spotted, will be the target regardless of status
         if (CurrTarget == null || !aTarget.TargetInfo.wasCompleted)
@@ -316,8 +327,17 @@ public class AIBase : MonoBehaviour
 
     public TargetScript RetrieveCurrTarget()
     {
-        return CurrTarget;
+        if(playerObj != null)
+        {
+            return playerObj;
+        }
+        else
+        {
+            return CurrTarget;
+        }
+       
     }
 
+    
    
 }
