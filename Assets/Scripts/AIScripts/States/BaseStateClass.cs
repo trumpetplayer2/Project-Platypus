@@ -31,9 +31,6 @@ public abstract class BaseStateClass
     }
 
   
-    protected void OnEnable()
-    {
-        OnEnterState();
-    }
+ 
 
 }

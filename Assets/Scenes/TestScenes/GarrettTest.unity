@@ -1283,6 +1283,8 @@ MonoBehaviour:
   losingTargetVal: 5
   catchTimerVal: 3
   searchStateVal: 0
+  searchMethod: 0
+  rotateSpeed: 10
   playerFound: 0
   SetPlayerResponse: 0
   Eyes: {fileID: 1483767962}

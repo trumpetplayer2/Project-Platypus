@@ -65,6 +65,7 @@ public class ChaseState : BaseStateClass
 
         if(timer <= 0)
         {
+            aiScript.search.searchingForPlayer = true;
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.search);
         }
 

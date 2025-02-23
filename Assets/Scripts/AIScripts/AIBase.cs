@@ -68,6 +68,18 @@ public class AIBase : MonoBehaviour
 
     public float searchStateVal;
 
+    public enum SearchMethod
+    {
+        SearchInPlace,
+        SearchInRandomPoint
+    }
+
+    public SearchMethod searchMethod;
+
+    public float rotateSpeed;
+
+    public float rotatePosition;
+
     [Header("Player Detected Info")]
 
     public PlayerDetectedState playerDetected = null;
