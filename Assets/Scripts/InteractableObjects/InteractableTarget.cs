@@ -18,13 +18,6 @@ public class InteractableTarget : ScriptableObject
 
     public bool isPlayer;
 
-    public enum AIResponse
-    {
-        Chase,
-        StopLook,
-        
-    }
-
-    public AIResponse SetResponse;
+    
 
 }

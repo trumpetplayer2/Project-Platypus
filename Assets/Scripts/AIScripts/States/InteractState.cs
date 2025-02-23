@@ -7,41 +7,35 @@ public class InteractState : BaseStateClass
 {
 
     float timer;
+
+    TargetScript currentTarget;
+
+    InteractableTarget tInfo;
     public InteractState(AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
     }
 
-    TargetScript currentTarget;
-
-    TargetScript playerTarget;
-
     public override void OnEnterState()
     {
-
         Debug.Log("In interact State");
-
-        
 
         currentTarget = aiScript.RetrieveCurrTarget();
 
+        tInfo = currentTarget.ReturnTargetInfo();
 
-        timer = currentTarget.TargetInfo.objDuration;
-
-        aiScript.agent.destination = currentTarget.transform.position;
-
-        Debug.Log("Should have AI moving to target");
         return;
     }
 
     public override void OnExitState()
     {
-        
+        Debug.Log("Exiting interact State");
+
+        timer = tInfo.objDuration;
+
         currentTarget = null;
 
         aiScript.CurrTarget = null;
-
-        Debug.Log("Exiting interact State");
 
         return;
     }
@@ -50,26 +44,23 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("Changing from Patrol or Idle");
 
+        aNewState.OnEnterState();
+
         OnExitState();
 
             return;
-        
     }
 
     public override void CurrStateFunctionality()
     {
-       
+        Debug.Log("interact functionality");
 
         timer -= Time.deltaTime;
 
-       
-        Debug.Log("interact functionality");
+        aiScript.agent.destination = currentTarget.transform.position;
 
-      
-
-        if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < aiScript.agent.stoppingDistance)
+        if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < aiScript.distanceBetweenTarget)
         {
-
             Debug.Log("AI is stopped in front of target");
             aiScript.agent.isStopped = true;
             BeginInteract(currentTarget);
@@ -84,13 +75,9 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("Beginning interacting");
 
-        InteractableTarget tInfo = aCurrentTarget.ReturnTargetInfo();
-
         Debug.LogFormat("Target Name: {0} , Target Desciption: {1}", tInfo.objName, tInfo.objDescription);
 
         tInfo.isActive = true;
-
-        Debug.Log(timer);
 
         if(timer <= 0)
         {
@@ -103,11 +90,6 @@ public class InteractState : BaseStateClass
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.idle);
         }
 
-    
-
     }
-
-   
- 
 
 }

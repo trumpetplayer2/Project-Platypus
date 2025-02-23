@@ -13,9 +13,9 @@ public class AIBase : MonoBehaviour
 {
     [Header("Idle Info")]
 
-    public int idleTimeUntil;
-
     public IdleState idle = null;
+
+    public int idleTimeUntil;
 
     [Header("Patrol Info")]
 
@@ -29,11 +29,61 @@ public class AIBase : MonoBehaviour
 
     public InteractState interact = null;
 
-    public  TargetScript CurrTarget;
+    public TargetScript CurrTarget;
 
     public TargetScript playerObj;
 
-    [Header("Searching For Player Info")]
+    [Header("Chase Info")]
+
+    public ChaseState chase = null;
+
+    public float speedVal;
+
+    public float Speed
+    {
+        get { return speed; }
+        set
+        {
+            speed = value;
+
+            agent.speed = speed;
+        }
+    }
+
+    private float speed;
+
+    public float chaseSpeedVal;
+
+    public float chaseMaxDistance;
+
+    public float chaseMinDistance;
+
+    public float losingTargetVal;
+
+    public float catchTimerVal;
+
+    [Header("Searching Info")]
+
+    public SearchState search = null;
+
+    public float searchStateVal;
+
+    [Header("Player Detected Info")]
+
+    public PlayerDetectedState playerDetected = null;
+
+    public bool playerFound;
+
+    public enum AIResponse
+    {
+        Chase,
+        Observe
+
+    }
+
+    public AIResponse SetPlayerResponse;
+
+    [Header("SearchingForTargets Info")]
 
     public Transform Eyes;
 
@@ -46,33 +96,15 @@ public class AIBase : MonoBehaviour
 
     public LayerMask EnvironmentMask;
 
-    [Header("Chase Info")]
-
-    public ChaseState chase = null;
-
-    public float speedVal;
-
-    public float Speed
-    {
-        get { return speed; } 
-        set { speed = value; 
-
-            agent.speed = speed;
-        }
-    }
-   
-    private float speed;
-    [Header("Searching Info")]
-
-    public SearchState search = null;
-
     [Header("Navigation Info")]
 
     public NavMeshAgent agent;
 
+    public float distanceBetweenTarget;
+
     [Header("State Machine Info")]
 
-   [SerializeField] public BaseStateClass currActiveState;
+    public BaseStateClass currActiveState;
 
     public float stateSwitchTimerVal;
 
@@ -96,6 +128,8 @@ public class AIBase : MonoBehaviour
         chase = new ChaseState(this);
 
         search = new SearchState(this);
+
+        playerDetected = new PlayerDetectedState(this);
 
         Speed = speedVal;
 
@@ -144,7 +178,7 @@ public class AIBase : MonoBehaviour
 
             currActiveState = aNextState;
 
-        stateSwitchTimer = stateSwitchTimerVal;
+        //stateSwitchTimer = stateSwitchTimerVal;
 
     }
 
@@ -195,7 +229,9 @@ public class AIBase : MonoBehaviour
                         }
                         else
                         {
+                           
                             return false;
+
                         }
                         
 
@@ -216,7 +252,9 @@ public class AIBase : MonoBehaviour
         {
             Debug.Log("Player Detected");
             playerObj = aTarget;
-            return true;
+
+            playerFound = true;
+            return false;
         }
 
         //Starting case, the first target spotted, will be the target regardless of status
@@ -258,6 +296,7 @@ public class AIBase : MonoBehaviour
        
     }
 
+   
     
    
 }

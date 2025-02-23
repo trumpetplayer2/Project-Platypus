@@ -57,6 +57,10 @@ public class IdleState : BaseStateClass
         {
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
         }
+        else if(!aiScript.SearchForTargets() && aiScript.playerFound)
+        {
+            aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
+        }
 
         return;
     }

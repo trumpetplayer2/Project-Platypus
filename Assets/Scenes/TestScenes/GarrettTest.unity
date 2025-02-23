@@ -1274,10 +1274,17 @@ MonoBehaviour:
   - {fileID: 759916030}
   - {fileID: 1384160428}
   CurrPatrolDestination: {fileID: 0}
-  targetInteractDistanceVal: 1
-  PrevTarget: {fileID: 0}
   CurrTarget: {fileID: 0}
-  TargetsBacklog: []
+  playerObj: {fileID: 0}
+  speedVal: 5
+  chaseSpeedVal: 2
+  chaseMaxDistance: 10
+  chaseMinDistance: 1
+  losingTargetVal: 5
+  catchTimerVal: 3
+  searchStateVal: 0
+  playerFound: 0
+  SetPlayerResponse: 0
   Eyes: {fileID: 1483767962}
   radius: 7
   angle: 70
@@ -1287,10 +1294,8 @@ MonoBehaviour:
   EnvironmentMask:
     serializedVersion: 2
     m_Bits: 128
-  ChaseRange: 5
-  speedVal: 5
-  LookingSpeed: 0
   agent: {fileID: 0}
+  distanceBetweenTarget: 2
   stateSwitchTimerVal: 2
   searchTimerVal: 2
 --- !u!136 &778202152
@@ -1375,7 +1380,7 @@ Transform:
   m_GameObject: {fileID: 778202149}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.47, y: 4.461, z: 11.40676}
+  m_LocalPosition: {x: 58.1, y: 4.461, z: 11.40676}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1965,7 +1970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6729085949646818361, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.51
+      value: 1.17
       objectReference: {fileID: 0}
     - target: {fileID: 6729085949646818361, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_LocalRotation.w

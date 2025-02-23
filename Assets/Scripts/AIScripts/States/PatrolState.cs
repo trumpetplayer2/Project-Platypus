@@ -25,10 +25,10 @@ public class PatrolState : BaseStateClass
 
     public override void OnExitState()
     {
-       // aiScript.agent.isStopped = true;
-        
        
         Debug.Log("Exiting Patrol State");
+
+       
 
         return;
     }
@@ -64,8 +64,11 @@ public class PatrolState : BaseStateClass
 
         if (aiScript.SearchForTargets())
         { 
-            
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
+        }
+        else if(!aiScript.SearchForTargets() && aiScript.playerFound)
+        {
+            aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
         }
 
         
