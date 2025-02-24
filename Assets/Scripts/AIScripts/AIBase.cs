@@ -11,6 +11,11 @@ using System.Diagnostics.CodeAnalysis;
 
 public class AIBase : MonoBehaviour
 {
+
+    [Header("Initial State")]
+
+    public InitialState initial = null;
+
     [Header("Idle Info")]
 
     public IdleState idle = null;
@@ -131,6 +136,8 @@ public class AIBase : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
+        initial = new InitialState(this);
+
         idle = new IdleState(this);
 
         patrol = new PatrolState(this);
@@ -150,7 +157,7 @@ public class AIBase : MonoBehaviour
 
     void OnEnable()
     { 
-        currActiveState = idle;
+        currActiveState = initial;
 
     }
 
