@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6332973410600140684}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
     minZoom: 5
     maxZoom: 10
     zoomScale: 7
-    FreecamCap: {x: 20, y: 20, z: 20}
+    FreecamCap: {x: 10, y: 10, z: 10}
   cSettings:
     maxLocations: {x: 100, y: 30, z: 100}
     minLocations: {x: -100, y: 0, z: -100}
@@ -210,6 +210,9 @@ MonoBehaviour:
     locationOffset: {x: 0, y: 5, z: 0}
     rotationOffset: {x: 22.5, y: 0, z: 0}
     rotationSmoothSpeed: 0.1
+    blocked:
+      serializedVersion: 2
+      m_Bits: 1
   freecam: 0
 --- !u!135 &5458006706350261738
 SphereCollider:

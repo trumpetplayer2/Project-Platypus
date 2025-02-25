@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 namespace tp2
 {
@@ -30,6 +31,7 @@ namespace tp2
         public Vector3 locationOffset;
         public Vector3 rotationOffset;
         public float rotationSmoothSpeed = 0.1f;
+        public LayerMask blocked;
     }
     [System.Serializable]
     public class CameraCinematicVariables
@@ -151,6 +153,16 @@ namespace tp2
                 Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, cSettings.smoothSpeed);
                 //transform.position = smoothedPosition;
                 body.velocity = (smoothedPosition - transform.position)/Time.deltaTime;
+                Ray ray = new Ray(PlayerMovement.instance.transform.position, transform.position - PlayerMovement.instance.transform.position);
+                
+                if (Physics.Raycast(ray, out RaycastHit hitInfo, distance, cSettings.blocked))
+                {
+                    if (!(hitInfo.collider.gameObject.tag.ToLower().Equals("player") || hitInfo.collider.gameObject.tag.ToLower().Equals("maincamera")))
+                    {
+                        transform.position = new Vector3(hitInfo.point.x, desiredPosition.y, hitInfo.point.z);
+                        body.velocity = Vector3.zero;
+                    }
+                }
             }
             cSettings.rotationOffset.y = angle-180;
 
@@ -159,7 +171,6 @@ namespace tp2
             Quaternion smoothedrotation = Quaternion.Lerp(transform.rotation, desiredrotation, cSettings.rotationSmoothSpeed);
             transform.rotation = smoothedrotation;
         }
-
         private void Update()
         {
             if (GameManager.instance.isPaused) return;
@@ -210,13 +221,17 @@ namespace tp2
         {
             freecam = true;
             //Get bounds
-            Vector3 max = new Vector3(transform.position.x + MovementSettings.FreecamCap.x, transform.position.y + MovementSettings.FreecamCap.y, transform.position.z + MovementSettings.FreecamCap.z);
-            Vector3 min = new Vector3(transform.position.x - MovementSettings.FreecamCap.x, transform.position.y - MovementSettings.FreecamCap.y, transform.position.z - MovementSettings.FreecamCap.z);
-            float x = Mathf.Clamp(transform.position.x + movement.x, min.x, max.x);
-            float y = Mathf.Clamp(transform.position.y + movement.y, min.y, max.y);
-            float z = Mathf.Clamp(transform.position.z + movement.z, min.z, max.z);
+            Vector3 pos = PlayerMovement.instance.gameObject.transform.position;
+            Vector3 max = new Vector3(pos.x + MovementSettings.FreecamCap.x, pos.y + MovementSettings.FreecamCap.y, pos.z + MovementSettings.FreecamCap.z);
+            Vector3 min = new Vector3(pos.x - MovementSettings.FreecamCap.x, pos.y - MovementSettings.FreecamCap.y, pos.z - MovementSettings.FreecamCap.z);
+            float x = Mathf.Clamp(movement.x + transform.position.x, min.x, max.x);
+            x = x - transform.position.x;
+            float y = Mathf.Clamp(movement.y + transform.position.y, min.y, max.y);
+            y = y - transform.position.y;
+            float z = Mathf.Clamp(movement.z + transform.position.z, min.z, max.z);
+            z = z - transform.position.z;
 
-            transform.position = new Vector3(x, y, z);
+            body.velocity = (new Vector3(x, y, z)) / Time.deltaTime;
         }
 
         public float getAngle()

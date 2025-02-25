@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using tp2;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -35,6 +36,7 @@ public class PauseScript : MonoBehaviour
         Fade();
         if (canTeleport)
         {
+            PlayerAbilityManager.instance.Release();
             tp2.PlayerMovement.instance.warp(checkpoint);
         }
     }

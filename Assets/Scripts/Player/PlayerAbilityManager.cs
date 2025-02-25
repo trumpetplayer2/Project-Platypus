@@ -190,14 +190,22 @@ namespace tp2
         void Grab()
         {
             if(grab.heldObject != null) {
-                grab.heldObject.release();
-                grabCooldown = grab.Cooldown;
-                queueClip(5);
+                Release();
                 return;
             }
             grab.grabEvent?.Invoke();
             grabCooldown = grab.Cooldown;
             queueClip(4);
+        }
+        public void Release()
+        {
+            if (grab.heldObject != null)
+            {
+                grab.heldObject.release();
+                grabCooldown = grab.Cooldown;
+                queueClip(5);
+                return;
+            }
         }
     }
 }
