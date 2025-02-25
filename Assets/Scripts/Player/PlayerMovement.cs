@@ -97,8 +97,8 @@ namespace tp2
                 cameraSettings.followMode = cameraMode.FreeCam;
             }
             //Get Direction
-            float strafe = Input.GetAxis("Horizontal");
-            float forward = Input.GetAxis("Vertical");
+            float strafe = Input.GetAxisRaw("Horizontal");
+            float forward = Input.GetAxisRaw("Vertical");
             //Calculate base movement
             Vector3 movement = new Vector3(forward, 0, -strafe).normalized;
             //Create a variable angle for later use

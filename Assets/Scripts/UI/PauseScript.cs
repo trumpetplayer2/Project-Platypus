@@ -17,6 +17,12 @@ public class PauseScript : MonoBehaviour
     public Vector3 checkpoint;
     bool canTeleport = false;
     public Submenu currentMenu;
+    public static PauseScript instance;
+
+    private void Start()
+    {
+        instance = this;
+    }
     // Update is called once per frame
     void Update()
     {
