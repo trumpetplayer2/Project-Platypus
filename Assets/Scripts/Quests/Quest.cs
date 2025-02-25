@@ -12,6 +12,7 @@ public class Quest
 {
     public string questName = "";
     public string questDescription = "";
+    public QuestUIContainer container;
     protected int UniqueID;
     [SerializeReference, SubclassSelector]
     public QuestTrigger trigger;
@@ -20,6 +21,8 @@ public class Quest
     bool finished = false;
     public UnityEvent OnStart = new UnityEvent();
     public UnityEvent OnFinish = new UnityEvent();
+    float descriptionCheckCooldown = 0f;
+    public float descriptionUpdate = 1f;
     
     
     public void Start()
@@ -37,11 +40,25 @@ public class Quest
         if (!hidden)
         {
             trigger.updateCheck();
+            descriptionCheckCooldown += Time.deltaTime;
+            if(descriptionCheckCooldown >= descriptionUpdate)
+            {
+                updateQuestDescription();
+                descriptionCheckCooldown = 0;
+            }
             if (trigger.getCompleted() && !finished)
             {
                 finished = true;
                 Finish();
             }
+        }
+    }
+
+    public void updateQuestDescription()
+    {
+        if (!hidden)
+        {
+            container?.updateQuestDescription(GetQuestDescription());
         }
     }
 

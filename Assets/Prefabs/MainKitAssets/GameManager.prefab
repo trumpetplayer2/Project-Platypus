@@ -73,6 +73,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8f45efdd9f1644a92b79b0ca2d44b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Zone: 1
+  QuestUIObjectPrefab: {fileID: 4917884717124553567, guid: 5ab10273aa9d0d644ba3bfdaa71585dc, type: 3}
+  QuestListUI: {fileID: 0}
+  ListStartOffset: {x: 15, y: -15}
+  ListObjectOffset: {x: 0, y: -165}
   QuestList: []
   references:
     version: 2

@@ -12,7 +12,14 @@ public class QuestObjective
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager instance;
+    public int Zone = 1;
+    public GameObject QuestUIObjectPrefab;
+    public GameObject QuestListUI;
+    public Vector2 ListStartOffset = new Vector2(15, 15);
+    public Vector2 ListObjectOffset = new Vector2(0, 165);
     public List<Quest> QuestList = new List<Quest>();
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +36,24 @@ public class QuestManager : MonoBehaviour
         {
             QuestList[i].initializeUID(i);
         }
+        //Generate the list of Quest UI Containers
+        List<Quest> quests = updateMenu(Zone);
+        GenerateQuestUI(quests);
+    }
+
+    void GenerateQuestUI(List<Quest> quests)
+    {
+        Vector2 offset = ListStartOffset;
+        foreach(Quest quest in quests)
+        {
+            GameObject element = Instantiate(QuestUIObjectPrefab);
+            if (!element.TryGetComponent<QuestUIContainer>(out QuestUIContainer container)) continue;
+            quest.container = container;
+            container.updateQuestName(quest.GetQuestName());
+            element.transform.SetParent(QuestListUI.transform);
+            element.transform.localPosition = offset;
+            offset += ListObjectOffset;
+        }
     }
 
     // Update is called once per frame
@@ -41,16 +66,14 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public List<QuestObjective> updateMenu(int zone)
+    public List<Quest> updateMenu(int zone)
     {
-        List<QuestObjective> quests = new List<QuestObjective>();
+        List<Quest> quests = new List<Quest>();
         foreach (Quest trigger in QuestList)
         {
             if(trigger.zone == zone)
             {
-                QuestObjective obj = new QuestObjective();
-                obj.names.Add(trigger.GetQuestName());
-                obj.descriptions.Add(trigger.GetQuestDescription());
+                quests.Add(trigger);
             }
         }
         return quests;
