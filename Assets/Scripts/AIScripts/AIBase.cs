@@ -9,6 +9,12 @@ using System.Net;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
+[System.Serializable]
+
+public class IdleItems
+{
+
+}
 public class AIBase : MonoBehaviour
 {
 

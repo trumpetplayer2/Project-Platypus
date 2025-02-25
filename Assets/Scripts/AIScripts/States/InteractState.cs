@@ -24,6 +24,8 @@ public class InteractState : BaseStateClass
 
         tInfo = currentTarget.ReturnTargetInfo();
 
+        aiScript.agent.isStopped = false;
+
         return;
     }
 

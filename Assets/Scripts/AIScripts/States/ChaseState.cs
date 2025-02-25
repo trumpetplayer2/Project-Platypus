@@ -7,9 +7,11 @@ using UnityEngine;
 
 public class ChaseState : BaseStateClass
 {
-    float timer;
+    float losingTimer;
 
     float catchTimer;
+
+    bool seesPlayer;
 
     public ChaseState(AIBase aAIscript) : base(aAIscript)
     {
@@ -26,34 +28,42 @@ public class ChaseState : BaseStateClass
 
         aiScript.Speed += aiScript.chaseSpeedVal;
 
-        timer = aiScript.losingTargetVal;
+        losingTimer = aiScript.losingTargetVal;
 
         catchTimer = aiScript.catchTimerVal;
 
-        aiScript.agent.destination = chasingTarget.transform.position;
+        aiScript.agent.isStopped = false;
 
+       
         return;
     }
 
     public override void CurrStateFunctionality()
     {
         Debug.Log("Chase Functionality");
-        aiScript.agent.destination = chasingTarget.transform.position;
         
-        if(Vector3.Distance(aiScript.gameObject.transform.position, chasingTarget.transform.position) > aiScript.chaseMaxDistance)
-        {
-            Debug.Log("Calling Losing Target");
+        
+       
+            aiScript.agent.destination = chasingTarget.transform.position;
 
-            LosingTarget();
-        }
+            if (Vector3.Distance(aiScript.Eyes.gameObject.transform.position, chasingTarget.transform.position) > aiScript.chaseMaxDistance)
+            {
+                Debug.Log("Calling Losing Target");
+
+                LosingTarget();
+            }
 
 
-        if(Vector3.Distance(aiScript.gameObject.transform.position, chasingTarget.transform.position) < aiScript.chaseMaxDistance)
-        {
-            Debug.Log("Calling Catching Target");
+            if (Vector3.Distance(aiScript.Eyes.gameObject.transform.position, chasingTarget.transform.position) < aiScript.chaseMinDistance)
+            {
+                Debug.Log("Calling Catching Target");
 
-            CatchTarget();
-        }
+                CatchTarget();
+            }
+        
+        
+
+        return;
         
     }
 
@@ -61,12 +71,18 @@ public class ChaseState : BaseStateClass
     {
         Debug.Log("Losing Target");
 
-        timer -= aiScript.losingTargetVal;
+        losingTimer -= aiScript.losingTargetVal;
 
-        if(timer <= 0)
+        if(losingTimer <= 0)
         {
-            aiScript.search.searchingForPlayer = true;
+            Debug.Log("Lost Target");
+            
+            aiScript.playerFound = false;
+
+            aiScript.CurrTarget = null;
+
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.search);
+           
         }
 
         return;
@@ -75,14 +91,18 @@ public class ChaseState : BaseStateClass
 
     private void CatchTarget()
     {
-        Debug.Log("Catching Target");
+        Debug.Log("Can Catch Target");
 
         catchTimer -= Time.deltaTime;
 
         if(catchTimer <= 0)
         {
+            Debug.Log("Attempting to Catch Target");
             CaughtTarget();
+            
         }
+
+        return;
     }
 
     public void CaughtTarget()
@@ -96,13 +116,21 @@ public class ChaseState : BaseStateClass
     {
         Debug.Log("Exiting Chase State");
 
+        seesPlayer = false;
+
         aiScript.Speed -= aiScript.chaseSpeedVal;
+
+        chasingTarget = null;
+
+        aiScript.playerObj = null;
 
         return;
     }
 
     public override void ChangeState(BaseStateClass aNewState)
     {
+        Debug.Log("Changing From Chase State");
+
         aNewState.OnEnterState();
 
         OnExitState();
