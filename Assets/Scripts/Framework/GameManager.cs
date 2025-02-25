@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(instance.gameObject);
+            instance = this;
         }
         if(saveState == null)
         {
