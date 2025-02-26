@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SearchState : BaseStateClass
@@ -14,9 +15,7 @@ public class SearchState : BaseStateClass
 
     Vector3 detectedLocation;
 
-    float angle;
-
-    public SearchState(AIBase aAIscript) : base(aAIscript)
+    public SearchState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
     }
@@ -24,30 +23,22 @@ public class SearchState : BaseStateClass
     {
         Debug.Log("In Search State");
 
-       
-
         aiScript.search.searchingForPlayer = true;
 
-        timer = aiScript.searchStateVal;
+        timer = aiScript.searchStateSettings.searchStateVal;
 
-        aISearchMethod = System.Enum.GetName(typeof(AIBase.SearchMethod), aiScript.searchMethod);
-
-        
+        aISearchMethod = System.Enum.GetName(typeof(StateMachineInfo.SearchStateSettings.SearchMethod), aiScript.searchStateSettings.searchMethod);
 
         return;
     }
 
     public override void CurrStateFunctionality()
     {
-
-        if (!aiScript.SearchForTargets() && aiScript.playerFound)
+        if (!aiScript.SearchForTargets() && aiScript.playerDetectedSettings.playerFound)
         {
             Debug.Log("Player Found Again");
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
         }
-
-
-        Debug.Log("Search Functionality");
 
         if (searchingForPlayer)
         {
@@ -64,8 +55,10 @@ public class SearchState : BaseStateClass
                         break;
                     }
             }
+            
         }
 
+        return;
     }
 
  
@@ -76,14 +69,13 @@ public class SearchState : BaseStateClass
         aiScript.agent.isStopped = true;
         timer -= Time.deltaTime;
 
-       
-
         if (timer <= 0)
         {
             Debug.Log("Resuming Patrol State from Search State");
 
             searchingForPlayer = false;
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.patrol);
+            return;
         }
 
         return;

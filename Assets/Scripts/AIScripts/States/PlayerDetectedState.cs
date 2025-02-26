@@ -9,7 +9,7 @@ public class PlayerDetectedState : BaseStateClass
 
     string aIResponse;
 
-    public PlayerDetectedState(AIBase aAIscript) : base(aAIscript)
+    public PlayerDetectedState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
     }
@@ -20,7 +20,7 @@ public class PlayerDetectedState : BaseStateClass
 
         playerTarget = aiScript.RetrieveCurrTarget();
 
-        aIResponse = System.Enum.GetName(typeof(AIBase.AIResponse), aiScript.SetPlayerResponse);
+        aIResponse = System.Enum.GetName(typeof(StateMachineInfo.PlayerDetectedSettings.AIResponse), aiScript.playerDetectedSettings.SetPlayerResponse);
 
         return;
         
@@ -28,20 +28,21 @@ public class PlayerDetectedState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        Debug.Log("Player Functionality");
+       
 
        
         switch (aIResponse)
         {
             case "Chase":
                 {
+                    
                     aiScript.SwitchStates(aiScript.currActiveState, aiScript.chase);
                     break;
                 }
 
         }
 
-
+        return;
     }
 
     public override void OnExitState()
@@ -54,8 +55,7 @@ public class PlayerDetectedState : BaseStateClass
 
     public override void ChangeState(BaseStateClass aNewState)
     {
-        Debug.Log("Switching States from Detected Player");
-
+        //Debug.Log("Switching States from Detected Player");
 
         aNewState.OnEnterState();
 

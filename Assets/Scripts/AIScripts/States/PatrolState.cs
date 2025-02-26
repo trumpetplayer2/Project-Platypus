@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class PatrolState : BaseStateClass
 {
-    public PatrolState(AIBase aAIscript) : base(aAIscript)
+    public PatrolState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
     }
@@ -16,7 +16,7 @@ public class PatrolState : BaseStateClass
     {
         Debug.Log("In Patrol State");
 
-        randomPatrolDestination = Random.Range(0, aiScript.PatrolDestinations.Length - 1);
+        randomPatrolDestination = Random.Range(0, aiScript.patrolSettings.PatrolDestinations.Length - 1);
 
         aiScript.agent.isStopped = false;
 
@@ -35,7 +35,7 @@ public class PatrolState : BaseStateClass
 
     public override void ChangeState(BaseStateClass aNewState)
     { 
-            Debug.Log("Changing from Patrol State");
+            //Debug.Log("Changing from Patrol State");
 
            aNewState.OnEnterState();
 
@@ -47,28 +47,29 @@ public class PatrolState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-       
-      
+        //Debug.Log("Patrolling to destination");
 
-        Debug.Log("Patrolling to destination");
+        aiScript.patrolSettings.CurrPatrolDestination = aiScript.patrolSettings.PatrolDestinations[randomPatrolDestination];
 
+        aiScript.agent.destination = aiScript.patrolSettings.PatrolDestinations[randomPatrolDestination].position;
 
-        aiScript.CurrPatrolDestination = aiScript.PatrolDestinations[randomPatrolDestination];
-
-        aiScript.agent.destination = aiScript.PatrolDestinations[randomPatrolDestination].position;
-
-        if ((Vector3.Distance(aiScript.gameObject.transform.position, aiScript.CurrPatrolDestination.position)) < 2)
+        if ((Vector3.Distance(aiScript.gameObject.transform.position, aiScript.patrolSettings.CurrPatrolDestination.position)) < 2)
         {
-            randomPatrolDestination = Random.Range(0, aiScript.PatrolDestinations.Length - 1);
+            randomPatrolDestination = Random.Range(0, aiScript.patrolSettings.PatrolDestinations.Length);
         }
 
         if (aiScript.SearchForTargets())
-        { 
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
-        }
-        else if(!aiScript.SearchForTargets() && aiScript.playerFound)
         {
+            Debug.Log("Switching to Interact");
+            aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
+            return;
+        }
+        else if(!aiScript.SearchForTargets() && aiScript.playerDetectedSettings.playerFound)
+        {
+            Debug.Log("Switching to Player Detected");
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
+
+            return;
         }
 
         

@@ -20,6 +20,9 @@ public class TargetScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(TargetInfo.wasCompleted)
+        {
+
+        }
     }
 }

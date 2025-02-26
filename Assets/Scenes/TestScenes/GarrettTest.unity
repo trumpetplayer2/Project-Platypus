@@ -1326,38 +1326,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e9b2756fc4b8440a99a3d66343a558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleTimeUntil: 5
-  PatrolDestinations:
-  - {fileID: 400828001}
-  - {fileID: 1384160428}
-  CurrPatrolDestination: {fileID: 0}
-  CurrTarget: {fileID: 0}
-  playerObj: {fileID: 0}
-  speedVal: 4
-  chaseSpeedVal: 1
-  chaseMaxDistance: 8
-  chaseMinDistance: 1
-  losingTargetVal: 5
-  catchTimerVal: 3
-  searchStateVal: 3
-  searchMethod: 0
-  rotateSpeed: 90
-  rotatePosition: 180
-  playerFound: 0
-  SetPlayerResponse: 0
-  Eyes: {fileID: 1483767962}
-  radius: 7
-  angle: 70
-  TargetMask:
-    serializedVersion: 2
-    m_Bits: 264
-  EnvironmentMask:
-    serializedVersion: 2
-    m_Bits: 128
-  agent: {fileID: 0}
+  idleSettings:
+    idleTimeUntil: 3
+  patrolSettings:
+    PatrolDestinations:
+    - {fileID: 400828001}
+    - {fileID: 1384160428}
+    CurrPatrolDestination: {fileID: 0}
+  interactSettings:
+    CurrTarget: {fileID: 0}
+    playerObj: {fileID: 0}
+  chaseSettings:
+    chaseSpeedVal: 1
+    chaseMaxDistance: 8
+    chaseMinDistance: 1
+    losingTargetVal: 3
+    catchTimerVal: 4
+  searchStateSettings:
+    searchStateVal: 5
+    searchMethod: 0
+  playerDetectedSettings:
+    playerFound: 0
+    SetPlayerResponse: 0
+  searchFunctionSettings:
+    Eyes: {fileID: 1483767962}
+    radius: 7
+    angle: 44
+    TargetMask:
+      serializedVersion: 2
+      m_Bits: 264
+    EnvironmentMask:
+      serializedVersion: 2
+      m_Bits: 128
+  agent: {fileID: 778202150}
   distanceBetweenTarget: 4
   stateSwitchTimerVal: 2
   searchTimerVal: 2
+  stateSwitchTimer: 0
+  searchTimer: 0
+  speedVal: 4
 --- !u!136 &778202152
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2233,6 +2240,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5644678638366787201, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644678638366787201, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644678638366787201, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6666870184989606917, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: cSettings.minLocations.y
       value: -6
@@ -2718,7 +2737,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -3014,7 +3033,7 @@ Transform:
   m_GameObject: {fileID: 1744955743}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.67, y: -7.45, z: 6.22}
+  m_LocalPosition: {x: 18.2, y: -7.45, z: 6.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
