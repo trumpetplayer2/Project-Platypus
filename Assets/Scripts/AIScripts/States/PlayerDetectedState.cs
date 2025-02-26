@@ -48,6 +48,7 @@ public class PlayerDetectedState : BaseStateClass
     {
         Debug.Log("Exiting Player Detected State");
 
+        playerTarget = null;
         return;
     }
 

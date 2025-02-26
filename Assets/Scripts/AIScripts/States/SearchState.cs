@@ -24,6 +24,10 @@ public class SearchState : BaseStateClass
     {
         Debug.Log("In Search State");
 
+       
+
+        aiScript.search.searchingForPlayer = true;
+
         timer = aiScript.searchStateVal;
 
         aISearchMethod = System.Enum.GetName(typeof(AIBase.SearchMethod), aiScript.searchMethod);
@@ -35,22 +39,19 @@ public class SearchState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        timer -= Time.deltaTime;
 
-        Debug.Log("Search Functionality");
-        if (aiScript.SearchForTargets())
+        if (!aiScript.SearchForTargets() && aiScript.playerFound)
         {
+            Debug.Log("Player Found Again");
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
         }
 
-        if (timer <= 0)
-        {
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.patrol);
-        }
 
-        if(searchingForPlayer)
+        Debug.Log("Search Functionality");
+
+        if (searchingForPlayer)
         {
-            switch(aISearchMethod)
+            switch (aISearchMethod)
             {
                 case "SearchInPlace":
                     {
@@ -65,33 +66,50 @@ public class SearchState : BaseStateClass
             }
         }
 
-
     }
 
+ 
     public void SearchInPlaceFunction()
     {
         Debug.Log("Searching in Place");
 
-        angle = Mathf.MoveTowardsAngle(aiScript.transform.eulerAngles.y, aiScript.rotatePosition, aiScript.rotateSpeed * Time.deltaTime);
+        aiScript.agent.isStopped = true;
+        timer -= Time.deltaTime;
 
-        aiScript.transform.eulerAngles = new Vector3(aiScript.transform.eulerAngles.x, angle, aiScript.transform.eulerAngles.z);
+       
+
+        if (timer <= 0)
+        {
+            Debug.Log("Resuming Patrol State from Search State");
+
+            searchingForPlayer = false;
+            aiScript.SwitchStates(aiScript.currActiveState, aiScript.patrol);
+        }
+
+        return;
     }
    
     public void SearchRandomPointFunction()
     {
         Debug.Log("Searching Random Point in Range");
+
+        return;
     }
 
     public void MoveToPointFunction()
     {
         Debug.Log("Investigating Point");
+
+        return;
     }
 
     public override void OnExitState()
     {
         Debug.Log("Exiting Search State");
 
-        searchingForPlayer = false;
+        aiScript.agent.isStopped = false;
+
+        return;
     }
 
     public override void ChangeState(BaseStateClass aNewState)
@@ -101,6 +119,8 @@ public class SearchState : BaseStateClass
         aNewState.OnEnterState();
 
         OnExitState();
+
+        return;
     }
 
     
