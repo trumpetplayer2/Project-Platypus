@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScenes/GarrettTest.unity
     guid: 29e21dfe12f5a784099331f1c0b72ce1
+  - enabled: 1
+    path: Assets/Scenes/Zone2.unity
+    guid: db26c6372ffb2374892b9fb5cf58ef66
   m_configObjects: {}
