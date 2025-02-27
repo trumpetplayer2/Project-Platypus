@@ -8,184 +8,219 @@ using UnityEngine.XR;
 using System.Net;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using UnityEditor.Searcher;
+using UnityEngine.UIElements;
+using System.ComponentModel;
 
-public class AIBase : MonoBehaviour
+namespace StateMachineInfo
 {
-
-    [Header("Initial State")]
-
-    public InitialState initial = null;
-
-    [Header("Idle Info")]
-
-    public IdleState idle = null;
-
-    public int idleTimeUntil;
-
-    [Header("Patrol Info")]
-
-    public PatrolState patrol = null;
-
-    public Transform[] PatrolDestinations;
-
-    public Transform CurrPatrolDestination;
-
-    [Header("Interact Info")]
-
-    public InteractState interact = null;
-
-    public TargetScript CurrTarget;
-
-    public TargetScript playerObj;
-
-    [Header("Chase Info")]
-
-    public ChaseState chase = null;
-
-    public float speedVal;
-
-    public float Speed
+    [System.Serializable]
+    public class IdleSettings
     {
-        get { return speed; }
-        set
-        {
-            speed = value;
-
-            agent.speed = speed;
-        }
+        public int idleTimeUntil;
     }
 
-    private float speed;
-
-    public float chaseSpeedVal;
-
-    public float chaseMaxDistance;
-
-    public float chaseMinDistance;
-
-    public float losingTargetVal;
-
-    public float catchTimerVal;
-
-    [Header("Searching Info")]
-
-    public SearchState search = null;
-
-    public float searchStateVal;
-
-    public enum SearchMethod
+    [System.Serializable]
+    public class PatrolSettings
     {
-        SearchInPlace,
-        SearchInRandomPoint
+        public Transform[] PatrolDestinations;
+
+        [ReadOnly] public Transform CurrPatrolDestination = null;
     }
 
-    public SearchMethod searchMethod;
-
-    public float rotateSpeed;
-
-    public float rotatePosition;
-
-    [Header("Player Detected Info")]
-
-    public PlayerDetectedState playerDetected = null;
-
-    public bool playerFound;
-
-    public enum AIResponse
+    [System.Serializable]
+    public class InteractSettings
     {
-        Chase,
-        Observe
+        
+        [ReadOnly] public TargetScript CurrTarget = null;
 
+        
+        [ReadOnly] public TargetScript playerObj = null;
     }
 
-    public AIResponse SetPlayerResponse;
-
-    [Header("SearchingForTargets Info")]
-
-    public Transform Eyes;
-
-    public float radius;
-
-    [Range(0, 360)]
-    public float angle;
-
-    public LayerMask TargetMask;
-
-    public LayerMask EnvironmentMask;
-
-    [Header("Navigation Info")]
-
-    public NavMeshAgent agent;
-
-    public float distanceBetweenTarget;
-
-    [Header("State Machine Info")]
-
-    public BaseStateClass currActiveState;
-
-    public float stateSwitchTimerVal;
-
-    public float searchTimerVal;
-
-    private float stateSwitchTimer;
-
-    private float searchTimer;
-
-
-    void Awake()
+    [System.Serializable]
+    public class ChaseSettings
     {
-        agent = GetComponent<NavMeshAgent>();
+        public float chaseSpeedVal;
 
-        initial = new InitialState(this);
+        public float chaseMaxDistance;
 
-        idle = new IdleState(this);
+        public float chaseMinDistance;
 
-        patrol = new PatrolState(this);
+        public float losingTargetVal;
 
-        interact = new InteractState(this);
-
-        chase = new ChaseState(this);
-
-        search = new SearchState(this);
-
-        playerDetected = new PlayerDetectedState(this);
-
-        Speed = speedVal;
-
-        CurrTarget = null;
+        public float catchTimerVal;
     }
 
-    void OnEnable()
+    [System.Serializable]
+    public class SearchStateSettings
     { 
-        currActiveState = initial;
+        public float searchStateVal;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        currActiveState.CurrStateFunctionality();
-
-        stateSwitchTimer -= Time.deltaTime;
-
-        if (stateSwitchTimer <= 0)
-            stateSwitchTimer = stateSwitchTimerVal;
-
-        searchTimer -= Time.deltaTime;
-
-        if (searchTimer <= 0)
-            searchTimer = searchTimerVal;
-
-    }
-
-    public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
-    {
-
-        if (stateSwitchTimer > 1)
+        public enum SearchMethod
         {
-            Debug.Log("Exiting SwitchStates Function");
-            return;
+            SearchInPlace,
+            SearchInRandomPoint
         }
+
+        public SearchMethod searchMethod;
+
+    }
+
+    [System.Serializable]
+    public class PlayerDetectedSettings
+    {
+
+        [ReadOnly] public bool playerFound;
+
+        public enum AIResponse
+        {
+            Chase,
+            Observe
+
+        }
+
+        public AIResponse SetPlayerResponse;
+    }
+
+    [System.Serializable]
+    public class SearchFunctionSettings
+    {
+        public Transform Eyes;
+
+        public float radius;
+
+        [Range(0, 360)]
+        public float angle;
+
+        public LayerMask TargetMask;
+
+        public LayerMask EnvironmentMask;
+
+    }
+
+    public class AIBase : MonoBehaviour
+    {
+        public IdleSettings idleSettings;
+
+        public PatrolSettings patrolSettings;
+
+        public InteractSettings interactSettings;
+
+        public ChaseSettings chaseSettings;
+
+        public SearchStateSettings searchStateSettings;
+
+        public PlayerDetectedSettings playerDetectedSettings;
+
+        public SearchFunctionSettings searchFunctionSettings;
+
+        public InitialState initial = null;
+
+        public IdleState idle = null;
+
+        public PatrolState patrol = null;
+
+        public InteractState interact = null;
+
+        public ChaseState chase = null;
+
+        public SearchState search = null;
+
+        [ReadOnly] public PlayerDetectedState playerDetected = null;
+
+        public NavMeshAgent agent;
+
+        public float distanceBetweenTarget;
+
+
+        public BaseStateClass currActiveState;
+
+        public float stateSwitchTimerVal;
+
+        public float searchTimerVal;
+
+        [ReadOnly] public float stateSwitchTimer;
+
+        [ReadOnly] public float searchTimer;
+
+        public float speedVal;
+
+        public float Speed
+        {
+            get { return speed; }
+            set
+            {
+                speed = value;
+
+                agent.speed = speed;
+            }
+        }
+
+        private float speed;
+
+
+        bool switchCooldown;
+        void Awake()
+        {
+            agent = GetComponent<NavMeshAgent>();
+
+            initial = new InitialState(this);
+
+            idle = new IdleState(this);
+
+            patrol = new PatrolState(this);
+
+            interact = new InteractState(this);
+
+            chase = new ChaseState(this);
+
+            search = new SearchState(this);
+
+            playerDetected = new PlayerDetectedState(this);
+
+            Speed = speedVal;
+
+           
+        }
+
+        void OnEnable()
+        {
+            currActiveState = initial;
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            currActiveState.CurrStateFunctionality();
+
+            if(switchCooldown)
+            {
+                stateSwitchTimer -= Time.deltaTime;
+
+                if (stateSwitchTimer <= 0)
+                {
+                    stateSwitchTimer = stateSwitchTimerVal;
+                    switchCooldown = false;
+                }
+                        
+            }
+
+            searchTimer -= Time.deltaTime;
+
+            if (searchTimer <= 0)
+                searchTimer = searchTimerVal;
+
+        }
+
+        public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
+        {
+            if (switchCooldown)
+            {
+                Debug.Log("Exiting SwitchStates Function");
+                return;
+            }
 
             Debug.Log("New State Decision");
             if (aNextState == aCurrActiveState)
@@ -197,125 +232,127 @@ public class AIBase : MonoBehaviour
 
             currActiveState = aNextState;
 
-        //stateSwitchTimer = stateSwitchTimerVal;
+            switchCooldown = true;
 
-    }
-
-    public bool SearchForTargets()
-    {
-        if(searchTimer > 1)
-        {
-            Debug.Log("Search Cooldown");
-            return false;
         }
 
-        Debug.Log("Searching for targets");
-
-        Collider[] AIRange = Physics.OverlapSphere(transform.position, radius, TargetMask);
-
-        if (AIRange.Length != 0)
+        public bool SearchForTargets()
         {
-            Debug.Log("Target found");
-
-            for (int i = 0; i < AIRange.Length; i++)
+            if (searchTimer > 1)
             {
-
-                if (!AIRange[i].TryGetComponent<TargetScript>(out TargetScript target))
-                {
-                    continue;
-                }
-
-                Vector3 directionToTarget = (target.gameObject.transform.position - Eyes.transform.position).normalized;
-
-                if (Vector3.Angle(Eyes.transform.forward, directionToTarget) < angle / 2)
-                {
-                    
-                    float distanceToTarget = Vector3.Distance(transform.position, target.gameObject.transform.position);
-
-                    if (!Physics.Raycast(Eyes.transform.position, directionToTarget, distanceToTarget, EnvironmentMask))
-                    {
-                        
-                        Debug.Log("Target seen");
-
-                        bool isTargetValid = CurrentTargetAnalysis(target);
-
-                        if (isTargetValid)
-                        {
-                            Debug.Log("Target is Valid, returning true");
-                           
-                            return true;
-                           
-                        }
-                        else
-                        {
-                           
-                            return false;
-
-                        }
-                        
-
-                    }
-                  
-                }
+                Debug.Log("Search Cooldown");
                 return false;
             }
 
+            Debug.Log("Searching for targets");
+
+            Collider[] AIRange = Physics.OverlapSphere(transform.position, searchFunctionSettings.radius, searchFunctionSettings.TargetMask);
+
+            if (AIRange.Length != 0)
+            {
+                Debug.Log("Target found");
+
+                for (int i = 0; i < AIRange.Length; i++)
+                {
+
+                    if (!AIRange[i].TryGetComponent<TargetScript>(out TargetScript target))
+                    {
+                        continue;
+                    }
+
+                    Vector3 directionToTarget = (target.gameObject.transform.position - searchFunctionSettings.Eyes.transform.position).normalized;
+
+                    if (Vector3.Angle(searchFunctionSettings.Eyes.transform.forward, directionToTarget) < searchFunctionSettings.angle / 2)
+                    {
+
+                        float distanceToTarget = Vector3.Distance(transform.position, target.gameObject.transform.position);
+
+                        if (!Physics.Raycast(searchFunctionSettings.Eyes.transform.position, directionToTarget, distanceToTarget, searchFunctionSettings.EnvironmentMask))
+                        {
+
+                            Debug.Log("Target seen");
+
+                            bool isTargetValid = CurrentTargetAnalysis(target);
+
+                            if (isTargetValid)
+                            {
+                                Debug.Log("Target is Valid, returning true");
+
+                                return true;
+
+                            }
+                            else
+                            {
+
+                                return false;
+
+                            }
+
+
+                        }
+
+                    }
+                    return false;
+                }
+
+            }
+            return false;
+
         }
-        return false;
 
-    }
-
-    private bool CurrentTargetAnalysis(TargetScript aTarget)
-    {
-        if (IsPlayer(aTarget))
+        private bool CurrentTargetAnalysis(TargetScript aTarget)
         {
-            Debug.Log("Player Detected");
-            playerObj = aTarget;
+            if (IsPlayer(aTarget))
+            {
+                Debug.Log("Player Detected");
+                interactSettings.playerObj = aTarget;
 
-            playerFound = true;
+                playerDetectedSettings.playerFound = true;
+                return false;
+            }
+
+            //Starting case, the first target spotted, will be the target regardless of status
+            if (!aTarget.TargetInfo.wasCompleted)
+            {
+                interactSettings.CurrTarget = aTarget;
+
+                Debug.Log("New object is set, proceed with interact state");
+
+                return true;
+            }
+
+
             return false;
         }
 
-        //Starting case, the first target spotted, will be the target regardless of status
-        if (CurrTarget == null || !aTarget.TargetInfo.wasCompleted)
+        public bool IsPlayer(TargetScript aTarget)
         {
-            CurrTarget = aTarget;
-
-            Debug.Log("New object is set, proceed with interact state");
-
-            return true;
+            if (aTarget.CompareTag("Player"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-       
-       return false;
+        public TargetScript RetrieveCurrTarget()
+        {
+            if (interactSettings.playerObj != null)
+            {
+                return interactSettings.playerObj;
+            }
+            else
+            {
+                return interactSettings.CurrTarget;
+            }
+
+        }
+
+
+
+
     }
-
-    public bool IsPlayer(TargetScript aTarget)
-    {
-        if (aTarget.CompareTag("Player"))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public TargetScript RetrieveCurrTarget()
-    {
-        if(playerObj != null)
-        {
-            return playerObj;
-        }
-        else
-        {
-            return CurrTarget;
-        }
-       
-    }
-
-   
-    
-   
 }
+

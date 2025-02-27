@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class InitialState : BaseStateClass
 {
-    public InitialState(AIBase aAIscript) : base(aAIscript)
+    public InitialState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
     }
 
     public override void OnEnterState()
     {
-
+        Debug.Log("In Initial State");
         return;
     }
 
     public override void OnExitState()
     {
-
+        Debug.Log("Exiting Initial State");
         return;
     }
 
     public override void ChangeState(BaseStateClass aNewState)
     {
-        Debug.Log("Changing from Initial State");
+        
 
         aNewState.OnEnterState();
 

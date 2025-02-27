@@ -4,27 +4,27 @@ using UnityEngine;
 using UnityEditor;
 
 
-[CustomEditor(typeof(AIBase))]
+[CustomEditor(typeof(StateMachineInfo.AIBase))]
 public class AIDetectionEditorScript : Editor
 {
     private void OnSceneGUI()
     {
-        AIBase aiView = (AIBase)target;
+        StateMachineInfo.AIBase aiView = (StateMachineInfo.AIBase)target;
 
         Handles.color = Color.yellow;
 
-        Handles.DrawWireArc(aiView.Eyes.transform.position, Vector3.up, Vector3.forward, 360, aiView.radius);
+        Handles.DrawWireArc(aiView.searchFunctionSettings.Eyes.transform.position, Vector3.up, Vector3.forward, 360, aiView.searchFunctionSettings.radius);
 
         //left half
-        Vector3 viewAngle1 = AngleDirection(aiView.transform.eulerAngles.y, -aiView.angle / 2);
+        Vector3 viewAngle1 = AngleDirection(aiView.transform.eulerAngles.y, -aiView.searchFunctionSettings.angle / 2);
 
         
         //right half
-        Vector3 viewAngle2 = AngleDirection(aiView.transform.eulerAngles.y, aiView.angle / 2);
+        Vector3 viewAngle2 = AngleDirection(aiView.transform.eulerAngles.y, aiView.searchFunctionSettings.angle / 2);
 
 
-        Handles.DrawLine(aiView.Eyes.transform.position, aiView.Eyes.transform.position + viewAngle1 * aiView.radius);
-        Handles.DrawLine(aiView.Eyes.transform.position, aiView.Eyes.transform.position + viewAngle2 * aiView.radius);
+        Handles.DrawLine(aiView.searchFunctionSettings.Eyes.transform.position, aiView.searchFunctionSettings.Eyes.transform.position + viewAngle1 * aiView.searchFunctionSettings.radius);
+        Handles.DrawLine(aiView.searchFunctionSettings.Eyes.transform.position, aiView.searchFunctionSettings.Eyes.transform.position + viewAngle2 * aiView.searchFunctionSettings.radius);
 
     }
 

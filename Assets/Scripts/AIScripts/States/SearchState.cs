@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SearchState : BaseStateClass
@@ -14,9 +15,7 @@ public class SearchState : BaseStateClass
 
     Vector3 detectedLocation;
 
-    float angle;
-
-    public SearchState(AIBase aAIscript) : base(aAIscript)
+    public SearchState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
     }
@@ -24,33 +23,26 @@ public class SearchState : BaseStateClass
     {
         Debug.Log("In Search State");
 
-        timer = aiScript.searchStateVal;
+        aiScript.search.searchingForPlayer = true;
 
-        aISearchMethod = System.Enum.GetName(typeof(AIBase.SearchMethod), aiScript.searchMethod);
+        timer = aiScript.searchStateSettings.searchStateVal;
 
-        
+        aISearchMethod = System.Enum.GetName(typeof(StateMachineInfo.SearchStateSettings.SearchMethod), aiScript.searchStateSettings.searchMethod);
 
         return;
     }
 
     public override void CurrStateFunctionality()
     {
-        timer -= Time.deltaTime;
-
-        Debug.Log("Search Functionality");
-        if (aiScript.SearchForTargets())
+        if (!aiScript.SearchForTargets() && aiScript.playerDetectedSettings.playerFound)
         {
+            Debug.Log("Player Found Again");
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
         }
 
-        if (timer <= 0)
+        if (searchingForPlayer)
         {
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.patrol);
-        }
-
-        if(searchingForPlayer)
-        {
-            switch(aISearchMethod)
+            switch (aISearchMethod)
             {
                 case "SearchInPlace":
                     {
@@ -63,35 +55,53 @@ public class SearchState : BaseStateClass
                         break;
                     }
             }
+            
         }
 
-
+        return;
     }
 
+ 
     public void SearchInPlaceFunction()
     {
         Debug.Log("Searching in Place");
 
-        angle = Mathf.MoveTowardsAngle(aiScript.transform.eulerAngles.y, aiScript.rotatePosition, aiScript.rotateSpeed * Time.deltaTime);
+        aiScript.agent.isStopped = true;
+        timer -= Time.deltaTime;
 
-        aiScript.transform.eulerAngles = new Vector3(aiScript.transform.eulerAngles.x, angle, aiScript.transform.eulerAngles.z);
+        if (timer <= 0)
+        {
+            Debug.Log("Resuming Patrol State from Search State");
+
+            searchingForPlayer = false;
+            aiScript.SwitchStates(aiScript.currActiveState, aiScript.patrol);
+            return;
+        }
+
+        return;
     }
    
     public void SearchRandomPointFunction()
     {
         Debug.Log("Searching Random Point in Range");
+
+        return;
     }
 
     public void MoveToPointFunction()
     {
         Debug.Log("Investigating Point");
+
+        return;
     }
 
     public override void OnExitState()
     {
         Debug.Log("Exiting Search State");
 
-        searchingForPlayer = false;
+        aiScript.agent.isStopped = false;
+
+        return;
     }
 
     public override void ChangeState(BaseStateClass aNewState)
@@ -101,6 +111,8 @@ public class SearchState : BaseStateClass
         aNewState.OnEnterState();
 
         OnExitState();
+
+        return;
     }
 
     

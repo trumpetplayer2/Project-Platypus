@@ -1,17 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[System.Serializable]
 public abstract class BaseStateClass
 {
 
     public bool playerDetected;
 
-    public AIBase aiScript;
+    public StateMachineInfo.AIBase aiScript;
 
-    public BaseStateClass(AIBase aAIscript) { 
+    public BaseStateClass(StateMachineInfo.AIBase aAIscript) { 
     
         this.aiScript = aAIscript;
 

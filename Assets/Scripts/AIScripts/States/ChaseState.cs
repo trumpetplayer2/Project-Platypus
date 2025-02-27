@@ -7,11 +7,13 @@ using UnityEngine;
 
 public class ChaseState : BaseStateClass
 {
-    float timer;
+    float losingTimer;
 
     float catchTimer;
 
-    public ChaseState(AIBase aAIscript) : base(aAIscript)
+    bool seesPlayer;
+
+    public ChaseState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
     }
@@ -24,36 +26,48 @@ public class ChaseState : BaseStateClass
         Debug.Log("Entering Chase State");
         chasingTarget = aiScript.RetrieveCurrTarget();
 
-        aiScript.Speed += aiScript.chaseSpeedVal;
+        aiScript.Speed += aiScript.chaseSettings.chaseSpeedVal;
 
-        timer = aiScript.losingTargetVal;
+        losingTimer = aiScript.chaseSettings.losingTargetVal;
 
-        catchTimer = aiScript.catchTimerVal;
+        catchTimer = aiScript.chaseSettings.catchTimerVal;
 
-        aiScript.agent.destination = chasingTarget.transform.position;
+        aiScript.agent.isStopped = false;
 
+       
         return;
     }
 
     public override void CurrStateFunctionality()
     {
-        Debug.Log("Chase Functionality");
-        aiScript.agent.destination = chasingTarget.transform.position;
+        //Debug.Log("Chase Functionality");
         
-        if(Vector3.Distance(aiScript.gameObject.transform.position, chasingTarget.transform.position) > aiScript.chaseMaxDistance)
-        {
-            Debug.Log("Calling Losing Target");
+        
+       
+            aiScript.agent.destination = chasingTarget.transform.position;
 
-            LosingTarget();
-        }
+            if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) > aiScript.chaseSettings.chaseMaxDistance)
+            {
+                Debug.Log("Calling Losing Target");
+
+                LosingTarget();
+
+                return;
+            }
 
 
-        if(Vector3.Distance(aiScript.gameObject.transform.position, chasingTarget.transform.position) < aiScript.chaseMaxDistance)
-        {
-            Debug.Log("Calling Catching Target");
+            if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) < aiScript.chaseSettings.chaseMinDistance)
+            {
+                Debug.Log("Calling Catching Target");
 
-            CatchTarget();
-        }
+                CatchTarget();
+
+                return;
+            }
+        
+        
+
+        return;
         
     }
 
@@ -61,12 +75,18 @@ public class ChaseState : BaseStateClass
     {
         Debug.Log("Losing Target");
 
-        timer -= aiScript.losingTargetVal;
+        losingTimer -= aiScript.chaseSettings.losingTargetVal;
 
-        if(timer <= 0)
+        if(losingTimer <= 0)
         {
-            aiScript.search.searchingForPlayer = true;
+            Debug.Log("Lost Target");
+            
+            aiScript.playerDetectedSettings.playerFound = false;
+
+            aiScript.interactSettings.CurrTarget = null;
+
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.search);
+           
         }
 
         return;
@@ -75,14 +95,18 @@ public class ChaseState : BaseStateClass
 
     private void CatchTarget()
     {
-        Debug.Log("Catching Target");
+        Debug.Log("Can Catch Target");
 
         catchTimer -= Time.deltaTime;
 
         if(catchTimer <= 0)
         {
+            Debug.Log("Attempting to Catch Target");
             CaughtTarget();
+            
         }
+
+        return;
     }
 
     public void CaughtTarget()
@@ -96,13 +120,21 @@ public class ChaseState : BaseStateClass
     {
         Debug.Log("Exiting Chase State");
 
-        aiScript.Speed -= aiScript.chaseSpeedVal;
+        seesPlayer = false;
+
+        aiScript.Speed -= aiScript.chaseSettings.chaseSpeedVal;
+
+        chasingTarget = null;
+
+        aiScript.interactSettings.playerObj = null;
 
         return;
     }
 
     public override void ChangeState(BaseStateClass aNewState)
     {
+        //.Log("Changing From Chase State");
+
         aNewState.OnEnterState();
 
         OnExitState();

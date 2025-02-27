@@ -11,7 +11,9 @@ public class InteractState : BaseStateClass
     TargetScript currentTarget;
 
     InteractableTarget tInfo;
-    public InteractState(AIBase aAIscript) : base(aAIscript)
+
+    
+    public InteractState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
     }
@@ -20,9 +22,14 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("In interact State");
 
+
         currentTarget = aiScript.RetrieveCurrTarget();
 
         tInfo = currentTarget.ReturnTargetInfo();
+
+        timer = currentTarget.TargetInfo.objDuration;
+
+        aiScript.agent.isStopped = false;
 
         return;
     }
@@ -31,18 +38,16 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("Exiting interact State");
 
-        timer = tInfo.objDuration;
-
         currentTarget = null;
 
-        aiScript.CurrTarget = null;
+        aiScript.interactSettings.CurrTarget = null;
 
         return;
     }
 
     public override void ChangeState(BaseStateClass aNewState)
     {
-        Debug.Log("Changing from Patrol or Idle");
+        //Debug.Log("Changing from Patrol or Idle");
 
         aNewState.OnEnterState();
 
@@ -53,7 +58,12 @@ public class InteractState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        Debug.Log("interact functionality");
+        //Debug.Log("interact functionality");
+        if(aiScript.SearchForTargets() && aiScript.playerDetectedSettings.playerFound)
+        {
+            aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
+            return;
+        }
 
         timer -= Time.deltaTime;
 
@@ -64,6 +74,7 @@ public class InteractState : BaseStateClass
             Debug.Log("AI is stopped in front of target");
             aiScript.agent.isStopped = true;
             BeginInteract(currentTarget);
+            return;
         }
 
         return;
@@ -77,18 +88,22 @@ public class InteractState : BaseStateClass
 
         Debug.LogFormat("Target Name: {0} , Target Desciption: {1}", tInfo.objName, tInfo.objDescription);
 
-        tInfo.isActive = true;
+        currentTarget.TargetInfo.isActive = true;
 
         if(timer <= 0)
         {
             Debug.Log("task is complete");
 
-            tInfo.wasCompleted = true;
+            currentTarget.TargetInfo.wasCompleted = true;
 
-            tInfo.isActive = false;
+            currentTarget.TargetInfo.isActive = false;
 
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.idle);
+
+            return;
         }
+
+        return;
 
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class IdleState : BaseStateClass
 {
-    public IdleState(AIBase aAIscript) : base(aAIscript)
+    public IdleState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
     }
@@ -16,7 +16,7 @@ public class IdleState : BaseStateClass
         
         Debug.Log("In idle State");
 
-        timer = aiScript.idleTimeUntil;
+        timer = aiScript.idleSettings.idleTimeUntil;
         
         return;
     }
@@ -31,7 +31,7 @@ public class IdleState : BaseStateClass
 
     public override void ChangeState(BaseStateClass aNewState)
     {
-            Debug.Log("Changing from Idle");
+            //Debug.Log("Changing from Idle");
 
         aNewState.OnEnterState();
 
@@ -43,7 +43,7 @@ public class IdleState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        Debug.Log("idle functionality");
+        //Debug.Log("idle functionality");
 
         timer -= Time.deltaTime;
 
@@ -55,11 +55,15 @@ public class IdleState : BaseStateClass
 
         if (aiScript.SearchForTargets())
         {
+            Debug.Log("Switching to Interact");
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
+            return;
         }
-        else if(!aiScript.SearchForTargets() && aiScript.playerFound)
+        else if(!aiScript.SearchForTargets() && aiScript.playerDetectedSettings.playerFound)
         {
+            Debug.Log("Switchting to Player Detected");
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
+            return;
         }
 
         return;

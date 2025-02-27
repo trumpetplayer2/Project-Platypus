@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class AIStateQuest : QuestTrigger
 {
-    public AIBase AI;
+    public StateMachineInfo.AIBase AI;
     [SerializeField]
     public string goalStateType;
     bool completed = false;
