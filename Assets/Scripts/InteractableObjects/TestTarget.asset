@@ -16,5 +16,5 @@ MonoBehaviour:
   objDescription: Test Target
   objDuration: 10
   isActive: 0
-  wasCompleted: 1
+  wasCompleted: 0
   isPlayer: 0

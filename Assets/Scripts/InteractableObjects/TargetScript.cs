@@ -25,4 +25,9 @@ public class TargetScript : MonoBehaviour
 
         }
     }
+
+    private void OnDisable()
+    {
+        TargetInfo.wasCompleted = false;
+    }
 }

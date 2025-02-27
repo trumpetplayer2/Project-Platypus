@@ -159,6 +159,8 @@ namespace StateMachineInfo
 
         private float speed;
 
+
+        bool switchCooldown;
         void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -193,10 +195,17 @@ namespace StateMachineInfo
         {
             currActiveState.CurrStateFunctionality();
 
-            stateSwitchTimer -= Time.deltaTime;
+            if(switchCooldown)
+            {
+                stateSwitchTimer -= Time.deltaTime;
 
-            if (stateSwitchTimer <= 0)
-                stateSwitchTimer = stateSwitchTimerVal;
+                if (stateSwitchTimer <= 0)
+                {
+                    stateSwitchTimer = stateSwitchTimerVal;
+                    switchCooldown = false;
+                }
+                        
+            }
 
             searchTimer -= Time.deltaTime;
 
@@ -207,7 +216,7 @@ namespace StateMachineInfo
 
         public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
         {
-            if (stateSwitchTimer > 1)
+            if (switchCooldown)
             {
                 Debug.Log("Exiting SwitchStates Function");
                 return;
@@ -222,6 +231,8 @@ namespace StateMachineInfo
             currActiveState.ChangeState(aNextState);
 
             currActiveState = aNextState;
+
+            switchCooldown = true;
 
         }
 
