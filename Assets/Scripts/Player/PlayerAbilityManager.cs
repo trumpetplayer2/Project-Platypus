@@ -125,6 +125,7 @@ namespace tp2
 
         void Gravel()
         {
+            if (grab.heldObject != null) return;
             gravelCooldown = gravel.Cooldown;
             if (canCollectGravel && gravelCount < gravel.Max)
             {
@@ -133,7 +134,6 @@ namespace tp2
             }
             else
             {
-                if (grab.heldObject != null) return;
                 SpitGravel();
             }
         }

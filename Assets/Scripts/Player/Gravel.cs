@@ -15,10 +15,13 @@ public class Gravel : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player") return;
+        if (other.gameObject.layer == 6) return;
+        if(other.isTrigger) return;
         if (((ignoreLayer & (1 << other.gameObject.layer)) != 0))
         {
             return;
         }
+        Debug.Log(other.name);
         Destroy(this.gameObject);
     }
 }
