@@ -238,21 +238,21 @@ MonoBehaviour:
     CurrTarget: {fileID: 0}
     playerObj: {fileID: 0}
   chaseSettings:
-    chaseSpeedVal: 1
-    chaseMaxDistance: 2
-    chaseMinDistance: 1
+    chaseSpeedVal: 4
+    chaseMaxDistance: 5
+    chaseMinDistance: 2
     losingTargetVal: 3
-    catchTimerVal: 4
+    catchTimerVal: 2
   searchStateSettings:
-    searchStateVal: 5
+    searchStateVal: 3
     searchMethod: 0
   playerDetectedSettings:
     playerFound: 0
     SetPlayerResponse: 0
   searchFunctionSettings:
     Eyes: {fileID: 3661754072967418126}
-    radius: 7
-    angle: 44
+    radius: 5
+    angle: 67
     TargetMask:
       serializedVersion: 2
       m_Bits: 264
@@ -265,7 +265,7 @@ MonoBehaviour:
   searchTimerVal: 2
   stateSwitchTimer: 0
   searchTimer: 0
-  speedVal: 4
+  speedVal: 3
 --- !u!195 &3449512243717176146
 NavMeshAgent:
   m_ObjectHideFlags: 0
