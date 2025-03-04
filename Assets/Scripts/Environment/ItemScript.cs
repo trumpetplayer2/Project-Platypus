@@ -8,7 +8,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public enum ItemType
 {
-    Other, Ball, Bell, Rope
+    Other, Ball, Bell, Key
 }
 [Serializable]
 public class ItemScript : MonoBehaviour
@@ -30,7 +30,8 @@ public class ItemScript : MonoBehaviour
     {
         if (isHeld && !priority) return;
         alignTarget = target;
-        transform.SetParent(alignTarget);
+        transform.parent = alignTarget;
+        transform.position = alignTarget.position;
         
     }
 
@@ -43,7 +44,7 @@ public class ItemScript : MonoBehaviour
         transform.SetPositionAndRotation(alignTarget.position, alignTarget.rotation);
         Vector3 scale = transform.lossyScale;
         transform.SetParent(alignTarget);
-        transform.localScale = new Vector3(transform.localScale.x/ scale.x, transform.localScale.y/ scale.y, transform.localScale.z/ scale.z);
+        //transform.localScale = new Vector3(transform.localScale.x/ scale.x, transform.localScale.y/ scale.y, transform.localScale.z/ scale.z);
         abilityManager.grab.heldObject = this;
         this.abilityManager = abilityManager;
         if(rb != null)
