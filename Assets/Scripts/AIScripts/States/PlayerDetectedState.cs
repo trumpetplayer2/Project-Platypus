@@ -28,9 +28,6 @@ public class PlayerDetectedState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-       
-
-       
         switch (aIResponse)
         {
             case "Chase":
@@ -38,6 +35,10 @@ public class PlayerDetectedState : BaseStateClass
                     
                     aiScript.SwitchStates(aiScript.currActiveState, aiScript.chase);
                     break;
+                }
+            case "Observe":
+                {
+                    aiScript.SwitchStates(aiScript.currActiveState, aiScript.observe); break;
                 }
 
         }

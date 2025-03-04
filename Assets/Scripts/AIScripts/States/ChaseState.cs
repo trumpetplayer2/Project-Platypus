@@ -11,7 +11,7 @@ public class ChaseState : BaseStateClass
 
     float catchTimer;
 
-    bool seesPlayer;
+    
 
     public ChaseState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
@@ -120,7 +120,7 @@ public class ChaseState : BaseStateClass
     {
         Debug.Log("Exiting Chase State");
 
-        seesPlayer = false;
+     
 
         aiScript.Speed -= aiScript.chaseSettings.chaseSpeedVal;
 

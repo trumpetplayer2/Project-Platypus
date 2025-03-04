@@ -53,6 +53,14 @@ namespace StateMachineInfo
     }
 
     [System.Serializable]
+    public class ObserveSettings
+    {
+        public float rotateTimerVal;
+
+        public float maxDistanceVal;
+    }
+
+    [System.Serializable]
     public class SearchStateSettings
     { 
         public float searchStateVal;
@@ -115,6 +123,8 @@ namespace StateMachineInfo
 
         public SearchFunctionSettings searchFunctionSettings;
 
+        public ObserveSettings observeSettings;
+
         public InitialState initial = null;
 
         public IdleState idle = null;
@@ -126,6 +136,8 @@ namespace StateMachineInfo
         public ChaseState chase = null;
 
         public SearchState search = null;
+
+        public ObserveState observe = null;
 
         [ReadOnly] public PlayerDetectedState playerDetected = null;
 
@@ -178,6 +190,8 @@ namespace StateMachineInfo
             search = new SearchState(this);
 
             playerDetected = new PlayerDetectedState(this);
+
+            observe = new ObserveState(this);
 
             Speed = speedVal;
 
