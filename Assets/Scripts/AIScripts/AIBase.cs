@@ -145,7 +145,7 @@ namespace StateMachineInfo
 
         public float distanceBetweenTarget;
 
-
+        
         public BaseStateClass currActiveState;
 
         public float stateSwitchTimerVal;
@@ -262,8 +262,10 @@ namespace StateMachineInfo
 
             Collider[] AIRange = Physics.OverlapSphere(transform.position, searchFunctionSettings.radius, searchFunctionSettings.TargetMask);
 
-            if (AIRange.Length != 0)
+            if (AIRange.Length == 0)
             {
+                return false;
+            }
                 Debug.Log("Target found");
 
                 for (int i = 0; i < AIRange.Length; i++)
@@ -281,26 +283,12 @@ namespace StateMachineInfo
 
                         float distanceToTarget = Vector3.Distance(transform.position, target.gameObject.transform.position);
 
-                        if (!Physics.Raycast(searchFunctionSettings.Eyes.transform.position, directionToTarget, distanceToTarget, searchFunctionSettings.EnvironmentMask))
+                        if (!Physics.Raycast(searchFunctionSettings.Eyes.transform.position, directionToTarget, Mathf.Min(distanceToTarget, searchFunctionSettings.radius), searchFunctionSettings.EnvironmentMask))
                         {
 
                             Debug.Log("Target seen");
 
-                            bool isTargetValid = CurrentTargetAnalysis(target);
-
-                            if (isTargetValid)
-                            {
-                                Debug.Log("Target is Valid, returning true");
-
-                                return true;
-
-                            }
-                            else
-                            {
-
-                                return false;
-
-                            }
+                            return CurrentTargetAnalysis(target);
 
 
                         }
@@ -309,7 +297,7 @@ namespace StateMachineInfo
                     return false;
                 }
 
-            }
+            
             return false;
 
         }

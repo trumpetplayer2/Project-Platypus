@@ -48,39 +48,31 @@ public class ObserveState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        //update player state and reset timer
-        //if(aiScript.SearchForTargets())
-        timer += Time.deltaTime;
-
-
         Debug.Log("Observing Player");
 
-        float angle = Mathf.Lerp(aiScript.transform.rotation.eulerAngles.y, angleBetween , timer / 0.5f);
-
-        currPosition.transform.Rotate(new Vector3(0, angle, 0));
-       
-
-
-        //if (Vector3.Distance(observedTarget.transform.position, currPosition.position) <= 1)
-        //{
-        //    Debug.Log("Next to player");
-        //    currPosition.rotation = Quaternion.AngleAxis(angleBetween, currPosition.up);
-        //    timer = aiScript.observeSettings.rotateTimerVal;
-            
-        //}
-        //else
-        //{
-            
-        //}
-
-        if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= maxDistance)
+        //update player state and reset timer
+        if (!aiScript.SearchForTargets() && aiScript.playerDetectedSettings.playerFound)
         {
-            Debug.Log("Player out of range");
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.search);
+            timer = 0;
+            float eulerZ = aiScript.transform.rotation.eulerAngles.z;
+            aiScript.transform.LookAt(observedTarget.transform, Vector3.up);
+            aiScript.transform.rotation = Quaternion.Euler(aiScript.transform.rotation.eulerAngles.x, aiScript.transform.rotation.eulerAngles.y, eulerZ);
             return;
         }
-
         
+            timer += Time.deltaTime;
+
+            float angle = Mathf.Lerp(aiScript.transform.rotation.eulerAngles.y, angleBetween, timer / 0.5f);
+
+            currPosition.transform.Rotate(new Vector3(0, angle, 0));
+
+            if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.searchFunctionSettings.radius)
+            {
+                Debug.Log("Player out of range");
+                aiScript.SwitchStates(aiScript.currActiveState, aiScript.search);
+                return;
+            }
+
     }
 
     public override void OnExitState()
