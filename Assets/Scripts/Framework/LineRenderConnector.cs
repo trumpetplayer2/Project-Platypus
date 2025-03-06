@@ -19,6 +19,7 @@ public class LineRenderConnector : MonoBehaviour
         lineRenderer.positionCount = connections.Length;
         for(int i = 0; i < connections.Length; i++)
         {
+            if (connections[i] == null) { continue; }
             lineRenderer.SetPosition(i, connections[i].transform.position);
         }
     }
