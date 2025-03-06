@@ -12,8 +12,17 @@ using UnityEditor.Searcher;
 using UnityEngine.UIElements;
 using System.ComponentModel;
 
+
+public enum DetectedType
+{
+    None,
+    Player,
+    Object
+}
+
 namespace StateMachineInfo
 {
+
     [System.Serializable]
     public class IdleSettings
     {
@@ -79,7 +88,7 @@ namespace StateMachineInfo
     public class PlayerDetectedSettings
     {
 
-        [ReadOnly] public bool playerFound;
+        //[ReadOnly] public bool playerFound;
 
         public enum AIResponse
         {
@@ -250,12 +259,12 @@ namespace StateMachineInfo
 
         }
 
-        public bool SearchForTargets()
+        public DetectedType SearchForTargets()
         {
             if (searchTimer > 1)
             {
                 Debug.Log("Search Cooldown");
-                return false;
+                return DetectedType.None;
             }
 
             Debug.Log("Searching for targets");
@@ -264,7 +273,7 @@ namespace StateMachineInfo
 
             if (AIRange.Length == 0)
             {
-                return false;
+                return DetectedType.None;
             }
                 Debug.Log("Target found");
 
@@ -294,23 +303,24 @@ namespace StateMachineInfo
                         }
 
                     }
-                    return false;
+                    
                 }
 
             
-            return false;
+            return DetectedType.None;
 
         }
 
-        private bool CurrentTargetAnalysis(TargetScript aTarget)
+        private DetectedType CurrentTargetAnalysis(TargetScript aTarget)
         {
-            if (IsPlayer(aTarget))
+
+            if (aTarget.CompareTag("Player"))
             {
                 Debug.Log("Player Detected");
                 interactSettings.playerObj = aTarget;
 
-                playerDetectedSettings.playerFound = true;
-                return false;
+               
+                return DetectedType.Player;
             }
 
             //Starting case, the first target spotted, will be the target regardless of status
@@ -320,24 +330,13 @@ namespace StateMachineInfo
 
                 Debug.Log("New object is set, proceed with interact state");
 
-                return true;
+                return DetectedType.Object;
             }
 
-
-            return false;
+            return DetectedType.None;
         }
 
-        public bool IsPlayer(TargetScript aTarget)
-        {
-            if (aTarget.CompareTag("Player"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+      
 
         public TargetScript RetrieveCurrTarget()
         {

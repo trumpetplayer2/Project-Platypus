@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -81,12 +82,12 @@ public class ChaseState : BaseStateClass
         {
             Debug.Log("Lost Target");
             
-            aiScript.playerDetectedSettings.playerFound = false;
 
             aiScript.interactSettings.CurrTarget = null;
 
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.search);
-           
+
+            
         }
 
         return;

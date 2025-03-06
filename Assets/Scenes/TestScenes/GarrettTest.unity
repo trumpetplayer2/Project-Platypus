@@ -1844,7 +1844,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1744393677674359303, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000032530275
+      value: 0.000062168125
       objectReference: {fileID: 0}
     - target: {fileID: 2430566793800206607, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2398,6 +2398,10 @@ PrefabInstance:
       value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: speedVal
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: chaseSettings.chaseSpeedVal
       value: 1
       objectReference: {fileID: 0}
@@ -2411,7 +2415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: observeSettings.maxDistanceVal
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: observeSettings.rotateTimerVal
@@ -2419,7 +2423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: playerDetectedSettings.SetPlayerResponse
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.size

@@ -59,7 +59,7 @@ public class InteractState : BaseStateClass
     public override void CurrStateFunctionality()
     {
         //Debug.Log("interact functionality");
-        if(aiScript.SearchForTargets() && aiScript.playerDetectedSettings.playerFound)
+        if(aiScript.SearchForTargets() == DetectedType.Player)
         {
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
             return;

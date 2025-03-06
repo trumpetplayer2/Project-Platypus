@@ -34,7 +34,7 @@ public class SearchState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        if (!aiScript.SearchForTargets() && aiScript.playerDetectedSettings.playerFound)
+        if (aiScript.SearchForTargets() == DetectedType.Player)
         {
             Debug.Log("Player Found Again");
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);

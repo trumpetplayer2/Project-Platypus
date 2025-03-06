@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
+
 public class ObserveState : BaseStateClass
 {
     public TargetScript observedTarget;
@@ -51,7 +53,7 @@ public class ObserveState : BaseStateClass
         Debug.Log("Observing Player");
 
         //update player state and reset timer
-        if (!aiScript.SearchForTargets() && aiScript.playerDetectedSettings.playerFound)
+        if (aiScript.SearchForTargets() == DetectedType.Player)
         {
             timer = 0;
             float eulerZ = aiScript.transform.rotation.eulerAngles.z;
@@ -66,7 +68,7 @@ public class ObserveState : BaseStateClass
 
             currPosition.transform.Rotate(new Vector3(0, angle, 0));
 
-            if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.searchFunctionSettings.radius)
+            if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.observeSettings.maxDistanceVal)
             {
                 Debug.Log("Player out of range");
                 aiScript.SwitchStates(aiScript.currActiveState, aiScript.search);
@@ -83,7 +85,7 @@ public class ObserveState : BaseStateClass
 
         aiScript.interactSettings.playerObj = null;
 
-        timer = 1;
+       
 
         return;
     }

@@ -58,13 +58,13 @@ public class PatrolState : BaseStateClass
             randomPatrolDestination = Random.Range(0, aiScript.patrolSettings.PatrolDestinations.Length);
         }
 
-        if (aiScript.SearchForTargets())
+        if (aiScript.SearchForTargets() == DetectedType.Object)
         {
             Debug.Log("Switching to Interact");
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
             return;
         }
-        else if(!aiScript.SearchForTargets() && aiScript.playerDetectedSettings.playerFound)
+        else if(aiScript.SearchForTargets() == DetectedType.Player)
         {
             Debug.Log("Switching to Player Detected");
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);

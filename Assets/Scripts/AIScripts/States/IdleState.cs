@@ -53,13 +53,13 @@ public class IdleState : BaseStateClass
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.patrol);
         }
 
-        if (aiScript.SearchForTargets())
+        if (aiScript.SearchForTargets() == DetectedType.Object)
         {
             Debug.Log("Switching to Interact");
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
             return;
         }
-        else if(!aiScript.SearchForTargets() && aiScript.playerDetectedSettings.playerFound)
+        else if(aiScript.SearchForTargets() == DetectedType.Player)
         {
             Debug.Log("Switchting to Player Detected");
             aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
