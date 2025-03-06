@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Door : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Door : MonoBehaviour
     [Header("Open")]
     public Vector3 openPos = Vector3.zero;
     public Vector3 openRotation = Vector3.zero;
+    public UnityEvent openEvent = new UnityEvent();
     [Header("Closed")]
     public Vector3 closePos = Vector3.zero;
     public Vector3 closeRotation = Vector3.zero;
@@ -35,6 +37,7 @@ public class Door : MonoBehaviour
         transform.position = openPos;
         transform.rotation = Quaternion.Euler(openRotation);
         open = true;
+        openEvent?.Invoke();
     }
 
     public void Close()
