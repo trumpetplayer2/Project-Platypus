@@ -3,14 +3,6 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.XR;
-using System.Net;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using UnityEditor.Searcher;
-using UnityEngine.UIElements;
-using System.ComponentModel;
 
 
 public enum DetectedType
