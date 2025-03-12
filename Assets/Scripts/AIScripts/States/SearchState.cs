@@ -23,9 +23,11 @@ public class SearchState : BaseStateClass
     {
         Debug.Log("In Search State");
 
+        aiScript.agent.isStopped = true;
+
         aiScript.search.searchingForPlayer = true;
 
-        timer = aiScript.searchStateSettings.searchStateVal;
+        timer = aiScript.searchStateSettings.searchStateTime;
 
         aISearchMethod = System.Enum.GetName(typeof(StateMachineInfo.SearchStateSettings.SearchMethod), aiScript.searchStateSettings.searchMethod);
 
@@ -37,7 +39,7 @@ public class SearchState : BaseStateClass
         if (aiScript.SearchForTargets() == DetectedType.Player)
         {
             Debug.Log("Player Found Again");
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
+            aiScript.SwitchStates(aiScript.playerDetected);
         }
 
         if (searchingForPlayer)
@@ -66,15 +68,13 @@ public class SearchState : BaseStateClass
     {
         Debug.Log("Searching in Place");
 
-        aiScript.agent.isStopped = true;
         timer -= Time.deltaTime;
 
         if (timer <= 0)
         {
             Debug.Log("Resuming Patrol State from Search State");
 
-            searchingForPlayer = false;
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.patrol);
+            aiScript.SwitchStates(aiScript.patrol);
             return;
         }
 
@@ -99,7 +99,7 @@ public class SearchState : BaseStateClass
     {
         Debug.Log("Exiting Search State");
 
-        aiScript.agent.isStopped = false;
+        
 
         return;
     }

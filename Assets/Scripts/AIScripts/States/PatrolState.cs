@@ -25,18 +25,12 @@ public class PatrolState : BaseStateClass
 
     public override void OnExitState()
     {
-       
         Debug.Log("Exiting Patrol State");
-
-       
-
         return;
     }
 
     public override void ChangeState(BaseStateClass aNewState)
     { 
-            //Debug.Log("Changing from Patrol State");
-
            aNewState.OnEnterState();
 
             OnExitState();
@@ -47,32 +41,29 @@ public class PatrolState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        //Debug.Log("Patrolling to destination");
-
         aiScript.patrolSettings.CurrPatrolDestination = aiScript.patrolSettings.PatrolDestinations[randomPatrolDestination];
 
         aiScript.agent.destination = aiScript.patrolSettings.PatrolDestinations[randomPatrolDestination].position;
 
-        if ((Vector3.Distance(aiScript.gameObject.transform.position, aiScript.patrolSettings.CurrPatrolDestination.position)) < 2)
+        if ((Vector3.Distance(aiScript.gameObject.transform.position, aiScript.patrolSettings.CurrPatrolDestination.position)) < aiScript.patrolSettings.patrolDistanceToDestination)
         {
-            randomPatrolDestination = Random.Range(0, aiScript.patrolSettings.PatrolDestinations.Length);
+            randomPatrolDestination = Random.Range(0, aiScript.patrolSettings.PatrolDestinations.Length - 1);
         }
 
         if (aiScript.SearchForTargets() == DetectedType.Object)
         {
             Debug.Log("Switching to Interact");
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
+            aiScript.SwitchStates(aiScript.interact);
             return;
         }
         else if(aiScript.SearchForTargets() == DetectedType.Player)
         {
             Debug.Log("Switching to Player Detected");
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
+            aiScript.SwitchStates(aiScript.playerDetected);
 
             return;
         }
 
-        
         return;
     }
 

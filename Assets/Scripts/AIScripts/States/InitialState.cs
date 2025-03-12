@@ -23,8 +23,6 @@ public class InitialState : BaseStateClass
 
     public override void ChangeState(BaseStateClass aNewState)
     {
-        
-
         aNewState.OnEnterState();
 
         OnExitState();
@@ -35,7 +33,7 @@ public class InitialState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        aiScript.SwitchStates(aiScript.currActiveState, aiScript.idle);
+        aiScript.SwitchStates(aiScript.idle);
         return;
     }
 

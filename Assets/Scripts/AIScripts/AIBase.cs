@@ -12,6 +12,16 @@ public enum DetectedType
     Object
 }
 
+public enum StateMachineEnum
+{
+    Idle,
+    Patrol,
+    Interact,
+    Chase,
+    Search,
+    Observe
+}
+
 namespace StateMachineInfo
 {
 
@@ -27,44 +37,48 @@ namespace StateMachineInfo
         public Transform[] PatrolDestinations;
 
         [ReadOnly] public Transform CurrPatrolDestination = null;
+
+        public float patrolDistanceToDestination;
     }
 
     [System.Serializable]
     public class InteractSettings
     {
-        
-        [ReadOnly] public TargetScript CurrTarget = null;
-
-        
-        [ReadOnly] public TargetScript playerObj = null;
+        public float distanceBetweenTarget;
     }
 
     [System.Serializable]
     public class ChaseSettings
     {
-        public float chaseSpeedVal;
+        public float chaseSpeedIncrease;
 
         public float chaseMaxDistance;
 
         public float chaseMinDistance;
 
-        public float losingTargetVal;
+        public float losingTargetTime;
 
-        public float catchTimerVal;
+        public float catchTimerTimer;
+
+        public enum ChaseSpeciality
+        {
+            Push,
+            Grab
+        }
+
+        public ChaseSpeciality chaseSpeciality;
     }
 
     [System.Serializable]
     public class ObserveSettings
-    {
-        public float rotateTimerVal;
-
-        public float maxDistanceVal;
+    { 
+        public float maxObserveDistance;
     }
 
     [System.Serializable]
     public class SearchStateSettings
     { 
-        public float searchStateVal;
+        public float searchStateTime;
 
         public enum SearchMethod
         {
@@ -79,9 +93,6 @@ namespace StateMachineInfo
     [System.Serializable]
     public class PlayerDetectedSettings
     {
-
-        //[ReadOnly] public bool playerFound;
-
         public enum AIResponse
         {
             Chase,
@@ -106,10 +117,18 @@ namespace StateMachineInfo
 
         public LayerMask EnvironmentMask;
 
+        [ReadOnly] public TargetScript CurrTarget = null;
+
+
+        [ReadOnly] public TargetScript playerObj = null;
+
     }
 
     public class AIBase : MonoBehaviour
     {
+       [ReadOnly] public StateMachineEnum stateMachineEnum;
+
+        #region StateSettings
         public IdleSettings idleSettings;
 
         public PatrolSettings patrolSettings;
@@ -126,6 +145,9 @@ namespace StateMachineInfo
 
         public ObserveSettings observeSettings;
 
+        #endregion
+
+        #region State Objs
         public InitialState initial = null;
 
         public IdleState idle = null;
@@ -140,18 +162,17 @@ namespace StateMachineInfo
 
         public ObserveState observe = null;
 
-        [ReadOnly] public PlayerDetectedState playerDetected = null;
+        public PlayerDetectedState playerDetected = null;
+
+        #endregion
 
         public NavMeshAgent agent;
 
-        public float distanceBetweenTarget;
-
-        
         public BaseStateClass currActiveState;
 
-        public float stateSwitchTimerVal;
+        public float stateSwitchTime;
 
-        public float searchTimerVal;
+        public float aIDetectionTime;
 
         [ReadOnly] public float stateSwitchTimer;
 
@@ -159,18 +180,18 @@ namespace StateMachineInfo
 
         public float speedVal;
 
-        public float Speed
-        {
-            get { return speed; }
-            set
-            {
-                speed = value;
+        //public float Speed
+        //{
+        //    get { return speed; }
+        //    set
+        //    {
+        //        speed = value;
 
-                agent.speed = speed;
-            }
-        }
+        //        agent.speed = speed;
+        //    }
+        //}
 
-        private float speed;
+        //private float speed;
 
 
         bool switchCooldown;
@@ -194,7 +215,9 @@ namespace StateMachineInfo
 
             observe = new ObserveState(this);
 
-            Speed = speedVal;
+            //Speed = speedVal;
+
+            agent.speed = speedVal;
 
            
         }
@@ -216,7 +239,7 @@ namespace StateMachineInfo
 
                 if (stateSwitchTimer <= 0)
                 {
-                    stateSwitchTimer = stateSwitchTimerVal;
+                    stateSwitchTimer = stateSwitchTime;
                     switchCooldown = false;
                 }
                         
@@ -225,11 +248,11 @@ namespace StateMachineInfo
             searchTimer -= Time.deltaTime;
 
             if (searchTimer <= 0)
-                searchTimer = searchTimerVal;
+                searchTimer = aIDetectionTime;
 
         }
 
-        public void SwitchStates(BaseStateClass aCurrActiveState, BaseStateClass aNextState)
+        public void SwitchStates(BaseStateClass aNextState)
         {
             if (switchCooldown)
             {
@@ -238,7 +261,7 @@ namespace StateMachineInfo
             }
 
             Debug.Log("New State Decision");
-            if (aNextState == aCurrActiveState)
+            if (aNextState == currActiveState)
             {
                 return;
             }
@@ -267,11 +290,11 @@ namespace StateMachineInfo
             {
                 return DetectedType.None;
             }
-                Debug.Log("Target found");
+                
 
                 for (int i = 0; i < AIRange.Length; i++)
                 {
-
+                    Debug.Log("Target found");
                     if (!AIRange[i].TryGetComponent<TargetScript>(out TargetScript target))
                     {
                         continue;
@@ -309,16 +332,15 @@ namespace StateMachineInfo
             if (aTarget.CompareTag("Player"))
             {
                 Debug.Log("Player Detected");
-                interactSettings.playerObj = aTarget;
+                searchFunctionSettings.playerObj = aTarget;
 
-               
                 return DetectedType.Player;
             }
 
             //Starting case, the first target spotted, will be the target regardless of status
             if (!aTarget.TargetInfo.wasCompleted)
             {
-                interactSettings.CurrTarget = aTarget;
+                searchFunctionSettings.CurrTarget = aTarget;
 
                 Debug.Log("New object is set, proceed with interact state");
 
@@ -327,24 +349,6 @@ namespace StateMachineInfo
 
             return DetectedType.None;
         }
-
-      
-
-        public TargetScript RetrieveCurrTarget()
-        {
-            if (interactSettings.playerObj != null)
-            {
-                return interactSettings.playerObj;
-            }
-            else
-            {
-                return interactSettings.CurrTarget;
-            }
-
-        }
-
-
-
 
     }
 }

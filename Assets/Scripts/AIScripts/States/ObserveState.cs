@@ -24,20 +24,19 @@ public class ObserveState : BaseStateClass
     //lerp.angle to forward direction
     public ObserveState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
-
         this.aiScript = aAIscript;
-
     }
 
     public override void OnEnterState()
     {
         Debug.Log("Entering Observe State");
 
+
+        observedTarget = aiScript.searchFunctionSettings.CurrTarget == null ? null : aiScript.searchFunctionSettings.CurrTarget;
+
         timer = 0;
 
-        maxDistance = aiScript.observeSettings.maxDistanceVal;
-
-        observedTarget = aiScript.RetrieveCurrTarget();
+        maxDistance = aiScript.observeSettings.maxObserveDistance;
 
         currPosition = aiScript.gameObject.transform;
 
@@ -68,10 +67,10 @@ public class ObserveState : BaseStateClass
 
             currPosition.transform.Rotate(new Vector3(0, angle, 0));
 
-            if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.observeSettings.maxDistanceVal)
+            if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.observeSettings.maxObserveDistance)
             {
                 Debug.Log("Player out of range");
-                aiScript.SwitchStates(aiScript.currActiveState, aiScript.search);
+                aiScript.SwitchStates(aiScript.search);
                 return;
             }
 
@@ -82,10 +81,6 @@ public class ObserveState : BaseStateClass
         Debug.Log("Exiting Observe State");
 
         observedTarget = null;
-
-        aiScript.interactSettings.playerObj = null;
-
-       
 
         return;
     }

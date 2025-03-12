@@ -18,7 +18,7 @@ public class PlayerDetectedState : BaseStateClass
     {
         Debug.Log("Entering Player Detected State");
 
-        playerTarget = aiScript.RetrieveCurrTarget();
+        playerTarget = aiScript.searchFunctionSettings.playerObj == null ? null : aiScript.searchFunctionSettings.playerObj;
 
         aIResponse = System.Enum.GetName(typeof(StateMachineInfo.PlayerDetectedSettings.AIResponse), aiScript.playerDetectedSettings.SetPlayerResponse);
 
@@ -32,13 +32,12 @@ public class PlayerDetectedState : BaseStateClass
         {
             case "Chase":
                 {
-                    
-                    aiScript.SwitchStates(aiScript.currActiveState, aiScript.chase);
+                    aiScript.SwitchStates(aiScript.chase);
                     break;
                 }
             case "Observe":
                 {
-                    aiScript.SwitchStates(aiScript.currActiveState, aiScript.observe); break;
+                    aiScript.SwitchStates(aiScript.observe); break;
                 }
 
         }
@@ -51,6 +50,8 @@ public class PlayerDetectedState : BaseStateClass
         Debug.Log("Exiting Player Detected State");
 
         playerTarget = null;
+
+        
         return;
     }
 

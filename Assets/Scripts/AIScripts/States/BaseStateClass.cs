@@ -9,8 +9,6 @@ using UnityEngine;
 public abstract class BaseStateClass
 {
 
-    public bool playerDetected;
-
     public StateMachineInfo.AIBase aiScript;
 
     public BaseStateClass(StateMachineInfo.AIBase aAIscript) { 
@@ -29,10 +27,7 @@ public abstract class BaseStateClass
 
     public void ChangeToInteract()
     {
-        aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
+        aiScript.SwitchStates(aiScript.interact);
     }
-
-  
- 
 
 }

@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class InteractState : BaseStateClass
 {
-
     float timer;
 
     TargetScript currentTarget;
 
     InteractableTarget tInfo;
 
-    
     public InteractState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -22,8 +20,7 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("In interact State");
 
-
-        currentTarget = aiScript.RetrieveCurrTarget();
+        currentTarget = aiScript.searchFunctionSettings.CurrTarget == null ? null : aiScript.searchFunctionSettings.CurrTarget;
 
         tInfo = currentTarget.ReturnTargetInfo();
 
@@ -40,7 +37,7 @@ public class InteractState : BaseStateClass
 
         currentTarget = null;
 
-        aiScript.interactSettings.CurrTarget = null;
+        aiScript.searchFunctionSettings.CurrTarget = null;
 
         return;
     }
@@ -61,7 +58,7 @@ public class InteractState : BaseStateClass
         //Debug.Log("interact functionality");
         if(aiScript.SearchForTargets() == DetectedType.Player)
         {
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
+            aiScript.SwitchStates(aiScript.playerDetected);
             return;
         }
 
@@ -69,7 +66,7 @@ public class InteractState : BaseStateClass
 
         aiScript.agent.destination = currentTarget.transform.position;
 
-        if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < aiScript.distanceBetweenTarget)
+        if (Vector3.Distance(currentTarget.transform.position, aiScript.gameObject.transform.position) < aiScript.interactSettings.distanceBetweenTarget)
         {
             Debug.Log("AI is stopped in front of target");
             aiScript.agent.isStopped = true;
@@ -98,7 +95,7 @@ public class InteractState : BaseStateClass
 
             currentTarget.TargetInfo.isActive = false;
 
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.idle);
+            aiScript.SwitchStates(aiScript.idle);
 
             return;
         }

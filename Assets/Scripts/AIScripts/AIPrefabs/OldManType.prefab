@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e9b2756fc4b8440a99a3d66343a558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateMachineEnum: 0
   idleSettings:
     idleTimeUntil: 3
   patrolSettings:
@@ -234,21 +235,21 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     CurrPatrolDestination: {fileID: 0}
+    patrolDistanceToDestination: 0
   interactSettings:
-    CurrTarget: {fileID: 0}
-    playerObj: {fileID: 0}
+    distanceBetweenTarget: 0
   chaseSettings:
-    chaseSpeedVal: 4
+    chaseSpeedIncrease: 0
     chaseMaxDistance: 5
     chaseMinDistance: 2
-    losingTargetVal: 3
-    catchTimerVal: 2
+    losingTargetTime: 0
+    catchTimerTimer: 0
+    chaseSpeciality: 0
   searchStateSettings:
-    searchStateVal: 3
+    searchStateTime: 0
     searchMethod: 0
   playerDetectedSettings:
-    playerFound: 0
-    SetPlayerResponse: 0
+    SetPlayerResponse: 1
   searchFunctionSettings:
     Eyes: {fileID: 3661754072967418126}
     radius: 5
@@ -259,10 +260,13 @@ MonoBehaviour:
     EnvironmentMask:
       serializedVersion: 2
       m_Bits: 128
+    CurrTarget: {fileID: 0}
+    playerObj: {fileID: 0}
+  observeSettings:
+    maxObserveDistance: 0
   agent: {fileID: 3449512243717176146}
-  distanceBetweenTarget: 4
-  stateSwitchTimerVal: 1
-  searchTimerVal: 2
+  stateSwitchTime: 0
+  aIDetectionTime: 0
   stateSwitchTimer: 0
   searchTimer: 0
   speedVal: 3

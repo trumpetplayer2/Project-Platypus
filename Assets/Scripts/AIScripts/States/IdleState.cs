@@ -13,17 +13,16 @@ public class IdleState : BaseStateClass
     float timer;
     public override void OnEnterState()
     {
-        
         Debug.Log("In idle State");
 
         timer = aiScript.idleSettings.idleTimeUntil;
         
+        aiScript.agent.isStopped = true;
         return;
     }
 
     public override void OnExitState()
     {
-
         Debug.Log("Exiting idle State");
 
         return;
@@ -31,13 +30,11 @@ public class IdleState : BaseStateClass
 
     public override void ChangeState(BaseStateClass aNewState)
     {
-            //Debug.Log("Changing from Idle");
-
         aNewState.OnEnterState();
 
         OnExitState();
 
-            return;
+        return;
 
     }
 
@@ -50,19 +47,19 @@ public class IdleState : BaseStateClass
         if(timer <= 0)
         {
             Debug.Log("Switching to Patrol");
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.patrol);
+            aiScript.SwitchStates(aiScript.patrol);
         }
 
         if (aiScript.SearchForTargets() == DetectedType.Object)
         {
             Debug.Log("Switching to Interact");
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.interact);
+            aiScript.SwitchStates(aiScript.interact);
             return;
         }
         else if(aiScript.SearchForTargets() == DetectedType.Player)
         {
             Debug.Log("Switchting to Player Detected");
-            aiScript.SwitchStates(aiScript.currActiveState, aiScript.playerDetected);
+            aiScript.SwitchStates(aiScript.playerDetected);
             return;
         }
 
