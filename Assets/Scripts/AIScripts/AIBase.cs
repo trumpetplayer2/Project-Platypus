@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -90,6 +91,9 @@ namespace StateMachineInfo
 
         public SearchMethod searchMethod;
 
+        public Vector3 noiseLocation;
+
+        public bool heardSomething;
     }
 
     [System.Serializable]
@@ -124,8 +128,11 @@ namespace StateMachineInfo
 
         [ReadOnly] public TargetScript playerObj = null;
 
+        public int maxColliders;
+
     }
 
+ 
     public class AIBase : MonoBehaviour
     {
        [ReadOnly] public StateMachineEnum stateMachineEnum;
@@ -146,6 +153,7 @@ namespace StateMachineInfo
         public SearchFunctionSettings searchFunctionSettings;
 
         public ObserveSettings observeSettings;
+
 
         #endregion
 
@@ -181,6 +189,8 @@ namespace StateMachineInfo
         [ReadOnly] public float searchTimer;
 
         public float speedVal;
+
+        Collider[] AIRange;
 
         //public float Speed
         //{
@@ -221,7 +231,7 @@ namespace StateMachineInfo
 
             agent.speed = speedVal;
 
-           
+            AIRange = new Collider[searchFunctionSettings.maxColliders];
         }
 
         void OnEnable()
@@ -278,7 +288,7 @@ namespace StateMachineInfo
 
         public DetectedType SearchForTargets()
         {
-            if (searchTimer > 1)
+            if (searchTimer < 0.5f || hearingFunctionSettings.HeardSomething)
             {
                 Debug.Log("Search Cooldown");
                 return DetectedType.None;
@@ -286,7 +296,8 @@ namespace StateMachineInfo
 
             Debug.Log("Searching for targets");
 
-            Collider[] AIRange = Physics.OverlapSphere(transform.position, searchFunctionSettings.radius, searchFunctionSettings.TargetMask);
+            
+             int targetCount =  Physics.OverlapSphereNonAlloc(transform.position, searchFunctionSettings.radius, AIRange, searchFunctionSettings.TargetMask);
 
             if (AIRange.Length == 0)
             {
@@ -294,15 +305,15 @@ namespace StateMachineInfo
             }
                 
 
-                for (int i = 0; i < AIRange.Length; i++)
+                for (int i = 0; i < targetCount; i++)
                 {
                     Debug.Log("Target found");
                     if (!AIRange[i].TryGetComponent<TargetScript>(out TargetScript target))
                     {
                          continue;
                     }
-
-                    Vector3 directionToTarget = (target.gameObject.transform.position - searchFunctionSettings.Eyes.transform.position).normalized;
+                
+                Vector3 directionToTarget = (target.gameObject.transform.position - searchFunctionSettings.Eyes.transform.position).normalized;
 
                     if (Vector3.Angle(searchFunctionSettings.Eyes.transform.forward, directionToTarget) < searchFunctionSettings.angle / 2)
                     {
@@ -350,6 +361,22 @@ namespace StateMachineInfo
             }
 
             return DetectedType.None;
+        }
+
+
+
+        public void HeardTargetFunction(Vector3 soundLocation) 
+        {
+            if (searchStateSettings.heardSomething)
+            {
+                searchStateSettings.noiseLocation = soundLocation;
+
+                searchStateSettings.heardSomething = true;
+
+                SwitchStates(search);
+
+                
+            }
         }
 
     }

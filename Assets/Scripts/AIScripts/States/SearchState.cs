@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SearchState : BaseStateClass
 {
@@ -21,6 +22,15 @@ public class SearchState : BaseStateClass
     }
     public override void OnEnterState()
     {
+        if(aiScript.searchStateSettings.heardSomething)
+        {
+            heardSomething = true;
+
+            detectedLocation = aiScript.searchStateSettings.noiseLocation;
+
+            aiScript.agent.isStopped = false;
+        }
+
         Debug.Log("In Search State");
 
         aiScript.agent.isStopped = true;
@@ -42,6 +52,11 @@ public class SearchState : BaseStateClass
             aiScript.SwitchStates(aiScript.playerDetected);
         }
 
+        if (heardSomething)
+        {
+            SearchNoiseLocation();
+        }
+
         if (searchingForPlayer)
         {
             switch (aISearchMethod)
@@ -51,11 +66,7 @@ public class SearchState : BaseStateClass
                         SearchInPlaceFunction();
                         break;
                     }
-                case "SearchInRandomPoint":
-                    {
-                        SearchRandomPointFunction();
-                        break;
-                    }
+             
             }
             
         }
@@ -81,9 +92,12 @@ public class SearchState : BaseStateClass
         return;
     }
    
-    public void SearchRandomPointFunction()
+    public void SearchNoiseLocation()
     {
         Debug.Log("Searching Random Point in Range");
+
+        aiScript.agent.destination = detectedLocation;
+        
 
         return;
     }

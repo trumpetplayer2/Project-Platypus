@@ -51,39 +51,7 @@ public class ObserveState : BaseStateClass
     {
         Debug.Log("Observing Player");
 
-
-
-        //update player state and reset timer
-        if (aiScript.SearchForTargets() == DetectedType.Player)
-        {
-            Debug.Log("Is this function running?");
-            timer = 0;
-
-            float EuZ = aiScript.transform.rotation.eulerAngles.z;
-
-            float EuX = aiScript.transform.rotation.eulerAngles.x;
-
-           //aiScript.transform.rotation = Quaternion.LookRotation(observedTarget.transform.position, Vector3.up);
-
-            aiScript.transform.LookAt(observedTarget.transform, Vector3.up);
-
-            aiScript.transform.rotation = Quaternion.Euler(EuX, aiScript.transform.rotation.eulerAngles.y, EuZ);
-
-            //Debug.Log(angle);
-
-            
-
-            return;
-        }
-
-        timer += Time.deltaTime;
-
-        float angle = Mathf.LerpAngle(aiScript.transform.rotation.eulerAngles.y, angleBetween, timer / aiScript.observeSettings.rotateSpeed);
-
-        currPosition.transform.Rotate(new Vector3(0f, angle, 0f));
-        //Debug.Log(timer);
-
-
+        aiScript.transform.LookAt(observedTarget.transform, Vector3.up);
 
         if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.observeSettings.maxObserveDistance)
             {
