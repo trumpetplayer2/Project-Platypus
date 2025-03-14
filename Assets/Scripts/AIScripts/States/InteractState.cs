@@ -20,7 +20,7 @@ public class InteractState : BaseStateClass
     {
         Debug.Log("In interact State");
 
-        currentTarget = aiScript.searchFunctionSettings.CurrTarget == null ? null : aiScript.searchFunctionSettings.CurrTarget;
+        currentTarget = aiScript.searchFunctionSettings.CurrTarget;
 
         tInfo = currentTarget.ReturnTargetInfo();
 

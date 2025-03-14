@@ -22,7 +22,7 @@ public class ChaseState : BaseStateClass
     public override void OnEnterState()
     {
         Debug.Log("Entering Chase State");
-        chasingTarget = aiScript.searchFunctionSettings.playerObj == null ? null : aiScript.searchFunctionSettings.playerObj;
+        chasingTarget = aiScript.searchFunctionSettings.playerObj;
 
         aiScript.agent.speed += aiScript.chaseSettings.chaseSpeedIncrease;
 

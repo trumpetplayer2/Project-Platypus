@@ -12,6 +12,7 @@ public class InitialState : BaseStateClass
     public override void OnEnterState()
     {
         Debug.Log("In Initial State");
+        
         return;
     }
 

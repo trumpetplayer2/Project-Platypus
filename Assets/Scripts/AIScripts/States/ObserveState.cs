@@ -32,8 +32,8 @@ public class ObserveState : BaseStateClass
         Debug.Log("Entering Observe State");
 
 
-        observedTarget = aiScript.searchFunctionSettings.CurrTarget == null ? null : aiScript.searchFunctionSettings.CurrTarget;
-
+        observedTarget = aiScript.searchFunctionSettings.playerObj;
+        
         timer = 0;
 
         maxDistance = aiScript.observeSettings.maxObserveDistance;
@@ -51,23 +51,41 @@ public class ObserveState : BaseStateClass
     {
         Debug.Log("Observing Player");
 
+
+
         //update player state and reset timer
         if (aiScript.SearchForTargets() == DetectedType.Player)
         {
+            Debug.Log("Is this function running?");
             timer = 0;
-            float eulerZ = aiScript.transform.rotation.eulerAngles.z;
+
+            float EuZ = aiScript.transform.rotation.eulerAngles.z;
+
+            float EuX = aiScript.transform.rotation.eulerAngles.x;
+
+           //aiScript.transform.rotation = Quaternion.LookRotation(observedTarget.transform.position, Vector3.up);
+
             aiScript.transform.LookAt(observedTarget.transform, Vector3.up);
-            aiScript.transform.rotation = Quaternion.Euler(aiScript.transform.rotation.eulerAngles.x, aiScript.transform.rotation.eulerAngles.y, eulerZ);
+
+            aiScript.transform.rotation = Quaternion.Euler(EuX, aiScript.transform.rotation.eulerAngles.y, EuZ);
+
+            //Debug.Log(angle);
+
+            
+
             return;
         }
-        
-            timer += Time.deltaTime;
 
-            float angle = Mathf.Lerp(aiScript.transform.rotation.eulerAngles.y, angleBetween, timer / 0.5f);
+        timer += Time.deltaTime;
 
-            currPosition.transform.Rotate(new Vector3(0, angle, 0));
+        float angle = Mathf.LerpAngle(aiScript.transform.rotation.eulerAngles.y, angleBetween, timer / aiScript.observeSettings.rotateSpeed);
 
-            if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.observeSettings.maxObserveDistance)
+        currPosition.transform.Rotate(new Vector3(0f, angle, 0f));
+        //Debug.Log(timer);
+
+
+
+        if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.observeSettings.maxObserveDistance)
             {
                 Debug.Log("Player out of range");
                 aiScript.SwitchStates(aiScript.search);
@@ -81,6 +99,8 @@ public class ObserveState : BaseStateClass
         Debug.Log("Exiting Observe State");
 
         observedTarget = null;
+
+        aiScript.searchFunctionSettings.playerObj = null;
 
         return;
     }

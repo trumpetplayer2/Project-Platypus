@@ -73,6 +73,8 @@ namespace StateMachineInfo
     public class ObserveSettings
     { 
         public float maxObserveDistance;
+
+        public float rotateSpeed;
     }
 
     [System.Serializable]
@@ -297,7 +299,7 @@ namespace StateMachineInfo
                     Debug.Log("Target found");
                     if (!AIRange[i].TryGetComponent<TargetScript>(out TargetScript target))
                     {
-                        continue;
+                         continue;
                     }
 
                     Vector3 directionToTarget = (target.gameObject.transform.position - searchFunctionSettings.Eyes.transform.position).normalized;
