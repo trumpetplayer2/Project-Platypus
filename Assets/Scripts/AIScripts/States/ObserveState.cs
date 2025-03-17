@@ -9,7 +9,7 @@ public class ObserveState : BaseStateClass
 {
     public TargetScript observedTarget;
 
-    float timer;
+   
 
     Transform currPosition;
 
@@ -34,7 +34,7 @@ public class ObserveState : BaseStateClass
 
         observedTarget = aiScript.searchFunctionSettings.playerObj;
         
-        timer = 0;
+        
 
         maxDistance = aiScript.observeSettings.maxObserveDistance;
 

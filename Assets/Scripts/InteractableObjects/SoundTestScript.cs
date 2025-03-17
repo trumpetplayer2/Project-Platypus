@@ -24,6 +24,8 @@ public class SoundTestScript : MonoBehaviour
     void Awake()
     {
         soundColliders = new Collider[3];
+
+        timer = timerValue;
     }
 
     // Start is called before the first frame update
@@ -35,16 +37,28 @@ public class SoundTestScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        heardThis = Physics.OverlapSphereNonAlloc(this.transform.position, radius, soundColliders, targetMasks);
+        timer -= Time.deltaTime;
 
-        for(int i = 0; i < heardThis; i++)
-        {
-            if (soundColliders[i].TryGetComponent<AIBase>(out AIBase aI))
+        if (timer <= 0) {
+
+            heardThis = Physics.OverlapSphereNonAlloc(this.transform.position, radius, soundColliders, targetMasks);
+
+            for (int i = 0; i < heardThis; i++)
             {
-                aI.HeardTargetFunction(this.transform.position);
+                if (soundColliders[i].TryGetComponent<AIBase>(out AIBase aI))
+                {
+                    aI.HeardTargetFunction(this.transform.position);
 
+                }
             }
+
+            timer = timerValue;
+
         }
+
+       
+
+       
     }
 
    

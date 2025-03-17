@@ -16,6 +16,8 @@ public class SearchState : BaseStateClass
 
     Vector3 detectedLocation;
 
+    float noiseTimer;
+
     public SearchState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -29,6 +31,8 @@ public class SearchState : BaseStateClass
             detectedLocation = aiScript.searchStateSettings.noiseLocation;
 
             aiScript.agent.isStopped = false;
+
+            noiseTimer = aiScript.searchStateSettings.heardNoiseTime;
         }
 
         Debug.Log("In Search State");
@@ -97,7 +101,18 @@ public class SearchState : BaseStateClass
         Debug.Log("Searching Random Point in Range");
 
         aiScript.agent.destination = detectedLocation;
-        
+
+        if(Vector3.Distance(aiScript.transform.position, detectedLocation) <= 1)
+        {
+            aiScript.agent.isStopped = true;
+
+            noiseTimer -= Time.deltaTime;
+
+            if (noiseTimer <= 0)
+            {
+                aiScript.SwitchStates(aiScript.patrol);
+            }
+        }
 
         return;
     }
@@ -112,8 +127,6 @@ public class SearchState : BaseStateClass
     public override void OnExitState()
     {
         Debug.Log("Exiting Search State");
-
-        
 
         return;
     }

@@ -94,6 +94,12 @@ namespace StateMachineInfo
         public Vector3 noiseLocation;
 
         public bool heardSomething;
+
+        public float heardNoiseTime;
+
+        public bool alreadyHeardSomething;
+
+        public float hearingCooldown;
     }
 
     [System.Serializable]
@@ -262,6 +268,12 @@ namespace StateMachineInfo
             if (searchTimer <= 0)
                 searchTimer = aIDetectionTime;
 
+
+            if(searchStateSettings.alreadyHeardSomething)
+            {
+
+            }
+
         }
 
         public void SwitchStates(BaseStateClass aNextState)
@@ -288,7 +300,7 @@ namespace StateMachineInfo
 
         public DetectedType SearchForTargets()
         {
-            if (searchTimer < 0.5f || hearingFunctionSettings.HeardSomething)
+            if (searchTimer < 0.5 || searchStateSettings.heardSomething)
             {
                 Debug.Log("Search Cooldown");
                 return DetectedType.None;
@@ -367,16 +379,15 @@ namespace StateMachineInfo
 
         public void HeardTargetFunction(Vector3 soundLocation) 
         {
-            if (searchStateSettings.heardSomething)
-            {
-                searchStateSettings.noiseLocation = soundLocation;
+            
+            searchStateSettings.noiseLocation = soundLocation;
 
-                searchStateSettings.heardSomething = true;
+            searchStateSettings.heardSomething = true;
 
-                SwitchStates(search);
+            SwitchStates(search);
 
                 
-            }
+            
         }
 
     }
