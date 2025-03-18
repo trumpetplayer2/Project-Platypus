@@ -8,7 +8,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public enum ItemType
 {
-    Other, Ball, Bell, Key
+    Other, Ball, Bell, Key, None
 }
 [Serializable]
 public class ItemScript : MonoBehaviour
@@ -48,27 +48,31 @@ public class ItemScript : MonoBehaviour
 
     public void setSpawn(Transform t)
     {
-        //If parent is player, dont respawn
-        if (t.parent.tag.ToLower().Equals("player")) return;
-        //Go to highest nonparent
-        if (t.parent != null)
-        {
-            setSpawn(t.parent);
-            return;
-        }
+        ////Go to highest nonparent
+        //if (t.parent != null)
+        //{
+        //    //If parent is player, dont respawn
+        //    if (t.parent.tag.ToLower().Equals("player")) return;
+        //    setSpawn(t.parent);
+        //    return;
+        //}
         respawnPoint = t.position;
     }
 
-    void respawn(Transform t)
+    public void respawn()
     {
-        //If parent is player, dont respawn
-        if (t.parent.tag.ToLower().Equals("player")) return;
-        //Go to highest nonparent
-        if (t.parent != null)
-        {
-            respawn(t.parent);
-            return;
-        }
+        respawn(transform);
+    }
+
+    void respawn(Transform t)
+    {   
+        ////Go to highest nonparent
+        //if (t.parent != null)
+        //{
+        //    if (t.parent.tag.ToLower().Equals("player")) return;
+        //    respawn(t.parent);
+        //    return;
+        //}
         //Send highest nonparent to spawnpoint
         t.position = respawnPoint;
     }
@@ -80,7 +84,6 @@ public class ItemScript : MonoBehaviour
         Transform target = abilityManager.grab.holdLocation;
         alignTarget = target;
         transform.SetPositionAndRotation(alignTarget.position, alignTarget.rotation);
-        Vector3 scale = transform.lossyScale;
         transform.SetParent(alignTarget);
         //transform.localScale = new Vector3(transform.localScale.x/ scale.x, transform.localScale.y/ scale.y, transform.localScale.z/ scale.z);
         abilityManager.grab.heldObject = this;
@@ -93,12 +96,10 @@ public class ItemScript : MonoBehaviour
 
     public void release()
     {
-        Vector3 scale = transform.lossyScale;
         alignTarget = null;
         this.transform.parent = null;
         abilityManager.grab.heldObject = null;
         abilityManager = null;
-        transform.localScale = scale;
         if (rb != null)
         {
             rb.isKinematic = false;

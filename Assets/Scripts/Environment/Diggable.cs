@@ -30,5 +30,7 @@ public abstract class Diggable : MonoBehaviour
         }
     }
 
-    public abstract void dig();
+    public virtual void dig() {
+        PlayerAbilityManager.instance.dig.triggered = true;
+    }
 }

@@ -12,6 +12,7 @@ public class BurriedObject : Diggable
     public float digTime = 1f;
     public override void dig()
     {
+        base.dig();
         timer = 0;
         digging = true;
         treasure.layer = 0;

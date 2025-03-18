@@ -10,17 +10,22 @@ public class ItemQuest : QuestTrigger
 
     public ItemType goalType;
     public ItemScript specificItem;
+    bool completed = false;
     public bool getCompleted()
     {
+        if (completed) return true;
         ItemScript heldItem = PlayerAbilityManager.instance.grab.heldObject;
         if (specificItem != null)
         {
+            completed = specificItem == heldItem;
             return specificItem == heldItem;
         }
         if(heldItem != null)
         {
+            completed = heldItem.type == goalType;
             return heldItem.type == goalType;
         }
+
         return false;
     }
 

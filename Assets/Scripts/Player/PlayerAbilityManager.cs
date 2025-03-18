@@ -28,6 +28,7 @@ namespace tp2
         public string DigInputName = "Dig";
         public UnityEvent dig = new UnityEvent();
         public AudioClip clip;
+        public bool triggered = false;
     }
     [Serializable]
     public class SixthSenseSettings
@@ -88,17 +89,21 @@ namespace tp2
                     Sense();
                 }
             }
+            if (Input.GetButtonDown(grab.grabInput))
+            {
+                if (grabCooldown <= 0)
+                {
+                    if (Grab()) return;
+                }
+            }
             if (Input.GetButtonDown(dig.DigInputName))
             {
                 if(digCooldown <= 0) Dig();
+                if (dig.triggered) return;
             }
             if (Input.GetButtonDown("Gravel"))
             {
                 if(gravelCooldown <= 0) Gravel();
-            }
-            if (Input.GetButtonDown(grab.grabInput))
-            {
-                if (grabCooldown <= 0) Grab();
             }
         }
 
@@ -182,20 +187,23 @@ namespace tp2
 
         void Dig()
         {
+            dig.triggered = false;
             dig.dig?.Invoke();
             digCooldown = dig.Cooldown;
             queueClip(2);
         }
 
-        void Grab()
+        bool Grab()
         {
             if(grab.heldObject != null) {
                 Release();
-                return;
+                return true;
             }
             grab.grabEvent?.Invoke();
             grabCooldown = grab.Cooldown;
             queueClip(4);
+            if (grab.heldObject != null) return true;
+            return false;
         }
         public void Release()
         {
