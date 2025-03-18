@@ -32,6 +32,7 @@ public class BurriedObject : Diggable
             if (treasure.TryGetComponent<ItemScript>(out ItemScript item))
             {
                 item.holdable = true;
+                item.setSpawn(item.transform);
             }
             if(treasure.layer == 6)
             {

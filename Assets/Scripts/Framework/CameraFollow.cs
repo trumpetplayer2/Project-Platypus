@@ -96,6 +96,7 @@ namespace tp2
             else
             {
                 GameManager.instance.isPaused = false;
+                Time.timeScale = 1f;
             }
         }
 

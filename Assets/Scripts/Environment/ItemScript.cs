@@ -16,6 +16,8 @@ public class ItemScript : MonoBehaviour
     public Transform alignLocation;
     public Transform alignTarget;
     public ItemType type = ItemType.Other;
+    public float minHeight = -100f;
+    public Vector3 respawnPoint;
     PlayerAbilityManager abilityManager;
     bool isHeld = false;
     public bool holdable = true;
@@ -24,6 +26,7 @@ public class ItemScript : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        setSpawn(transform);
     }
 
     public void grab(Transform target, bool priority = false)
@@ -33,6 +36,41 @@ public class ItemScript : MonoBehaviour
         transform.parent = alignTarget;
         transform.position = alignTarget.position;
         
+    }
+
+    private void FixedUpdate()
+    {
+        if(transform.position.y <= minHeight)
+        {
+            respawn(transform);
+        }
+    }
+
+    public void setSpawn(Transform t)
+    {
+        //If parent is player, dont respawn
+        if (t.parent.tag.ToLower().Equals("player")) return;
+        //Go to highest nonparent
+        if (t.parent != null)
+        {
+            setSpawn(t.parent);
+            return;
+        }
+        respawnPoint = t.position;
+    }
+
+    void respawn(Transform t)
+    {
+        //If parent is player, dont respawn
+        if (t.parent.tag.ToLower().Equals("player")) return;
+        //Go to highest nonparent
+        if (t.parent != null)
+        {
+            respawn(t.parent);
+            return;
+        }
+        //Send highest nonparent to spawnpoint
+        t.position = respawnPoint;
     }
 
     public void grab(PlayerAbilityManager abilityManager, bool priority = false)

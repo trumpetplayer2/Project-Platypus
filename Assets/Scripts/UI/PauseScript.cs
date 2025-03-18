@@ -23,6 +23,7 @@ public class PauseScript : MonoBehaviour
     private void Start()
     {
         instance = this;
+        GameManager.instance.isPaused = false;
     }
     // Update is called once per frame
     void Update()
