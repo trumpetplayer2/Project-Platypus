@@ -23,6 +23,30 @@ public enum StateMachineEnum
     Observe
 }
 
+public enum ChaseSpeciality
+{
+    Push,
+    Grab
+}
+
+public enum SearchMethod
+{
+    SearchInPlace
+}
+
+public enum AIResponse
+{
+    Chase,
+    Observe
+
+}
+
+public enum TriggeredResponse
+{
+    None,
+    Chase
+}
+
 namespace StateMachineInfo
 {
 
@@ -61,11 +85,7 @@ namespace StateMachineInfo
 
         public float catchTimerTimer;
 
-        public enum ChaseSpeciality
-        {
-            Push,
-            Grab
-        }
+       
 
         public ChaseSpeciality chaseSpeciality;
     }
@@ -83,36 +103,34 @@ namespace StateMachineInfo
     { 
         public float searchStateTime;
 
-        public enum SearchMethod
-        {
-            SearchInPlace,
-            SearchInRandomPoint
-        }
-
+       
         public SearchMethod searchMethod;
 
-        public Vector3 noiseLocation;
+        [ReadOnly] public Vector3 noiseLocation;
 
-        public bool heardSomething;
+        [ReadOnly] public bool heardSomething;
 
         public float heardNoiseTime;
 
-        public bool alreadyHeardSomething;
+        [ReadOnly] public bool alreadyHeardSomething;
 
         public float hearingCooldown;
+
+        public float hearingCooldownTime;
     }
 
     [System.Serializable]
     public class PlayerDetectedSettings
     {
-        public enum AIResponse
-        {
-            Chase,
-            Observe
+       
 
-        }
+        public bool playerDoingSomething;
 
-        public AIResponse SetPlayerResponse;
+        public AIResponse setAIResponse;
+
+        public TriggeredResponse setAITriggerResponse;
+
+        public SCTriggerResponse aITriggerObj;
     }
 
     [System.Serializable]
@@ -130,7 +148,6 @@ namespace StateMachineInfo
         public LayerMask EnvironmentMask;
 
         [ReadOnly] public TargetScript CurrTarget = null;
-
 
         [ReadOnly] public TargetScript playerObj = null;
 
@@ -198,20 +215,6 @@ namespace StateMachineInfo
 
         Collider[] AIRange;
 
-        //public float Speed
-        //{
-        //    get { return speed; }
-        //    set
-        //    {
-        //        speed = value;
-
-        //        agent.speed = speed;
-        //    }
-        //}
-
-        //private float speed;
-
-
         bool switchCooldown;
         void Awake()
         {
@@ -233,8 +236,6 @@ namespace StateMachineInfo
 
             observe = new ObserveState(this);
 
-            //Speed = speedVal;
-
             agent.speed = speedVal;
 
             AIRange = new Collider[searchFunctionSettings.maxColliders];
@@ -243,7 +244,6 @@ namespace StateMachineInfo
         void OnEnable()
         {
             currActiveState = initial;
-
         }
 
         // Update is called once per frame
@@ -271,7 +271,14 @@ namespace StateMachineInfo
 
             if(searchStateSettings.alreadyHeardSomething)
             {
+                searchStateSettings.hearingCooldownTime += Time.deltaTime;
 
+                if(searchStateSettings.hearingCooldownTime == searchStateSettings.hearingCooldown)
+                {
+                    searchStateSettings.hearingCooldownTime = 0;
+
+                    searchStateSettings.alreadyHeardSomething = false;
+                }
             }
 
         }

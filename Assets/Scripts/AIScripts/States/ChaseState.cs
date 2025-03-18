@@ -98,6 +98,20 @@ public class ChaseState : BaseStateClass
 
     public void CaughtTarget()
     {
+        switch (aiScript.chaseSettings.chaseSpeciality) {
+
+
+            case ChaseSpeciality.Push :
+                {
+                    Debug.Log("Pushing target");
+                    break;
+                }
+            case ChaseSpeciality.Grab :
+                {
+                    Debug.Log("Grabbing Target");
+                    break;
+                }
+        }
 
         Debug.Log("Caught Target");
 

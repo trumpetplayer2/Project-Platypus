@@ -234,26 +234,34 @@ MonoBehaviour:
     PatrolDestinations:
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     CurrPatrolDestination: {fileID: 0}
-    patrolDistanceToDestination: 0
+    patrolDistanceToDestination: 1
   interactSettings:
-    distanceBetweenTarget: 0
+    distanceBetweenTarget: 1
   chaseSettings:
-    chaseSpeedIncrease: 0
-    chaseMaxDistance: 5
+    chaseSpeedIncrease: 2
+    chaseMaxDistance: 11
     chaseMinDistance: 2
-    losingTargetTime: 0
-    catchTimerTimer: 0
+    losingTargetTime: 1
+    catchTimerTimer: 1
     chaseSpeciality: 0
   searchStateSettings:
-    searchStateTime: 0
+    searchStateTime: 4
     searchMethod: 0
+    noiseLocation: {x: 0, y: 0, z: 0}
+    heardSomething: 0
+    heardNoiseTime: 0
+    alreadyHeardSomething: 0
+    hearingCooldown: 0
   playerDetectedSettings:
     SetPlayerResponse: 1
   searchFunctionSettings:
     Eyes: {fileID: 3661754072967418126}
     radius: 5
-    angle: 67
+    angle: 90
     TargetMask:
       serializedVersion: 2
       m_Bits: 264
@@ -262,14 +270,16 @@ MonoBehaviour:
       m_Bits: 128
     CurrTarget: {fileID: 0}
     playerObj: {fileID: 0}
+    maxColliders: 0
   observeSettings:
-    maxObserveDistance: 0
+    maxObserveDistance: 6
+    rotateSpeed: 2
   agent: {fileID: 3449512243717176146}
-  stateSwitchTime: 0
-  aIDetectionTime: 0
+  stateSwitchTime: 1
+  aIDetectionTime: 1.5
   stateSwitchTimer: 0
   searchTimer: 0
-  speedVal: 3
+  speedVal: 4
 --- !u!195 &3449512243717176146
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -1949,7 +1949,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1744393677674359303, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00008200337
+      value: 0.00036078764
       objectReference: {fileID: 0}
     - target: {fileID: 2430566793800206607, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2498,82 +2498,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3449512243717176146, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: speedVal
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: aIDetectionTime
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: stateSwitchTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: chaseSettings.chaseSpeedVal
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: observeSettings.rotateSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: searchFunctionSettings.angle
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: chaseSettings.catchTimerTimer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: chaseSettings.chaseMaxDistance
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: chaseSettings.losingTargetTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: observeSettings.maxDistanceVal
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: observeSettings.rotateTimerVal
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: chaseSettings.chaseSpeedIncrease
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: observeSettings.maxObserveDistance
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: searchStateSettings.searchStateTime
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: interactSettings.distanceBetweenTarget
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: playerDetectedSettings.SetPlayerResponse
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: patrolSettings.patrolDistanceToDestination
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: patrolSettings.PatrolDestinations.Array.size
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3588297552164767607, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.data[0]
       value: 
@@ -2597,10 +2521,6 @@ PrefabInstance:
     - target: {fileID: 6614036923812015456, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_Name
       value: OldManType
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614036923812015456, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7734086913493318726, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_LocalPosition.x
