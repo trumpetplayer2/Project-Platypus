@@ -32,17 +32,8 @@ public class PlayerDetectedState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        if (TriggerBehavior())
-        {
-            switch (triggerResponse)
-            {
-                case "Chase":
-                    { 
-                        aiScript.SwitchStates(aiScript.chase);
-                        break;
-                    }
-            }
-        }
+      
+           
 
         switch (aIResponse)
         {
@@ -82,17 +73,24 @@ public class PlayerDetectedState : BaseStateClass
         return;
     }
 
-    public bool TriggerBehavior()
+    public void TriggerBehavior()
     {
-        if(aiScript.playerDetectedSettings.setAITriggerResponse == TriggeredResponse.None)
+        if (aiScript.searchFunctionSettings.playerObj == null)
+            return;
+
+
+        switch (triggerResponse)
         {
-            return false;
+            case "None":
+                {
+                    break;
+                }
+
+            case "Chase":
+                {
+                    aiScript.SwitchStates(aiScript.chase);
+                    break;
+                }
         }
-        else
-        {
-            Debug.Log("Behavior is triggered for now");
-            return true;
-        }
-        
     }
 }
