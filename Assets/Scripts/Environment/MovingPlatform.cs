@@ -19,13 +19,13 @@ public class MovingPlatform : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.parent != null) return;
-        other.transform.parent = this.transform;
+        other.transform.SetParent(this.transform);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if(other.transform.parent != this.transform) return;
-        other.transform.parent = this.transform;
+        other.transform.SetParent(this.transform);
     }
     private void Start()
     {
