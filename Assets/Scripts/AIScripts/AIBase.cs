@@ -116,7 +116,7 @@ namespace StateMachineInfo
 
         public float hearingCooldown;
 
-        public float hearingCooldownTime;
+        [ReadOnly] public float hearingCooldownTime = 0f;
     }
 
     [System.Serializable]
