@@ -43,10 +43,13 @@ public class SoundTestScript : MonoBehaviour
 
             heardThis = Physics.OverlapSphereNonAlloc(this.transform.position, radius, soundColliders, targetMasks);
 
+            Debug.Log("Triggering Sound");
+
             for (int i = 0; i < heardThis; i++)
             {
                 if (soundColliders[i].TryGetComponent<AIBase>(out AIBase aI))
                 {
+                    Debug.Log("Hearing in SoundTestScript");
                     aI.HeardTargetFunction(this.transform.position);
 
                 }

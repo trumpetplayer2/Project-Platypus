@@ -12,7 +12,6 @@ public class SearchState : BaseStateClass
 
     public bool searchingForPlayer;
 
-    bool heardSomething;
 
     Vector3 detectedLocation;
 
@@ -24,9 +23,16 @@ public class SearchState : BaseStateClass
     }
     public override void OnEnterState()
     {
-        if(aiScript.searchStateSettings.heardSomething)
+        Debug.Log("In Search State");
+
+        if(aiScript.searchStateSettings.alreadyHeardSomething)
         {
-            heardSomething = true;
+           aiScript.SwitchStates(aiScript.patrol);
+        }
+
+        if (aiScript.searchStateSettings.heardSomething)
+        {
+          
 
             detectedLocation = aiScript.searchStateSettings.noiseLocation;
 
@@ -34,16 +40,16 @@ public class SearchState : BaseStateClass
 
             noiseTimer = aiScript.searchStateSettings.heardNoiseTime;
         }
+        else
+        {
+            aiScript.agent.isStopped = true;
 
-        Debug.Log("In Search State");
+            aiScript.search.searchingForPlayer = true;
 
-        aiScript.agent.isStopped = true;
+            timer = aiScript.searchStateSettings.searchStateTime;
 
-        aiScript.search.searchingForPlayer = true;
-
-        timer = aiScript.searchStateSettings.searchStateTime;
-
-        aISearchMethod = System.Enum.GetName(typeof(SearchMethod), aiScript.searchStateSettings.searchMethod);
+            aISearchMethod = System.Enum.GetName(typeof(SearchMethod), aiScript.searchStateSettings.searchMethod);
+        }
 
         return;
     }
@@ -56,13 +62,14 @@ public class SearchState : BaseStateClass
             aiScript.SwitchStates(aiScript.playerDetected);
         }
 
-        if (heardSomething)
+        if (aiScript.searchStateSettings.heardSomething)
         {
             SearchNoiseLocation();
         }
 
         if (searchingForPlayer)
         {
+            Debug.Log("In Searching for Player statement");
             switch (aISearchMethod)
             {
                 case "SearchInPlace":
@@ -98,11 +105,11 @@ public class SearchState : BaseStateClass
    
     public void SearchNoiseLocation()
     {
-        Debug.Log("Searching Random Point in Range");
+        Debug.Log("Searching Location of Noise");
 
         aiScript.agent.destination = detectedLocation;
 
-        if(Vector3.Distance(aiScript.transform.position, detectedLocation) <= 1)
+        if(Vector3.Distance(aiScript.transform.position, detectedLocation) <= 0f)
         {
             aiScript.agent.isStopped = true;
 
@@ -110,6 +117,13 @@ public class SearchState : BaseStateClass
 
             if (noiseTimer <= 0)
             {
+                aiScript.searchStateSettings.alreadyHeardSomething = true;
+
+                aiScript.searchStateSettings.heardSomething = false;
+
+                
+
+                Debug.Log("Should Change to This");
                 aiScript.SwitchStates(aiScript.patrol);
             }
         }
