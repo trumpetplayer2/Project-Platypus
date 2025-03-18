@@ -9,6 +9,8 @@ public class PlayerDetectedState : BaseStateClass
 
     string aIResponse;
 
+    string triggerResponse;
+
     public PlayerDetectedState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -20,7 +22,9 @@ public class PlayerDetectedState : BaseStateClass
 
         playerTarget = aiScript.searchFunctionSettings.playerObj == null ? null : aiScript.searchFunctionSettings.playerObj;
 
-        aIResponse = System.Enum.GetName(typeof(StateMachineInfo.PlayerDetectedSettings.AIResponse), aiScript.playerDetectedSettings.SetPlayerResponse);
+        aIResponse = System.Enum.GetName(typeof(AIResponse), aiScript.playerDetectedSettings.setAIResponse);
+
+        triggerResponse = System.Enum.GetName(typeof(TriggeredResponse), aiScript.playerDetectedSettings.setAITriggerResponse);
 
         return;
         
@@ -28,6 +32,18 @@ public class PlayerDetectedState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
+        if (TriggerBehavior())
+        {
+            switch (triggerResponse)
+            {
+                case "Chase":
+                    { 
+                        aiScript.SwitchStates(aiScript.chase);
+                        break;
+                    }
+            }
+        }
+
         switch (aIResponse)
         {
             case "Chase":
@@ -64,5 +80,19 @@ public class PlayerDetectedState : BaseStateClass
         OnExitState();
 
         return;
+    }
+
+    public bool TriggerBehavior()
+    {
+        if(aiScript.playerDetectedSettings.setAITriggerResponse == TriggeredResponse.None)
+        {
+            return false;
+        }
+        else
+        {
+            Debug.Log("Behavior is triggered for now");
+            return true;
+        }
+        
     }
 }

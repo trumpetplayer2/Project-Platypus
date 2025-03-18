@@ -43,7 +43,7 @@ public class SearchState : BaseStateClass
 
         timer = aiScript.searchStateSettings.searchStateTime;
 
-        aISearchMethod = System.Enum.GetName(typeof(StateMachineInfo.SearchStateSettings.SearchMethod), aiScript.searchStateSettings.searchMethod);
+        aISearchMethod = System.Enum.GetName(typeof(SearchMethod), aiScript.searchStateSettings.searchMethod);
 
         return;
     }
