@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4351201893906838128}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AllignLoc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8968459018217517433}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 5244382687031886947}
   - component: {fileID: 4419058527872933337}
   - component: {fileID: 1541829794538892628}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 536454867265187807}
   - component: {fileID: 8200490380372953943}
   - component: {fileID: 265118579416089676}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,6 +246,8 @@ MonoBehaviour:
   alignLocation: {fileID: 4351201893906838128}
   alignTarget: {fileID: 0}
   type: 3
+  minHeight: -100
+  respawnPoint: {x: 0, y: 0, z: 0}
   holdable: 1
 --- !u!135 &265118579416089676
 SphereCollider:

@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 6923249421380632221}
   - component: {fileID: 5088620138293672281}
   - component: {fileID: 6460195471408550642}
-  - component: {fileID: 650500189057401969}
   m_Layer: 0
   m_Name: Dig Spot
   m_TagString: Untagged
@@ -38,6 +37,7 @@ Transform:
   m_Children:
   - {fileID: 8975916059188603702}
   - {fileID: 6396058834888768810}
+  - {fileID: 1502098435936138552}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5334611245074523875
@@ -167,13 +167,45 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &650500189057401969
+--- !u!1 &3629270622832600055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1502098435936138552}
+  - component: {fileID: 8644924028982754260}
+  m_Layer: 10
+  m_Name: Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1502098435936138552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3629270622832600055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2407078002223154263}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8644924028982754260
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2643466098819436675}
+  m_GameObject: {fileID: 3629270622832600055}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -338,6 +370,8 @@ MonoBehaviour:
   alignLocation: {fileID: 6396058834888768810}
   alignTarget: {fileID: 0}
   type: 0
+  minHeight: -100
+  respawnPoint: {x: 0, y: 0, z: 0}
   holdable: 0
 --- !u!135 &1562069916843629636
 SphereCollider:
