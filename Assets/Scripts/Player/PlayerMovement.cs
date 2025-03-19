@@ -231,7 +231,7 @@ namespace tp2
                     cameraSettings.followMode = cameraMode.Locked;
                     break;
                 case cameraMode.Locked:
-                    cameraSettings.followMode = cameraMode.Unlocked;
+                    cameraSettings.followMode = cameraMode.FreeCam;
                     break;
                 case cameraMode.Unlocked:
                     cameraSettings.followMode = cameraMode.FreeCam;

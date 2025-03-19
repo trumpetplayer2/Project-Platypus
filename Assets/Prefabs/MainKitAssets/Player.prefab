@@ -188,8 +188,8 @@ MonoBehaviour:
     animator: {fileID: 967583675391815917}
   speed:
     baseSpeed: 7
-    runSpeedMult: 1.05
-    waterSpeedMult: -0.4
+    runSpeedMult: 1.01
+    waterSpeedMult: 1.025
     gravity: 1
     slideSpeed: 10
     terminalVelocity: 0.5
