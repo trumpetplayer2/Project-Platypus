@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using tp2;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerDetectedState : BaseStateClass
 {
-    TargetScript playerTarget;
+   
 
     string aIResponse;
 
@@ -20,8 +21,6 @@ public class PlayerDetectedState : BaseStateClass
     {
         Debug.Log("Entering Player Detected State");
 
-        playerTarget = aiScript.searchFunctionSettings.playerObj == null ? null : aiScript.searchFunctionSettings.playerObj;
-
         aIResponse = System.Enum.GetName(typeof(AIResponse), aiScript.playerDetectedSettings.setAIResponse);
 
         triggerResponse = System.Enum.GetName(typeof(TriggeredResponse), aiScript.playerDetectedSettings.setAITriggerResponse);
@@ -32,21 +31,25 @@ public class PlayerDetectedState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-      
-           
-
-        switch (aIResponse)
+        if (aiScript.playerDetectedSettings.TriggerDetected)
         {
-            case "Chase":
-                {
-                    aiScript.SwitchStates(aiScript.chase);
-                    break;
-                }
-            case "Observe":
-                {
-                    aiScript.SwitchStates(aiScript.observe); break;
-                }
+            TriggerBehavior();
+        }
+        else if(aiScript.playerDetectedSettings.TriggerDetected || aiScript.playerDetectedSettings.setAITriggerResponse == TriggeredResponse.None)
+        {
+            switch (aIResponse)
+            {
+                case "Chase":
+                    {
+                        aiScript.SwitchStates(StateMachineEnum.Chase);
+                        break;
+                    }
+                case "Observe":
+                    {
+                        aiScript.SwitchStates(StateMachineEnum.Observe); break;
+                    }
 
+            }
         }
 
         return;
@@ -56,7 +59,7 @@ public class PlayerDetectedState : BaseStateClass
     {
         Debug.Log("Exiting Player Detected State");
 
-        playerTarget = null;
+       
 
         
         return;
@@ -75,20 +78,13 @@ public class PlayerDetectedState : BaseStateClass
 
     public void TriggerBehavior()
     {
-        if (aiScript.searchFunctionSettings.playerObj == null)
-            return;
-
+        aiScript.searchFunctionSettings.playerObj = PlayerMovement.instance.GetComponent<TargetScript>();
 
         switch (triggerResponse)
         {
-            case "None":
-                {
-                    break;
-                }
-
             case "Chase":
                 {
-                    aiScript.SwitchStates(aiScript.chase);
+                    aiScript.SwitchStates(StateMachineEnum.Chase);
                     break;
                 }
         }

@@ -58,7 +58,7 @@ public class InteractState : BaseStateClass
         //Debug.Log("interact functionality");
         if(aiScript.SearchForTargets() == DetectedType.Player)
         {
-            aiScript.SwitchStates(aiScript.playerDetected);
+            aiScript.SwitchStates(StateMachineEnum.PlayerDetected);
             return;
         }
 
@@ -95,7 +95,7 @@ public class InteractState : BaseStateClass
 
             currentTarget.TargetInfo.isActive = false;
 
-            aiScript.SwitchStates(aiScript.idle);
+            aiScript.SwitchStates(StateMachineEnum.Idle);
 
             return;
         }

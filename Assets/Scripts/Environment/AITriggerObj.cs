@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class AITriggerObj : MonoBehaviour
 {
+
+    
     public float radius;
 
     Collider[] colliders;
@@ -14,6 +16,16 @@ public class AITriggerObj : MonoBehaviour
 
     int items;
 
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
     private void Awake()
     {
         
@@ -21,23 +33,19 @@ public class AITriggerObj : MonoBehaviour
 
     public void CheckAreaForAI()
     {
+        Debug.Log("Registered Hit");
+        
         items = Physics.OverlapSphereNonAlloc(this.transform.position, radius, colliders, colliderMask);
 
         for(int i = 0; i < items; i++)
         {
             if (colliders[i].TryGetComponent<AIBase>(out AIBase aI))
             {
+                Debug.Log("Found AI");
                 aI.playerDetected.TriggerBehavior();
-
-              
             }
 
-            //don't like doing this, there has to be a better way
-            if (colliders[i].CompareTag("Player") && colliders[i].TryGetComponent<TargetScript>(out TargetScript aTarget))
-            {
-                aI.searchFunctionSettings.playerObj = aTarget;
-            }
-
+          
         }
     }
 }

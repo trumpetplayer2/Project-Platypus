@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
+
 public enum DetectedType
 {
     None,
@@ -15,12 +16,14 @@ public enum DetectedType
 
 public enum StateMachineEnum
 {
+    Initial,
     Idle,
     Patrol,
     Interact,
     Chase,
     Search,
-    Observe
+    Observe,
+    PlayerDetected
 }
 
 public enum ChaseSpeciality
@@ -122,9 +125,8 @@ namespace StateMachineInfo
     [System.Serializable]
     public class PlayerDetectedSettings
     {
-       
 
-        public bool playerDoingSomething;
+        public bool TriggerDetected;
 
         public AIResponse setAIResponse;
 
@@ -158,6 +160,8 @@ namespace StateMachineInfo
  
     public class AIBase : MonoBehaviour
     {
+        //public static event Action<Vector3> sendTo
+        
        [ReadOnly] public StateMachineEnum stateMachineEnum;
 
         #region StateSettings
@@ -273,7 +277,7 @@ namespace StateMachineInfo
             {
                 searchStateSettings.hearingCooldownTime += Time.deltaTime;
 
-                if(searchStateSettings.hearingCooldownTime == searchStateSettings.hearingCooldown)
+                if(searchStateSettings.hearingCooldownTime >= searchStateSettings.hearingCooldown)
                 {
                     searchStateSettings.hearingCooldownTime = 0;
 
@@ -283,7 +287,7 @@ namespace StateMachineInfo
 
         }
 
-        public void SwitchStates(BaseStateClass aNextState)
+        public void SwitchStates(StateMachineEnum aNextState)
         {
             if (switchCooldown)
             {
@@ -292,14 +296,53 @@ namespace StateMachineInfo
             }
 
             Debug.Log("New State Decision");
-            if (aNextState == currActiveState)
+
+            BaseStateClass nextStateInput = null;
+
+            stateMachineEnum = aNextState;
+
+            switch (aNextState)
+            {
+                case StateMachineEnum.Idle:
+                    {
+                        nextStateInput = idle;
+                        break;
+                    }
+                case StateMachineEnum.Patrol:
+                    {
+                        nextStateInput = patrol; break;
+                        
+                    }
+                case StateMachineEnum.Interact:
+                    {
+                        nextStateInput = interact; break;
+                    }
+                case StateMachineEnum.Chase:
+                    {
+                        nextStateInput = chase; break;
+                    }
+                case StateMachineEnum.Search:
+                    {
+                        nextStateInput = search; break;
+                    }
+                case StateMachineEnum.Observe:
+                    {
+                        nextStateInput = observe; break;
+                    }
+                case StateMachineEnum.PlayerDetected:
+                    {
+                        nextStateInput = playerDetected; break;
+                    }
+            }
+
+            if (currActiveState == nextStateInput)
             {
                 return;
             }
 
-            currActiveState.ChangeState(aNextState);
+            currActiveState.ChangeState(nextStateInput);
 
-            currActiveState = aNextState;
+            currActiveState = nextStateInput;
 
             switchCooldown = true;
 
@@ -386,15 +429,26 @@ namespace StateMachineInfo
 
         public void HeardTargetFunction(Vector3 soundLocation) 
         {
-            
+            if (searchStateSettings.alreadyHeardSomething)
+            {
+                return;
+            }
+
             searchStateSettings.noiseLocation = soundLocation;
 
             searchStateSettings.heardSomething = true;
 
-            SwitchStates(search);
+            SwitchStates(StateMachineEnum.Search);
 
                 
             
+        }
+
+        public void TriggerBehavior()
+        {
+            playerDetectedSettings.TriggerDetected = true;
+
+            SwitchStates(StateMachineEnum.PlayerDetected);
         }
 
     }

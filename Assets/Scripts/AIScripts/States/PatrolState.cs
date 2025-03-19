@@ -53,13 +53,13 @@ public class PatrolState : BaseStateClass
         if (aiScript.SearchForTargets() == DetectedType.Object)
         {
             Debug.Log("Switching to Interact");
-            aiScript.SwitchStates(aiScript.interact);
+            aiScript.SwitchStates(StateMachineEnum.Interact);
             return;
         }
         else if(aiScript.SearchForTargets() == DetectedType.Player)
         {
             Debug.Log("Switching to Player Detected");
-            aiScript.SwitchStates(aiScript.playerDetected);
+            aiScript.SwitchStates(StateMachineEnum.PlayerDetected);
 
             return;
         }

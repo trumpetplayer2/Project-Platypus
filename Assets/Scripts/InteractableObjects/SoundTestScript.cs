@@ -21,11 +21,15 @@ public class SoundTestScript : MonoBehaviour
 
     public LayerMask targetMasks;
 
+    Material material;
+
     void Awake()
     {
         soundColliders = new Collider[3];
 
         timer = timerValue;
+
+        material = GetComponent<Material>();
     }
 
     // Start is called before the first frame update
@@ -39,7 +43,11 @@ public class SoundTestScript : MonoBehaviour
     {
         timer -= Time.deltaTime;
 
+        material.color = Color.white;
+
         if (timer <= 0) {
+
+            material.color = Color.red;
 
             heardThis = Physics.OverlapSphereNonAlloc(this.transform.position, radius, soundColliders, targetMasks);
 

@@ -27,7 +27,7 @@ public class SearchState : BaseStateClass
 
         if(aiScript.searchStateSettings.alreadyHeardSomething)
         {
-           aiScript.SwitchStates(aiScript.patrol);
+           aiScript.SwitchStates(StateMachineEnum.Patrol);
         }
 
         if (aiScript.searchStateSettings.heardSomething)
@@ -59,7 +59,7 @@ public class SearchState : BaseStateClass
         if (aiScript.SearchForTargets() == DetectedType.Player)
         {
             Debug.Log("Player Found Again");
-            aiScript.SwitchStates(aiScript.playerDetected);
+            aiScript.SwitchStates(StateMachineEnum.PlayerDetected);
         }
 
         if (aiScript.searchStateSettings.heardSomething)
@@ -96,7 +96,7 @@ public class SearchState : BaseStateClass
         {
             Debug.Log("Resuming Patrol State from Search State");
 
-            aiScript.SwitchStates(aiScript.patrol);
+            aiScript.SwitchStates(StateMachineEnum.Patrol);
             return;
         }
 
@@ -109,9 +109,12 @@ public class SearchState : BaseStateClass
 
         aiScript.agent.destination = detectedLocation;
 
-        if(Vector3.Distance(aiScript.transform.position, detectedLocation) <= 0f)
+        if(Vector3.Distance(aiScript.transform.position, detectedLocation) <= 0.5)
         {
+            
             aiScript.agent.isStopped = true;
+
+            Debug.Log("Am I here");
 
             noiseTimer -= Time.deltaTime;
 
@@ -124,7 +127,7 @@ public class SearchState : BaseStateClass
                 
 
                 Debug.Log("Should Change to This");
-                aiScript.SwitchStates(aiScript.patrol);
+                aiScript.SwitchStates(StateMachineEnum.Patrol);
             }
         }
 
