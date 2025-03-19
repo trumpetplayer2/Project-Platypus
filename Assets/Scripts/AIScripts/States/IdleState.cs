@@ -47,19 +47,19 @@ public class IdleState : BaseStateClass
         if(timer <= 0)
         {
             Debug.Log("Switching to Patrol");
-            aiScript.SwitchStates(aiScript.patrol);
+            aiScript.SwitchStates(StateMachineEnum.Patrol);
         }
 
         if (aiScript.SearchForTargets() == DetectedType.Object)
         {
             Debug.Log("Switching to Interact");
-            aiScript.SwitchStates(aiScript.interact);
+            aiScript.SwitchStates(StateMachineEnum.Interact);
             return;
         }
         else if(aiScript.SearchForTargets() == DetectedType.Player)
         {
             Debug.Log("Switchting to Player Detected");
-            aiScript.SwitchStates(aiScript.playerDetected);
+            aiScript.SwitchStates(StateMachineEnum.PlayerDetected);
             return;
         }
 

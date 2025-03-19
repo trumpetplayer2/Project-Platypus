@@ -72,7 +72,7 @@ public class ChaseState : BaseStateClass
         {
             Debug.Log("Lost Target");
 
-            aiScript.SwitchStates(aiScript.search);
+            aiScript.SwitchStates(StateMachineEnum.Search);
 
         }
 

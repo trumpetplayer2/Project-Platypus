@@ -34,7 +34,7 @@ public class InitialState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        aiScript.SwitchStates(aiScript.idle);
+        aiScript.SwitchStates(StateMachineEnum.Idle);
         return;
     }
 

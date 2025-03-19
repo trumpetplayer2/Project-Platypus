@@ -213,9 +213,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3579162235559926780, guid: ea685bb404d98554a812a682de95466a, type: 3}
+      propertyPath: m_Size
+      value: 0.99999475
+      objectReference: {fileID: 0}
     - target: {fileID: 3619048597316285125, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000031471252
+      value: 0.00005539675
+      objectReference: {fileID: 0}
+    - target: {fileID: 6157421517880975590, guid: ea685bb404d98554a812a682de95466a, type: 3}
+      propertyPath: checkpoint.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6157421517880975590, guid: ea685bb404d98554a812a682de95466a, type: 3}
+      propertyPath: checkpoint.y
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6157421517880975590, guid: ea685bb404d98554a812a682de95466a, type: 3}
+      propertyPath: checkpoint.z
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7231030682238623299, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -360,6 +376,14 @@ PrefabInstance:
       propertyPath: cSettings.playerTracker
       value: 
       objectReference: {fileID: 7215663444279273688}
+    - target: {fileID: 1549921472727175950, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
+      propertyPath: cSettings.blocked.m_Bits
+      value: 129
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549921472727175950, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
+      propertyPath: cSettings.minLocations.y
+      value: -6
+      objectReference: {fileID: 0}
     - target: {fileID: 2202592486761563797, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -403,6 +427,10 @@ PrefabInstance:
     - target: {fileID: 3222324189769709502, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442920302222290935, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 959
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

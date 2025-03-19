@@ -56,7 +56,7 @@ public class ObserveState : BaseStateClass
         if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.observeSettings.maxObserveDistance)
             {
                 Debug.Log("Player out of range");
-                aiScript.SwitchStates(aiScript.search);
+                aiScript.SwitchStates(StateMachineEnum.Search);
                 return;
             }
 
