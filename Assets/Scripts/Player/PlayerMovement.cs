@@ -104,6 +104,15 @@ namespace tp2
             Vector3 movement = new Vector3(forward, 0, -strafe).normalized;
             //Create a variable angle for later use
             float angle = 0;
+            if (held)
+            {
+                childSettings.animator.SetBool("Grabbed", true);
+                return;
+            }
+            else
+            {
+                childSettings.animator.SetBool("Grabbed", false);
+            }
             //Different Camera Modes!
             switch (cameraSettings.followMode)
             {
@@ -137,15 +146,6 @@ namespace tp2
                     angle = CameraFollow.instance.getAngle() + 90;
                     movement = Quaternion.AngleAxis(angle, Vector3.up) * movement;
                     break;
-            }
-            if (held)
-            {
-                childSettings.animator.SetBool("Grabbed", true);
-                return;
-            }
-            else
-            {
-                childSettings.animator.SetBool("Grabbed", false);
             }
             childSettings.animator.SetBool("Walking", movement.magnitude > 0);
             float mult = 1;
