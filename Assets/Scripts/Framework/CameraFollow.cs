@@ -154,16 +154,6 @@ namespace tp2
                 Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, cSettings.smoothSpeed);
                 //transform.position = smoothedPosition;
                 body.velocity = (smoothedPosition - transform.position)/Time.deltaTime;
-                Ray ray = new Ray(PlayerMovement.instance.transform.position, transform.position - PlayerMovement.instance.transform.position);
-                
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, distance, cSettings.blocked))
-                {
-                    if (!(hitInfo.collider.gameObject.tag.ToLower().Equals("player") || hitInfo.collider.gameObject.tag.ToLower().Equals("maincamera")))
-                    {
-                        transform.position = new Vector3(hitInfo.point.x, desiredPosition.y, hitInfo.point.z);
-                        body.velocity = Vector3.zero;
-                    }
-                }
             }
             cSettings.rotationOffset.y = angle-180;
 
@@ -175,6 +165,16 @@ namespace tp2
         private void Update()
         {
             if (GameManager.instance.isPaused) return;
+            Ray ray = new Ray(PlayerMovement.instance.transform.position, transform.position - PlayerMovement.instance.transform.position);
+
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, distance, cSettings.blocked))
+            {
+                if (!(hitInfo.collider.gameObject.tag.ToLower().Equals("player") || hitInfo.collider.gameObject.tag.ToLower().Equals("maincamera")))
+                {
+                    transform.position = new Vector3(hitInfo.point.x, locationOffset.y, hitInfo.point.z);
+                    body.velocity = Vector3.zero;
+                }
+            }
             if (shakeDuration > 0)
             {
                 transform.localPosition = transform.position + Random.insideUnitSphere * shakeAmount;
