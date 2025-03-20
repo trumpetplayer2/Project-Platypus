@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PlayerDetectedState : BaseStateClass
 {
-   
 
     string aIResponse;
 
@@ -33,10 +32,13 @@ public class PlayerDetectedState : BaseStateClass
     {
         if (aiScript.playerDetectedSettings.TriggerDetected)
         {
+            Debug.Log("Was AI trigger Detected");
             TriggerBehavior();
         }
-        else if(aiScript.playerDetectedSettings.TriggerDetected || aiScript.playerDetectedSettings.setAITriggerResponse == TriggeredResponse.None)
+        else if(!aiScript.playerDetectedSettings.TriggerDetected || aiScript.playerDetectedSettings.setAITriggerResponse == TriggeredResponse.None)
         {
+            Debug.Log("Normal AI Response");
+
             switch (aIResponse)
             {
                 case "Chase":
@@ -59,9 +61,6 @@ public class PlayerDetectedState : BaseStateClass
     {
         Debug.Log("Exiting Player Detected State");
 
-       
-
-        
         return;
     }
 
@@ -78,6 +77,7 @@ public class PlayerDetectedState : BaseStateClass
 
     public void TriggerBehavior()
     {
+        Debug.Log("Trigger Behavior Function");
         aiScript.searchFunctionSettings.playerObj = PlayerMovement.instance.GetComponent<TargetScript>();
 
         switch (triggerResponse)

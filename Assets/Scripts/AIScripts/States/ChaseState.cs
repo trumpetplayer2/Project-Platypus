@@ -14,6 +14,12 @@ public class ChaseState : BaseStateClass
 
     float catchTimer;
 
+    CharacterController playerController;
+
+    Transform playerTransform;
+
+    bool playerGrabbed;
+
     public ChaseState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -29,6 +35,10 @@ public class ChaseState : BaseStateClass
         losingTimer = aiScript.chaseSettings.losingTargetTime;
 
         catchTimer = aiScript.chaseSettings.catchTimerTimer;
+
+        playerController = chasingTarget.GetComponent<CharacterController>();
+
+        playerTransform = chasingTarget.transform;
 
         aiScript.agent.isStopped = false;
 
@@ -103,18 +113,38 @@ public class ChaseState : BaseStateClass
 
             case ChaseSpeciality.Push :
                 {
-                    Debug.Log("Pushing target");
+                    PushFunction();
                     break;
                 }
             case ChaseSpeciality.Grab :
                 {
-                    Debug.Log("Grabbing Target");
+                    GrabFunction();
                     break;
                 }
         }
 
         Debug.Log("Caught Target");
 
+    }
+
+    private void GrabFunction()
+    {
+        playerTransform.parent = aiScript.transform;
+
+
+
+        if (playerGrabbed)
+        {
+
+        }
+
+    }
+
+    private void PushFunction()
+    {
+        
+
+       
     }
 
     public override void OnExitState()

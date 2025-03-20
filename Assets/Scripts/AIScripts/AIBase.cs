@@ -88,7 +88,7 @@ namespace StateMachineInfo
 
         public float catchTimerTimer;
 
-       
+        public Transform platypusGrabbedLocation;
 
         public ChaseSpeciality chaseSpeciality;
     }
@@ -126,7 +126,7 @@ namespace StateMachineInfo
     public class PlayerDetectedSettings
     {
 
-        public bool TriggerDetected;
+        [ReadOnly] public bool TriggerDetected;
 
         public AIResponse setAIResponse;
 

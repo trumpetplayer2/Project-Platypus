@@ -28,7 +28,7 @@ public class AITriggerObj : MonoBehaviour
 
     private void Awake()
     {
-        
+        colliders = new Collider[3];
     }
 
     public void CheckAreaForAI()
@@ -37,12 +37,16 @@ public class AITriggerObj : MonoBehaviour
         
         items = Physics.OverlapSphereNonAlloc(this.transform.position, radius, colliders, colliderMask);
 
+        Debug.Log("Overlap Sphere activated");
+
         for(int i = 0; i < items; i++)
         {
+            Debug.Log("Am I in For loop");
+
             if (colliders[i].TryGetComponent<AIBase>(out AIBase aI))
             {
                 Debug.Log("Found AI");
-                aI.playerDetected.TriggerBehavior();
+                aI.TriggerBehavior();
             }
 
           
