@@ -35,6 +35,10 @@ public class BurriedObject : Diggable
                 item.holdable = true;
                 item.setSpawn(item.transform);
             }
+            if(treasure.TryGetComponent<Rigidbody>(out Rigidbody rigidbody))
+            {
+                rigidbody.useGravity = true;
+            }
             if(treasure.layer == 6)
             {
                 treasure.layer = 0;
