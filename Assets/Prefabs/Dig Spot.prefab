@@ -369,7 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alignLocation: {fileID: 6396058834888768810}
   alignTarget: {fileID: 0}
-  type: 0
+  type: 1
   minHeight: -100
   respawnPoint: {x: 0, y: 0, z: 0}
   holdable: 0
