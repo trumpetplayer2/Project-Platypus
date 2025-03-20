@@ -215,11 +215,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3579162235559926780, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: m_Size
-      value: 0.99999475
+      value: 0.9999973
       objectReference: {fileID: 0}
     - target: {fileID: 3619048597316285125, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00005539675
+      value: -0.000016956563
       objectReference: {fileID: 0}
     - target: {fileID: 6157421517880975590, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: checkpoint.x
@@ -427,10 +427,6 @@ PrefabInstance:
     - target: {fileID: 3222324189769709502, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442920302222290935, guid: 7edf4cfc36fd7d8408fdc41039e2b1b4, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 959
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
