@@ -82,6 +82,7 @@ namespace tp2
         {
             if (GameManager.instance.isPaused) return;
             DecrementCooldown();
+            if (PlayerMovement.instance.held) return;
             if (Input.GetButtonDown(sense.SenseInputName))
             {
                 if (canSense)
