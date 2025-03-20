@@ -6,7 +6,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-
+/// <summary>
+/// The type of object that is detected and how to react to it
+/// </summary>
 public enum DetectedType
 {
     None,
@@ -14,6 +16,9 @@ public enum DetectedType
     Object
 }
 
+/// <summary>
+/// The number of states that can be the current state
+/// </summary>
 public enum StateMachineEnum
 {
     Initial,
@@ -26,17 +31,9 @@ public enum StateMachineEnum
     PlayerDetected
 }
 
-public enum ChaseSpeciality
-{
-    Push,
-    Grab
-}
-
-public enum SearchMethod
-{
-    SearchInPlace
-}
-
+/// <summary>
+/// What the AI does upon seeing the player
+/// </summary>
 public enum AIResponse
 {
     Chase,
@@ -44,6 +41,10 @@ public enum AIResponse
 
 }
 
+/// <summary>
+/// What the AI does when the player shoots an object within range.
+/// </summary>
+/// 
 public enum TriggeredResponse
 {
     None,
@@ -52,7 +53,6 @@ public enum TriggeredResponse
 
 namespace StateMachineInfo
 {
-
     [System.Serializable]
     public class IdleSettings
     {
@@ -66,22 +66,38 @@ namespace StateMachineInfo
 
         [ReadOnly] public Transform CurrPatrolDestination = null;
 
+        /// <summary>
+        /// at what distance does the AI stop at a destination
+        /// </summary>
         public float patrolDistanceToDestination;
     }
 
     [System.Serializable]
     public class InteractSettings
     {
+        /// <summary>
+        /// Distance to stop at interactable target
+        /// </summary>
         public float distanceBetweenTarget;
     }
 
     [System.Serializable]
     public class ChaseSettings
     {
+        /// <summary>
+        /// Adds to chase speed of AI instance
+        /// </summary>
         public float chaseSpeedIncrease;
 
+        /// <summary>
+        /// The distance for the AI to start losing the player
+        /// </summary>
         public float chaseMaxDistance;
 
+        /// <summary>
+        /// the distance for the AI to start catching the player
+        /// </summary>
+        
         public float chaseMinDistance;
 
         public float losingTargetTime;
@@ -90,7 +106,9 @@ namespace StateMachineInfo
 
         public GameObject playerGrabbedPosition;
 
-        public ChaseSpeciality chaseSpeciality;
+        public CheckpointTrigger grabbedPlayerLocation;
+
+        public float catchCooldown;
     }
 
     [System.Serializable]
@@ -107,7 +125,7 @@ namespace StateMachineInfo
         public float searchStateTime;
 
        
-        public SearchMethod searchMethod;
+        
 
         [ReadOnly] public Vector3 noiseLocation;
 
@@ -132,7 +150,7 @@ namespace StateMachineInfo
 
         public TriggeredResponse setAITriggerResponse;
 
-        public SCTriggerResponse aITriggerObj;
+
     }
 
     [System.Serializable]

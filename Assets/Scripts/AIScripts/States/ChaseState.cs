@@ -15,11 +15,10 @@ public class ChaseState : BaseStateClass
 
     float catchTimer;
 
-    CharacterController playerController;
+  
+    bool catchCoolingDown = false;
 
-    Transform playerTransform;
-
-    bool playerGrabbed;
+    float timer = 0;
 
     public ChaseState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
@@ -37,7 +36,7 @@ public class ChaseState : BaseStateClass
 
         catchTimer = aiScript.chaseSettings.catchTimerTimer;
 
-        playerController = chasingTarget.GetComponent<CharacterController>();
+       
 
         
 
@@ -48,11 +47,7 @@ public class ChaseState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-        if (playerGrabbed)
-        {
-            aiScript.agent.isStopped = true;
-            return;
-        }
+      
 
         aiScript.agent.destination = chasingTarget.transform.position;
 
@@ -68,6 +63,7 @@ public class ChaseState : BaseStateClass
 
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) < aiScript.chaseSettings.chaseMinDistance)
             {
+                
                 Debug.Log("Calling Catching Target");
 
                 CatchTarget();
@@ -76,7 +72,20 @@ public class ChaseState : BaseStateClass
             }
 
        
+            if(catchCoolingDown)
+            {
+                Debug.Log("catch Cooling Down");
+                
+                aiScript.agent.isStopped = false;
 
+                timer += Time.deltaTime;
+
+                if(timer >= aiScript.chaseSettings.catchCooldown)
+                {
+                    catchCoolingDown = false;
+                    timer = 0;
+                }
+            }
 
         return;
         
@@ -102,6 +111,7 @@ public class ChaseState : BaseStateClass
 
     private void CatchTarget()
     {
+        
         Debug.Log("Can Catch Target");
 
         catchTimer -= Time.deltaTime;
@@ -109,53 +119,58 @@ public class ChaseState : BaseStateClass
         if(catchTimer <= 0)
         {
             Debug.Log("Attempting to Catch Target");
-            CaughtTarget();
+           
+            GrabFunction();
+
+            
+            return;
             
         }
 
         return;
     }
 
-    public void CaughtTarget()
-    {
-        switch (aiScript.chaseSettings.chaseSpeciality) {
-
-
-            case ChaseSpeciality.Push :
-                {
-                    PushFunction();
-                    break;
-                }
-            case ChaseSpeciality.Grab :
-                {
-                    GrabFunction();
-                    break;
-                }
-        }
-
-        Debug.Log("Caught Target");
-
-    }
+   
 
     private void GrabFunction()
     {
+        if(catchCoolingDown)
+        {
+            return;
+        }
+
+        Debug.Log("Grab Function");
+
         if(chasingTarget.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
             player.held = true;
             player.transform.position = aiScript.chaseSettings.playerGrabbedPosition.transform.position;
             player.transform.parent = aiScript.transform;
 
-            playerGrabbed = true;
+
+            Debug.Log("Taking player to location");
+
+            aiScript.agent.destination = aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition;
+
+            if (Vector3.Distance(aiScript.transform.position, aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition) < 6f)
+            {
+                aiScript.agent.isStopped = true;
+
+                Debug.Log("Am I here?");
+                player.held = false;
+
+                catchTimer = aiScript.chaseSettings.catchTimerTimer;
+
+                player.transform.parent = null;
+
+                catchCoolingDown = true;
+
+            }
         }
 
     }
 
-    private void PushFunction()
-    {
-
-
-    }
-
+   
     public override void OnExitState()
     {
         Debug.Log("Exiting Chase State");

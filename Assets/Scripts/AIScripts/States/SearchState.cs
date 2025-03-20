@@ -48,7 +48,7 @@ public class SearchState : BaseStateClass
 
             timer = aiScript.searchStateSettings.searchStateTime;
 
-            aISearchMethod = System.Enum.GetName(typeof(SearchMethod), aiScript.searchStateSettings.searchMethod);
+           
         }
 
         return;
@@ -67,20 +67,7 @@ public class SearchState : BaseStateClass
             SearchNoiseLocation();
         }
 
-        if (searchingForPlayer)
-        {
-            Debug.Log("In Searching for Player statement");
-            switch (aISearchMethod)
-            {
-                case "SearchInPlace":
-                    {
-                        SearchInPlaceFunction();
-                        break;
-                    }
-             
-            }
-            
-        }
+        SearchInPlaceFunction();
 
         return;
     }
