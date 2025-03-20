@@ -1559,7 +1559,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1744393677674359303, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00013560375
+      value: 0.00003555211
       objectReference: {fileID: 0}
     - target: {fileID: 1992728896572015422, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_Size
@@ -3371,7 +3371,7 @@ Transform:
   m_GameObject: {fileID: 1773044533}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.016, y: 0, z: 0.712}
+  m_LocalPosition: {x: -0.016, y: 0.602, z: 1.073}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3598,6 +3598,10 @@ PrefabInstance:
       propertyPath: searchStateSettings.heardNoiseTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
+      propertyPath: chaseSettings.playerGrabbedPosition
+      value: 
+      objectReference: {fileID: 1773044533}
     - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
       propertyPath: searchFunctionSettings.maxColliders
       value: 5

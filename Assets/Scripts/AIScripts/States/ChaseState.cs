@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices.WindowsRuntime;
+using tp2;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ public class ChaseState : BaseStateClass
 
         playerController = chasingTarget.GetComponent<CharacterController>();
 
-        playerTransform = chasingTarget.transform;
+        
 
         aiScript.agent.isStopped = false;
 
@@ -47,7 +48,13 @@ public class ChaseState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
-            aiScript.agent.destination = chasingTarget.transform.position;
+        if (playerGrabbed)
+        {
+            aiScript.agent.isStopped = true;
+            return;
+        }
+
+        aiScript.agent.destination = chasingTarget.transform.position;
 
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) > aiScript.chaseSettings.chaseMaxDistance)
             {
@@ -67,6 +74,9 @@ public class ChaseState : BaseStateClass
 
                 return;
             }
+
+       
+
 
         return;
         
@@ -129,22 +139,21 @@ public class ChaseState : BaseStateClass
 
     private void GrabFunction()
     {
-        playerTransform.parent = aiScript.transform;
-
-
-
-        if (playerGrabbed)
+        if(chasingTarget.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
+            player.held = true;
+            player.transform.position = aiScript.chaseSettings.playerGrabbedPosition.transform.position;
+            player.transform.parent = aiScript.transform;
 
+            playerGrabbed = true;
         }
 
     }
 
     private void PushFunction()
     {
-        
 
-       
+
     }
 
     public override void OnExitState()
