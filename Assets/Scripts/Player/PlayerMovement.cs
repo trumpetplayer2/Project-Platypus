@@ -44,6 +44,7 @@ namespace tp2
         float lastGravity = 0;
         public static PlayerMovement instance;
         public bool swimming = false;
+        public bool held = false;
         // Start is called before the first frame update
         void Start()
         {
@@ -136,6 +137,15 @@ namespace tp2
                     angle = CameraFollow.instance.getAngle() + 90;
                     movement = Quaternion.AngleAxis(angle, Vector3.up) * movement;
                     break;
+            }
+            if (held)
+            {
+                childSettings.animator.SetBool("Grabbed", true);
+                return;
+            }
+            else
+            {
+                childSettings.animator.SetBool("Grabbed", false);
             }
             childSettings.animator.SetBool("Walking", movement.magnitude > 0);
             float mult = 1;
