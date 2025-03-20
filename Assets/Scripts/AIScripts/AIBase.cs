@@ -88,7 +88,7 @@ namespace StateMachineInfo
 
         public float catchTimerTimer;
 
-        public Transform platypusGrabbedLocation;
+        public GameObject playerGrabbedPosition;
 
         public ChaseSpeciality chaseSpeciality;
     }
