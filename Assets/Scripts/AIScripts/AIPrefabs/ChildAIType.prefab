@@ -49,6 +49,46 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
+      propertyPath: speedVal
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
+      propertyPath: chaseSettings.catchCooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
+      propertyPath: searchFunctionSettings.angle
+      value: 118
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
+      propertyPath: chaseSettings.catchTimerTimer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
+      propertyPath: chaseSettings.losingTargetTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
+      propertyPath: chaseSettings.chaseSpeedIncrease
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
+      propertyPath: searchStateSettings.heardNoiseTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
+      propertyPath: searchStateSettings.searchStateTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
+      propertyPath: interactSettings.distanceBetweenTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
+      propertyPath: patrolSettings.patrolDistanceToDestination
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.size
       value: 0
       objectReference: {fileID: 0}
