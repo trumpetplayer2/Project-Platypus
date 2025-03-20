@@ -26,11 +26,7 @@ public enum StateMachineEnum
     PlayerDetected
 }
 
-public enum ChaseSpeciality
-{
-    Push,
-    Grab
-}
+
 
 public enum SearchMethod
 {
@@ -90,7 +86,9 @@ namespace StateMachineInfo
 
         public GameObject playerGrabbedPosition;
 
-        public ChaseSpeciality chaseSpeciality;
+        public CheckpointTrigger grabbedPlayerLocation;
+
+        public float catchCooldown;
     }
 
     [System.Serializable]
@@ -132,7 +130,7 @@ namespace StateMachineInfo
 
         public TriggeredResponse setAITriggerResponse;
 
-        public SCTriggerResponse aITriggerObj;
+
     }
 
     [System.Serializable]
