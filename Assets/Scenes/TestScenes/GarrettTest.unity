@@ -1559,7 +1559,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1744393677674359303, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00003555211
+      value: 0.000055080443
       objectReference: {fileID: 0}
     - target: {fileID: 1992728896572015422, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_Size
@@ -3377,6 +3377,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6617546040873194783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778166471 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+  m_PrefabInstance: {fileID: 1243409973}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9944db4b94250c40bac6fff4a560a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1839360048
 GameObject:
   m_ObjectHideFlags: 0
@@ -3591,13 +3602,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
+      propertyPath: chaseSettings.catchCooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
       propertyPath: chaseSettings.chaseSpeciality
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
+      propertyPath: chaseSettings.randomPointRadius
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
       propertyPath: searchStateSettings.heardNoiseTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
+      propertyPath: chaseSettings.grabbedPlayerLocation
+      value: 
+      objectReference: {fileID: 1778166471}
     - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
       propertyPath: chaseSettings.playerGrabbedPosition
       value: 
@@ -3612,7 +3635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
       propertyPath: playerDetectedSettings.setAIResponse
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
       propertyPath: chaseSettings.platypusGrabbedLocation
@@ -3620,7 +3643,7 @@ PrefabInstance:
       objectReference: {fileID: 1773044534}
     - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
       propertyPath: playerDetectedSettings.setAITriggerResponse
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: e5e8481449cd2f248bd44e9390fe4271, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.size

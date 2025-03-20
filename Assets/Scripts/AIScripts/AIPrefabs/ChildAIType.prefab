@@ -48,9 +48,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4196661874630513908, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
+      propertyPath: patrolSettings.PatrolDestinations.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7595386388757771333, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
       propertyPath: m_Name
-      value: AI Variant
+      value: ChildAIType
       objectReference: {fileID: 0}
     - target: {fileID: 7595386388757771333, guid: 1b1578975e3eb504789d38b119deb0df, type: 3}
       propertyPath: m_IsActive
