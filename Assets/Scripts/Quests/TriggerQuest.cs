@@ -7,15 +7,17 @@ using UnityEngine;
 public class TriggerQuest : QuestTrigger
 {
     public QuestTriggerZone[] zones;
-    
+    bool completed = false;
     
 
     public bool getCompleted()
     {
+        if (completed) return true;
         foreach(QuestTriggerZone zone in zones)
         {
             if(!zone.completed) return false;
         }
+        completed = true;
         return true;
     }
 
@@ -27,4 +29,13 @@ public class TriggerQuest : QuestTrigger
     }
 
     public void updateCheck(){}
+
+    public void forceComplete()
+    {
+        foreach(QuestTriggerZone zone in zones)
+        {
+            zone.completed = true;
+        }
+        completed = true;
+    }
 }

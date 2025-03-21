@@ -39,4 +39,12 @@ public class ManualTriggerQuest : QuestTrigger
     {
         
     }
+
+    public void forceComplete()
+    {
+        for(int i = 0; i < completionCheck.Length; i++)
+        {
+            completionCheck[i] = true;
+        }
+    }
 }

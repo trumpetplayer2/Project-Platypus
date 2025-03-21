@@ -35,4 +35,9 @@ public class ItemQuest : QuestTrigger
     }
 
     public void updateCheck() { }
+
+    public void forceComplete()
+    {
+        completed = true;
+    }
 }

@@ -33,6 +33,7 @@ public class Quest
     public void Finish()
     {
         OnFinish?.Invoke();
+        QuestManager.instance.saveQuestData();
     }
 
     public void QuestUpdate()
@@ -96,5 +97,15 @@ public class Quest
     public int getUID()
     {
         return UniqueID;
+    }
+
+    public void forceComplete()
+    {
+        trigger.forceComplete();
+    }
+
+    public bool getCompleted()
+    {
+        return finished;
     }
 }

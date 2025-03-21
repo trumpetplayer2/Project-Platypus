@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,8 +20,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool isPaused = false;
+    public Button continueButton;
     public Image saveIcon;
     public SaveState saveState;
+    public Dictionary<int, int[]> QuestMap = new Dictionary<int, int[]>();
+    public bool reset = false;
+    public Vector3 loadCheckpoint = new Vector3(float.NaN, float.NaN, float.NaN);
 
     private void Awake()
     {
@@ -31,14 +35,22 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if (!instance.reset)
+            {
+                //Pass Quest Map
+                QuestMap = instance.QuestMap;
+                loadCheckpoint = instance.loadCheckpoint;
+            }
             Destroy(instance.gameObject);
             instance = this;
         }
         if(saveState == null)
         {
             saveState = gameObject.AddComponent<SaveState>();
-            saveState.name = "profile0";
+            saveState.profileName = "profile0";
+            saveState.loadSettings("settings");
         }
+        if (continueButton != null) continueButton.interactable = (canLoad());
     }
 
     public void toggleSavingIcon(bool isSaving)
@@ -53,5 +65,33 @@ public class GameManager : MonoBehaviour
         {
             instance = null;
         }
+    }
+
+    public void load()
+    {
+        if (!canLoad()) return;
+        reset = false;
+        saveState.load();
+    }
+
+    public void save()
+    {
+        if (saveState == null) Debug.Log("Save state was null");
+        saveState.save();
+    }
+
+    public bool canLoad()
+    {
+        return SaveManager.canLoad(saveState.profileName);
+    }
+
+    public void updateQuestData()
+    {
+        updateQuestData(QuestManager.instance.getQuestData());
+    }
+
+    void updateQuestData(KeyValuePair<int, int[]> pair)
+    {
+        QuestMap.Add(pair.Key, pair.Value);
     }
 }

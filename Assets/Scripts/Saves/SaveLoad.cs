@@ -1,24 +1,24 @@
-using JetBrains.Annotations;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+
 
 [System.Serializable]
 public sealed class saveProfile
 {
     public string name;
     public Vector3 lastCheckpoint;
-
+    public int zone = 0;
+    //Only stores completed quest. Zone:Index
+    public Dictionary<int, int[]> QuestMap;
 
     private saveProfile() { }
 
-    public saveProfile(string name)
+    public saveProfile(string name, Vector3 lastCheckpoint, int lastZone, Dictionary<int, int[]> QuestMap)
     {
         this.name = name;
-        
+        this.zone = lastZone;
+        this.lastCheckpoint = lastCheckpoint;
+        this.QuestMap = QuestMap;
     }
 }
 [System.Serializable]

@@ -10,6 +10,12 @@ public class AIStateQuest : QuestTrigger
     [SerializeField]
     public string goalStateType;
     bool completed = false;
+
+    public void forceComplete()
+    {
+        completed = true;
+    }
+
     public bool getCompleted()
     {
         return completed;
@@ -27,4 +33,6 @@ public class AIStateQuest : QuestTrigger
             completed = true;
         }
     }
+
+    
 }

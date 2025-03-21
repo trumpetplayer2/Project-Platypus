@@ -87,6 +87,10 @@ PrefabInstance:
       propertyPath: QuestListUI
       value: 
       objectReference: {fileID: 2445173193940922965}
+    - target: {fileID: 6299745339043865969, guid: 549d1f143a2118345b260c40e323504c, type: 3}
+      propertyPath: saveIcon
+      value: 
+      objectReference: {fileID: 3095932978097260829}
     - target: {fileID: 8177108668886356094, guid: 549d1f143a2118345b260c40e323504c, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -215,11 +219,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3579162235559926780, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: m_Size
-      value: 0.9999973
+      value: 0.99991083
       objectReference: {fileID: 0}
     - target: {fileID: 3619048597316285125, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000016956563
+      value: -0.0000022973452
       objectReference: {fileID: 0}
     - target: {fileID: 6157421517880975590, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: checkpoint.x
@@ -270,6 +274,17 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3095932978097260829 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 70601752297705951, guid: ea685bb404d98554a812a682de95466a, type: 3}
+  m_PrefabInstance: {fileID: 3029837642928625858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
