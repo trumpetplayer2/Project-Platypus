@@ -55,7 +55,7 @@ public class QuestManager : MonoBehaviour
         loading = false;
     }
 
-    void completeQuest(Quest q)
+    public void completeQuest(Quest q)
     {
         q.forceComplete();
     }
