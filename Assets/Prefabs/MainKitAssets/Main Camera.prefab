@@ -213,6 +213,7 @@ MonoBehaviour:
     blocked:
       serializedVersion: 2
       m_Bits: 1
+    WallJitterTolerance: 0.25
   freecam: 0
 --- !u!135 &5458006706350261738
 SphereCollider:

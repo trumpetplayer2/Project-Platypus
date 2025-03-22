@@ -84,6 +84,8 @@ public class GameManager : MonoBehaviour
     public void save()
     {
         if (saveState == null) Debug.Log("Save state was null");
+        //Don't save while loading
+        if (loadingIn) return;
         //If saving, prevent concurrent modifications
         if (saving) { Invoke("save", 1f); return; }
         saveState.save();

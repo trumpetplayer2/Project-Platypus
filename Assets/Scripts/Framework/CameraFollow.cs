@@ -32,6 +32,7 @@ namespace tp2
         public Vector3 rotationOffset;
         public float rotationSmoothSpeed = 0.1f;
         public LayerMask blocked;
+        public float WallJitterTolerance = 0.25f;
     }
     [System.Serializable]
     public class CameraCinematicVariables
@@ -135,7 +136,6 @@ namespace tp2
         private void followCamUpdate()
         {
             if (cSettings.playerTracker == null) return;
-
             float x = Mathf.Clamp(cSettings.playerTracker.position.x, cSettings.minLocations.x, cSettings.maxLocations.x);
             float y = Mathf.Clamp(cSettings.playerTracker.position.y, cSettings.minLocations.y, cSettings.maxLocations.y);
             float z = Mathf.Clamp(cSettings.playerTracker.position.z, cSettings.minLocations.z, cSettings.maxLocations.z);
@@ -171,7 +171,17 @@ namespace tp2
             {
                 if (!(hitInfo.collider.gameObject.tag.ToLower().Equals("player") || hitInfo.collider.gameObject.tag.ToLower().Equals("maincamera")))
                 {
-                    transform.position = new Vector3(hitInfo.point.x, locationOffset.y, hitInfo.point.z);
+                    Vector3 loc = new Vector3(hitInfo.point.x, locationOffset.y, hitInfo.point.z);
+                    //If camera is below player, and player is below max height, tp to y of player
+                    if (loc.y < cSettings.playerTracker.position.y && cSettings.playerTracker.position.y < cSettings.maxLocations.y)
+                    {
+                        loc = new Vector3(loc.x, cSettings.playerTracker.position.y, loc.z);
+                    }
+                    //Only move camera if loc is further than .1 units away. This prevents camera vibration on certain walls
+                    if(Vector3.Distance(loc, transform.position) > cSettings.WallJitterTolerance)
+                    {
+                        transform.position = loc;
+                    }
                     body.velocity = Vector3.zero;
                 }
             }
