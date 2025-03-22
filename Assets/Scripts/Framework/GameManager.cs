@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
                 //Pass Quest Map
                 QuestMap = instance.QuestMap;
                 loadCheckpoint = instance.loadCheckpoint;
-                loadingIn = instance.loadingIn;
+                loadingIn = true;
             }
             Destroy(instance.gameObject);
             instance = this;

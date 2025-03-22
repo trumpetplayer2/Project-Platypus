@@ -27,8 +27,10 @@ public class PauseScript : MonoBehaviour
         if(GameManager.instance.loadingIn)
         {
             checkpoint = GameManager.instance.loadCheckpoint;
+            Debug.Log(checkpoint);
             GameManager.instance.loadingIn = false;
-            returnToCheckpoint();
+            fading = true;
+            fadeCounter = fadeTime;
         }
     }
     // Update is called once per frame
