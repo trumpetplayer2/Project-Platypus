@@ -54,7 +54,10 @@ public class QuestManager : MonoBehaviour
         GenerateQuestUI(quests);
         loading = false;
     }
-
+    public void completeQuest(int index)
+    {
+        completeQuest(QuestList[index]);
+    }
     public void completeQuest(Quest q)
     {
         q.forceComplete();
