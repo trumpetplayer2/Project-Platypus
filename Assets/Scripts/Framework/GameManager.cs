@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     public bool reset = false;
     public Vector3 loadCheckpoint = Vector3.zero;
     public bool loadingIn = false;
+    public float saveCooldown = 1f;
+    float saveTimer = -1f;
+    public bool saving = false;
 
     private void Awake()
     {
@@ -81,7 +84,11 @@ public class GameManager : MonoBehaviour
     public void save()
     {
         if (saveState == null) Debug.Log("Save state was null");
+        //If saving, prevent concurrent modifications
+        if (saving) { Invoke("save", 1f); return; }
         saveState.save();
+        saveTimer = saveCooldown;
+        saving = true;
     }
 
     public bool canLoad()
@@ -98,5 +105,18 @@ public class GameManager : MonoBehaviour
     {
         QuestMap.Remove(pair.Key);
         QuestMap.Add(pair.Key, pair.Value);
+    }
+
+    private void Update()
+    {
+        if(saveTimer > 0)
+        {
+            saveTimer -= Time.deltaTime;
+        }
+        bool saveIconEnabled = (saveIcon != null) ? saveIcon.IsActive() : false;
+        if (saveTimer <= 0 && !saving && saveIconEnabled)
+        {
+            toggleSavingIcon(false);
+        }
     }
 }

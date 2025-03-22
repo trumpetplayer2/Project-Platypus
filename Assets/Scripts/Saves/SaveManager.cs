@@ -65,7 +65,7 @@ public static class SaveManager
             
             File.WriteAllText($"{settingFolder}/{save.name}", JsonString);
         });
-        GameManager.instance.toggleSavingIcon(false);
+        GameManager.instance.Invoke("hideSaveIcon", 1f);
     }
 
     public static async void Save(saveProfile save)
@@ -80,8 +80,9 @@ public static class SaveManager
             }
             var JsonString = JsonUtility.ToJson(save);
             File.WriteAllText($"{saveFolder}/{save.name}", JsonString);
-
+            GameManager.instance.saving = false;
         });
-        GameManager.instance.toggleSavingIcon(false);
     }
+
+    
 }

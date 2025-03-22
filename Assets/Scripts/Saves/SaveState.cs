@@ -8,25 +8,28 @@ public class SaveState : MonoBehaviour
 {
     public string profileName = "PROFILENAMENOTFOUND";
 
-    bool load(string profileName)
+    async Task<bool> load(string profileName)
     {
         try
         {
-            saveProfile data = SaveManager.Load(profileName);
-            //Update Quest Map
-            GameManager.instance.QuestMap = data.getQuestMap();
-            //This may cause an error, we'll need to see
-            GameManager.instance.loadCheckpoint = data.lastCheckpoint;
-            GameManager.instance.loadingIn = true;
+            
+                saveProfile data = await Task.Run(() => SaveManager.Load(profileName));
+                //Update Quest Map
+                GameManager.instance.QuestMap = data.getQuestMap();
+                //This may cause an error, we'll need to see
+                GameManager.instance.loadCheckpoint = data.lastCheckpoint;
+                GameManager.instance.loadingIn = true;
 
-            SceneManager.LoadScene(data.zone);
+                SceneManager.LoadScene(data.zone);
 
-            //Reset timescale
-            Time.timeScale = 1.0f;
+                //Reset timescale
+                Time.timeScale = 1.0f;
+            
             return true;
         }catch(NullReferenceException e)
         {
             Debug.Log(e.StackTrace);
+            SceneManager.LoadScene(0);
             return false;
         }
     }
