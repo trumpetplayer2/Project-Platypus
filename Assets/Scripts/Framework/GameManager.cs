@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        this.transform.parent = null;
+        DontDestroyOnLoad(this.gameObject);
         if(instance == null)
         {
             instance = this;
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
 
     void updateQuestData(KeyValuePair<int, int[]> pair)
     {
+        QuestMap.Remove(pair.Key);
         QuestMap.Add(pair.Key, pair.Value);
     }
 }

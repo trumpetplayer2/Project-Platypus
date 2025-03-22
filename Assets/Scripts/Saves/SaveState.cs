@@ -8,13 +8,13 @@ public class SaveState : MonoBehaviour
 {
     public string profileName = "PROFILENAMENOTFOUND";
 
-    async Task<bool> load(string profileName)
+    bool load(string profileName)
     {
         try
         {
             saveProfile data = SaveManager.Load(profileName);
             //Update Quest Map
-            GameManager.instance.QuestMap = data.QuestMap;
+            GameManager.instance.QuestMap = data.getQuestMap();
             //This may cause an error, we'll need to see
             GameManager.instance.loadCheckpoint = data.lastCheckpoint;
             GameManager.instance.loadingIn = true;
@@ -52,7 +52,6 @@ public class SaveState : MonoBehaviour
 
     public bool save(string profileName)
     {
-
         //saveProfile data = new saveProfile(profileName, SceneManager.GetActiveScene().buildIndex, ZoneLoader.zoneLoader.roomLoader.curRoom, Movement.getinstance().transform.position, CollectibleList.getInstance().toStringArray(), UpgradeInventory.getInstance().toStringList());
         //SaveManager.Save(data);
         saveProfile data = new saveProfile(profileName, PauseScript.instance.checkpoint, SceneManager.GetActiveScene().buildIndex, GameManager.instance.QuestMap);

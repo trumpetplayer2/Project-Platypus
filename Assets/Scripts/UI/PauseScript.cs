@@ -70,7 +70,6 @@ public class PauseScript : MonoBehaviour
         }
         Time.timeScale = GameManager.instance.isPaused ? 1 : 0;
         Cursor.lockState = GameManager.instance.isPaused ? CursorLockMode.Locked : CursorLockMode.None;
-        Debug.Log(Cursor.lockState);
         GameManager.instance.isPaused = !GameManager.instance.isPaused;
     }
 
