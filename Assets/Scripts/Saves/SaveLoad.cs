@@ -1,6 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public sealed class SerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>
+{
+    public void fromDictionary(Dictionary<TKey, TValue> dic)
+    {
+        this.Clear();
+        foreach(TKey key in dic.Keys)
+        {
+            this.Add(key, dic[key]);
+        }
+    }
+}
 
 [System.Serializable]
 public sealed class saveProfile
@@ -9,7 +21,7 @@ public sealed class saveProfile
     public Vector3 lastCheckpoint;
     public int zone = 0;
     //Only stores completed quest. Zone:Index
-    public Dictionary<int, int[]> QuestMap;
+    public SerializedDictionary<int, int[]> QuestMap = new SerializedDictionary<int, int[]>();
 
     private saveProfile() { }
 
@@ -18,7 +30,7 @@ public sealed class saveProfile
         this.name = name;
         this.zone = lastZone;
         this.lastCheckpoint = lastCheckpoint;
-        this.QuestMap = QuestMap;
+        this.QuestMap.fromDictionary(QuestMap);
     }
 }
 [System.Serializable]

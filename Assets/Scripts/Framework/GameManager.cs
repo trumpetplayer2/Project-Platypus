@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
     public SaveState saveState;
     public Dictionary<int, int[]> QuestMap = new Dictionary<int, int[]>();
     public bool reset = false;
-    public Vector3 loadCheckpoint = new Vector3(float.NaN, float.NaN, float.NaN);
+    public Vector3 loadCheckpoint = Vector3.zero;
+    public bool loadingIn = false;
 
     private void Awake()
     {
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
                 //Pass Quest Map
                 QuestMap = instance.QuestMap;
                 loadCheckpoint = instance.loadCheckpoint;
+                loadingIn = instance.loadingIn;
             }
             Destroy(instance.gameObject);
             instance = this;

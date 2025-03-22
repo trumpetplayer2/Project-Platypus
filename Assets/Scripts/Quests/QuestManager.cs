@@ -41,7 +41,6 @@ public class QuestManager : MonoBehaviour
         if(!GameManager.instance.QuestMap.TryGetValue(Zone, out temp)){
             temp = new int[0];
         }
-
         for (int i = 0; i < QuestList.Count; i++)
         {
             QuestList[i].initializeUID(i);

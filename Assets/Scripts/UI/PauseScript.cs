@@ -24,10 +24,10 @@ public class PauseScript : MonoBehaviour
     {
         instance = this;
         GameManager.instance.isPaused = false;
-        if(GameManager.instance.loadCheckpoint.x != float.NaN)
+        if(GameManager.instance.loadingIn)
         {
             checkpoint = GameManager.instance.loadCheckpoint;
-            GameManager.instance.loadCheckpoint = new Vector3(float.NaN, float.NaN, float.NaN);
+            GameManager.instance.loadingIn = false;
             returnToCheckpoint();
         }
     }

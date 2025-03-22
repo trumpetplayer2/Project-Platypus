@@ -17,6 +17,7 @@ public class SaveState : MonoBehaviour
             GameManager.instance.QuestMap = data.QuestMap;
             //This may cause an error, we'll need to see
             GameManager.instance.loadCheckpoint = data.lastCheckpoint;
+            GameManager.instance.loadingIn = true;
 
             SceneManager.LoadScene(data.zone);
 
