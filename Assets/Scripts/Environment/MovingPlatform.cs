@@ -19,13 +19,18 @@ public class MovingPlatform : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.parent != null) return;
+        Vector3 scale = other.transform.lossyScale;
         other.transform.SetParent(this.transform);
+        other.transform.localScale = new Vector3(scale.x / other.transform.parent.lossyScale.x, scale.y / other.transform.parent.lossyScale.y, scale.z / other.transform.parent.lossyScale.z);
+
     }
 
     private void OnTriggerExit(Collider other)
     {
         if(other.transform.parent != this.transform) return;
-        other.transform.SetParent(this.transform);
+        Vector3 scale = other.transform.lossyScale;
+        other.transform.parent = null;
+        other.transform.localScale = scale;
     }
     private void Start()
     {
