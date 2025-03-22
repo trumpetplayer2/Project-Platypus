@@ -182,13 +182,16 @@ namespace tp2
             }
             //Finalize horizontal plane movement
             movement = movement * speed.baseSpeed * Time.deltaTime * mult;
+            if (float.IsNaN(movement.x) || float.IsNaN(movement.y) || float.IsNaN(movement.z)) return;
             //Freecam check! This movement goes to freecam if in freecam mode
-            if(cameraSettings.followMode == cameraMode.FreeCam)
+            if (cameraSettings.followMode == cameraMode.FreeCam)
             {
                 //Send movement to camera;
                 CameraFollow.instance.freecamUpdate(movement);
                 //Set movement here to zero
                 movement = Vector3.zero;
+                childSettings.animator.SetBool("Walking", false);
+                childSettings.animator.SetBool("Sprinting", false);
             }else if (CameraFollow.instance.freecam){
                 CameraFollow.instance.freecam = false;
             }

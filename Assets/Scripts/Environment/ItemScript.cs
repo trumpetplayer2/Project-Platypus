@@ -19,7 +19,7 @@ public class ItemScript : MonoBehaviour
     public float minHeight = -100f;
     public Vector3 respawnPoint;
     PlayerAbilityManager abilityManager;
-    bool isHeld = false;
+    public bool isHeld = false;
     public bool holdable = true;
     Rigidbody rb = null;
     UnityAction call;
@@ -80,7 +80,6 @@ public class ItemScript : MonoBehaviour
     public void grab(PlayerAbilityManager abilityManager, bool priority = false)
     {
         if (isHeld && !priority) return;
-        Debug.Log("Grab");
         Transform target = abilityManager.grab.holdLocation;
         alignTarget = target;
         transform.SetPositionAndRotation(alignTarget.position, alignTarget.rotation);
@@ -92,6 +91,7 @@ public class ItemScript : MonoBehaviour
         {
             rb.isKinematic = true;
         }
+        isHeld = true;
     }
 
     public void release()
@@ -100,6 +100,7 @@ public class ItemScript : MonoBehaviour
         this.transform.parent = null;
         abilityManager.grab.heldObject = null;
         abilityManager = null;
+        isHeld = false;
         if (rb != null)
         {
             rb.isKinematic = false;
