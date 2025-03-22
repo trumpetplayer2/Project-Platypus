@@ -14,6 +14,7 @@ public class ItemQuest : QuestTrigger
     public bool getCompleted()
     {
         if (completed) return true;
+        if (PlayerAbilityManager.instance == null) return false;
         ItemScript heldItem = PlayerAbilityManager.instance.grab.heldObject;
         if (specificItem != null)
         {

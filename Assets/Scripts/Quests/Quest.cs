@@ -28,6 +28,8 @@ public class Quest
     public void Start()
     {
         OnStart?.Invoke();
+        container.updateQuestName(GetQuestName());
+        updateQuestDescription();
     }
 
     public void Finish()
@@ -60,6 +62,10 @@ public class Quest
         if (!hidden)
         {
             container?.updateQuestDescription(GetQuestDescription());
+        }
+        else
+        {
+            container.updateQuestDescription("???");
         }
     }
 

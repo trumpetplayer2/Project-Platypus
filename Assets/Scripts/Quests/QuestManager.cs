@@ -72,6 +72,14 @@ public class QuestManager : MonoBehaviour
             element.transform.SetParent(QuestListUI.transform);
             element.transform.localPosition = offset;
             offset += ListObjectOffset;
+            if (!quest.hidden)
+            {
+                quest.Start();
+            }
+            else
+            {
+                quest.updateQuestDescription();
+            }
         }
     }
 
@@ -147,5 +155,11 @@ public class QuestManager : MonoBehaviour
             Debug.Log("Waiting");
         }
         yield return null;
+    }
+
+    public void showQuest(int index)
+    {
+        QuestList[index].hidden = false;
+        QuestList[index].Start();
     }
 }
