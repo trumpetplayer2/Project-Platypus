@@ -9,8 +9,9 @@ public class CheckpointTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.tag.ToLower().Equals("player")) return;
+        Vector3 temp = PauseScript.instance.checkpoint;
         PauseScript.instance.checkpoint = checkpointPosition;
-        if (Vector3.Distance(PauseScript.instance.checkpoint, checkpointPosition) > 0.1)
+        if (Vector3.Distance(temp, checkpointPosition) > 0.1)
         {
             //New checkpoint, Save
             GameManager.instance.save();
