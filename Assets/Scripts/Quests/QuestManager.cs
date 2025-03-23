@@ -4,6 +4,8 @@ using System.Data;
 using System.Threading.Tasks;
 using System.Xml;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class QuestObjective
 {
     public List<string> names = new List<string>();
@@ -15,7 +17,7 @@ public class QuestManager : MonoBehaviour
     public static QuestManager instance;
     public int Zone = 1;
     public GameObject QuestUIObjectPrefab;
-    public GameObject QuestListUI;
+    public RectTransform QuestListUI;
     public Vector2 ListStartOffset = new Vector2(15, 15);
     public Vector2 ListObjectOffset = new Vector2(0, 165);
     public List<Quest> QuestList = new List<Quest>();
@@ -84,6 +86,7 @@ public class QuestManager : MonoBehaviour
                 quest.updateQuestDescription();
             }
         }
+        QuestListUI.sizeDelta = new Vector2(0, Mathf.Abs(offset.y));
     }
 
     // Update is called once per frame
