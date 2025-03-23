@@ -6,33 +6,16 @@ using UnityEngine;
 [Serializable]
 public class ManualTriggerQuest : QuestTrigger
 {
-    bool[] completionCheck;
-
-    public void completeCheck(int i)
-    {
-        completionCheck[i] = true;
-    }
+    bool completed = false;
 
     public bool getCompleted()
     {
-        foreach(bool b in completionCheck)
-        {
-            if (!b)
-            {
-                return false;
-            }
-        }
-        return true;
+        return completed;
     }
 
     public string getStatus()
     {
-        int i = 0;
-        foreach (bool b in completionCheck)
-        {
-            if (b) i++;
-        }
-        return i + "/" + completionCheck.Length;
+        return completed ? "Complete" : "Incomplete";
     }
 
     public void updateCheck()
@@ -42,9 +25,6 @@ public class ManualTriggerQuest : QuestTrigger
 
     public void forceComplete()
     {
-        for(int i = 0; i < completionCheck.Length; i++)
-        {
-            completionCheck[i] = true;
-        }
+        completed = true;
     }
 }
