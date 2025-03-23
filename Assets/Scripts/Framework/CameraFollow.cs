@@ -202,7 +202,7 @@ namespace tp2
             if (Input.GetButton("MoveCamera") || !Settings.cameraLock)
             {
                 angle += Input.GetAxis("Mouse X") * Settings.cameraSensitivity;
-                Cursor.lockState = CursorLockMode.Locked;
+                //Cursor.lockState = CursorLockMode.Locked;
             }
             if (Input.GetButtonUp("MoveCamera"))
             {
