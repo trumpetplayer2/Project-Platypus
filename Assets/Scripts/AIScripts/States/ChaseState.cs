@@ -34,7 +34,7 @@ public class ChaseState : BaseStateClass
 
         losingTimer = aiScript.chaseSettings.losingTargetTime;
 
-        catchTimer = aiScript.chaseSettings.catchTimerTimer;
+        catchTimer = aiScript.chaseSettings.catchTargetTime;
 
        
 
@@ -159,7 +159,7 @@ public class ChaseState : BaseStateClass
                 Debug.Log("Am I here?");
                 player.held = false;
 
-                catchTimer = aiScript.chaseSettings.catchTimerTimer;
+                catchTimer = aiScript.chaseSettings.catchTargetTime;
 
                 player.transform.parent = null;
 

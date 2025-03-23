@@ -9,19 +9,8 @@ public class ObserveState : BaseStateClass
 {
     public TargetScript observedTarget;
 
-   
-
     Transform currPosition;
 
-    float angleBetween;
-
-    float maxDistance;
-
-    //vecotr between ai and player
-
-    //angle between ai and forward
-
-    //lerp.angle to forward direction
     public ObserveState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -31,16 +20,9 @@ public class ObserveState : BaseStateClass
     {
         Debug.Log("Entering Observe State");
 
-
         observedTarget = aiScript.searchFunctionSettings.playerObj;
-        
-        
-
-        maxDistance = aiScript.observeSettings.maxObserveDistance;
 
         currPosition = aiScript.gameObject.transform;
-
-        angleBetween = Vector3.Angle(aiScript.transform.position, observedTarget.transform.position);
 
         aiScript.agent.isStopped = true;
 

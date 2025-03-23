@@ -102,7 +102,7 @@ namespace StateMachineInfo
 
         public float losingTargetTime;
 
-        public float catchTimerTimer;
+        public float catchTargetTime;
 
         public GameObject playerGrabbedPosition;
 
@@ -115,8 +115,6 @@ namespace StateMachineInfo
     public class ObserveSettings
     { 
         public float maxObserveDistance;
-
-        public float rotateSpeed;
     }
 
     [System.Serializable]
