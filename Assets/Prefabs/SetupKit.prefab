@@ -103,7 +103,7 @@ PrefabInstance:
     - target: {fileID: 2673349774910085278, guid: 549d1f143a2118345b260c40e323504c, type: 3}
       propertyPath: QuestListUI
       value: 
-      objectReference: {fileID: 2445173193940922965}
+      objectReference: {fileID: 1744393677674359303}
     - target: {fileID: 2673349774910085278, guid: 549d1f143a2118345b260c40e323504c, type: 3}
       propertyPath: managedReferences[-2]
       value: 
@@ -240,11 +240,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3579162235559926780, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.9999969
       objectReference: {fileID: 0}
     - target: {fileID: 3619048597316285125, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00036926562
+      value: -0.000020722024
       objectReference: {fileID: 0}
     - target: {fileID: 6157421517880975590, guid: ea685bb404d98554a812a682de95466a, type: 3}
       propertyPath: checkpoint.x
@@ -283,6 +283,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea685bb404d98554a812a682de95466a, type: 3}
+--- !u!224 &1744393677674359303 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3619048597316285125, guid: ea685bb404d98554a812a682de95466a, type: 3}
+  m_PrefabInstance: {fileID: 3029837642928625858}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1992728896572015422 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3579162235559926780, guid: ea685bb404d98554a812a682de95466a, type: 3}
@@ -294,11 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2445173193940922965 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 856569414134917783, guid: ea685bb404d98554a812a682de95466a, type: 3}
-  m_PrefabInstance: {fileID: 3029837642928625858}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2544362491554785787 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 667449170766688569, guid: ea685bb404d98554a812a682de95466a, type: 3}
