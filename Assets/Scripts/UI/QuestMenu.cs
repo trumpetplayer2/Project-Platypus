@@ -10,6 +10,12 @@ public class QuestMenu : MonoBehaviour
     float timer = 0;
     public Vector2 open = new Vector2 (0, 0);
     public Vector2 closed = new Vector2(-800, 0);
+
+    private void Start()
+    {
+        Cursor.lockState = (state) ? CursorLockMode.Locked : CursorLockMode.Confined;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -33,6 +39,7 @@ public class QuestMenu : MonoBehaviour
             {
                 finished = true;
                 state = !state;
+                Cursor.lockState = (state) ? CursorLockMode.Locked : CursorLockMode.Confined;
             }
         }
     }
