@@ -65,10 +65,13 @@ public class SearchState : BaseStateClass
 
         if (aiScript.searchStateSettings.heardSomething)
         {
+            Debug.Log("Calling Search Noise Location Function");
             SearchNoiseLocation();
         }
-
-        SearchInPlaceFunction();
+        else
+        {
+            SearchInPlaceFunction();
+        }
 
         return;
     }
@@ -99,33 +102,23 @@ public class SearchState : BaseStateClass
     /// </summary>
     public void SearchNoiseLocation()
     {
-       
-
         Debug.Log("Searching Location of Noise");
 
         aiScript.agent.destination = detectedLocation;
 
         if(Vector3.Distance(aiScript.transform.position, detectedLocation) <= 0.5)
         {
-            
             aiScript.agent.isStopped = true;
-
-            
 
             noiseTimer -= Time.deltaTime;
 
-            Debug.Log(noiseTimer);
-
-            Debug.Log("Am I here");
-
             if (noiseTimer <= 0)
             {
+                Debug.Log("Am I here");
 
                 aiScript.searchStateSettings.alreadyHeardSomething = true;
 
                 aiScript.searchStateSettings.heardSomething = false;
-
-               
 
                 Debug.Log("Should Change to This");
                 aiScript.SwitchStates(StateMachineEnum.Patrol);
