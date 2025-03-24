@@ -25,9 +25,6 @@ public abstract class BaseStateClass
 
     public abstract void ChangeState(BaseStateClass aNewState);
 
-    public void ChangeToInteract()
-    {
-        aiScript.SwitchStates(StateMachineEnum.Interact);
-    }
+   
 
 }

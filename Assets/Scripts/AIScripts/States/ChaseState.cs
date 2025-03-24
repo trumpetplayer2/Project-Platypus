@@ -15,7 +15,6 @@ public class ChaseState : BaseStateClass
 
     float catchTimer;
 
-  
     bool catchCoolingDown = false;
 
     float timer = 0;
@@ -25,6 +24,7 @@ public class ChaseState : BaseStateClass
         this.aiScript = aAIscript;
     }
 
+    
     public override void OnEnterState()
     {
         Debug.Log("Entering Chase State");
@@ -36,19 +36,18 @@ public class ChaseState : BaseStateClass
 
         catchTimer = aiScript.chaseSettings.catchTargetTime;
 
-       
-
-        
-
         aiScript.agent.isStopped = false;
 
         return;
     }
 
+    /// <summary>
+    /// will begin to chase the player, and check if the player exceeds or is below a specific distance
+    /// 
+    /// also operates catch cooldown for the AI, so that it won't grab the player immediately upon letting them go
+    /// </summary>
     public override void CurrStateFunctionality()
     {
-      
-
         aiScript.agent.destination = chasingTarget.transform.position;
 
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) > aiScript.chaseSettings.chaseMaxDistance)
@@ -60,7 +59,6 @@ public class ChaseState : BaseStateClass
                 return;
             }
 
-
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) < aiScript.chaseSettings.chaseMinDistance)
             {
                 
@@ -71,7 +69,6 @@ public class ChaseState : BaseStateClass
                 return;
             }
 
-       
             if(catchCoolingDown)
             {
                 Debug.Log("catch Cooling Down");
@@ -91,6 +88,9 @@ public class ChaseState : BaseStateClass
         
     }
 
+    /// <summary>
+    /// is called if the player exceeds a specific range, and will switch to search state when the timer reaches 0 or below
+    /// </summary>
     private void LosingTarget()
     {
         Debug.Log("Losing Target");
@@ -109,6 +109,9 @@ public class ChaseState : BaseStateClass
 
     }
 
+    /// <summary>
+    /// is called if the player is below a specific range from the AI, and will call the GrabFunction when the timer reaches 0 or below
+    /// </summary>
     private void CatchTarget()
     {
         
@@ -122,7 +125,6 @@ public class ChaseState : BaseStateClass
            
             GrabFunction();
 
-            
             return;
             
         }
@@ -131,7 +133,9 @@ public class ChaseState : BaseStateClass
     }
 
    
-
+    /// <summary>
+    /// will grab the player and take them to the checkpoint location
+    /// </summary>
     private void GrabFunction()
     {
         if(catchCoolingDown)

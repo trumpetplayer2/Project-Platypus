@@ -53,6 +53,9 @@ public class InteractState : BaseStateClass
             return;
     }
 
+    /// <summary>
+    /// if the AI sees the player, switch to Player Detected State, if its an interactable object, move towards the object and begin interacting with the object
+    /// </summary>
     public override void CurrStateFunctionality()
     {
         //Debug.Log("interact functionality");
@@ -78,7 +81,10 @@ public class InteractState : BaseStateClass
         
     }
 
- 
+    /// <summary>
+    /// Acquire information from the Interactable Target scriptable objects, which details how long to interact with the object and what to do with the object
+    /// </summary>
+    /// <param name="aCurrentTarget"> The reference to the current target that has been found</param>
     private void BeginInteract(TargetScript aCurrentTarget)
     {
         Debug.Log("Beginning interacting");

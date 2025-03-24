@@ -29,6 +29,9 @@ public class ObserveState : BaseStateClass
         return;
     }
 
+    /// <summary>
+    /// Will look at the player if they are within range, and will switch to search state when the player moves far enough.
+    /// </summary>
     public override void CurrStateFunctionality()
     {
         Debug.Log("Observing Player");

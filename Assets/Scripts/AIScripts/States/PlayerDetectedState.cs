@@ -16,6 +16,9 @@ public class PlayerDetectedState : BaseStateClass
         this.aiScript = aAIscript;
     }
 
+    /// <summary>
+    /// Gets reference to Regular and Trigger Responses
+    /// </summary>
     public override void OnEnterState()
     {
         Debug.Log("Entering Player Detected State");
@@ -28,6 +31,9 @@ public class PlayerDetectedState : BaseStateClass
         
     }
 
+    /// <summary>
+    /// Will switch to the appropriate state depending on the set response
+    /// </summary>
     public override void CurrStateFunctionality()
     {
         if (aiScript.playerDetectedSettings.TriggerDetected)
@@ -75,6 +81,9 @@ public class PlayerDetectedState : BaseStateClass
         return;
     }
 
+    /// <summary>
+    /// Will acquire the player object and switch to the required state based on the trigger behavior
+    /// </summary>
     public void TriggerBehavior()
     {
         Debug.Log("Trigger Behavior Function");
@@ -82,6 +91,10 @@ public class PlayerDetectedState : BaseStateClass
 
         switch (triggerResponse)
         {
+            case "None":
+                {
+                    return;
+                }
             case "Chase":
                 {
                     aiScript.SwitchStates(StateMachineEnum.Chase);

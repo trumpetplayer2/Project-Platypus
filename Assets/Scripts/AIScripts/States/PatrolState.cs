@@ -39,6 +39,9 @@ public class PatrolState : BaseStateClass
         
     }
 
+    /// <summary>
+    /// Travels to a randomly selected Transform location from an array of transforms, travels to the location, and then select a new location
+    /// </summary>
     public override void CurrStateFunctionality()
     {
         aiScript.patrolSettings.CurrPatrolDestination = aiScript.patrolSettings.PatrolDestinations[randomPatrolDestination];

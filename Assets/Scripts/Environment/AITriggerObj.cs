@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using tp2;
 using UnityEngine;
 
+/// <summary>
+/// An object that, upon being hit by gravel from the player, will create an overlap sphere, that, if an AI is within, will activate the trigger behavior
+/// </summary>
 public class AITriggerObj : MonoBehaviour
 {
-
-    
     public float radius;
 
     Collider[] colliders;
@@ -16,20 +17,11 @@ public class AITriggerObj : MonoBehaviour
 
     int items;
 
-    private void OnEnable()
-    {
-        
-    }
-
-    private void OnDisable()
-    {
-        
-    }
-
     private void Awake()
     {
         colliders = new Collider[3];
     }
+
 
     public void CheckAreaForAI()
     {
