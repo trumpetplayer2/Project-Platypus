@@ -11,6 +11,10 @@ public class PlayerDetectedState : BaseStateClass
 
     string triggerResponse;
 
+    ItemScript heldItem;
+
+    bool itemTrigger;
+
     public PlayerDetectedState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -27,6 +31,19 @@ public class PlayerDetectedState : BaseStateClass
 
         triggerResponse = System.Enum.GetName(typeof(TriggeredResponse), aiScript.playerDetectedSettings.setAITriggerResponse);
 
+        if (aiScript.playerDetectedSettings.itemCheck)
+        {
+            heldItem = PlayerAbilityManager.instance.grab.heldObject;
+
+            if(heldItem != null)
+            {
+                if(heldItem.type.ToString() == aiScript.playerDetectedSettings.heldObjTypeTrigger)
+                {
+                    itemTrigger = true;
+                }
+            }
+        }
+
         return;
         
     }
@@ -36,6 +53,11 @@ public class PlayerDetectedState : BaseStateClass
     /// </summary>
     public override void CurrStateFunctionality()
     {
+        if (itemTrigger)
+        {
+            TriggerBehavior();
+        }
+       
         if (aiScript.playerDetectedSettings.TriggerDetected)
         {
             Debug.Log("Was AI trigger Detected");

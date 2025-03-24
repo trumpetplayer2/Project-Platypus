@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
+
 /// <summary>
 /// The type of object that is detected and how to react to it
 /// </summary>
@@ -199,7 +200,9 @@ namespace StateMachineInfo
         /// </summary>
         public TriggeredResponse setAITriggerResponse;
 
+        public bool itemCheck;
 
+        public string heldObjTypeTrigger;
     }
 
     [System.Serializable]
@@ -581,9 +584,7 @@ namespace StateMachineInfo
         {
             if (searchStateSettings.alreadyHeardSomething)
             {
-                Debug.Log("Am I Here");
-
-               
+                Debug.Log("Am I in HeardTargetFunction");
 
                 return;
             }
@@ -607,6 +608,17 @@ namespace StateMachineInfo
 
             SwitchStates(StateMachineEnum.PlayerDetected);
         }
+
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.name == "GraveProjectile") {
+            
+                TriggerBehavior();
+            }
+        }
+
+
 
     }
 }
