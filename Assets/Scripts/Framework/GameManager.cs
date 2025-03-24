@@ -55,7 +55,14 @@ public class GameManager : MonoBehaviour
         {
             saveState = gameObject.AddComponent<SaveState>();
             saveState.profileName = "profile0";
-            saveState.loadSettings("settings");
+            try
+            {
+                saveState.loadSettings("settings");
+            }
+            catch
+            {
+                saveState.saveSettings();
+            }
         }
         if (continueButton != null) continueButton.interactable = (canLoad());
     }
