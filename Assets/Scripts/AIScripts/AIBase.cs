@@ -612,7 +612,7 @@ namespace StateMachineInfo
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.name == "GraveProjectile") {
+            if(collision.gameObject.name == "GravelProjectile") {
             
                 TriggerBehavior();
             }

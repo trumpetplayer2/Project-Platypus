@@ -53,12 +53,7 @@ public class PlayerDetectedState : BaseStateClass
     /// </summary>
     public override void CurrStateFunctionality()
     {
-        if (itemTrigger)
-        {
-            TriggerBehavior();
-        }
-       
-        if (aiScript.playerDetectedSettings.TriggerDetected)
+        if (aiScript.playerDetectedSettings.TriggerDetected || itemTrigger)
         {
             Debug.Log("Was AI trigger Detected");
             TriggerBehavior();
@@ -88,6 +83,10 @@ public class PlayerDetectedState : BaseStateClass
     public override void OnExitState()
     {
         Debug.Log("Exiting Player Detected State");
+
+        heldItem = null;
+
+        itemTrigger = false;
 
         return;
     }
