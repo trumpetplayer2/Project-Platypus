@@ -14,18 +14,21 @@ public class PatrolState : BaseStateClass
 
     public override void OnEnterState()
     {
-        Debug.Log("In Patrol State");
+        
 
         randomPatrolDestination = Random.Range(0, aiScript.patrolSettings.PatrolDestinations.Length - 1);
 
         aiScript.agent.isStopped = false;
+
+        aiScript.aIAnimator.SetBool("Walk", true);
 
         return;
     }
 
     public override void OnExitState()
     {
-        Debug.Log("Exiting Patrol State");
+        aiScript.aIAnimator.SetBool("Walk", false);
+        
         return;
     }
 
@@ -55,13 +58,13 @@ public class PatrolState : BaseStateClass
 
         if (aiScript.SearchForTargets() == DetectedType.Object)
         {
-            Debug.Log("Switching to Interact");
+            
             aiScript.SwitchStates(StateMachineEnum.Interact);
             return;
         }
         else if(aiScript.SearchForTargets() == DetectedType.Player)
         {
-            Debug.Log("Switching to Player Detected");
+           
             aiScript.SwitchStates(StateMachineEnum.PlayerDetected);
 
             return;

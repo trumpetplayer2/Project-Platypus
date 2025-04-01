@@ -11,6 +11,9 @@ public class ObserveState : BaseStateClass
 
     Transform currPosition;
 
+    Vector3 rotation;
+
+
     public ObserveState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -18,7 +21,7 @@ public class ObserveState : BaseStateClass
 
     public override void OnEnterState()
     {
-        Debug.Log("Entering Observe State");
+       
 
         observedTarget = aiScript.searchFunctionSettings.playerObj;
 
@@ -34,13 +37,19 @@ public class ObserveState : BaseStateClass
     /// </summary>
     public override void CurrStateFunctionality()
     {
-        Debug.Log("Observing Player");
+        
 
         aiScript.transform.LookAt(observedTarget.transform, Vector3.up);
 
+        rotation = Quaternion.LookRotation(observedTarget.transform.position).eulerAngles;
+
+        rotation.y = 0f;
+
+        currPosition.rotation = Quaternion.Euler(rotation);
+
         if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.observeSettings.maxObserveDistance)
             {
-                Debug.Log("Player out of range");
+               
                 aiScript.SwitchStates(StateMachineEnum.Search);
                 return;
             }
@@ -49,7 +58,7 @@ public class ObserveState : BaseStateClass
 
     public override void OnExitState()
     {
-        Debug.Log("Exiting Observe State");
+       
 
         observedTarget = null;
 

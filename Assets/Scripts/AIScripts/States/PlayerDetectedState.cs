@@ -25,7 +25,7 @@ public class PlayerDetectedState : BaseStateClass
     /// </summary>
     public override void OnEnterState()
     {
-        Debug.Log("Entering Player Detected State");
+        
 
         aIResponse = System.Enum.GetName(typeof(AIResponse), aiScript.playerDetectedSettings.setAIResponse);
 
@@ -55,12 +55,12 @@ public class PlayerDetectedState : BaseStateClass
     {
         if (aiScript.playerDetectedSettings.TriggerDetected || itemTrigger)
         {
-            Debug.Log("Was AI trigger Detected");
+            
             TriggerBehavior();
         }
         else if(!aiScript.playerDetectedSettings.TriggerDetected || aiScript.playerDetectedSettings.setAITriggerResponse == TriggeredResponse.None)
         {
-            Debug.Log("Normal AI Response");
+           
 
             switch (aIResponse)
             {
@@ -82,8 +82,7 @@ public class PlayerDetectedState : BaseStateClass
 
     public override void OnExitState()
     {
-        Debug.Log("Exiting Player Detected State");
-
+        
         heldItem = null;
 
         itemTrigger = false;
@@ -107,7 +106,7 @@ public class PlayerDetectedState : BaseStateClass
     /// </summary>
     public void TriggerBehavior()
     {
-        Debug.Log("Trigger Behavior Function");
+       
         aiScript.searchFunctionSettings.playerObj = PlayerMovement.instance.GetComponent<TargetScript>();
 
         switch (triggerResponse)
