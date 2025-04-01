@@ -185,6 +185,12 @@ namespace StateMachineInfo
     [System.Serializable]
     public class PlayerDetectedSettings
     {
+
+       [ReadOnly] public bool playerDetectedCooldown = false;
+
+        public float playerDetectedCooldownTime;
+
+        [ReadOnly] public float pDCooldownTimer = 0;
         /// <summary>
         /// Has the AI detected a message from an object hit by gravel from the player?
         /// </summary>
@@ -347,7 +353,7 @@ namespace StateMachineInfo
         /// </summary>
         Collider[] AIRange;
 
-       
+        public Animator aIAnimator;
       
         void Awake()
         {
@@ -421,6 +427,18 @@ namespace StateMachineInfo
                 }
             }
 
+            if (playerDetectedSettings.playerDetectedCooldown)
+            {
+                playerDetectedSettings.pDCooldownTimer += Time.deltaTime;
+
+                if(playerDetectedSettings.pDCooldownTimer >= playerDetectedSettings.playerDetectedCooldownTime)
+                {
+                    playerDetectedSettings.pDCooldownTimer = 0;
+
+                    playerDetectedSettings.playerDetectedCooldown = false;
+                }
+            }
+
         }
 
         /// <summary>
@@ -432,11 +450,11 @@ namespace StateMachineInfo
         {
             if (switchCooldown)
             {
-                Debug.Log("Exiting SwitchStates Function");
+                
                 return;
             }
 
-            Debug.Log("New State Decision");
+            
 
             BaseStateClass nextStateInput = null;
 
@@ -497,11 +515,11 @@ namespace StateMachineInfo
         {
             if (searchTimer < 0.5 || searchStateSettings.heardSomething)
             {
-                Debug.Log("Search Cooldown");
+                
                 return DetectedType.None;
             }
 
-            Debug.Log("Searching for targets");
+           
 
             
              int targetCount =  Physics.OverlapSphereNonAlloc(transform.position, searchFunctionSettings.radius, AIRange, searchFunctionSettings.TargetMask);
@@ -514,7 +532,7 @@ namespace StateMachineInfo
 
                 for (int i = 0; i < targetCount; i++)
                 {
-                    Debug.Log("Target found");
+                    
                     if (!AIRange[i].TryGetComponent<TargetScript>(out TargetScript target))
                     {
                          continue;
@@ -530,7 +548,7 @@ namespace StateMachineInfo
                         if (!Physics.Raycast(searchFunctionSettings.Eyes.transform.position, directionToTarget, Mathf.Min(distanceToTarget, searchFunctionSettings.radius), searchFunctionSettings.EnvironmentMask))
                         {
 
-                            Debug.Log("Target seen");
+                           
 
                             return CurrentTargetAnalysis(target);
 
@@ -553,10 +571,14 @@ namespace StateMachineInfo
         /// <returns> returns what type of item was found</returns>
         private DetectedType CurrentTargetAnalysis(TargetScript aTarget)
         {
+            if (playerDetectedSettings.playerDetectedCooldown)
+            {
+                return DetectedType.None;
+            }
 
             if (aTarget.CompareTag("Player"))
             {
-                Debug.Log("Player Detected");
+               
                 searchFunctionSettings.playerObj = aTarget;
 
                 return DetectedType.Player;
@@ -567,7 +589,6 @@ namespace StateMachineInfo
             {
                 searchFunctionSettings.CurrTarget = aTarget;
 
-                Debug.Log("New object is set, proceed with interact state");
 
                 return DetectedType.Object;
             }
@@ -584,7 +605,7 @@ namespace StateMachineInfo
         {
             if (searchStateSettings.alreadyHeardSomething)
             {
-                Debug.Log("Am I in HeardTargetFunction");
+                
 
                 return;
             }

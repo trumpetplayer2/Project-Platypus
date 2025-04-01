@@ -23,7 +23,7 @@ public class SearchState : BaseStateClass
     }
     public override void OnEnterState()
     {
-        Debug.Log("In Search State");
+       
 
         if(aiScript.searchStateSettings.alreadyHeardSomething)
         {
@@ -59,13 +59,13 @@ public class SearchState : BaseStateClass
     {
         if (aiScript.SearchForTargets() == DetectedType.Player)
         {
-            Debug.Log("Player Found Again");
+           
             aiScript.SwitchStates(StateMachineEnum.PlayerDetected);
         }
 
         if (aiScript.searchStateSettings.heardSomething)
         {
-            Debug.Log("Calling Search Noise Location Function");
+           
             SearchNoiseLocation();
         }
         else
@@ -81,13 +81,13 @@ public class SearchState : BaseStateClass
     /// </summary>
     public void SearchInPlaceFunction()
     {
-        Debug.Log("Searching in Place");
+        
 
         timer -= Time.deltaTime;
 
         if (timer <= 0)
         {
-            Debug.Log("Resuming Patrol State from Search State");
+           
 
             aiScript.SwitchStates(StateMachineEnum.Patrol);
             return;
@@ -102,7 +102,7 @@ public class SearchState : BaseStateClass
     /// </summary>
     public void SearchNoiseLocation()
     {
-        Debug.Log("Searching Location of Noise");
+       
 
         aiScript.agent.destination = detectedLocation;
 
@@ -114,13 +114,13 @@ public class SearchState : BaseStateClass
 
             if (noiseTimer <= 0)
             {
-                Debug.Log("Am I here");
+               
 
                 aiScript.searchStateSettings.alreadyHeardSomething = true;
 
                 aiScript.searchStateSettings.heardSomething = false;
 
-                Debug.Log("Should Change to This");
+                
                 aiScript.SwitchStates(StateMachineEnum.Patrol);
             }
         }
@@ -130,14 +130,14 @@ public class SearchState : BaseStateClass
 
     public override void OnExitState()
     {
-        Debug.Log("Exiting Search State");
+        
 
         return;
     }
 
     public override void ChangeState(BaseStateClass aNewState)
     {
-        Debug.Log("Changing from Search State");
+       
 
         aNewState.OnEnterState();
 

@@ -18,6 +18,8 @@ public class IdleState : BaseStateClass
         timer = aiScript.idleSettings.idleTimeUntil;
         
         aiScript.agent.isStopped = true;
+
+        
         return;
     }
 
@@ -40,6 +42,7 @@ public class IdleState : BaseStateClass
 
     public override void CurrStateFunctionality()
     {
+       
         //Debug.Log("idle functionality");
 
         timer -= Time.deltaTime;

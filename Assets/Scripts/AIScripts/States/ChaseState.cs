@@ -38,6 +38,8 @@ public class ChaseState : BaseStateClass
 
         aiScript.agent.isStopped = false;
 
+        aiScript.aIAnimator.SetBool("Run", true);
+
         return;
     }
 
@@ -52,7 +54,7 @@ public class ChaseState : BaseStateClass
 
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) > aiScript.chaseSettings.chaseMaxDistance)
             {
-                Debug.Log("Calling Losing Target");
+                
 
                 LosingTarget();
 
@@ -62,8 +64,7 @@ public class ChaseState : BaseStateClass
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) < aiScript.chaseSettings.chaseMinDistance)
             {
                 
-                Debug.Log("Calling Catching Target");
-
+                
                 CatchTarget();
 
                 return;
@@ -71,7 +72,7 @@ public class ChaseState : BaseStateClass
 
             if(catchCoolingDown)
             {
-                Debug.Log("catch Cooling Down");
+               
                 
                 aiScript.agent.isStopped = false;
 
@@ -93,13 +94,13 @@ public class ChaseState : BaseStateClass
     /// </summary>
     private void LosingTarget()
     {
-        Debug.Log("Losing Target");
+       
 
         losingTimer -= Time.deltaTime;
 
         if(losingTimer <= 0)
         {
-            Debug.Log("Lost Target");
+            
 
             aiScript.SwitchStates(StateMachineEnum.Search);
 
@@ -115,13 +116,13 @@ public class ChaseState : BaseStateClass
     private void CatchTarget()
     {
         
-        Debug.Log("Can Catch Target");
+       
 
         catchTimer -= Time.deltaTime;
 
         if(catchTimer <= 0)
         {
-            Debug.Log("Attempting to Catch Target");
+            
            
             GrabFunction();
 
@@ -143,16 +144,20 @@ public class ChaseState : BaseStateClass
             return;
         }
 
-        Debug.Log("Grab Function");
+        
 
         if(chasingTarget.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
+            PlayerAbilityManager playerInstance = player.GetComponent<PlayerAbilityManager>();
+
+            aiScript.aIAnimator.SetBool("PickUP", true);
             player.held = true;
+            playerInstance.Release();
             player.transform.position = aiScript.chaseSettings.playerGrabbedPosition.transform.position;
             player.transform.parent = aiScript.transform;
 
 
-            Debug.Log("Taking player to location");
+            
 
             aiScript.agent.destination = aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition;
 
@@ -160,7 +165,7 @@ public class ChaseState : BaseStateClass
             {
                 aiScript.agent.isStopped = true;
 
-                Debug.Log("Am I here?");
+               
                 player.held = false;
 
                 catchTimer = aiScript.chaseSettings.catchTargetTime;
@@ -168,6 +173,8 @@ public class ChaseState : BaseStateClass
                 player.transform.parent = null;
 
                 catchCoolingDown = true;
+
+                aiScript.playerDetectedSettings.playerDetectedCooldown = true;
 
             }
         }
@@ -177,7 +184,7 @@ public class ChaseState : BaseStateClass
    
     public override void OnExitState()
     {
-        Debug.Log("Exiting Chase State");
+       
 
         aiScript.agent.speed -= aiScript.chaseSettings.chaseSpeedIncrease;
 
