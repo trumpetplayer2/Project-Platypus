@@ -15,6 +15,7 @@ public class MovingPlatform : MonoBehaviour
     int lastPos = 0;
     bool moving = false;
     bool invert = false;
+    public bool stopAtTop = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -64,6 +65,11 @@ public class MovingPlatform : MonoBehaviour
         }
         if(position > positionList.Length)
         {
+            if(stopAtTop)
+            {
+                moving = false;
+                return;
+            }
             position = positionList.Length;
             invert = true;
             freezeTime = waitOnTop;

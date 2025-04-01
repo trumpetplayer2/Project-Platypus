@@ -10,12 +10,21 @@ public class BurriedObject : Diggable
     bool digging = false;
     float timer = 0;
     public float digTime = 1f;
+    public int itemLayer = 11;
+    public GameObject digParticlePrefab;
+    GameObject digParticle;
     public override void dig()
     {
+        if (triggered) return;
         base.dig();
         timer = 0;
         digging = true;
         treasure.layer = 0;
+        //Instantiate dig particles
+        if(digParticlePrefab != null)
+        {
+            digParticle = Instantiate(digParticlePrefab, transform);
+        }
     }
     private void Start()
     {
@@ -41,9 +50,13 @@ public class BurriedObject : Diggable
             }
             if(treasure.layer == 6)
             {
-                treasure.layer = 0;
+                treasure.layer = itemLayer;
             }
             treasure.gameObject.SetActive(true);
+            if(digParticle != null)
+            {
+                Destroy(digParticle.gameObject);
+            }
             Destroy(this.gameObject);
         }
     }

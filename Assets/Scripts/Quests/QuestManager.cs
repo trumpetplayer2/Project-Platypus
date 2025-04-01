@@ -98,7 +98,7 @@ public class QuestManager : MonoBehaviour
         }
         foreach(Quest trigger in QuestList)
         {
-            if (trigger.hidden) { return; }
+            if (trigger.hidden) { continue; }
             trigger.QuestUpdate();
         }
     }

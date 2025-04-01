@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public abstract class Diggable : MonoBehaviour
 {
     UnityAction call;
+    protected bool triggered = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<PlayerAbilityManager>(out PlayerAbilityManager ability))
@@ -32,5 +33,6 @@ public abstract class Diggable : MonoBehaviour
 
     public virtual void dig() {
         PlayerAbilityManager.instance.dig.triggered = true;
+        triggered = true;
     }
 }
