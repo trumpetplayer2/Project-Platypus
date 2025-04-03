@@ -433,7 +433,7 @@ Transform:
   m_GameObject: {fileID: 60337581}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.64, y: -6.19, z: 4.56}
+  m_LocalPosition: {x: 18.9, y: -6.19, z: -39.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1270,6 +1270,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1836241239906170691, guid: 1ea870e27fa83b845b8c1f20d5e2e979, type: 3}
+      propertyPath: chaseSettings.grabbedPlayerLocation
+      value: 
+      objectReference: {fileID: 588577824}
+    - target: {fileID: 1836241239906170691, guid: 1ea870e27fa83b845b8c1f20d5e2e979, type: 3}
+      propertyPath: playerDetectedSettings.setAIResponse
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836241239906170691, guid: 1ea870e27fa83b845b8c1f20d5e2e979, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1326,6 +1334,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ea870e27fa83b845b8c1f20d5e2e979, type: 3}
+--- !u!114 &588577824 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+  m_PrefabInstance: {fileID: 1243409973}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9944db4b94250c40bac6fff4a560a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &757579248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,7 +1647,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1744393677674359303, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00042114983
+      value: 0.00002814752
       objectReference: {fileID: 0}
     - target: {fileID: 1992728896572015422, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_Size
