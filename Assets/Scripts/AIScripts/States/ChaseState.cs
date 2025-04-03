@@ -50,6 +50,7 @@ public class ChaseState : BaseStateClass
     /// </summary>
     public override void CurrStateFunctionality()
     {
+        Debug.Log("is Curr State Running");
         aiScript.agent.destination = chasingTarget.transform.position;
 
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) > aiScript.chaseSettings.chaseMaxDistance)
@@ -61,10 +62,10 @@ public class ChaseState : BaseStateClass
                 return;
             }
 
-            if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) < aiScript.chaseSettings.chaseMinDistance)
+            if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) <= aiScript.chaseSettings.chaseMinDistance)
             {
-                
-                
+
+            Debug.Log("Am I close to the player");
                 CatchTarget();
 
                 return;
@@ -122,8 +123,8 @@ public class ChaseState : BaseStateClass
 
         if(catchTimer <= 0)
         {
-            
-           
+
+            Debug.Log("Calling Grabbing Function");
             GrabFunction();
 
             return;
@@ -139,7 +140,12 @@ public class ChaseState : BaseStateClass
     /// </summary>
     private void GrabFunction()
     {
-        if(catchCoolingDown)
+        Debug.Log("Start of Grab Function");
+
+        aiScript.aIAnimator.SetBool("Run", false);
+
+        aiScript.aIAnimator.SetBool("PickUP", true);
+        if (catchCoolingDown)
         {
             return;
         }
@@ -157,7 +163,7 @@ public class ChaseState : BaseStateClass
             player.transform.parent = aiScript.transform;
 
 
-            
+            Debug.Log("Here");
 
             aiScript.agent.destination = aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition;
 
@@ -175,6 +181,10 @@ public class ChaseState : BaseStateClass
                 catchCoolingDown = true;
 
                 aiScript.playerDetectedSettings.playerDetectedCooldown = true;
+
+                aiScript.aIAnimator.SetBool("PickUP", false);
+
+                aiScript.aIAnimator.SetBool("Walk", true);
 
             }
         }

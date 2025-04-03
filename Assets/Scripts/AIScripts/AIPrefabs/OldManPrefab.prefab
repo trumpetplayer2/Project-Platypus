@@ -12,6 +12,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: OldManPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 1332713899135024792, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332713899135024792, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.732
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332713899135024792, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.442
+      objectReference: {fileID: 0}
     - target: {fileID: 3757154525192571276, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 36.554226
@@ -63,6 +75,10 @@ PrefabInstance:
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: playerDetectedSettings.playerDetectedCooldownTime
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015128262710035992, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.034
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
