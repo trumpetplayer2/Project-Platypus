@@ -65,7 +65,7 @@ public class ChaseState : BaseStateClass
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) <= aiScript.chaseSettings.chaseMinDistance)
             {
 
-            Debug.Log("Am I close to the player");
+             Debug.Log("Am I close to the player");
                 CatchTarget();
 
                 return;
