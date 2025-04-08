@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemRespawnPlane : MonoBehaviour
 {
     public bool AllItems = true;
+    
     public ItemScript[] SpecificItems;
     public ItemType SpecificType;
     private void OnTriggerEnter(Collider other)
