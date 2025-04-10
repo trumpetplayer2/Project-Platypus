@@ -111,7 +111,7 @@ public class ChaseState : BaseStateClass
 
         if(losingTimer <= 0)
         {
-            aiScript.aIAnimator.SetBool("Run", false);
+           
 
             aiScript.SwitchStates(StateMachineEnum.Search);
 
@@ -126,19 +126,21 @@ public class ChaseState : BaseStateClass
     /// </summary>
     private void CatchTarget()
     {
-
-        if (!callGrabAnim)
-        {
-
-            aiScript.aIAnimator.SetTrigger("PickUP");
-            callGrabAnim = true;
-        }
-
+       
 
         catchTimer -= Time.deltaTime;
 
         if(catchTimer <= 0)
         {
+            if (!callGrabAnim)
+            {
+                Debug.Log("Is this Running");
+               
+                aiScript.aIAnimator.SetTrigger("PickUP");
+                aiScript.agent.destination = aiScript.transform.position;
+                aiScript.agent.isStopped = true;
+                callGrabAnim = true;
+            }
 
             Debug.Log("Calling Grabbing Function");
             GrabFunction();
@@ -156,6 +158,10 @@ public class ChaseState : BaseStateClass
     /// </summary>
     private void GrabFunction()
     {
+        if (aiScript.aIAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base.PickUP"))
+        {
+            return;
+        }
 
         Debug.Log("Start of Grab Function");
 
@@ -174,8 +180,12 @@ public class ChaseState : BaseStateClass
         {
             PlayerAbilityManager playerInstance = player.GetComponent<PlayerAbilityManager>();
 
-           
+            aiScript.agent.isStopped = false;
 
+            
+
+           aiScript.aIAnimator.SetBool("Walk", true);
+            aiScript.aIAnimator.SetBool("Run", false);
 
             player.held = true;
             playerInstance.Release();
