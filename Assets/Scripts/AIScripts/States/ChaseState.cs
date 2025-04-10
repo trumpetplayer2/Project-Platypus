@@ -19,6 +19,8 @@ public class ChaseState : BaseStateClass
 
     float timer = 0;
 
+    bool callGrabAnim;
+
     public ChaseState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -39,6 +41,8 @@ public class ChaseState : BaseStateClass
         aiScript.agent.isStopped = false;
 
         aiScript.aIAnimator.SetBool("Run", true);
+
+        callGrabAnim = false;
 
         return;
     }
@@ -123,7 +127,13 @@ public class ChaseState : BaseStateClass
     private void CatchTarget()
     {
 
-        aiScript.aIAnimator.SetBool("PickUP", true);
+        if (!callGrabAnim)
+        {
+
+            aiScript.aIAnimator.SetTrigger("PickUP");
+            callGrabAnim = true;
+        }
+
 
         catchTimer -= Time.deltaTime;
 
@@ -146,6 +156,7 @@ public class ChaseState : BaseStateClass
     /// </summary>
     private void GrabFunction()
     {
+
         Debug.Log("Start of Grab Function");
 
         //aiScript.aIAnimator.SetBool("Run", false);
@@ -157,17 +168,21 @@ public class ChaseState : BaseStateClass
             return;
         }
 
-        if(chasingTarget.TryGetComponent<PlayerMovement>(out PlayerMovement player))
+       
+
+        if (chasingTarget.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
             PlayerAbilityManager playerInstance = player.GetComponent<PlayerAbilityManager>();
 
            
+
+
             player.held = true;
             playerInstance.Release();
             player.transform.position = aiScript.chaseSettings.playerGrabbedPosition.transform.position;
             player.transform.parent = aiScript.transform;
 
-
+            
             Debug.Log("Here");
 
             aiScript.agent.destination = aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition;
@@ -187,7 +202,7 @@ public class ChaseState : BaseStateClass
 
                 aiScript.playerDetectedSettings.playerDetectedCooldown = true;
 
-                aiScript.aIAnimator.SetBool("PickUP", false);
+                
 
                 //aiScript.aIAnimator.SetBool("Walk", true);
 

@@ -632,7 +632,8 @@ namespace StateMachineInfo
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.name == "GravelProjectile") {
+            Debug.Log("Hit by Gravel");
+            if(collision.gameObject.TryGetComponent<Gravel>(out Gravel gravelProjectile)) {
             
                 TriggerBehavior();
             }
