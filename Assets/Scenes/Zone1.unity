@@ -5259,19 +5259,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4190575775896910235, guid: 256a732bce4b00a419ba3361f297bd80, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.880474
+      value: 25.26
       objectReference: {fileID: 0}
     - target: {fileID: 4190575775896910235, guid: 256a732bce4b00a419ba3361f297bd80, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.8616805
+      value: 8.24
       objectReference: {fileID: 0}
     - target: {fileID: 4190575775896910235, guid: 256a732bce4b00a419ba3361f297bd80, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.548052
+      value: -25.86
       objectReference: {fileID: 0}
     - target: {fileID: 4190575775896910235, guid: 256a732bce4b00a419ba3361f297bd80, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.98062795
+      value: 0.9007664
       objectReference: {fileID: 0}
     - target: {fileID: 4190575775896910235, guid: 256a732bce4b00a419ba3361f297bd80, type: 3}
       propertyPath: m_LocalRotation.x
@@ -5279,7 +5279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4190575775896910235, guid: 256a732bce4b00a419ba3361f297bd80, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.19587964
+      value: 0.43430415
       objectReference: {fileID: 0}
     - target: {fileID: 4190575775896910235, guid: 256a732bce4b00a419ba3361f297bd80, type: 3}
       propertyPath: m_LocalRotation.z
@@ -5291,7 +5291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4190575775896910235, guid: 256a732bce4b00a419ba3361f297bd80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 22.592
+      value: 51.482
       objectReference: {fileID: 0}
     - target: {fileID: 4190575775896910235, guid: 256a732bce4b00a419ba3361f297bd80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -8618,7 +8618,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &882097577500598955
 MonoBehaviour:
@@ -8702,7 +8702,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.07000208, y: -0.786, z: 6.119999}
+  m_ConnectedAnchor: {x: 6.1268234, y: 2.5746317, z: 16.400003}
   serializedVersion: 2
   m_Spring: 5
   m_Damper: 0.2

@@ -21,7 +21,6 @@ public class Gravel : MonoBehaviour
         {
             return;
         }
-        Debug.Log(other.name);
         Destroy(this.gameObject);
     }
 }
