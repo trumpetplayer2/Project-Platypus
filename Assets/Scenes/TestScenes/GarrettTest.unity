@@ -1358,6 +1358,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 726010255}
     - target: {fileID: 1836241239906170691, guid: 1ea870e27fa83b845b8c1f20d5e2e979, type: 3}
+      propertyPath: chaseSettings.chaseMinDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836241239906170691, guid: 1ea870e27fa83b845b8c1f20d5e2e979, type: 3}
       propertyPath: chaseSettings.grabbedPlayerLocation
       value: 
       objectReference: {fileID: 588577824}
@@ -2020,7 +2024,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1744393677674359303, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00032777883
+      value: 0.000118140444
       objectReference: {fileID: 0}
     - target: {fileID: 1992728896572015422, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_Size

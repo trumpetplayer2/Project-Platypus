@@ -429,6 +429,7 @@ namespace StateMachineInfo
 
             if (playerDetectedSettings.playerDetectedCooldown)
             {
+                Debug.Log("player Detected Cooldown");
                 playerDetectedSettings.pDCooldownTimer += Time.deltaTime;
 
                 if(playerDetectedSettings.pDCooldownTimer >= playerDetectedSettings.playerDetectedCooldownTime)
@@ -513,8 +514,9 @@ namespace StateMachineInfo
         /// <returns> returns an enum detailing what item was found</returns>
         public DetectedType SearchForTargets()
         {
-            if (searchTimer < 0.5 || searchStateSettings.heardSomething)
+            if (searchTimer < 0.5 || searchStateSettings.heardSomething || playerDetectedSettings.playerDetectedCooldown)
             {
+                
                 
                 return DetectedType.None;
             }
@@ -571,10 +573,7 @@ namespace StateMachineInfo
         /// <returns> returns what type of item was found</returns>
         private DetectedType CurrentTargetAnalysis(TargetScript aTarget)
         {
-            if (playerDetectedSettings.playerDetectedCooldown)
-            {
-                return DetectedType.None;
-            }
+            
 
             if (aTarget.CompareTag("Player"))
             {
