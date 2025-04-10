@@ -19,6 +19,8 @@ public class ChaseState : BaseStateClass
 
     float timer = 0;
 
+    bool callGrabAnim;
+
     public ChaseState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -39,6 +41,8 @@ public class ChaseState : BaseStateClass
         aiScript.agent.isStopped = false;
 
         aiScript.aIAnimator.SetBool("Run", true);
+
+        callGrabAnim = false;
 
         return;
     }
@@ -107,7 +111,7 @@ public class ChaseState : BaseStateClass
 
         if(losingTimer <= 0)
         {
-            aiScript.aIAnimator.SetBool("Run", false);
+           
 
             aiScript.SwitchStates(StateMachineEnum.Search);
 
@@ -122,13 +126,21 @@ public class ChaseState : BaseStateClass
     /// </summary>
     private void CatchTarget()
     {
-
-        aiScript.aIAnimator.SetBool("PickUP", true);
+       
 
         catchTimer -= Time.deltaTime;
 
         if(catchTimer <= 0)
         {
+            if (!callGrabAnim)
+            {
+                Debug.Log("Is this Running");
+               
+                aiScript.aIAnimator.SetTrigger("PickUP");
+                aiScript.agent.destination = aiScript.transform.position;
+                aiScript.agent.isStopped = true;
+                callGrabAnim = true;
+            }
 
             Debug.Log("Calling Grabbing Function");
             GrabFunction();
@@ -146,6 +158,11 @@ public class ChaseState : BaseStateClass
     /// </summary>
     private void GrabFunction()
     {
+        if (aiScript.aIAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base.PickUP"))
+        {
+            return;
+        }
+
         Debug.Log("Start of Grab Function");
 
         //aiScript.aIAnimator.SetBool("Run", false);
@@ -157,17 +174,25 @@ public class ChaseState : BaseStateClass
             return;
         }
 
-        if(chasingTarget.TryGetComponent<PlayerMovement>(out PlayerMovement player))
+       
+
+        if (chasingTarget.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
             PlayerAbilityManager playerInstance = player.GetComponent<PlayerAbilityManager>();
 
-           
+            aiScript.agent.isStopped = false;
+
+            
+
+           aiScript.aIAnimator.SetBool("Walk", true);
+            aiScript.aIAnimator.SetBool("Run", false);
+
             player.held = true;
             playerInstance.Release();
             player.transform.position = aiScript.chaseSettings.playerGrabbedPosition.transform.position;
             player.transform.parent = aiScript.transform;
 
-
+            
             Debug.Log("Here");
 
             aiScript.agent.destination = aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition;
@@ -187,7 +212,7 @@ public class ChaseState : BaseStateClass
 
                 aiScript.playerDetectedSettings.playerDetectedCooldown = true;
 
-                aiScript.aIAnimator.SetBool("PickUP", false);
+                
 
                 //aiScript.aIAnimator.SetBool("Walk", true);
 
