@@ -174,7 +174,7 @@ MonoBehaviour:
       m_Bits: 264
     EnvironmentMask:
       serializedVersion: 2
-      m_Bits: 128
+      m_Bits: 4224
     CurrTarget: {fileID: 0}
     playerObj: {fileID: 0}
     maxColliders: 5
@@ -186,6 +186,7 @@ MonoBehaviour:
   stateSwitchTimer: 0
   searchTimer: 0
   speedVal: 3
+  aIAnimator: {fileID: 0}
 --- !u!195 &8119926544169799320
 NavMeshAgent:
   m_ObjectHideFlags: 0

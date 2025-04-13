@@ -21,6 +21,8 @@ public class ChaseState : BaseStateClass
 
     bool callGrabAnim;
 
+
+
     public ChaseState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -54,6 +56,11 @@ public class ChaseState : BaseStateClass
     /// </summary>
     public override void CurrStateFunctionality()
     {
+
+        if(aiScript.SearchForTargets() != DetectedType.None)
+        {
+
+        }
         Debug.Log("is Curr State Running");
 
         if(aiScript.playerDetectedSettings.playerDetectedCooldown)
