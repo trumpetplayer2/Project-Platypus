@@ -15,6 +15,8 @@ public abstract class Diggable : MonoBehaviour
             if(call != null) { return; }
             call = () => dig();
             ability.dig.dig.AddListener(call);
+            ability.dig.DigObjects.Add(this.gameObject);
+
         }
     }
 
@@ -26,6 +28,7 @@ public abstract class Diggable : MonoBehaviour
             {
                 ability.dig.dig.RemoveListener(call);
                 call = null;
+                ability.dig.DigObjects.Remove(this.gameObject);
             }
             catch { }
         }
@@ -34,5 +37,16 @@ public abstract class Diggable : MonoBehaviour
     public virtual void dig() {
         PlayerAbilityManager.instance.dig.triggered = true;
         triggered = true;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerAbilityManager ability = PlayerAbilityManager.instance;
+        try
+        {
+            ability.dig.dig.RemoveListener(call);
+            call = null;
+        }catch { }
+        ability.dig.DigObjects.Remove(this.gameObject);
     }
 }

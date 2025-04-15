@@ -16,6 +16,7 @@ public class MovingPlatform : MonoBehaviour
     bool moving = false;
     bool invert = false;
     public bool stopAtTop = false;
+    bool atTop = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -46,7 +47,7 @@ public class MovingPlatform : MonoBehaviour
             freezeTime -= Time.deltaTime;
             return;
         }
-        if(!moving) return;
+        if(!moving || atTop) return;
         timer += Time.deltaTime;
         transform.position = Vector3.Lerp(positionList[lastPos], positionList[position], timer/timeToNext);
         if (Vector3.Distance(transform.position, positionList[position]) < variance) getNextPlatform();
@@ -68,6 +69,7 @@ public class MovingPlatform : MonoBehaviour
             if(stopAtTop)
             {
                 moving = false;
+                atTop = true;
                 return;
             }
             position = positionList.Length;
