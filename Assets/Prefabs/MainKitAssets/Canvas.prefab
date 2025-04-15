@@ -68,7 +68,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00020273947}
+  m_AnchoredPosition: {x: 0, y: -0.000033517197}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &939710176088665350
@@ -637,7 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776e3abea02762f42b07bc5e71f3b86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openTime: 1
+  openTime: 0.5
   open: {x: 960, y: 0}
   closed: {x: 160, y: 0}
 --- !u!1 &4112225849042017951
@@ -1360,8 +1360,8 @@ MonoBehaviour:
   m_Content: {fileID: 3619048597316285125}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
-  m_Elasticity: 0.1
+  m_MovementType: 2
+  m_Elasticity: 0.001
   m_Inertia: 1
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 165

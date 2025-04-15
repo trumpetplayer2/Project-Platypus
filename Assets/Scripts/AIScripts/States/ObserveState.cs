@@ -29,6 +29,10 @@ public class ObserveState : BaseStateClass
 
         aiScript.agent.isStopped = true;
 
+        aiScript.aIAnimator.SetBool("Walk", false);
+
+        aiScript.aIAnimator.SetBool("Interact", true);
+
         return;
     }
 

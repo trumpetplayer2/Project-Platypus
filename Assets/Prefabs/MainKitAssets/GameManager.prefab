@@ -47,8 +47,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
+  continueButton: {fileID: 0}
   saveIcon: {fileID: 0}
   saveState: {fileID: 0}
+  reset: 1
+  loadCheckpoint: {x: 0, y: 0, z: 0}
+  loadingIn: 0
+  saveCooldown: 1
+  saving: 0
 --- !u!114 &1470145355889620928
 MonoBehaviour:
   m_ObjectHideFlags: 0
