@@ -14,15 +14,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1332713899135024792, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.12
+      value: 0.077
       objectReference: {fileID: 0}
     - target: {fileID: 1332713899135024792, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8
+      value: 1.027
       objectReference: {fileID: 0}
     - target: {fileID: 1332713899135024792, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.45
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3670111574366088715, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -83,10 +83,18 @@ PrefabInstance:
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: aIAnimator
       value: 
-      objectReference: {fileID: 6188934217497185621}
+      objectReference: {fileID: 3627334236486810283}
+    - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: searchFunctionSettings.angle
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: chaseSettings.catchTargetTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: searchFunctionSettings.radius
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: chaseSettings.losingTargetTime
@@ -99,6 +107,10 @@ PrefabInstance:
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: playerDetectedSettings.setAITriggerResponse
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: playerDetectedSettings.playerDetectedCooldownTime
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -218,7 +230,36 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6188934217497185621}
+    - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3627334236486810283}
   m_SourcePrefab: {fileID: 100100000, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}
+--- !u!1 &1885557278017378229 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7036213049465896255, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}
+  m_PrefabInstance: {fileID: 8903473696962849418}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3627334236486810283
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885557278017378229}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 69164e452de08dd4aad2c3aeed0a8989, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8596835086082250715 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}
