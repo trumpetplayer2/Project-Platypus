@@ -582,16 +582,18 @@ namespace StateMachineInfo
 
                 return DetectedType.Player;
             }
-
-            //Starting case, the first target spotted, will be the target regardless of status
+            
             if (!aTarget.TargetInfo.wasCompleted)
             {
+
                 searchFunctionSettings.CurrTarget = aTarget;
 
 
                 return DetectedType.Object;
             }
+            //Starting case, the first target spotted, will be the target regardless of status
 
+           
             return DetectedType.None;
         }
 
