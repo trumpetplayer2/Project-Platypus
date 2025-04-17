@@ -19,6 +19,7 @@ namespace tp2
         public Transform gravelSpawnLocation;
         public AudioClip collectClip;
         public AudioClip spitClip;
+        public ParticleSystem gravelParticle;
     }
     [Serializable]
     public class DigSettings
@@ -29,6 +30,8 @@ namespace tp2
         public UnityEvent dig = new UnityEvent();
         public AudioClip clip;
         public bool triggered = false;
+        public ParticleSystem digParticle;
+        public List<GameObject> DigObjects = new List<GameObject>();
     }
     [Serializable]
     public class SixthSenseSettings
@@ -190,8 +193,24 @@ namespace tp2
         {
             dig.triggered = false;
             dig.dig?.Invoke();
+            if(dig.digParticle != null)
+            {
+                foreach(GameObject obj in dig.DigObjects)
+                {
+                    SpawnParticle(dig.digParticle, obj);
+                }
+            }
             digCooldown = dig.Cooldown;
             queueClip(2);
+        }
+
+        void SpawnParticle(ParticleSystem Particle, GameObject target)
+        {
+            Vector3 playerPos = grab.holdLocation.position;
+            if(Physics.Raycast(playerPos, target.transform.position - playerPos, out RaycastHit hitInfo))
+            {
+                Instantiate(Particle, hitInfo.point, Quaternion.FromToRotation(Vector3.forward, hitInfo.normal));
+            }
         }
 
         bool Grab()

@@ -198,6 +198,7 @@ MonoBehaviour:
     slopeMultiplierMax: -0.3
   swimming: 0
   held: 0
+  spinWaitTime: 10
 --- !u!143 &4578871774910618203
 CharacterController:
   m_ObjectHideFlags: 0
@@ -249,6 +250,7 @@ MonoBehaviour:
     gravelSpawnLocation: {fileID: 3190463933237773391}
     collectClip: {fileID: 0}
     spitClip: {fileID: 0}
+    gravelParticle: {fileID: 0}
   canCollectGravel: 0
   dig:
     Cooldown: 1
@@ -259,6 +261,8 @@ MonoBehaviour:
         m_Calls: []
     clip: {fileID: 0}
     triggered: 0
+    digParticle: {fileID: 1294285093481974575, guid: 6b79e4a3becaf0046b44169fcef2d279, type: 3}
+    DigObjects: []
   sense:
     Cooldown: 1
     length: 5
