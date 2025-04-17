@@ -57,12 +57,7 @@ public class ChaseState : BaseStateClass
     public override void CurrStateFunctionality()
     {
 
-        if(aiScript.SearchForTargets() != DetectedType.None)
-        {
-
-        }
-        Debug.Log("is Curr State Running");
-
+  
         if(aiScript.playerDetectedSettings.playerDetectedCooldown)
         {
             LosingTarget();
