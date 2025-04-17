@@ -196,19 +196,19 @@ MonoBehaviour:
     cinematicNumber: 0
   MovementSettings:
     rotationSpeed: 1
-    minZoom: 5
-    maxZoom: 10
+    minZoom: 4
+    maxZoom: 8
     zoomScale: 7
     FreecamCap: {x: 10, y: 10, z: 10}
   cSettings:
     maxLocations: {x: 100, y: 30, z: 100}
     minLocations: {x: -100, y: 0, z: -100}
-    distance: 10
+    distance: 6
     startAngle: 0
     playerTracker: {fileID: 0}
     smoothSpeed: 0.125
-    locationOffset: {x: 0, y: 5, z: 0}
-    rotationOffset: {x: 22.5, y: 0, z: 0}
+    locationOffset: {x: 0, y: 9.5, z: 0}
+    rotationOffset: {x: 50, y: 0, z: 0}
     rotationSmoothSpeed: 0.1
     blocked:
       serializedVersion: 2
