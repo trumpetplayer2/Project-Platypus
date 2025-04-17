@@ -280,6 +280,24 @@ MonoBehaviour:
     grabClip: {fileID: 0}
     dropClip: {fileID: 0}
   animator: {fileID: 967583675391815917}
+  noiseController:
+    Clips:
+    - clip: {fileID: 8300000, guid: dafe91a93ca7686438cca581e23b8550, type: 3}
+      timeout: 3
+      volume: 1
+      pitch: 0
+      startTime: 0
+    - clip: {fileID: 8300000, guid: a4c0c004930bc5f46ab082be897253f4, type: 3}
+      timeout: 3
+      volume: 1
+      pitch: 0
+      startTime: 0
+    - clip: {fileID: 8300000, guid: 7545865941c2a8647a0d79b55906fddb, type: 3}
+      timeout: 3
+      volume: 1
+      pitch: 0
+      startTime: 0
+    Input: Noise
 --- !u!54 &7450155215747013509
 Rigidbody:
   m_ObjectHideFlags: 0
