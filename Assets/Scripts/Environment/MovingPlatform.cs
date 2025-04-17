@@ -57,14 +57,14 @@ public class MovingPlatform : MonoBehaviour
     {
         timer = 0f;
         lastPos = position;
-        position = invert ? position + 1 : position - 1;
+        position = !invert ? position + 1 : position - 1;
         if(position < 0)
         {
-            position = 1;
+            position = 0;
             invert = false;
             freezeTime = waitOnTop;
         }
-        if(position > positionList.Length)
+        if(position >= positionList.Length)
         {
             if(stopAtTop)
             {
@@ -72,7 +72,7 @@ public class MovingPlatform : MonoBehaviour
                 atTop = true;
                 return;
             }
-            position = positionList.Length;
+            position = positionList.Length-1;
             invert = true;
             freezeTime = waitOnTop;
         }

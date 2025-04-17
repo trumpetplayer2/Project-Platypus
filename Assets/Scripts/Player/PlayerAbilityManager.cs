@@ -206,7 +206,8 @@ namespace tp2
 
         void SpawnParticle(ParticleSystem Particle, GameObject target)
         {
-            if(Physics.Raycast(this.transform.position, target.transform.position - this.transform.position, out RaycastHit hitInfo))
+            Vector3 playerPos = grab.holdLocation.position;
+            if(Physics.Raycast(playerPos, target.transform.position - playerPos, out RaycastHit hitInfo))
             {
                 Instantiate(Particle, hitInfo.point, Quaternion.FromToRotation(Vector3.forward, hitInfo.normal));
             }
