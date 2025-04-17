@@ -53,6 +53,12 @@ namespace tp2
         public AudioClip grabClip;
         public AudioClip dropClip;
     }
+    [Serializable]
+    public class NoiseMaker
+    {
+        public Clip[] Clips;
+        public string Input = "Noise";
+    }
     public class PlayerAbilityManager : MonoBehaviour
     {
         public static PlayerAbilityManager instance;
@@ -73,6 +79,7 @@ namespace tp2
         float grabCooldown = 0f;
         AudioSettings audioSettings;
         public Animator animator;
+        public NoiseMaker noiseController;
 
         private void Start()
         {
@@ -108,6 +115,11 @@ namespace tp2
             if (Input.GetButtonDown("Gravel"))
             {
                 if(gravelCooldown <= 0) Gravel();
+            }
+            if (Input.GetButtonDown(noiseController.Input))
+            {
+                System.Random rand = new System.Random();
+                AudioHandler.instance.queueClip(noiseController.Clips[rand.Next(noiseController.Clips.Length)]);
             }
         }
 
