@@ -56,7 +56,10 @@ public class ChaseState : BaseStateClass
     /// </summary>
     public override void CurrStateFunctionality()
     {
-
+        if(PlayerMovement.instance.held == true && !aiScript.chaseSettings.iCaughtPlayer)
+        {
+            aiScript.playerDetectedSettings.playerDetectedCooldown = true;
+        }
   
         if(aiScript.playerDetectedSettings.playerDetectedCooldown)
         {
@@ -190,6 +193,9 @@ public class ChaseState : BaseStateClass
             aiScript.aIAnimator.SetBool("Run", false);
 
             player.held = true;
+
+            aiScript.chaseSettings.iCaughtPlayer = true;
+
             playerInstance.Release();
             player.transform.position = aiScript.chaseSettings.playerGrabbedPosition.transform.position;
             player.transform.parent = aiScript.transform;
