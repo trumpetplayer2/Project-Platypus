@@ -132,6 +132,10 @@ namespace StateMachineInfo
         /// Cooldown that restricts AI ability to catch
         /// </summary>
         public float catchCooldown;
+
+        public bool iCaughtPlayer;
+
+        
     }
 
     [System.Serializable]
@@ -180,6 +184,8 @@ namespace StateMachineInfo
         /// Timer for hearing cooldown process
         /// </summary>
         [ReadOnly] public float hearingCooldownTime = 0f;
+
+        
     }
 
     [System.Serializable]

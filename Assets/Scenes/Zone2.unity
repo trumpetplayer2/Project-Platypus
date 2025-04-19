@@ -4660,6 +4660,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1836241239906170691, guid: a78742b8d56d9e148af2f245620d0cac, type: 3}
+      propertyPath: observeSettings.maxObserveDistance
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836241239906170691, guid: a78742b8d56d9e148af2f245620d0cac, type: 3}
       propertyPath: chaseSettings.grabbedPlayerLocation
       value: 
       objectReference: {fileID: 589462386}
