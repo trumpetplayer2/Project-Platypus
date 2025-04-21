@@ -45,6 +45,9 @@ namespace tp2
         public static PlayerMovement instance;
         public bool swimming = false;
         public bool held = false;
+        float spinTimer = 0;
+        public float spinWaitTime = 10f;
+        bool spinning = false;
         // Start is called before the first frame update
         void Start()
         {
@@ -97,6 +100,11 @@ namespace tp2
             {
                 cameraSettings.followMode = cameraMode.FreeCam;
             }
+            if(!spinning && spinTimer > spinWaitTime)
+            {
+                childSettings.animator.SetTrigger("Spin");
+            }
+            spinTimer += Time.deltaTime;
             //Get Direction
             float strafe = Input.GetAxisRaw("Horizontal");
             float forward = Input.GetAxisRaw("Vertical");
@@ -148,6 +156,12 @@ namespace tp2
                     break;
             }
             childSettings.animator.SetBool("Walking", movement.magnitude > 0);
+            if(movement.magnitude > 0)
+            {
+                spinTimer = 0;
+                spinning = false;
+                childSettings.animator.ResetTrigger("Spin");
+            }
             float mult = 1;
             if (Input.GetButton("Sprint"))
             {

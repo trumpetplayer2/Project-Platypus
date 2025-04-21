@@ -132,6 +132,10 @@ namespace StateMachineInfo
         /// Cooldown that restricts AI ability to catch
         /// </summary>
         public float catchCooldown;
+
+        public bool iCaughtPlayer;
+
+        
     }
 
     [System.Serializable]
@@ -180,6 +184,8 @@ namespace StateMachineInfo
         /// Timer for hearing cooldown process
         /// </summary>
         [ReadOnly] public float hearingCooldownTime = 0f;
+
+        
     }
 
     [System.Serializable]
@@ -582,16 +588,18 @@ namespace StateMachineInfo
 
                 return DetectedType.Player;
             }
-
-            //Starting case, the first target spotted, will be the target regardless of status
+            
             if (!aTarget.TargetInfo.wasCompleted)
             {
+
                 searchFunctionSettings.CurrTarget = aTarget;
 
 
                 return DetectedType.Object;
             }
+            //Starting case, the first target spotted, will be the target regardless of status
 
+           
             return DetectedType.None;
         }
 

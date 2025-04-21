@@ -43,11 +43,15 @@ public class ObserveState : BaseStateClass
     {
         
 
-        aiScript.transform.LookAt(observedTarget.transform, Vector3.up);
+        //aiScript.transform.LookAt(observedTarget.transform, Vector3.up);
 
         rotation = Quaternion.LookRotation(observedTarget.transform.position).eulerAngles;
 
-        rotation.y = 0f;
+        //rotation.y = 0f;
+
+        rotation.x = 0f;
+
+        rotation *= 2;
 
         currPosition.rotation = Quaternion.Euler(rotation);
 

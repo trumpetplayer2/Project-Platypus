@@ -14,6 +14,7 @@ namespace tp2
         public float volume;
         public float pitch;
         public float startTime;
+        public float variance;
         float time;
 
         /// <summary>
@@ -24,12 +25,13 @@ namespace tp2
         /// <param name="pitch">The pitch to play the clip at</param>
         /// <param name="timeout">Won't play if it takes more than x seconds. -1 to disable</param>
         /// <param name="sTime">Time in seconds to start the AudioClip at</param>
-        public Clip(AudioClip clip, float volume = 1, float pitch = 1, float timeout = 10, float sTime = 0)
+        public Clip(AudioClip clip, float volume = 1, float pitch = 1, float timeout = 10, float sTime = 0, float variance = .2f)
         {
             this.clip = clip;
             this.timeout = timeout;
             this.volume = volume;
             this.pitch = pitch;
+            this.variance = variance;
             startTime = sTime;
             time = Time.time;
         }
@@ -106,9 +108,10 @@ namespace tp2
                     if (!c.getExpired())
                     {
                         sfxSource.volume = c.getScaledVolume();
-                        sfxSource.pitch = c.pitch;
+                        sfxSource.pitch = c.pitch + Random.Range(-c.variance, c.variance);
                         sfxSource.time = Mathf.Min(c.clip.length, c.startTime);
                         sfxSource.PlayOneShot(c.clip);
+                        Debug.Log("played clip");
                     }
                     //Check if any more values in queue. If so, continue, otherwise, return
                     if(audioQueue.Count > 0)
