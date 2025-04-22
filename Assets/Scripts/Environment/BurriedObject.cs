@@ -47,6 +47,7 @@ public class BurriedObject : Diggable
             if(treasure.TryGetComponent<Rigidbody>(out Rigidbody rigidbody))
             {
                 rigidbody.useGravity = true;
+                rigidbody.velocity = Vector3.zero;
             }
             if(treasure.layer == 6)
             {
