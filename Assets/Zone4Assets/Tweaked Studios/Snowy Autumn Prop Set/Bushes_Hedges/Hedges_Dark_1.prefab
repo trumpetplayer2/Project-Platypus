@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6540893534008025087}
   - component: {fileID: 531839552693999877}
   - component: {fileID: 2036199908640742003}
+  - component: {fileID: 3372956262313631065}
   m_Layer: 0
   m_Name: Hedges_Dark_1
   m_TagString: Untagged
@@ -105,3 +106,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 17.725117, y: 5.8772717, z: 3.5341964}
   m_Center: {x: -0.62633514, y: 2.8747816, z: 0}
+--- !u!114 &3372956262313631065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789188129635616231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
