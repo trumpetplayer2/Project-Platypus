@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using System.Xml;
+using tp2;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +25,7 @@ public class QuestManager : MonoBehaviour
     bool loading;
     float saveDelay = 1f;
     float saveCooldown = 0f;
-    
+    public AudioClip QuestComplete;
     
     // Start is called before the first frame update
     void Start()
@@ -161,6 +162,11 @@ public class QuestManager : MonoBehaviour
             Debug.Log("Waiting");
         }
         yield return null;
+    }
+
+    public void OnQuestComplete(int id)
+    {
+        AudioHandler.instance.queueClip(QuestComplete);
     }
 
     public void showQuest(int index)

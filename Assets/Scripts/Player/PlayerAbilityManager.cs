@@ -77,7 +77,7 @@ namespace tp2
         //Grab settings
         public HoldSettings grab;
         float grabCooldown = 0f;
-        AudioSettings audioSettings;
+        public AudioSettings audioSettings;
         public Animator animator;
         public NoiseMaker noiseController;
 

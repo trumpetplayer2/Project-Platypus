@@ -248,7 +248,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: f7b65ccaaa8801449abacba62c187b9c, type: 3}
     gravelEntity: {fileID: 1567429259736677278, guid: 17aecb32f0f6034459c878f37b3fb6c2, type: 3}
     gravelSpawnLocation: {fileID: 3190463933237773391}
-    collectClip: {fileID: 0}
+    collectClip: {fileID: 8300000, guid: 6bcb3f762d45bc24286e9aa6999752cb, type: 3}
     spitClip: {fileID: 0}
     gravelParticle: {fileID: 0}
   canCollectGravel: 0
@@ -277,8 +277,17 @@ MonoBehaviour:
     grabEvent:
       m_PersistentCalls:
         m_Calls: []
-    grabClip: {fileID: 0}
+    grabClip: {fileID: 8300000, guid: ba0f46d53d0b4e543890bffac741b638, type: 3}
     dropClip: {fileID: 0}
+  audioSettings:
+    sfxVolume: 1
+    sfxPitch: 1
+    startTime: 0
+    timeout: -1
+    cooldown: 0.1
+    sfx:
+    - {fileID: 0}
+    - {fileID: 0}
   animator: {fileID: 967583675391815917}
   noiseController:
     Clips:
@@ -287,16 +296,19 @@ MonoBehaviour:
       volume: 1
       pitch: 0
       startTime: 0
+      variance: 0
     - clip: {fileID: 8300000, guid: a4c0c004930bc5f46ab082be897253f4, type: 3}
       timeout: 3
       volume: 1
       pitch: 0
       startTime: 0
+      variance: 0
     - clip: {fileID: 8300000, guid: 7545865941c2a8647a0d79b55906fddb, type: 3}
       timeout: 3
       volume: 1
       pitch: 0
       startTime: 0
+      variance: 0
     Input: Noise
 --- !u!54 &7450155215747013509
 Rigidbody:
