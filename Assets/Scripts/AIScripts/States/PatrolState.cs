@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class PatrolState : BaseStateClass
 {
+
+    public Transform prevDestination;
     public PatrolState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
         this.aiScript = aAIscript;
@@ -53,7 +55,8 @@ public class PatrolState : BaseStateClass
 
         if ((Vector3.Distance(aiScript.gameObject.transform.position, aiScript.patrolSettings.CurrPatrolDestination.position)) < aiScript.patrolSettings.patrolDistanceToDestination)
         {
-            randomPatrolDestination = Random.Range(0, aiScript.patrolSettings.PatrolDestinations.Length - 1);
+            Debug.Log("Switched Destination");
+            randomPatrolDestination = Random.Range(0, aiScript.patrolSettings.PatrolDestinations.Length);
         }
 
         if (aiScript.SearchForTargets() == DetectedType.Object)

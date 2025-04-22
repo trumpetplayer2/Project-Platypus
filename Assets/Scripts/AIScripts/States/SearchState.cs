@@ -129,7 +129,8 @@ public class SearchState : BaseStateClass
 
                 aiScript.searchStateSettings.heardSomething = false;
 
-                
+                aiScript.aIAnimator.SetBool("Interact", true);
+
                 aiScript.SwitchStates(StateMachineEnum.Patrol);
             }
         }
