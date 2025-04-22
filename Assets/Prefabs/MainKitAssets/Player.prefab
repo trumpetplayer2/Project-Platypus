@@ -279,36 +279,27 @@ MonoBehaviour:
         m_Calls: []
     grabClip: {fileID: 8300000, guid: ba0f46d53d0b4e543890bffac741b638, type: 3}
     dropClip: {fileID: 0}
-  audioSettings:
-    sfxVolume: 1
-    sfxPitch: 1
-    startTime: 0
-    timeout: -1
-    cooldown: 0.1
-    sfx:
-    - {fileID: 0}
-    - {fileID: 0}
   animator: {fileID: 967583675391815917}
   noiseController:
     Clips:
-    - clip: {fileID: 8300000, guid: dafe91a93ca7686438cca581e23b8550, type: 3}
-      timeout: 3
+    - clip: {fileID: 8300000, guid: b3e17407289e1824aaf28311ccc152b8, type: 3}
+      timeout: -1
       volume: 1
-      pitch: 0
+      pitch: 1
       startTime: 0
-      variance: 0
-    - clip: {fileID: 8300000, guid: a4c0c004930bc5f46ab082be897253f4, type: 3}
-      timeout: 3
+      variance: 0.2
+    - clip: {fileID: 8300000, guid: b26babf6dbaa3c540a625f8b88e4d047, type: 3}
+      timeout: -1
       volume: 1
-      pitch: 0
+      pitch: 1
       startTime: 0
-      variance: 0
-    - clip: {fileID: 8300000, guid: 7545865941c2a8647a0d79b55906fddb, type: 3}
-      timeout: 3
+      variance: 0.2
+    - clip: {fileID: 8300000, guid: 208ab7484dd93a64797634d5a9a6e8ce, type: 3}
+      timeout: -1
       volume: 1
-      pitch: 0
+      pitch: 1
       startTime: 0
-      variance: 0
+      variance: 0.2
     Input: Noise
 --- !u!54 &7450155215747013509
 Rigidbody:

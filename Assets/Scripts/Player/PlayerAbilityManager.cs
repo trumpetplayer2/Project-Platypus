@@ -58,6 +58,7 @@ namespace tp2
     {
         public Clip[] Clips;
         public string Input = "Noise";
+        public float noiseCooldown = .5f;
     }
     public class PlayerAbilityManager : MonoBehaviour
     {
@@ -77,9 +78,10 @@ namespace tp2
         //Grab settings
         public HoldSettings grab;
         float grabCooldown = 0f;
-        public AudioSettings audioSettings;
+        AudioSettings audioSettings;
         public Animator animator;
         public NoiseMaker noiseController;
+        float noiseCooldown = 0;
 
         private void Start()
         {
@@ -92,6 +94,12 @@ namespace tp2
         {
             if (GameManager.instance.isPaused) return;
             DecrementCooldown();
+            if (Input.GetButtonDown(noiseController.Input) && noiseCooldown <= 0)
+            {
+                System.Random rand = new System.Random();
+                AudioHandler.instance.queueClip(noiseController.Clips[rand.Next(noiseController.Clips.Length)]);
+                noiseCooldown = noiseController.noiseCooldown;
+            }
             if (PlayerMovement.instance.held) return;
             if (Input.GetButtonDown(sense.SenseInputName))
             {
@@ -116,11 +124,6 @@ namespace tp2
             {
                 if(gravelCooldown <= 0) Gravel();
             }
-            if (Input.GetButtonDown(noiseController.Input))
-            {
-                System.Random rand = new System.Random();
-                AudioHandler.instance.queueClip(noiseController.Clips[rand.Next(noiseController.Clips.Length)]);
-            }
         }
 
         void DecrementCooldown()
@@ -129,6 +132,7 @@ namespace tp2
             digCooldown = Mathf.Max(0, digCooldown - Time.deltaTime);
             gravelCooldown = Mathf.Max(0, gravelCooldown - Time.deltaTime);
             grabCooldown = Mathf.Max(0, grabCooldown - Time.deltaTime);
+            noiseCooldown = Mathf.Max(0, noiseCooldown - Time.deltaTime);
             canSense = senseCooldown <= 0;
 
         }
@@ -166,7 +170,7 @@ namespace tp2
         void CollectGravel()
         {
             gravelCount = gravel.Max;
-            queueClip(0);
+            AudioHandler.instance.queueClip(gravel.collectClip);
             updateGravelUI();
         }
 
@@ -177,7 +181,7 @@ namespace tp2
                 return;
             }
             Instantiate(gravel.gravelEntity, gravel.gravelSpawnLocation.position, gravel.gravelSpawnLocation.rotation);
-            queueClip(1);
+            AudioHandler.instance.queueClip(gravel.spitClip);
             gravelCount -= 1;
             updateGravelUI();
         }
@@ -232,8 +236,8 @@ namespace tp2
             }
             grab.grabEvent?.Invoke();
             grabCooldown = grab.Cooldown;
+            if (grab.heldObject == null) return false;
             queueClip(4);
-            if (grab.heldObject != null) return true;
             return false;
         }
         public void Release()

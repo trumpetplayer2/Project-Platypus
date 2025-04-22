@@ -111,7 +111,6 @@ namespace tp2
                         sfxSource.pitch = c.pitch + Random.Range(-c.variance, c.variance);
                         sfxSource.time = Mathf.Min(c.clip.length, c.startTime);
                         sfxSource.PlayOneShot(c.clip);
-                        Debug.Log($"played clip {sfxSource.volume}, {c.clip.name}");
                     }
                     //Check if any more values in queue. If so, continue, otherwise, return
                     if(audioQueue.Count > 0)
