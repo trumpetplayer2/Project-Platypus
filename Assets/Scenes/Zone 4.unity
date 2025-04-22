@@ -1313,7 +1313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2635108812990552267, guid: 0ed0922b8b8e6b0479c7f593d52df669, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 64.54618
+      value: 67.75
       objectReference: {fileID: 0}
     - target: {fileID: 2635108812990552267, guid: 0ed0922b8b8e6b0479c7f593d52df669, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1321,7 +1321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2635108812990552267, guid: 0ed0922b8b8e6b0479c7f593d52df669, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 126.94153
+      value: 126.84
       objectReference: {fileID: 0}
     - target: {fileID: 2635108812990552267, guid: 0ed0922b8b8e6b0479c7f593d52df669, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11117,7 +11117,7 @@ Transform:
   m_GameObject: {fileID: 261963777}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.56, y: -1.82, z: -2.2}
+  m_LocalPosition: {x: 0.37, y: -1.82, z: 3.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11276,9 +11276,17 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
+      propertyPath: chaseSettings.distanceToCheckpoint
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
       propertyPath: chaseSettings.grabbedPlayerLocation
       value: 
       objectReference: {fileID: 1118015563}
+    - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
+      propertyPath: patrolSettings.patrolDistanceToDestination
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.size
       value: 6
@@ -17442,8 +17450,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.224624, y: 5.162189, z: 7.357387}
+  m_Center: {x: -0.11231106, y: 2.0810983, z: 3.178708}
 --- !u!1 &389774825
 GameObject:
   m_ObjectHideFlags: 0
@@ -21445,7 +21453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6115495643100457985, guid: 2a1e00f6fd8038f4eb484539be2d71d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 58.39
+      value: 62.05
       objectReference: {fileID: 0}
     - target: {fileID: 6115495643100457985, guid: 2a1e00f6fd8038f4eb484539be2d71d2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21453,7 +21461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6115495643100457985, guid: 2a1e00f6fd8038f4eb484539be2d71d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 127.64
+      value: 132.48
       objectReference: {fileID: 0}
     - target: {fileID: 6115495643100457985, guid: 2a1e00f6fd8038f4eb484539be2d71d2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25355,9 +25363,17 @@ PrefabInstance:
       value: ChildPrefab1 (3)
       objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
+      propertyPath: chaseSettings.distanceToCheckpoint
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
       propertyPath: chaseSettings.grabbedPlayerLocation
       value: 
-      objectReference: {fileID: 1118015563}
+      objectReference: {fileID: 1449609317}
+    - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
+      propertyPath: patrolSettings.patrolDistanceToDestination
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.size
       value: 11
@@ -29180,15 +29196,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7582493935273536654, guid: ee3d910545b206946a646dfdbb9b8c71, type: 3}
       propertyPath: m_LocalScale.x
-      value: 14.758726
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7582493935273536654, guid: ee3d910545b206946a646dfdbb9b8c71, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.8909
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7582493935273536654, guid: ee3d910545b206946a646dfdbb9b8c71, type: 3}
       propertyPath: m_LocalScale.z
-      value: 17.346184
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7582493935273536654, guid: ee3d910545b206946a646dfdbb9b8c71, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29234,7 +29250,10 @@ PrefabInstance:
     - {fileID: 2777507040973992039, guid: ee3d910545b206946a646dfdbb9b8c71, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7093660499286963764, guid: ee3d910545b206946a646dfdbb9b8c71, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1904058414}
   m_SourcePrefab: {fileID: 100100000, guid: ee3d910545b206946a646dfdbb9b8c71, type: 3}
 --- !u!1001 &695656865
 PrefabInstance:
@@ -45786,6 +45805,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1217822023}
     m_Modifications:
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.x
+      value: 31.67618
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.y
+      value: -7.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.z
+      value: 15.04
+      objectReference: {fileID: 0}
     - target: {fileID: 2837709001711407888, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_Name
       value: CheckpointTrigger
@@ -45796,11 +45827,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5124502
+      value: -7.24
       objectReference: {fileID: 0}
     - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 39.103565
+      value: 39.4
       objectReference: {fileID: 0}
     - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -47724,7 +47755,7 @@ Transform:
   m_GameObject: {fileID: 1158610963}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6, y: -1.25, z: -9.54}
+  m_LocalPosition: {x: 1.6, y: -1.25, z: -13.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49538,9 +49569,17 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
+      propertyPath: chaseSettings.distanceToCheckpoint
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
       propertyPath: chaseSettings.grabbedPlayerLocation
       value: 
-      objectReference: {fileID: 1118015563}
+      objectReference: {fileID: 1449609317}
+    - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
+      propertyPath: patrolSettings.patrolDistanceToDestination
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.size
       value: 11
@@ -49593,7 +49632,8 @@ PrefabInstance:
       propertyPath: playerDetectedSettings.playerDetectedCooldownTime
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -50048,7 +50088,7 @@ Transform:
   m_GameObject: {fileID: 1208150274}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.08, y: -1.25, z: -3.29}
+  m_LocalPosition: {x: 8.02, y: -1.25, z: -3.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50352,6 +50392,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1118015564}
+  - {fileID: 1449609316}
   - {fileID: 1911506691}
   - {fileID: 2099816718}
   m_Father: {fileID: 747840755}
@@ -55574,6 +55615,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1543087136}
     m_Modifications:
+    - target: {fileID: 855280126562456357, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 942470117471417506, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.619148
@@ -55619,9 +55664,17 @@ PrefabInstance:
       value: ChildPrefab2
       objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
+      propertyPath: chaseSettings.distanceToCheckpoint
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
       propertyPath: chaseSettings.grabbedPlayerLocation
       value: 
       objectReference: {fileID: 1118015563}
+    - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
+      propertyPath: patrolSettings.patrolDistanceToDestination
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.size
       value: 3
@@ -56635,9 +56688,17 @@ PrefabInstance:
       value: ChildPrefab1 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
+      propertyPath: chaseSettings.distanceToCheckpoint
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
       propertyPath: chaseSettings.grabbedPlayerLocation
       value: 
       objectReference: {fileID: 1118015563}
+    - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
+      propertyPath: patrolSettings.patrolDistanceToDestination
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.size
       value: 3
@@ -59089,6 +59150,91 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eff4014297b475847a57d7ba053ea2ec, type: 3}
+--- !u!1001 &1449609315
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1217822023}
+    m_Modifications:
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.x
+      value: 31.67618
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.y
+      value: -7.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.z
+      value: 139.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837709001711407888, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_Name
+      value: CheckpointTrigger (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 31.67618
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 121.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+--- !u!4 &1449609316 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+  m_PrefabInstance: {fileID: 1449609315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1449609317 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+  m_PrefabInstance: {fileID: 1449609315}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9944db4b94250c40bac6fff4a560a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1452659527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60228,6 +60374,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 72724319}
     m_Modifications:
+    - target: {fileID: 1836241239906170691, guid: a78742b8d56d9e148af2f245620d0cac, type: 3}
+      propertyPath: chaseSettings.distanceToCheckpoint
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1836241239906170691, guid: a78742b8d56d9e148af2f245620d0cac, type: 3}
       propertyPath: chaseSettings.grabbedPlayerLocation
       value: 
@@ -61621,9 +61771,21 @@ PrefabInstance:
       value: ChildPrefab1 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
+      propertyPath: chaseSettings.chaseMinDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
+      propertyPath: chaseSettings.distanceToCheckpoint
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
       propertyPath: chaseSettings.grabbedPlayerLocation
       value: 
       objectReference: {fileID: 1118015563}
+    - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
+      propertyPath: patrolSettings.patrolDistanceToDestination
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: b4afd4df994d78b47a2ef2ce9c9cb855, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.data[0]
       value: 
@@ -61648,7 +61810,8 @@ PrefabInstance:
       propertyPath: playerDetectedSettings.playerDetectedCooldownTime
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -72774,31 +72937,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 869378075295768060, guid: 0a01ce2f5c886ac469ab722a233b6650, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 62.556175
+      value: 57.32
       objectReference: {fileID: 0}
     - target: {fileID: 869378075295768060, guid: 0a01ce2f5c886ac469ab722a233b6650, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.50755
+      value: -8.51
       objectReference: {fileID: 0}
     - target: {fileID: 869378075295768060, guid: 0a01ce2f5c886ac469ab722a233b6650, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 132.91357
+      value: 125.4
       objectReference: {fileID: 0}
     - target: {fileID: 869378075295768060, guid: 0a01ce2f5c886ac469ab722a233b6650, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0045767543
+      value: -0.2431508
       objectReference: {fileID: 0}
     - target: {fileID: 869378075295768060, guid: 0a01ce2f5c886ac469ab722a233b6650, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 1.0002905e-10
+      value: 0.000000005508062
       objectReference: {fileID: 0}
     - target: {fileID: 869378075295768060, guid: 0a01ce2f5c886ac469ab722a233b6650, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.99998957
+      value: 0.96998847
       objectReference: {fileID: 0}
     - target: {fileID: 869378075295768060, guid: 0a01ce2f5c886ac469ab722a233b6650, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000021855467
+      value: 0.000000021150255
       objectReference: {fileID: 0}
     - target: {fileID: 869378075295768060, guid: 0a01ce2f5c886ac469ab722a233b6650, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -72806,7 +72969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 869378075295768060, guid: 0a01ce2f5c886ac469ab722a233b6650, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 179.476
+      value: 208.145
       objectReference: {fileID: 0}
     - target: {fileID: 869378075295768060, guid: 0a01ce2f5c886ac469ab722a233b6650, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -78654,6 +78817,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4454565282817368, guid: b86078357402ec049b1f38b341e4c391, type: 3}
   m_PrefabInstance: {fileID: 1902647721}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1904058410 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7093660499286963764, guid: ee3d910545b206946a646dfdbb9b8c71, type: 3}
+  m_PrefabInstance: {fileID: 693868531}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1904058414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904058410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &1904243604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78780,17 +78967,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1217822023}
     m_Modifications:
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.x
+      value: 91.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.y
+      value: -6.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.z
+      value: 19.96357
+      objectReference: {fileID: 0}
     - target: {fileID: 2837709001711407888, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_Name
       value: CheckpointTrigger (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 105.57618
+      value: 123.4
       objectReference: {fileID: 0}
     - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5124502
+      value: -6.65
       objectReference: {fileID: 0}
     - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -85594,21 +85793,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1217822023}
     m_Modifications:
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.x
+      value: 106.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.y
+      value: -7.569
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961543968781375585, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: checkpointPosition.z
+      value: 136.51
+      objectReference: {fileID: 0}
     - target: {fileID: 2837709001711407888, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_Name
       value: CheckpointTrigger (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4278045
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4278045
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4278045
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 105.57618
+      value: 110.05
       objectReference: {fileID: 0}
     - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5124502
+      value: -7.569
       objectReference: {fileID: 0}
     - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 132.10356
+      value: 124.69
       objectReference: {fileID: 0}
     - target: {fileID: 6789114390752048627, guid: 4a4621d0f2af60048952725340183ae1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -87491,7 +87714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7998615047934898644, guid: a44cccc20f3187546becc81725456fb2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 59.72
+      value: 61.78
       objectReference: {fileID: 0}
     - target: {fileID: 7998615047934898644, guid: a44cccc20f3187546becc81725456fb2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -87499,7 +87722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7998615047934898644, guid: a44cccc20f3187546becc81725456fb2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 119.56
+      value: 120.41
       objectReference: {fileID: 0}
     - target: {fileID: 7998615047934898644, guid: a44cccc20f3187546becc81725456fb2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -87578,6 +87801,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 289184013}
     m_Modifications:
+    - target: {fileID: 1030865612977020233, guid: cac3e25d5b782ed48857166fab391d56, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2010037963543680216, guid: cac3e25d5b782ed48857166fab391d56, type: 3}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3054752828358230738, guid: cac3e25d5b782ed48857166fab391d56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.0174637
@@ -87618,6 +87849,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3178469777101672417, guid: cac3e25d5b782ed48857166fab391d56, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3211469573319191809, guid: cac3e25d5b782ed48857166fab391d56, type: 3}
       propertyPath: m_Radius
       value: 0.43215102
@@ -87629,6 +87864,14 @@ PrefabInstance:
     - target: {fileID: 6291963253923741328, guid: cac3e25d5b782ed48857166fab391d56, type: 3}
       propertyPath: m_Name
       value: Park-Fountain1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291963253923741328, guid: cac3e25d5b782ed48857166fab391d56, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006183521448038275, guid: cac3e25d5b782ed48857166fab391d56, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -87655,11 +87898,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
+  m_OverrideArea: 1
+  m_Area: 1
   m_OverrideGenerateLinks: 0
   m_GenerateLinks: 0
-  m_IgnoreFromBuild: 1
+  m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
 --- !u!4 &782561534227567425 stripped

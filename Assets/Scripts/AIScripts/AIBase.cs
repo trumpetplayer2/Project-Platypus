@@ -135,7 +135,7 @@ namespace StateMachineInfo
 
         public bool iCaughtPlayer;
 
-        
+        public float distanceToCheckpoint;
     }
 
     [System.Serializable]
@@ -184,6 +184,9 @@ namespace StateMachineInfo
         /// Timer for hearing cooldown process
         /// </summary>
         [ReadOnly] public float hearingCooldownTime = 0f;
+
+
+
 
         
     }

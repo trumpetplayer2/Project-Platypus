@@ -163,7 +163,7 @@ public class ChaseState : BaseStateClass
     /// </summary>
     private void GrabFunction()
     {
-        if (aiScript.aIAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base.PickUP"))
+        if (aiScript.aIAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base.PickUP") || catchCoolingDown)
         {
             return;
         }
@@ -171,15 +171,6 @@ public class ChaseState : BaseStateClass
         Debug.Log("Start of Grab Function");
 
         //aiScript.aIAnimator.SetBool("Run", false);
-
-       
-
-        if (catchCoolingDown)
-        {
-            return;
-        }
-
-       
 
         if (chasingTarget.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
@@ -205,8 +196,11 @@ public class ChaseState : BaseStateClass
 
             aiScript.agent.destination = aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition;
 
-            if (Vector3.Distance(aiScript.transform.position, aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition) < 6f)
+           
+
+            if (Vector3.Distance(aiScript.transform.position, aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition) < aiScript.chaseSettings.distanceToCheckpoint)
             {
+
                 aiScript.agent.isStopped = true;
 
                
@@ -220,7 +214,7 @@ public class ChaseState : BaseStateClass
 
                 aiScript.playerDetectedSettings.playerDetectedCooldown = true;
 
-                
+                aiScript.SwitchStates(StateMachineEnum.Patrol);
 
                 //aiScript.aIAnimator.SetBool("Walk", true);
 
