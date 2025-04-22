@@ -539,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3757154525192571276, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.569893
+      value: 39.56989
       objectReference: {fileID: 0}
     - target: {fileID: 3757154525192571276, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -547,7 +547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3757154525192571276, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.416508
+      value: -17.41651
       objectReference: {fileID: 0}
     - target: {fileID: 3757154525192571276, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -606,8 +606,16 @@ PrefabInstance:
       value: Key
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: patrolSettings.patrolDistanceToDestination
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: searchFunctionSettings.EnvironmentMask.m_Bits
+      value: 20608
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: playerDetectedSettings.playerDetectedCooldownTime
@@ -630,7 +638,7 @@ PrefabInstance:
       addedObject: {fileID: -4188935495183837030}
     - targetCorrespondingSourceObject: {fileID: 340339231484221610, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2440335437313132240}
+      addedObject: {fileID: 7984325488531158760}
     - targetCorrespondingSourceObject: {fileID: 8106218522349076063, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9214005151588300609}
@@ -716,7 +724,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!54 &2440335437313132240
+--- !u!54 &7984325488531158760
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -724,7 +732,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8322183424761208148}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -739,7 +747,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
