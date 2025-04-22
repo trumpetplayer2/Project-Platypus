@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 531839552693999877}
   - component: {fileID: 2036199908640742003}
   - component: {fileID: 3372956262313631065}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hedges_Dark_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
