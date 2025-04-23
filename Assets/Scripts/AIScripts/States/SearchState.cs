@@ -81,14 +81,12 @@ public class SearchState : BaseStateClass
     /// </summary>
     public void SearchInPlaceFunction()
     {
-        if (aiScript.aIAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base.Walk"))
-        {
+        
             aiScript.aIAnimator.SetBool("Walk", false);
-        }
-        else if (aiScript.aIAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base.Run"))
-        {
+        
+        
             aiScript.aIAnimator.SetBool("Run", false);
-        }
+        
 
         aiScript.aIAnimator.SetBool("Interact", true);
 
