@@ -13,6 +13,14 @@ public class ObserveState : BaseStateClass
 
     Vector3 rotation;
 
+    float timer = 0f;
+
+    public float timerMax;
+
+    public Vector3 start;
+
+    public Vector3 goal;
+
 
     public ObserveState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
@@ -29,6 +37,8 @@ public class ObserveState : BaseStateClass
 
         aiScript.agent.isStopped = true;
 
+        timerMax = aiScript.observeSettings.observeTimerMax;
+
         aiScript.aIAnimator.SetBool("Walk", false);
 
         aiScript.aIAnimator.SetBool("Interact", true);
@@ -42,18 +52,36 @@ public class ObserveState : BaseStateClass
     public override void CurrStateFunctionality()
     {
         
+       
 
-        //aiScript.transform.LookAt(observedTarget.transform, Vector3.up);
+        if(goal == null || timer >= timerMax)
+        {
+            start = aiScript.transform.forward;
 
-        rotation = Quaternion.LookRotation(observedTarget.transform.position).eulerAngles;
+            goal = (observedTarget.transform.position - aiScript.transform.position).normalized;
 
-        //rotation.y = 0f;
+            timer = 0f;
+
+
+        }
+
+        timer += Time.deltaTime;
+
+        aiScript.transform.forward = Vector3.Lerp(start, goal, timer / timerMax);
+
+        ////aiScript.transform.LookAt(observedTarget.transform, Vector3.up);
+
+        //rotation = Quaternion.LookRotation(observedTarget.transform.position - aiScript.transform.position.normalized).eulerAngles;
+
+        ////rotation.y = 0f;
+
+        //Vector3.Lerp(aiScript.transform.forward, rotation, )
 
         rotation.x = 0f;
 
-        rotation *= 2;
+        //rotation *= 2;
 
-        currPosition.rotation = Quaternion.Euler(rotation);
+        //currPosition.rotation = Quaternion.Euler(rotation);
 
         if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.observeSettings.maxObserveDistance)
             {
