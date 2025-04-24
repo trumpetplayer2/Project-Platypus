@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6512012140047891694}
   - component: {fileID: 2188585574792478934}
   - component: {fileID: 5581376337029214787}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Log_Light_Damaged_Light_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5687332599104013129}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2188585574792478934
 MeshFilter:

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5324143969996450028}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Park-Fence3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,6 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4803361784186368598}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,7 +32,6 @@ Transform:
   - {fileID: 3566245485495831899}
   - {fileID: 6167678121547311241}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6937321353915938929
 GameObject:
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6167678121547311241}
   - component: {fileID: 828849085190479609}
   - component: {fileID: 3691150168084203556}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,13 +58,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6937321353915938929}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5324143969996450028}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &828849085190479609
 MeshFilter:
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 3566245485495831899}
   - component: {fileID: 4462371717454548099}
   - component: {fileID: 7913552484056823293}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,13 +141,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8203433967500366781}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5324143969996450028}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4462371717454548099
 MeshFilter:

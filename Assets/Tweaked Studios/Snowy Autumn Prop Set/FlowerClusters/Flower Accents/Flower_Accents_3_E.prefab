@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2699760298247442820}
   - component: {fileID: 694808217062955566}
   - component: {fileID: 5190018353712017343}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Flower_Accents_3_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6221132467030498624}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &694808217062955566
 MeshFilter:

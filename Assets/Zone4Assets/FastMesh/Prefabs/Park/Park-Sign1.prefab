@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1263306079177652904}
   - component: {fileID: 2096553304804342640}
   - component: {fileID: 5559523857535435278}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7572481489125072671}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Park-Sign1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

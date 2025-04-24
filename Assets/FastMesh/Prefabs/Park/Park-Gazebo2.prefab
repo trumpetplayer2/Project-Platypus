@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5626212647516176549}
   - component: {fileID: 4792969823089983869}
   - component: {fileID: 1349705265360877571}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058900603396775491}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3930133380733068562}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4792969823089983869
 MeshFilter:
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3098042602634896759}
   - component: {fileID: 8424302090787836679}
   - component: {fileID: 5498915222575547866}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,13 +108,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2247255273594353039}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3930133380733068562}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8424302090787836679
 MeshFilter:
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5177005886214179206}
   - component: {fileID: 7064009870126928432}
   - component: {fileID: 6991585488716117329}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,13 +191,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2292993360811893074}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3930133380733068562}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7064009870126928432
 MeshFilter:
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3930133380733068562}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Park-Gazebo2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,6 +272,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4449965244895182760}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -282,7 +283,6 @@ Transform:
   - {fileID: 1284092018806587616}
   - {fileID: 5177005886214179206}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5083356470393329017
 GameObject:
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 1284092018806587616}
   - component: {fileID: 7429233659824461666}
   - component: {fileID: 1156617133767943952}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,13 +309,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5083356470393329017}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3930133380733068562}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7429233659824461666
 MeshFilter:

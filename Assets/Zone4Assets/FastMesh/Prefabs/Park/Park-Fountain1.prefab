@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1671728972425726807}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Park-Fountain1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 7151016304288722744}
   - component: {fileID: 3675660850436953670}
   - component: {fileID: 989867654619293503}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 812893742221593394}
   - component: {fileID: 6147604557907672386}
   - component: {fileID: 7920034707407858591}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 5702877178269026877}
   - component: {fileID: 7173079348279134711}
   - component: {fileID: 5634439522413562279}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3911904399857445291}
   - component: {fileID: 1432749213896337187}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: coll1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7135254156458078592}
   - component: {fileID: 1163263954716901286}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: coll2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6232443462541138013}
   - component: {fileID: 4510212553772464448}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: coll2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 6374676154571692376}
   - component: {fileID: 8318385307885568920}
   - component: {fileID: 7549260516648903055}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: coll2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,6 +255,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8814488045916099564, guid: a5444681219b5aa43924361e98346ff5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5444681219b5aa43924361e98346ff5, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.3465
@@ -307,9 +311,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7272266175963554724, guid: a5444681219b5aa43924361e98346ff5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a5444681219b5aa43924361e98346ff5, type: 3}
       propertyPath: m_Name
       value: soccerGoalNormal3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a5444681219b5aa43924361e98346ff5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9072243488710425555, guid: a5444681219b5aa43924361e98346ff5, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

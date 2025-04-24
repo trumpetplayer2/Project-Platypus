@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4391988251352474}
   - component: {fileID: 205966903861642654}
   - component: {fileID: 3444375351555200022}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Stump_A_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 4567075706781546}
   - component: {fileID: 33498936457620602}
   - component: {fileID: 23941267120582582}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Stump_A_03_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 4883500142463836}
   - component: {fileID: 33872766006830584}
   - component: {fileID: 23593847852381126}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Stump_A_03_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 4834087655780734}
   - component: {fileID: 33598601580949424}
   - component: {fileID: 23766401065696344}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Stump_A_03_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 4681915023095254}
   - component: {fileID: 33738315193329128}
   - component: {fileID: 23740828266321190}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Stump_A_03_LOD3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

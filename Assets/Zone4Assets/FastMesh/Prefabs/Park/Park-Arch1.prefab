@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4128596345465909949}
   - component: {fileID: 7448091541548139725}
   - component: {fileID: 6910175043288191504}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6746848872849463151}
   - component: {fileID: 5850670134907033271}
   - component: {fileID: 76227062660329417}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2683985575384658648}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Park-Arch1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1803808096623178791}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

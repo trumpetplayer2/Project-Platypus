@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1577135310703498454}
   - component: {fileID: 3643225139714235296}
   - component: {fileID: 1426665693193088905}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Flower_Petal_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8906780795524853211}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3643225139714235296
 MeshFilter:

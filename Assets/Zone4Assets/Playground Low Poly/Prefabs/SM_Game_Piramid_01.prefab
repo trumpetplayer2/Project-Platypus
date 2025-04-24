@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9172678904532372155}
   - component: {fileID: 3152387587662089680}
   - component: {fileID: 1371416317144722073}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SM_Game_Piramid_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

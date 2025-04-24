@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4792969823089983869}
   - component: {fileID: 1349705265360877571}
   - component: {fileID: 7734668356091634292}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 8424302090787836679}
   - component: {fileID: 5498915222575547866}
   - component: {fileID: 2004413257864440971}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 5177005886214179206}
   - component: {fileID: 7064009870126928432}
   - component: {fileID: 6991585488716117329}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3930133380733068562}
   - component: {fileID: 6204748251120620262}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Park-Gazebo2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 1284092018806587616}
   - component: {fileID: 7429233659824461666}
   - component: {fileID: 1156617133767943952}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: layer 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

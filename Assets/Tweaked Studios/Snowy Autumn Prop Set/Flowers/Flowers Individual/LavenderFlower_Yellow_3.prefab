@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1384858016392159161}
   - component: {fileID: 3768162631392914679}
   - component: {fileID: 1525659813507485328}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LavenderFlower_Yellow_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4752076328510713034}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3768162631392914679
 MeshFilter:

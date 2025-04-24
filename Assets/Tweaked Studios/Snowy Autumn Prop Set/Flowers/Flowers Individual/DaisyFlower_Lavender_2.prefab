@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7381769190997024361}
   - component: {fileID: 2742714032124594223}
   - component: {fileID: 6915006855680487993}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DaisyFlower_Lavender_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4086938275544545668}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2742714032124594223
 MeshFilter:

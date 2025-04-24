@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4364085177521085694}
   - component: {fileID: 1541680139973737301}
   - component: {fileID: 8251852464635894874}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Flora_A_02_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 980574544916279205}
   - component: {fileID: 2314109072106131492}
   - component: {fileID: 7977112789041665253}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Flora_A_02_LOD3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5320337396749420736}
   - component: {fileID: 4917869101764680202}
   - component: {fileID: 4227072135137489896}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Flora_A_02_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 19445079720946657}
   - component: {fileID: 7878155290695043549}
   - component: {fileID: 863112286892866800}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Flora_A_02_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8184438710551732275}
   - component: {fileID: 5694623740278038973}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Flora_A_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

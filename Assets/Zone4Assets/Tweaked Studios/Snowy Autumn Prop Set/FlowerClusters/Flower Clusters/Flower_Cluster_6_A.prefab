@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8705784131295563222}
   - component: {fileID: 6105590258455749334}
   - component: {fileID: 2417677739274689182}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Flower_Cluster_6_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8600377564917568501}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6105590258455749334
 MeshFilter:

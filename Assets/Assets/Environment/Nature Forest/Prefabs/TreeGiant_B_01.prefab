@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4176289386815426}
   - component: {fileID: 33354390977943290}
   - component: {fileID: 23173281350742342}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TreeGiant_B_01_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4668275327710722}
   - component: {fileID: 33224032623831372}
   - component: {fileID: 23050809179938712}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TreeGiant_B_01_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4603806609300556}
   - component: {fileID: 33275361549350430}
   - component: {fileID: 23408779392017780}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TreeGiant_B_01_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 4191979630323686}
   - component: {fileID: 33966860266734856}
   - component: {fileID: 23396073685345594}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TreeGiant_B_01_LOD3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4367187987584862}
   - component: {fileID: 205477876666999474}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TreeGiant_B_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3938892012107376175}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

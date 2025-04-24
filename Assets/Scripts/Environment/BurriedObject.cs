@@ -25,6 +25,10 @@ public class BurriedObject : Diggable
         {
             digParticle = Instantiate(digParticlePrefab, transform);
         }
+        if (treasure.TryGetComponent<ItemScript>(out ItemScript i))
+        {
+            i.holdable = false;
+        }
     }
     private void Start()
     {

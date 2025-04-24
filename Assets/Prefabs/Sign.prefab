@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8613505441604063801}
   - component: {fileID: 3532828314175712084}
   - component: {fileID: 8348115468238243601}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,6 +165,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 30d530456ca58db4aaded57266eb69b9, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -4683669308469848369, guid: 30d530456ca58db4aaded57266eb69b9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -172,6 +176,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 30d530456ca58db4aaded57266eb69b9, type: 3}
       propertyPath: m_Name
       value: Sign
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 30d530456ca58db4aaded57266eb69b9, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

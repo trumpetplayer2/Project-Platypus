@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4010694581077490}
   - component: {fileID: 205133647621050494}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Herb_A_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 4046895422656660}
   - component: {fileID: 33795672137505402}
   - component: {fileID: 23640147304089670}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Herb_A_01_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 4782358794690116}
   - component: {fileID: 33085228934804270}
   - component: {fileID: 23284118094554148}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Herb_A_01_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 4417465014711466}
   - component: {fileID: 33270856440483288}
   - component: {fileID: 23728685362816290}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Herb_A_01_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 4426494911070164}
   - component: {fileID: 33458209877620454}
   - component: {fileID: 23513672763604684}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Herb_A_01_LOD3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

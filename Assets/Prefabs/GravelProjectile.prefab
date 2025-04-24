@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9103040998996855114}
   - component: {fileID: 2519940774229421040}
   - component: {fileID: 3711539653640014469}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GravelProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
