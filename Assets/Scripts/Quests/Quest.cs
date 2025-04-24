@@ -36,6 +36,7 @@ public class Quest
     {
         OnFinish?.Invoke();
         QuestManager.instance.saveQuestData();
+        QuestManager.instance.OnQuestComplete(UniqueID);
     }
 
     public void QuestUpdate()

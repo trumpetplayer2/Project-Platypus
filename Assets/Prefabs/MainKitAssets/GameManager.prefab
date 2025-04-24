@@ -85,7 +85,13 @@ MonoBehaviour:
   ListStartOffset: {x: 15, y: -15}
   ListObjectOffset: {x: 0, y: -165}
   QuestList: []
-  QuestComplete: {fileID: 8300000, guid: a942b09529f75624a9e0bce33cb71058, type: 3}
+  QuestComplete:
+    clip: {fileID: 8300000, guid: a942b09529f75624a9e0bce33cb71058, type: 3}
+    timeout: -1
+    volume: 1
+    pitch: 1.5
+    startTime: 0
+    variance: 0
   references:
     version: 2
     RefIds: []

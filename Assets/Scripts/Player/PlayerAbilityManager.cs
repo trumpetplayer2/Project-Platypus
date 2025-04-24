@@ -217,7 +217,10 @@ namespace tp2
                 }
             }
             digCooldown = dig.Cooldown;
-            queueClip(2);
+            if (dig.triggered)
+            {
+                queueClip(2);
+            }
         }
 
         void SpawnParticle(ParticleSystem Particle, GameObject target)

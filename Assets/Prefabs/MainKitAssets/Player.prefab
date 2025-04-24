@@ -249,7 +249,7 @@ MonoBehaviour:
     gravelEntity: {fileID: 1567429259736677278, guid: 17aecb32f0f6034459c878f37b3fb6c2, type: 3}
     gravelSpawnLocation: {fileID: 3190463933237773391}
     collectClip: {fileID: 8300000, guid: 6bcb3f762d45bc24286e9aa6999752cb, type: 3}
-    spitClip: {fileID: 0}
+    spitClip: {fileID: 8300000, guid: 65aa456075103834b81b75bd6d582105, type: 3}
     gravelParticle: {fileID: 0}
   canCollectGravel: 0
   dig:
@@ -259,7 +259,7 @@ MonoBehaviour:
     dig:
       m_PersistentCalls:
         m_Calls: []
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 527c8dd7ca98da64080a1071ac9b7a88, type: 3}
     triggered: 0
     digParticle: {fileID: 1294285093481974575, guid: 6b79e4a3becaf0046b44169fcef2d279, type: 3}
     DigObjects: []
@@ -301,6 +301,7 @@ MonoBehaviour:
       startTime: 0
       variance: 0.2
     Input: Noise
+    noiseCooldown: 0.5
 --- !u!54 &7450155215747013509
 Rigidbody:
   m_ObjectHideFlags: 0

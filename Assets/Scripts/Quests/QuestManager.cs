@@ -25,7 +25,7 @@ public class QuestManager : MonoBehaviour
     bool loading;
     float saveDelay = 1f;
     float saveCooldown = 0f;
-    public AudioClip QuestComplete;
+    public Clip QuestComplete;
     
     // Start is called before the first frame update
     void Start()
