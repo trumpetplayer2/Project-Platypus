@@ -59,7 +59,8 @@ public class SearchState : BaseStateClass
     {
         if (aiScript.SearchForTargets() == DetectedType.Player)
         {
-           
+            aiScript.aIAnimator.SetBool("Interact", false);
+
             aiScript.SwitchStates(StateMachineEnum.PlayerDetected);
         }
 
