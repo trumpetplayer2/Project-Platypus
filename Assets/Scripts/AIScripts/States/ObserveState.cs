@@ -11,7 +11,7 @@ public class ObserveState : BaseStateClass
 
     Transform currPosition;
 
-    Vector3 rotation;
+   
 
     float timer = 0f;
 
@@ -77,7 +77,7 @@ public class ObserveState : BaseStateClass
 
         //Vector3.Lerp(aiScript.transform.forward, rotation, )
 
-        rotation.x = 0f;
+      
 
         //rotation *= 2;
 
