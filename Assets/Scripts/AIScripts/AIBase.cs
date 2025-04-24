@@ -145,6 +145,10 @@ namespace StateMachineInfo
         /// Maximum distance between AI and player before it changes from Observe State
         /// </summary>
         public float maxObserveDistance;
+
+        public float observeTimerMax;
+
+
     }
 
     [System.Serializable]
