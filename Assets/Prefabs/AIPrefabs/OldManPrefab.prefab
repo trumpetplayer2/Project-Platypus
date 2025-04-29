@@ -586,6 +586,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 568402157370635260}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: aIDetectionTime
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: searchFunctionSettings.angle
       value: 100
       objectReference: {fileID: 0}
@@ -600,6 +604,10 @@ PrefabInstance:
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: observeSettings.observeTimerMax
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: playerDetectedSettings.itemCheck
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: chaseSettings.distanceToCheckpoint
