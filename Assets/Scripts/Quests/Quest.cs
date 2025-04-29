@@ -23,6 +23,7 @@ public class Quest
     public UnityEvent OnFinish = new UnityEvent();
     float descriptionCheckCooldown = 0f;
     public float descriptionUpdate = 1f;
+    Color completedColor = Color.gray;
     
     
     public void Start()
@@ -37,6 +38,10 @@ public class Quest
         OnFinish?.Invoke();
         QuestManager.instance.saveQuestData();
         QuestManager.instance.OnQuestComplete(UniqueID);
+        container.QuestName.fontStyle = TMPro.FontStyles.Strikethrough;
+        container.Description.fontStyle = TMPro.FontStyles.Strikethrough;
+        container.QuestName.color = completedColor;
+        container.Description.color = completedColor;
     }
 
     public void QuestUpdate()
