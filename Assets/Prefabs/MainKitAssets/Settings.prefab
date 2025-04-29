@@ -447,6 +447,7 @@ GameObject:
   - component: {fileID: 7747799520972311534}
   - component: {fileID: 7968563088356568537}
   - component: {fileID: 2143459861637714241}
+  - component: {fileID: 6990891171335507652}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -580,6 +581,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6990891171335507652}
+        m_TargetAssemblyTypeName: tp2.SfxHandler, Assembly-CSharp
+        m_MethodName: play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6990891171335507652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050459999917088636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27cd010d6a8d3cf419d01cac8f0797a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSettings:
+    sfxVolume: 1
+    sfxPitch: 1
+    startTime: 0
+    timeout: -1
+    cooldown: 0.1
+    sfx:
+    - {fileID: 8300000, guid: d4bb03c63a0518643ab4956eb00c9dfc, type: 3}
 --- !u!1 &2111925887031242352
 GameObject:
   m_ObjectHideFlags: 0
@@ -2972,6 +3005,7 @@ GameObject:
   - component: {fileID: 1906939885220257995}
   - component: {fileID: 8734329371283723602}
   - component: {fileID: 5334405120508537090}
+  - component: {fileID: 1724370366669651026}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -3093,9 +3127,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: saveSettings
+      - m_Target: {fileID: 2947724003071599917}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: save
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3105,6 +3139,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1724370366669651026}
+        m_TargetAssemblyTypeName: tp2.SfxHandler, Assembly-CSharp
+        m_MethodName: play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1724370366669651026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9185995141181427980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27cd010d6a8d3cf419d01cac8f0797a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSettings:
+    sfxVolume: 1
+    sfxPitch: 3
+    startTime: 0
+    timeout: -1
+    cooldown: 0.1
+    sfx:
+    - {fileID: 8300000, guid: d4bb03c63a0518643ab4956eb00c9dfc, type: 3}
 --- !u!1 &9212459193022505464
 GameObject:
   m_ObjectHideFlags: 0

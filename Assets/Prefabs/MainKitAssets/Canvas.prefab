@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 2423193568806061155}
   - component: {fileID: 3013007121590559360}
   - component: {fileID: 5974896730695196553}
+  - component: {fileID: 6127222288814843351}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -453,6 +454,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6127222288814843351}
+        m_TargetAssemblyTypeName: tp2.SfxHandler, Assembly-CSharp
+        m_MethodName: play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6127222288814843351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688990807400153129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27cd010d6a8d3cf419d01cac8f0797a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSettings:
+    sfxVolume: 1
+    sfxPitch: 1
+    startTime: 0
+    timeout: -1
+    cooldown: 0.1
+    sfx:
+    - {fileID: 8300000, guid: d4bb03c63a0518643ab4956eb00c9dfc, type: 3}
 --- !u!1 &3150541961532258950
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +619,7 @@ MonoBehaviour:
   fadeTime: 0.5
   checkpoint: {x: 0, y: 0, z: 0}
   currentMenu: {fileID: 5546234346979450329}
+  returningtoCheckpoint: 0
 --- !u!1 &3692539062509221410
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +820,7 @@ GameObject:
   - component: {fileID: 739906837671899065}
   - component: {fileID: 3319120233901814438}
   - component: {fileID: 4829604868072023796}
+  - component: {fileID: 6303252013118494761}
   m_Layer: 5
   m_Name: LastCheckpoint
   m_TagString: Untagged
@@ -907,6 +942,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6303252013118494761}
+        m_TargetAssemblyTypeName: tp2.SfxHandler, Assembly-CSharp
+        m_MethodName: play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6303252013118494761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4246890020052776743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27cd010d6a8d3cf419d01cac8f0797a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSettings:
+    sfxVolume: 1
+    sfxPitch: 1
+    startTime: 0
+    timeout: -1
+    cooldown: 0.1
+    sfx:
+    - {fileID: 8300000, guid: d4bb03c63a0518643ab4956eb00c9dfc, type: 3}
 --- !u!1 &4720702737059474807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,6 +2001,7 @@ GameObject:
   - component: {fileID: 4330015329918960159}
   - component: {fileID: 6969813789073549236}
   - component: {fileID: 3366471447180862467}
+  - component: {fileID: 3557290856960757312}
   m_Layer: 5
   m_Name: Resume
   m_TagString: Untagged
@@ -2055,6 +2123,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3557290856960757312}
+        m_TargetAssemblyTypeName: tp2.SfxHandler, Assembly-CSharp
+        m_MethodName: play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3557290856960757312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7340960044184046502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27cd010d6a8d3cf419d01cac8f0797a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSettings:
+    sfxVolume: 1
+    sfxPitch: 1
+    startTime: 0
+    timeout: -1
+    cooldown: 0.1
+    sfx:
+    - {fileID: 8300000, guid: d4bb03c63a0518643ab4956eb00c9dfc, type: 3}
 --- !u!1 &7871506773373012718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2560,6 +2660,7 @@ GameObject:
   - component: {fileID: 2077115592742572313}
   - component: {fileID: 2726567205172033486}
   - component: {fileID: 6916305389261272484}
+  - component: {fileID: 6301986625506890300}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -2681,6 +2782,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6301986625506890300}
+        m_TargetAssemblyTypeName: tp2.SfxHandler, Assembly-CSharp
+        m_MethodName: play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6301986625506890300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195185198877421221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27cd010d6a8d3cf419d01cac8f0797a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSettings:
+    sfxVolume: 1
+    sfxPitch: 1
+    startTime: 0
+    timeout: -1
+    cooldown: 0.1
+    sfx:
+    - {fileID: 8300000, guid: d4bb03c63a0518643ab4956eb00c9dfc, type: 3}
 --- !u!1001 &6121274550432318295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2850,9 +2983,29 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 8942822408663983738}
+    - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 4836042963025248005}
+    - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: togglePauseMenu
@@ -2862,8 +3015,16 @@ PrefabInstance:
       value: save
       objectReference: {fileID: 0}
     - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: play
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: SettingsMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: tp2.SfxHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -2872,6 +3033,10 @@ PrefabInstance:
     - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: Submenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334405120508537090, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6263596960369315328, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
       propertyPath: m_Name
@@ -2911,6 +3076,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1488479563546883900, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
   m_PrefabInstance: {fileID: 6121274550432318295}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4836042963025248005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1724370366669651026, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}
+  m_PrefabInstance: {fileID: 6121274550432318295}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27cd010d6a8d3cf419d01cac8f0797a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6166734102471138407 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 101191610753883952, guid: abec9cf4efdcd8c4a8d84895ded5bd78, type: 3}

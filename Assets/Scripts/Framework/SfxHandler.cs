@@ -40,6 +40,11 @@ namespace tp2
     {
         public AudioSettings audioSettings = new AudioSettings();
         float timer = 0;
+
+        public void play(int i)
+        {
+            playClip(i);
+        }
         public void playClip(int i, bool overrideTimer = false)
         {
             if (getSfx(i) == null) return;
