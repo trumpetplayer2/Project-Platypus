@@ -442,7 +442,7 @@ namespace StateMachineInfo
 
             if (playerDetectedSettings.playerDetectedCooldown)
             {
-                Debug.Log("player Detected Cooldown");
+                //Debug.Log("player Detected Cooldown");
                 playerDetectedSettings.pDCooldownTimer += Time.deltaTime;
 
                 if(playerDetectedSettings.pDCooldownTimer >= playerDetectedSettings.playerDetectedCooldownTime)
@@ -645,15 +645,7 @@ namespace StateMachineInfo
         }
 
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            Debug.Log("Hit by Gravel");
-            if(collision.gameObject.TryGetComponent<Gravel>(out Gravel gravelProjectile)) {
-            
-                TriggerBehavior();
-            }
-        }
-
+       
 
 
     }

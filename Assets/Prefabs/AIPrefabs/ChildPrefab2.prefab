@@ -90,11 +90,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: searchFunctionSettings.angle
-      value: 100
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: chaseSettings.catchTargetTime
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: searchFunctionSettings.radius
@@ -102,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: chaseSettings.chaseMinDistance
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: chaseSettings.losingTargetTime
