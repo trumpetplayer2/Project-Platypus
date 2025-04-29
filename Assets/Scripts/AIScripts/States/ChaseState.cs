@@ -31,7 +31,7 @@ public class ChaseState : BaseStateClass
     
     public override void OnEnterState()
     {
-        Debug.Log("Entering Chase State");
+        //Debug.Log("Entering Chase State");
         chasingTarget = aiScript.searchFunctionSettings.playerObj;
 
         aiScript.agent.speed += aiScript.chaseSettings.chaseSpeedIncrease;
@@ -80,7 +80,7 @@ public class ChaseState : BaseStateClass
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) <= aiScript.chaseSettings.chaseMinDistance)
             {
 
-             Debug.Log("Am I close to the player");
+             //Debug.Log("Am I close to the player");
                 CatchTarget();
 
                 return;
@@ -139,7 +139,7 @@ public class ChaseState : BaseStateClass
         {
             if (!callGrabAnim)
             {
-                Debug.Log("Is this Running");
+                //Debug.Log("Is this Running");
                
                 aiScript.aIAnimator.SetTrigger("PickUP");
                 aiScript.agent.destination = aiScript.transform.position;
@@ -147,7 +147,7 @@ public class ChaseState : BaseStateClass
                 callGrabAnim = true;
             }
 
-            Debug.Log("Calling Grabbing Function");
+            //Debug.Log("Calling Grabbing Function");
             GrabFunction();
 
             return;
@@ -157,7 +157,7 @@ public class ChaseState : BaseStateClass
         return;
     }
 
-   
+
     /// <summary>
     /// will grab the player and take them to the checkpoint location
     /// </summary>
@@ -168,57 +168,56 @@ public class ChaseState : BaseStateClass
             return;
         }
 
-        Debug.Log("Start of Grab Function");
+        //Debug.Log("Start of Grab Function");
 
         //aiScript.aIAnimator.SetBool("Run", false);
 
-        if (chasingTarget.TryGetComponent<PlayerMovement>(out PlayerMovement player))
+        PlayerMovement player = PlayerMovement.instance;
+        PlayerAbilityManager playerInstance = PlayerAbilityManager.instance;
+
+        aiScript.agent.isStopped = false;
+
+
+
+        aiScript.aIAnimator.SetBool("Walk", true);
+        aiScript.aIAnimator.SetBool("Run", false);
+        if (!GameManager.instance.isPaused && !PauseScript.instance.returningtoCheckpoint)
         {
-            PlayerAbilityManager playerInstance = player.GetComponent<PlayerAbilityManager>();
-
-            aiScript.agent.isStopped = false;
-
-            
-
-           aiScript.aIAnimator.SetBool("Walk", true);
-            aiScript.aIAnimator.SetBool("Run", false);
-
             player.held = true;
 
             aiScript.chaseSettings.iCaughtPlayer = true;
 
             playerInstance.Release();
             player.transform.position = aiScript.chaseSettings.playerGrabbedPosition.transform.position;
-            player.transform.parent = aiScript.transform;
+        }
 
-            
-            Debug.Log("Here");
+        //Debug.Log("Here");
 
-            aiScript.agent.destination = aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition;
+        aiScript.agent.destination = aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition;
 
-           
 
-            if (Vector3.Distance(aiScript.transform.position, aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition) < aiScript.chaseSettings.distanceToCheckpoint)
-            {
 
-                aiScript.agent.isStopped = true;
+        if (Vector3.Distance(aiScript.transform.position, aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition) < aiScript.chaseSettings.distanceToCheckpoint)
+        {
 
-               
-                player.held = false;
+            aiScript.agent.isStopped = true;
 
-                catchTimer = aiScript.chaseSettings.catchTargetTime;
 
-                player.transform.parent = null;
+            player.held = false;
 
-                catchCoolingDown = true;
+            catchTimer = aiScript.chaseSettings.catchTargetTime;
 
-                aiScript.playerDetectedSettings.playerDetectedCooldown = true;
+            player.transform.parent = null;
 
-                aiScript.SwitchStates(StateMachineEnum.Patrol);
+            catchCoolingDown = true;
 
-                //aiScript.aIAnimator.SetBool("Walk", true);
+            aiScript.playerDetectedSettings.playerDetectedCooldown = true;
 
-            }
+            aiScript.SwitchStates(StateMachineEnum.Patrol);
+
+            //aiScript.aIAnimator.SetBool("Walk", true);
+
+
         }
 
     }

@@ -19,6 +19,7 @@ public class PauseScript : MonoBehaviour
     bool canTeleport = false;
     public Submenu currentMenu;
     public static PauseScript instance;
+    public bool returningtoCheckpoint = false;
 
     private void Start()
     {
@@ -78,8 +79,11 @@ public class PauseScript : MonoBehaviour
     public void returnToCheckpoint()
     {
         if (GameManager.instance.isPaused) { togglePause(); }
+        PlayerMovement.instance.held = false;
+        CameraFollow.instance.transform.position = this.transform.position;
         fading = true;
         fadeCounter = 0;
+        returningtoCheckpoint = true;
     }
 
     public void Fade()
@@ -103,6 +107,7 @@ public class PauseScript : MonoBehaviour
             {
                 canTeleport = false;
                 fading = false;
+                returningtoCheckpoint=false;
             }
         }
     }
