@@ -79,7 +79,7 @@ PrefabInstance:
       addedObject: {fileID: 8336054227161524042}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c832315dbed6ec84da56150a270f5589, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -7434785936401891950}
+      addedObject: {fileID: -7167745510923231358}
   m_SourcePrefab: {fileID: 100100000, guid: c832315dbed6ec84da56150a270f5589, type: 3}
 --- !u!4 &2374199004935426091 stripped
 Transform:
@@ -110,27 +110,24 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.661194, y: 3.7125604, z: 5.5648375}
-  m_Center: {x: -0.17832458, y: 1.8562802, z: -0.016798973}
---- !u!114 &-7434785936401891950
-MonoBehaviour:
+  m_Size: {x: 7.661194, y: 4.2988043, z: 5.5648375}
+  m_Center: {x: -0.1783247, y: 1.5631584, z: -0.016798973}
+--- !u!208 &-7167745510923231358
+NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3150560164121365137}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_OverrideGenerateLinks: 0
-  m_GenerateLinks: 0
-  m_IgnoreFromBuild: 0
-  m_ApplyToChildren: 1
-  m_AffectedAgents: ffffffff
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.831, y: 2.5, z: 2.782}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.178, y: 1.8560001, z: -0.017}
+  m_TimeToStationary: 0.5
 --- !u!1001 &3125172593064310480
 PrefabInstance:
   m_ObjectHideFlags: 0
