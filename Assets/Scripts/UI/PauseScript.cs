@@ -80,7 +80,6 @@ public class PauseScript : MonoBehaviour
     {
         if (GameManager.instance.isPaused) { togglePause(); }
         PlayerMovement.instance.held = false;
-        CameraFollow.instance.transform.position = this.transform.position;
         fading = true;
         fadeCounter = 0;
         returningtoCheckpoint = true;
@@ -101,6 +100,7 @@ public class PauseScript : MonoBehaviour
                 canTeleport = true;
                 Color c = fade.color;
                 c.a = (2 * fadeTime - fadeCounter)/fadeTime;
+                CameraFollow.instance.transform.position = PlayerMovement.instance.transform.position;
                 fade.color = c;
             }
             else
