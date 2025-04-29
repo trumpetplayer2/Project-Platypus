@@ -156,7 +156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -203, y: 1584}
+  m_AnchoredPosition: {x: -203, y: 3310}
   m_SizeDelta: {x: 772.02, y: 262.5953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &29410335
@@ -296,7 +296,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -227, y: -598}
+  m_AnchoredPosition: {x: -185, y: -411}
   m_SizeDelta: {x: 772.02, y: 262.5953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133795667
@@ -319,32 +319,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-    - Teh_Bucket: Picnic Table
-
-
-    - AlmaPerdida: soccerGoal
-
-
-    -
-    Ahmet Gencoglu: Low Polygon Soccer Ball
-
-
-    - Polygon Park: Low Poly Park
-
-
-    -
-    Fast Mesh: Low Poly Park Pack
-
-
-    - ArtStudios3D: Playground Low Poly
-
-
-    -
-    Tweaked Studios: Snowy Autumn Low Poly Environmental Props
-
-'
+  m_text: "\n- Teh_Bucket: Picnic Table\n\n- AlmaPerdida: soccerGoal\n\n- Ahmet Gencoglu:
+    Low Polygon Soccer Ball\n\n- Polygon Park: Low Poly Park\n\n- Fast Mesh: Low
+    Poly Park Pack\n\n- ArtStudios3D: Playground Low Poly\n\n- Tweaked Studios: Snowy
+    Autumn Low Poly Environmental Props\n\n- Omabuarts Studio: Quirky Series \u2013
+    Animals Mega Pack Vol 2\n\n- Omabuarts Studio: Nature Forest \u2013 Animation
+    Asset\n\n- Nebula-Studio: High-Class Sub-Urban House\n\n- POLYSCAN: low poly
+    house 3\n\n- Coffee 'Valen' Bat: Sweet Sounds sfx Pack\n\n-zennnsounds: Take
+    Item Sound Effect\n\n-Homemade_SFX: Equip Sound\n\n-Universfield: Bubble Pop
+    #2\n\n-Universfield: Open New Level\n\n-modusmogulus: Digging dirt (and grass)
+    loop\n\n-Australian Conservation Foundation: What does a platypus sound like?
+    (Facebook)\n\n-Cyberwave-Orchestra: Sneaky and Quirky Music Loop\n\n-nojisuma:
+    cave\n\n-nojisuma: sound k\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ab4ae0b54d104c46ac47ada1f08200e, type: 2}
   m_sharedMaterial: {fileID: 5438812746930292066, guid: 7ab4ae0b54d104c46ac47ada1f08200e, type: 2}
@@ -433,7 +419,7 @@ GameObject:
   - component: {fileID: 310070174}
   - component: {fileID: 310070173}
   m_Layer: 5
-  m_Name: AssetHeader (1)
+  m_Name: ThankYouw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,7 +441,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -69, y: -1860}
+  m_AnchoredPosition: {x: -69, y: -3574}
   m_SizeDelta: {x: 715.1331, y: 95.7035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &310070173
@@ -589,7 +575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -187, y: 2128}
+  m_AnchoredPosition: {x: -187, y: 3854}
   m_SizeDelta: {x: 772.02, y: 262.5953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &400680399
@@ -802,6 +788,8 @@ GameObject:
   - component: {fileID: 511579454}
   - component: {fileID: 511579453}
   - component: {fileID: 511579452}
+  - component: {fileID: 511579457}
+  - component: {fileID: 511579456}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -892,6 +880,114 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &511579456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511579451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f98482eac395c3341bb8ed9d9217b5b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &511579457
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511579451}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &830813829
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +1022,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -195, y: 982}
+  m_AnchoredPosition: {x: -195, y: 2789}
   m_SizeDelta: {x: 772.02, y: 262.5953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &830813831
@@ -1047,6 +1143,7 @@ GameObject:
   - component: {fileID: 978873895}
   - component: {fileID: 978873894}
   - component: {fileID: 978873896}
+  - component: {fileID: 978873897}
   m_Layer: 5
   m_Name: ScrollingObject
   m_TagString: Untagged
@@ -1061,7 +1158,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978873892}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1079,8 +1176,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6, y: -4673}
-  m_SizeDelta: {x: -689.6368, y: 6803.615}
+  m_AnchoredPosition: {x: 5.999939, y: -6839}
+  m_SizeDelta: {x: -689.6367, y: 11254.665}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &978873894
 MonoBehaviour:
@@ -1136,6 +1233,20 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &978873897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978873892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6febf8e508a8c7d458cf06e14f915c4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 100
+  timeTilMainM: 115
 --- !u!1 &1139250136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,7 +1281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -385, y: 3354}
+  m_AnchoredPosition: {x: -385, y: 5093}
   m_SizeDelta: {x: 715.1331, y: 95.7035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1139250138
@@ -1193,7 +1304,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Team
+  m_text: "Team\n Parry This"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ab4ae0b54d104c46ac47ada1f08200e, type: 2}
   m_sharedMaterial: {fileID: 5438812746930292066, guid: 7ab4ae0b54d104c46ac47ada1f08200e, type: 2}
@@ -1256,7 +1367,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -29.0542, w: -132.06793}
+  m_margin: {x: 0, y: 0, z: -634.94617, w: -132.06793}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1304,7 +1415,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -326, y: 509}
+  m_AnchoredPosition: {x: -326, y: 2393}
   m_SizeDelta: {x: 715.1331, y: 95.7035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1140873067
@@ -1438,7 +1549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -203, y: 2725}
+  m_AnchoredPosition: {x: -203, y: 4433}
   m_SizeDelta: {x: 772.02, y: 262.5953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1554604905
@@ -1675,7 +1786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10.877197, y: 3827}
+  m_AnchoredPosition: {x: -10.877197, y: 5720}
   m_SizeDelta: {x: 715.1331, y: 95.7035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2012955737

@@ -55,7 +55,7 @@ public class PatrolState : BaseStateClass
 
         if ((Vector3.Distance(aiScript.gameObject.transform.position, aiScript.patrolSettings.CurrPatrolDestination.position)) < aiScript.patrolSettings.patrolDistanceToDestination)
         {
-            Debug.Log("Switched Destination");
+           // Debug.Log("Switched Destination");
             randomPatrolDestination = Random.Range(0, aiScript.patrolSettings.PatrolDestinations.Length);
         }
 

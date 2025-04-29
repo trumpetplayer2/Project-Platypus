@@ -11,14 +11,14 @@ public class InitialState : BaseStateClass
 
     public override void OnEnterState()
     {
-        Debug.Log("In Initial State");
+        //Debug.Log("In Initial State");
         
         return;
     }
 
     public override void OnExitState()
     {
-        Debug.Log("Exiting Initial State");
+        //Debug.Log("Exiting Initial State");
         return;
     }
 

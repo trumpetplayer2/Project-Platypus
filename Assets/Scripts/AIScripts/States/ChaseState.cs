@@ -59,6 +59,8 @@ public class ChaseState : BaseStateClass
         if(PlayerMovement.instance.held == true && !aiScript.chaseSettings.iCaughtPlayer)
         {
             aiScript.playerDetectedSettings.playerDetectedCooldown = true;
+
+            aiScript.agent.destination = aiScript.transform.position;
         }
   
         if(aiScript.playerDetectedSettings.playerDetectedCooldown)
@@ -131,7 +133,12 @@ public class ChaseState : BaseStateClass
     /// </summary>
     private void CatchTarget()
     {
-       
+        if (PlayerMovement.instance.held == true && !aiScript.chaseSettings.iCaughtPlayer)
+        {
+            return;
+
+
+        }
 
         catchTimer -= Time.deltaTime;
 
@@ -166,6 +173,13 @@ public class ChaseState : BaseStateClass
         if (aiScript.aIAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base.PickUP") || catchCoolingDown)
         {
             return;
+        }
+
+        if (PlayerMovement.instance.held == true && !aiScript.chaseSettings.iCaughtPlayer)
+        {
+            return;
+
+
         }
 
         //Debug.Log("Start of Grab Function");

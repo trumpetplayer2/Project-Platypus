@@ -13,7 +13,7 @@ public class IdleState : BaseStateClass
     float timer;
     public override void OnEnterState()
     {
-        Debug.Log("In idle State");
+        //Debug.Log("In idle State");
 
         timer = aiScript.idleSettings.idleTimeUntil;
         
@@ -25,7 +25,7 @@ public class IdleState : BaseStateClass
 
     public override void OnExitState()
     {
-        Debug.Log("Exiting idle State");
+       // Debug.Log("Exiting idle State");
 
         return;
     }
@@ -49,19 +49,19 @@ public class IdleState : BaseStateClass
 
         if(timer <= 0)
         {
-            Debug.Log("Switching to Patrol");
+           // Debug.Log("Switching to Patrol");
             aiScript.SwitchStates(StateMachineEnum.Patrol);
         }
 
         if (aiScript.SearchForTargets() == DetectedType.Object)
         {
-            Debug.Log("Switching to Interact");
+            //Debug.Log("Switching to Interact");
             aiScript.SwitchStates(StateMachineEnum.Interact);
             return;
         }
         else if(aiScript.SearchForTargets() == DetectedType.Player)
         {
-            Debug.Log("Switchting to Player Detected");
+            //Debug.Log("Switchting to Player Detected");
             aiScript.SwitchStates(StateMachineEnum.PlayerDetected);
             return;
         }
