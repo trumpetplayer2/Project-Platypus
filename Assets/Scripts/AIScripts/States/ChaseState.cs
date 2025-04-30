@@ -56,19 +56,21 @@ public class ChaseState : BaseStateClass
     /// </summary>
     public override void CurrStateFunctionality()
     {
-        if(PlayerMovement.instance.held == true && !aiScript.chaseSettings.iCaughtPlayer)
+        if (aiScript.playerDetectedSettings.playerDetectedCooldown || chasingTarget == null)
+        {
+            LosingTarget();
+        }
+
+        if (PlayerMovement.instance.held == true && !aiScript.chaseSettings.iCaughtPlayer)
         {
             aiScript.playerDetectedSettings.playerDetectedCooldown = true;
 
             aiScript.agent.destination = aiScript.transform.position;
         }
-  
-        if(aiScript.playerDetectedSettings.playerDetectedCooldown)
-        {
-            LosingTarget();
-        }
+        
+       
+            aiScript.agent.destination = chasingTarget.transform.position;
 
-        aiScript.agent.destination = chasingTarget.transform.position;
 
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) > aiScript.chaseSettings.chaseMaxDistance)
             {
