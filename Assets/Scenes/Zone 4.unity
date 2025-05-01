@@ -75767,6 +75767,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 21.3
       objectReference: {fileID: 0}
+    - target: {fileID: 8020601270190991515, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 91d5c37979a9439429c02d24532fc4e0, type: 3}
     - target: {fileID: 8395636566108321076, guid: fefdcdc8fd999ad429541d224cbc79a2, type: 3}
       propertyPath: m_Name
       value: SetupKit
