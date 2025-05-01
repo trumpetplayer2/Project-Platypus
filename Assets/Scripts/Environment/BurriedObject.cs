@@ -53,10 +53,7 @@ public class BurriedObject : Diggable
                 rigidbody.useGravity = true;
                 rigidbody.velocity = Vector3.zero;
             }
-            if(treasure.layer == 6)
-            {
-                treasure.layer = itemLayer;
-            }
+            treasure.layer = 11;
             treasure.gameObject.SetActive(true);
             if(digParticle != null)
             {

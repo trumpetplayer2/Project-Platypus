@@ -13,17 +13,18 @@ public class Fade : MonoBehaviour
     public bool fadeDirection = false;
     public float fadeTime = 1f;
     float timer = 0f;
+    public static Fade instance;
 
     // Start is called before the first frame update
     void Start()
     {
         FadeImage.color = shown;
+        instance = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
         if (!fading) return;
         if (timer > fadeTime)
         {
@@ -44,5 +45,6 @@ public class Fade : MonoBehaviour
             temp.a = 1 - (timer / fadeTime);
             FadeImage.color = temp;
         }
+        timer += Time.deltaTime;
     }
 }
