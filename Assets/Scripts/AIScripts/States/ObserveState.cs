@@ -29,7 +29,9 @@ public class ObserveState : BaseStateClass
 
     public override void OnEnterState()
     {
-       
+        //aiScript.aIAnimator.SetBool("Walk", false);
+
+        aiScript.aIAnimator.SetBool("Interact", true);
 
         observedTarget = aiScript.searchFunctionSettings.playerObj;
 
@@ -39,9 +41,7 @@ public class ObserveState : BaseStateClass
 
         timerMax = aiScript.observeSettings.observeTimerMax;
 
-        aiScript.aIAnimator.SetBool("Walk", false);
-
-        aiScript.aIAnimator.SetBool("Interact", true);
+       
 
         return;
     }

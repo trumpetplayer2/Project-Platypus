@@ -36,7 +36,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7899822674171323588}
-  - {fileID: 1332713899135024792}
   - {fileID: 8015128262710035992}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -145,9 +144,11 @@ MonoBehaviour:
     chaseMinDistance: 2
     losingTargetTime: 1
     catchTargetTime: 2
-    playerGrabbedPosition: {fileID: 6897396194689969637}
+    playerGrabbedPosition: {fileID: 0}
     grabbedPlayerLocation: {fileID: 0}
     catchCooldown: 3
+    iCaughtPlayer: 0
+    distanceToCheckpoint: 0
   searchStateSettings:
     searchStateTime: 4
     noiseLocation: {x: 0, y: 0, z: 0}
@@ -180,6 +181,7 @@ MonoBehaviour:
     maxColliders: 5
   observeSettings:
     maxObserveDistance: 6
+    observeTimerMax: 0
   agent: {fileID: 8119926544169799320}
   stateSwitchTime: 1
   aIDetectionTime: 1.5
@@ -228,37 +230,6 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
---- !u!1 &6897396194689969637
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1332713899135024792}
-  m_Layer: 9
-  m_Name: PutPlatHere
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1332713899135024792
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6897396194689969637}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.016, y: 0.602, z: 1.073}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3757154525192571276}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8106218522349076063
 GameObject:
   m_ObjectHideFlags: 0

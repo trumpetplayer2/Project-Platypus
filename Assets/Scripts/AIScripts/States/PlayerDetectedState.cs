@@ -66,6 +66,7 @@ public class PlayerDetectedState : BaseStateClass
             {
                 case "Chase":
                     {
+                        aiScript.aIAnimator.SetBool("Run", true);
                         aiScript.SwitchStates(StateMachineEnum.Chase);
                         break;
                     }

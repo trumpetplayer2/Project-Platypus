@@ -16,13 +16,13 @@ public class PatrolState : BaseStateClass
 
     public override void OnEnterState()
     {
-        
+        aiScript.aIAnimator.SetBool("Walk", true);
 
         randomPatrolDestination = Random.Range(0, aiScript.patrolSettings.PatrolDestinations.Length - 1);
 
         aiScript.agent.isStopped = false;
 
-        aiScript.aIAnimator.SetBool("Walk", true);
+       
 
         return;
     }

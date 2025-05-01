@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8799996678670800499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1704385923522230838}
+  m_Layer: 9
+  m_Name: PutPlayHere(Kid2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1704385923522230838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8799996678670800499}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.3921429, y: 0.647437, z: -0.27563232, w: 0.5925169}
+  m_LocalPosition: {x: 0.69769466, y: -4.3688426, z: 1.4045699}
+  m_LocalScale: {x: 3.0139804, y: 3.0139787, z: 3.01398}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2808054483197136691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4120876906165255470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -121,6 +152,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: chaseSettings.playerGrabbedPosition
+      value: 
+      objectReference: {fileID: 8799996678670800499}
+    - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: playerDetectedSettings.setAIResponse
       value: 0
       objectReference: {fileID: 0}
@@ -141,8 +176,12 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8119926544169799320, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
+      propertyPath: m_Acceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119926544169799320, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_AngularSpeed
-      value: 700
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -257,7 +296,10 @@ PrefabInstance:
     - {fileID: -8700617353114198275, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}
     - {fileID: -2572967989333021709, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}
     - {fileID: 65702495048144492, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6734931530170869177, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1704385923522230838}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}
       insertIndex: -1
@@ -292,6 +334,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &2808054483197136691 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6734931530170869177, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}
+  m_PrefabInstance: {fileID: 8903473696962849418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8596835086082250715 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 39c7193e2700546429c456fc5a384ed1, type: 3}

@@ -31,6 +31,7 @@ public class ChaseState : BaseStateClass
     
     public override void OnEnterState()
     {
+        aiScript.aIAnimator.SetBool("Run", true);
         //Debug.Log("Entering Chase State");
         chasingTarget = aiScript.searchFunctionSettings.playerObj;
 
@@ -42,7 +43,7 @@ public class ChaseState : BaseStateClass
 
         aiScript.agent.isStopped = false;
 
-        aiScript.aIAnimator.SetBool("Run", true);
+       
 
         callGrabAnim = false;
 
@@ -232,6 +233,8 @@ public class ChaseState : BaseStateClass
 
             playerInstance.Release();
             player.transform.position = aiScript.chaseSettings.playerGrabbedPosition.transform.position;
+
+
         }
 
         //Debug.Log("Here");
@@ -242,6 +245,7 @@ public class ChaseState : BaseStateClass
 
         if (Vector3.Distance(aiScript.transform.position, aiScript.chaseSettings.grabbedPlayerLocation.checkpointPosition) < aiScript.chaseSettings.distanceToCheckpoint)
         {
+            aiScript.aIAnimator.SetTrigger("Drop");
 
             aiScript.agent.isStopped = true;
 
@@ -268,7 +272,7 @@ public class ChaseState : BaseStateClass
    
     public override void OnExitState()
     {
-       
+        aiScript.aIAnimator.SetBool("Run", false);
 
         aiScript.agent.speed -= aiScript.chaseSettings.chaseSpeedIncrease;
 

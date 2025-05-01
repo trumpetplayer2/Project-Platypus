@@ -55811,6 +55811,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChildPrefab2
       objectReference: {fileID: 0}
+    - target: {fileID: 5305114594880435126, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
+      propertyPath: m_Acceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5305114594880435126, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 6308589915292995475, guid: 83e41c9fd88bb23428181bf678c9e2f2, type: 3}
       propertyPath: chaseSettings.distanceToCheckpoint
       value: 10
