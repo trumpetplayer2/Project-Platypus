@@ -2426,6 +2426,7 @@ GameObject:
   - component: {fileID: 7997095535875672434}
   - component: {fileID: 744712122515168213}
   - component: {fileID: 7466720636494097283}
+  - component: {fileID: 8054198135784662887}
   m_Layer: 5
   m_Name: Fade
   m_TagString: Untagged
@@ -2476,7 +2477,7 @@ MonoBehaviour:
   m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2490,6 +2491,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8054198135784662887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8728319026171160940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab310eda0a17c849ace0f800f8e7adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hidden: {r: 0, g: 0, b: 0, a: 0}
+  shown: {r: 0, g: 0, b: 0, a: 1}
+  FadeImage: {fileID: 7466720636494097283}
+  fading: 1
+  fadeDirection: 0
+  fadeTime: 1
 --- !u!1 &8804480415175872300
 GameObject:
   m_ObjectHideFlags: 0
