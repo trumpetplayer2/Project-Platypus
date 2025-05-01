@@ -26,6 +26,7 @@ public class QuestManager : MonoBehaviour
     float saveDelay = 1f;
     float saveCooldown = 0f;
     public Clip QuestComplete;
+    int completedQuestCount = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -166,7 +167,15 @@ public class QuestManager : MonoBehaviour
 
     public void OnQuestComplete(int id)
     {
-        AudioHandler.instance.queueClip(QuestComplete);
+        completedQuestCount++;
+        if (completedQuestCount < QuestList.Count)
+        {
+            AudioHandler.instance.queueClip(QuestComplete);
+        }
+        else
+        {
+            AudioHandler.instance.queueClip(QuestComplete.clip, QuestComplete.volume, QuestComplete.pitch + 1, QuestComplete.timeout, QuestComplete.startTime);
+        }
     }
 
     public void showQuest(int index)

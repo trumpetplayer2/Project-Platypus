@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: House1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c832315dbed6ec84da56150a270f5589, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -188,9 +192,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6513575608552445315, guid: ca7c5cbd9c080a240bf3f90bdcab5941, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -1931406144067114908, guid: ca7c5cbd9c080a240bf3f90bdcab5941, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -1085395746887679842, guid: ca7c5cbd9c080a240bf3f90bdcab5941, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ca7c5cbd9c080a240bf3f90bdcab5941, type: 3}
       propertyPath: m_Name
       value: Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ca7c5cbd9c080a240bf3f90bdcab5941, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914435050736407131, guid: ca7c5cbd9c080a240bf3f90bdcab5941, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464276932165800981, guid: ca7c5cbd9c080a240bf3f90bdcab5941, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7152398716773346849, guid: ca7c5cbd9c080a240bf3f90bdcab5941, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

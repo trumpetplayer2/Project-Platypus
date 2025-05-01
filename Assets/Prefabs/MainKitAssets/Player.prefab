@@ -241,10 +241,10 @@ MonoBehaviour:
     Cooldown: 1
     countIndicator: {fileID: 0}
     sprites:
-    - {fileID: 21300000, guid: 54ea407501fc7bc4eb92a61ed826395b, type: 3}
-    - {fileID: 21300000, guid: c0e596036acc67a4793ce1b52b08c091, type: 3}
-    - {fileID: 21300000, guid: 620a8bd68833f4c40817d08d3bfc1ec9, type: 3}
-    - {fileID: 21300000, guid: f7b65ccaaa8801449abacba62c187b9c, type: 3}
+    - {fileID: 21300000, guid: c21e7bab6647b4f4babf451f9ebda1c7, type: 3}
+    - {fileID: 21300000, guid: 82254f2723cb91b47823c8a76cf6a48b, type: 3}
+    - {fileID: 21300000, guid: 98608d8cbd1af8249b8ad263b723ef80, type: 3}
+    - {fileID: 21300000, guid: ea036e03ceab01142829d0e3161c1d6f, type: 3}
     gravelEntity: {fileID: 1567429259736677278, guid: 17aecb32f0f6034459c878f37b3fb6c2, type: 3}
     gravelSpawnLocation: {fileID: 3190463933237773391}
     collectClip: {fileID: 8300000, guid: 6bcb3f762d45bc24286e9aa6999752cb, type: 3}

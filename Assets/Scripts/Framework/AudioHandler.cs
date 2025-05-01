@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace tp2
@@ -35,6 +36,9 @@ namespace tp2
             startTime = sTime;
             time = Time.time;
         }
+
+        public static implicit operator AudioClip(Clip clip) { return clip.clip; }
+
         /// <summary>
         /// Fetches if the Clip has timed out.
         /// </summary>
