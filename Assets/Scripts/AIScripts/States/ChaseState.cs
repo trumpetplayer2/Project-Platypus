@@ -21,7 +21,7 @@ public class ChaseState : BaseStateClass
 
     bool callGrabAnim;
 
-
+    bool playerCaught;
 
     public ChaseState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
@@ -46,6 +46,8 @@ public class ChaseState : BaseStateClass
 
         callGrabAnim = false;
 
+        playerCaught = false;
+
         return;
     }
 
@@ -56,27 +58,43 @@ public class ChaseState : BaseStateClass
     /// </summary>
     public override void CurrStateFunctionality()
     {
-        if (aiScript.playerDetectedSettings.playerDetectedCooldown || chasingTarget == null)
+        if(chasingTarget == null)
         {
-            LosingTarget();
+            //playerCaught = true;
+
+            LosingTarget(true);
+
+            //aiScript.agent.destination = aiScript.transform.position;
         }
+
+        //if(playerCaught )
+        //{
+        //    LosingTarget();
+        //}
+
 
         if (PlayerMovement.instance.held == true && !aiScript.chaseSettings.iCaughtPlayer)
         {
+
+            playerCaught = true;
+
             aiScript.playerDetectedSettings.playerDetectedCooldown = true;
 
-            aiScript.agent.destination = aiScript.transform.position;
+            LosingTarget(true);
+
+            
         }
-        
-       
+
+        if (!playerCaught)
+        {
             aiScript.agent.destination = chasingTarget.transform.position;
 
 
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) > aiScript.chaseSettings.chaseMaxDistance)
             {
-                
 
-                LosingTarget();
+
+                LosingTarget(false);
 
                 return;
             }
@@ -84,11 +102,13 @@ public class ChaseState : BaseStateClass
             if (Vector3.Distance(aiScript.searchFunctionSettings.Eyes.gameObject.transform.position, chasingTarget.transform.position) <= aiScript.chaseSettings.chaseMinDistance)
             {
 
-             //Debug.Log("Am I close to the player");
+                //Debug.Log("Am I close to the player");
                 CatchTarget();
 
                 return;
             }
+        }
+            
 
             if(catchCoolingDown)
             {
@@ -112,19 +132,26 @@ public class ChaseState : BaseStateClass
     /// <summary>
     /// is called if the player exceeds a specific range, and will switch to search state when the timer reaches 0 or below
     /// </summary>
-    private void LosingTarget()
+    private void LosingTarget(bool isCaught)
     {
        
-
-        losingTimer -= Time.deltaTime;
-
-        if(losingTimer <= 0)
+        if(isCaught)
         {
-           
-
             aiScript.SwitchStates(StateMachineEnum.Search);
-
         }
+        else
+        {
+            losingTimer -= Time.deltaTime;
+
+            if (losingTimer <= 0)
+            {
+
+
+                aiScript.SwitchStates(StateMachineEnum.Search);
+
+            }
+        }
+       
 
         return;
 
