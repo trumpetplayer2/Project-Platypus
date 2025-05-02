@@ -5,13 +5,17 @@ using UnityEngine;
 public class Detectable : MonoBehaviour
 {
     public GameObject Indicator;
-    public bool hideBase = false;
-    MeshRenderer mesh;
+    public bool hideBase = true;
+    public MeshRenderer mesh;
     private void Start()
     {
         if(mesh == null)
         {
             mesh = GetComponent<MeshRenderer>();
+        }
+        if(Indicator == null)
+        {
+            Indicator = this.gameObject;
         }
     }
     public void showIndicator()
@@ -19,7 +23,7 @@ public class Detectable : MonoBehaviour
         if (hideBase)
         {
             if (mesh == null) return;
-            mesh.enabled = false;
+            mesh.enabled = true;
         }
     }
 
@@ -28,7 +32,7 @@ public class Detectable : MonoBehaviour
         if (hideBase)
         {
             if (mesh == null) return;
-            mesh.enabled = true;
+            mesh.enabled = false;
         }
     }
 }

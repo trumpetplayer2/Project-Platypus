@@ -18,6 +18,7 @@ namespace tp2
     public class PlayerChildrenSetting
     {
         public CharacterController body;
+        public Rigidbody rb;
         public Animator animator;
     }
     public enum SlopeMode{None, Linear}
@@ -65,11 +66,12 @@ namespace tp2
                 {
                     childSettings.body = gameObject.AddComponent<CharacterController>();
                 }
+                childSettings.rb = this.GetComponent<Rigidbody>();
             }
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             if(!GameManager.instance.isPaused) { unpausedUpdate(); }
         }
@@ -195,7 +197,7 @@ namespace tp2
                     break;
             }
             //Finalize horizontal plane movement
-            movement = movement * speed.baseSpeed * Time.deltaTime * mult;
+            movement = movement * speed.baseSpeed * mult;
             if (float.IsNaN(movement.x) || float.IsNaN(movement.y) || float.IsNaN(movement.z)) return;
             //Freecam check! This movement goes to freecam if in freecam mode
             if (cameraSettings.followMode == cameraMode.FreeCam)
@@ -214,7 +216,7 @@ namespace tp2
             if (!childSettings.body.isGrounded)
             {
                 //Velocity = Initial Velocity + (Gravity) * Delta time
-                gravity = lastGravity + -speed.gravity * Time.deltaTime; 
+                gravity = lastGravity + -speed.gravity; 
                 if(gravity > speed.terminalVelocity)
                 {
                     gravity = speed.terminalVelocity;
@@ -227,10 +229,11 @@ namespace tp2
             if(slope > childSettings.body.slopeLimit)
             {
                 Vector3 temp = normal.normalized;
-                movement = new Vector3(temp.x,-.5f,temp.z) * speed.slideSpeed * Time.deltaTime;
+                movement = new Vector3(temp.x,-.5f,temp.z) * speed.slideSpeed;
+                Debug.Log("Sloped");
             }
             movement.y = gravity;
-            childSettings.body.Move(movement);
+            childSettings.body.Move(movement*Time.fixedDeltaTime);
             lastGravity = gravity;
         }
 

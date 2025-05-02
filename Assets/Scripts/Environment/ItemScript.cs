@@ -75,6 +75,10 @@ public class ItemScript : MonoBehaviour
         //}
         //Send highest nonparent to spawnpoint
         t.position = respawnPoint;
+        if(rb != null)
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 
     public void grab(PlayerAbilityManager abilityManager, bool priority = false)

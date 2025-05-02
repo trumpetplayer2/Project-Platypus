@@ -101,12 +101,13 @@ namespace tp2
                 noiseCooldown = noiseController.noiseCooldown;
             }
             if (PlayerMovement.instance.held) return;
-            if (Input.GetButtonDown(sense.SenseInputName))
+            if (Input.GetButton(sense.SenseInputName))
             {
-                if (canSense)
-                {
-                    Sense();
-                }
+                Sense();
+            }
+            if (Input.GetButtonUp(sense.SenseInputName))
+            {
+                SenseFade();
             }
             if (Input.GetButtonDown(grab.grabInput))
             {
@@ -140,7 +141,7 @@ namespace tp2
         {
             sense.sphere.showDetect();
             queueClip(3);
-            Invoke("SenseFade", sense.length);
+            //Invoke("SenseFade", sense.length);
         }
 
         void SenseFade()
@@ -220,7 +221,13 @@ namespace tp2
             if (dig.triggered)
             {
                 queueClip(2);
+                Invoke("DigClip", 1);
+                Invoke("DigClip", 2);
             }
+        }
+        void DigClip()
+        {
+            queueClip(2);
         }
 
         void SpawnParticle(ParticleSystem Particle, GameObject target)
