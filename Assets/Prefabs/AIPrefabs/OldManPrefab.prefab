@@ -1623,7 +1623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: patrolSettings.patrolDistanceToDestination
-      value: 1.5
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 7979488678272676541, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: patrolSettings.PatrolDestinations.Array.size

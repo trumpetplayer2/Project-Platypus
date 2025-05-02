@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using tp2;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,11 +17,15 @@ public class ObserveState : BaseStateClass
     float timer = 0f;
 
     public float timerMax;
-
+    
     public Vector3 start;
 
     public Vector3 goal;
+    private ItemScript heldItem;
 
+    public bool itemTrigger;
+
+    bool itemDetected;
 
     public ObserveState(StateMachineInfo.AIBase aAIscript) : base(aAIscript)
     {
@@ -41,6 +46,9 @@ public class ObserveState : BaseStateClass
 
         timerMax = aiScript.observeSettings.observeTimerMax;
 
+
+       
+
        
 
         return;
@@ -51,10 +59,32 @@ public class ObserveState : BaseStateClass
     /// </summary>
     public override void CurrStateFunctionality()
     {
-        
-       
 
-        if(goal == null || timer >= timerMax)
+        if (aiScript.playerDetectedSettings.itemCheck)
+        {
+            heldItem = PlayerAbilityManager.instance.grab.heldObject;
+
+            if (heldItem != null)
+            {
+                if (heldItem.type.ToString() == aiScript.playerDetectedSettings.heldObjTypeTrigger)
+                {
+                    itemTrigger = true;
+                    itemDetected = true;
+
+                }
+            }
+        }
+
+        if (aiScript.playerDetectedSettings.TriggerDetected || itemTrigger)
+        {
+
+            aiScript.SwitchStates(StateMachineEnum.Chase);
+        }
+
+     if (!itemDetected)
+     {
+
+            if (goal == null || timer >= timerMax)
         {
             start = aiScript.transform.forward;
 
@@ -69,26 +99,18 @@ public class ObserveState : BaseStateClass
 
         aiScript.transform.forward = Vector3.Lerp(start, goal, timer / timerMax);
 
-        ////aiScript.transform.LookAt(observedTarget.transform, Vector3.up);
+       
 
-        //rotation = Quaternion.LookRotation(observedTarget.transform.position - aiScript.transform.position.normalized).eulerAngles;
-
-        ////rotation.y = 0f;
-
-        //Vector3.Lerp(aiScript.transform.forward, rotation, )
-
-      
-
-        //rotation *= 2;
-
-        //currPosition.rotation = Quaternion.Euler(rotation);
-
-        if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.observeSettings.maxObserveDistance)
+       
+            if (Vector3.Distance(observedTarget.transform.position, currPosition.position) >= aiScript.observeSettings.maxObserveDistance)
             {
-               
+
                 aiScript.SwitchStates(StateMachineEnum.Search);
                 return;
             }
+     }
+
+       
 
     }
 
@@ -99,6 +121,11 @@ public class ObserveState : BaseStateClass
         observedTarget = null;
 
         aiScript.searchFunctionSettings.playerObj = null;
+
+        heldItem = null;
+
+        itemTrigger = false;
+
 
         return;
     }
