@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8119926544169799320, guid: 780b4dce0e2b03f4db1a6f7f9fa756a9, type: 3}
       propertyPath: m_AngularSpeed
-      value: 150
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
