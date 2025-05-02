@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class QuestMenu : MonoBehaviour
 {
-    bool state = true;
+    public bool state = true;
     bool finished = true;
     public float openTime = 1f;
     float timer = 0;
     public Vector2 open = new Vector2 (0, 0);
     public Vector2 closed = new Vector2(-800, 0);
+    public static QuestMenu instance;
 
     private void Start()
     {
         Cursor.lockState = (state) ? CursorLockMode.Locked : CursorLockMode.Confined;
+        instance = this;
     }
 
     // Update is called once per frame

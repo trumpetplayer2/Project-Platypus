@@ -191,13 +191,12 @@ namespace tp2
 
                 shakeDuration -= Time.deltaTime * decreaseSpeed;
             }
-
+            if (!QuestMenu.instance.state) return;
             float cameraZoomChange = Input.GetAxis("Mouse ScrollWheel");
             distance -= cameraZoomChange * MovementSettings.zoomScale;
             distance = Mathf.Clamp(distance, MovementSettings.minZoom, MovementSettings.maxZoom);
             //Scale current y by the initial settings
             locationOffset.y = distance / cSettings.distance * cSettings.locationOffset.y;
-
             //If camera lock is disabled, input is not needed
             if (Input.GetButton("MoveCamera") || !Settings.cameraLock)
             {
