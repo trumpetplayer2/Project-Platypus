@@ -42,7 +42,6 @@ public class SenseSphere : MonoBehaviour
 
     public void showDetect()
     {
-        Debug.Log("Showing");
         foreach (Detectable detectable in detected)
         {
             detectable.showIndicator();

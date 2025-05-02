@@ -230,7 +230,6 @@ namespace tp2
             {
                 Vector3 temp = normal.normalized;
                 movement = new Vector3(temp.x,-.5f,temp.z) * speed.slideSpeed;
-                Debug.Log("Sloped");
             }
             movement.y = gravity;
             childSettings.body.Move(movement*Time.fixedDeltaTime);
