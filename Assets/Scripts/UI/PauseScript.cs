@@ -114,6 +114,8 @@ public class PauseScript : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        if (GameManager.instance.isPaused) { togglePause(); }
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("MainMenu");
     }
 }

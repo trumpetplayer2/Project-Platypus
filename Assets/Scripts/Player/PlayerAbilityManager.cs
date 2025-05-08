@@ -101,7 +101,7 @@ namespace tp2
                 noiseCooldown = noiseController.noiseCooldown;
             }
             if (PlayerMovement.instance.held) return;
-            if (Input.GetButton(sense.SenseInputName))
+            if (Input.GetButtonDown(sense.SenseInputName))
             {
                 Sense();
             }

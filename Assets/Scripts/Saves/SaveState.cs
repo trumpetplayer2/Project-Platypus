@@ -53,7 +53,7 @@ public class SaveState : MonoBehaviour
         }
     }
 
-    public bool save(string profileName)
+    private bool save(string profileName)
     {
         //saveProfile data = new saveProfile(profileName, SceneManager.GetActiveScene().buildIndex, ZoneLoader.zoneLoader.roomLoader.curRoom, Movement.getinstance().transform.position, CollectibleList.getInstance().toStringArray(), UpgradeInventory.getInstance().toStringList());
         //SaveManager.Save(data);
